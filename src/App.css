@@ -12,14 +12,7 @@
   /*grid-gap: 10px;*/
 
 }
-.header {
-  grid-area: h;
-  background-color: indianred;
-}
 
-.header img {
- width: 30px;
-}
 
 .nav {
   grid-area: n;
