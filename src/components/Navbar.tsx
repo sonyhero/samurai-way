@@ -10,13 +10,13 @@ export const Navbar = () => {
             <div className ={`${s.item} ${s.active}`}>
                 <a >Messages</a>
             </div>
-            <div className ={s.item}>
+            <div className ={`${s.item} ${s.active}`}>
                 <a >News</a>
             </div>
-            <div className ={s.item}>
+            <div className ={`${s.item} ${s.active}`}>
                 <a >Music</a>
             </div>
-            <div className ={s.item}>
+            <div className ={`${s.item} ${s.active}`}>
                 <a >Settings</a>
             </div>
         </nav>
