@@ -3,7 +3,7 @@ import s from './PostCSS.module.css'
 
 type PostType = {
     message: string
-    likes: number
+    likesCount: number
 }
 
 export const Post = (props: PostType) => {
@@ -12,7 +12,7 @@ export const Post = (props: PostType) => {
             <img src="https://i.pinimg.com/736x/11/f7/83/11f78374741b89e4dea99e0b6356ee3c.jpg" alt="itachi logo"/>
             {props.message}
             <div>
-                <span> {props.likes} likes</span>
+                <span> {props.likesCount} likes</span>
             </div>
         </div>
     )
