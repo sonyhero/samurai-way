@@ -11,7 +11,7 @@ export const Profile = () => {
                     alt="itachi content" width='1200px' height='200px'/>
             </div>
             <div>
-                ava+dicr
+                ava+description
             </div>
             <MyPosts/>
         </div>
