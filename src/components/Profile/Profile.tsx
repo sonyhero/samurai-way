@@ -1,17 +1,12 @@
-import React from "react";
-import {MyPosts} from "./MyPosts/MyPosts";
+import React from 'react';
+import s from './ProfileCSS.module.css'
+import {MyPosts} from './MyPosts/MyPosts';
+import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 
 export const Profile = () => {
     return (
         <div>
-            <div>
-                <img
-                    src="https://cdn.wallpapersafari.com/66/25/slYcCE.jpg"
-                    alt="itachi content" width='1200px' height='200px'/>
-            </div>
-            <div>
-                ava+description
-            </div>
+            <ProfileInfo/>
             <MyPosts/>
         </div>
     )
