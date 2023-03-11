@@ -26,21 +26,38 @@ const Message = (props:MessageType) => {
 }
 
 export const Dialogs = () => {
+
+    let dialogsData = [
+        {id:1, name: 'Dimych'},
+        {id:2, name: 'Sveta'},
+        {id:3, name: 'Viktor'},
+        {id:4, name: 'Maks'},
+        {id:5, name: 'Igor'},
+    ]
+
+    let messagesData = [
+        {id:1, message: 'Hi'},
+        {id:2, message: 'Anton'},
+        {id:3, message: 'How are you'},
+    ]
+
+    let dialogsDataMap = dialogsData.map(
+        el=><DialogItem name={el.name} id={`${el.id}`}/>
+    )
+
+    let messagesDataMap = messagesData.map(
+        el=><Message message={el.message}/>
+    )
+
     return (
         <div>
             Dialogs
             <div className={s.dialogs}>
                 <div className={s.dialogsItems}>
-                    <DialogItem name={'Dimych'} id={'1'}/>
-                    <DialogItem name={'Sveta'} id={'2'}/>
-                    <DialogItem name={'Viktor'} id={'3'}/>
-                    <DialogItem name={'Maks'} id={'4'}/>
-                    <DialogItem name={'Igor'} id={'5'}/>
+                    {dialogsDataMap}
                 </div>
                 <div className={s.messages}>
-                    <Message message={'Hi'}/>
-                    <Message message={'How are you'}/>
-                    <Message message={'I am good'}/>
+                    {messagesDataMap}
                 </div>
             </div>
 
