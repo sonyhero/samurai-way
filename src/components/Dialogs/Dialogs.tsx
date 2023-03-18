@@ -11,20 +11,6 @@ export type DialogsPropsType = {
 
 export const Dialogs = (props:DialogsPropsType) => {
 
-    // let dialogs = [
-    //     {id: 1, name: 'Dimych'},
-    //     {id: 2, name: 'Sveta'},
-    //     {id: 3, name: 'Viktor'},
-    //     {id: 4, name: 'Maks'},
-    //     {id: 5, name: 'Igor'},
-    // ]
-    //
-    // let messages = [
-    //     {id: 1, message: 'Hi'},
-    //     {id: 2, message: 'Anton'},
-    //     {id: 3, message: 'How are you'},
-    // ]
-
     let dialogsDataMap = props.dialogs.map(
         d => <DialogItem name={d.name} id={d.id}/>
     )

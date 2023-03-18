@@ -6,8 +6,6 @@ import {ProfilePropsType} from '../Profile';
 
 export const MyPosts = (props: ProfilePropsType) => {
 
-
-
     let postDataMap = props.posts.map(p =>
         <Post id={p.id} message={p.message} likesCount={p.likesCount}/>
     )
