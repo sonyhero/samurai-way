@@ -1,19 +1,10 @@
 import React from 'react';
 import s from './MyPostsCSS.module.css'
 import {Post} from './Post/Post';
-
-export type MyPostsPropsType = {
-    posts: PostsType[]
-}
-
-export type PostsType = {
-    id: number
-    message: string
-    likesCount: number
-}
+import {ProfilePropsType} from '../Profile';
 
 
-export const MyPosts = (props: MyPostsPropsType) => {
+export const MyPosts = (props: ProfilePropsType) => {
 
 
 
