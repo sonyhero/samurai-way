@@ -8,11 +8,26 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
+import {Friends} from './components/Friends/Friends';
 
-export type AppPropsType = {
-    dialogs: DialogItemType[]
-    messages: MessageType[]
+export type StateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+    sidebar: SidebarType
+}
+
+export type ProfilePageType = {
     posts: PostsType[]
+
+}
+
+export type DialogsPageType = {
+    messages: MessageType[]
+    dialogs: DialogItemType[]
+}
+
+export type SidebarType = {
+    friends: FriendsType[]
 }
 
 export type DialogItemType = {
@@ -22,32 +37,40 @@ export type DialogItemType = {
 export type MessageType = {
     message: string
 }
+export type FriendsType = {
+    id: number
+    name: string
+}
 
 export type PostsType = {
     id: number
     message: string
     likesCount: number
 }
+
+type AppPropsType = {
+    state: StateType
+}
 const App = (props: AppPropsType) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar/>
+                <Navbar state={props.state.sidebar}/>
                 <div className="app-wrapper-content">
 
                     {/*<Route path="/dialogs" component={Dialogs}/>*/}
 
-                    <Route path="/dialogs" render={()=> <Dialogs
-                        dialogs={props.dialogs}
-                        messages={props.messages}
+                    <Route path="/dialogs" render={() => <Dialogs
+                        state={props.state.dialogsPage}
                     />}/>
-                    <Route path="/profile" render={()=> <Profile
-                        posts={props.posts}
+                    <Route path="/profile" render={() => <Profile
+                        state={props.state.profilePage}
                     />}/>
-                    <Route path="/news" render={()=> <News/>}/>
-                    <Route path="/music" render={()=> <Music/>}/>
-                    <Route path="/settings" render={()=> <Settings/>}/>
+                    <Route path="/news" render={() => <News/>}/>
+                    <Route path="/music" render={() => <Music/>}/>
+                    <Route path="/settings" render={() => <Settings/>}/>
+                    <Route path="/friends" render={() => <Friends/>}/>
                 </div>
             </div>
         </BrowserRouter>

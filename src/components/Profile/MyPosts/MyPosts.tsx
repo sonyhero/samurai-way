@@ -1,10 +1,10 @@
 import React from 'react';
 import s from './MyPostsCSS.module.css'
 import {Post} from './Post/Post';
-import {ProfilePropsType} from '../Profile';
+import {ProfileStateType} from '../Profile';
 
 
-export const MyPosts = (props: ProfilePropsType) => {
+export const MyPosts = (props: ProfileStateType) => {
 
     let postDataMap = props.posts.map(p =>
         <Post id={p.id} message={p.message} likesCount={p.likesCount}/>
