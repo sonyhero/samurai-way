@@ -8,17 +8,28 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {DialogItemType} from './components/Dialogs/DialogItem/DialogsItem';
-import {MessageType} from './components/Dialogs/Message/Message';
-import {PostsType} from './components/Profile/MyPosts/Post/Post';
 
-type AppPropsType = {
+export type AppPropsType = {
     dialogs: DialogItemType[]
     messages: MessageType[]
     posts: PostsType[]
 }
 
-type PropsType = {
+export type DialogItemType = {
+    id: number
+    name: string
+}
+export type MessageType = {
+    message: string
+}
+
+export type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+export type PropsType = {
     data: AppPropsType
 }
 

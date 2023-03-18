@@ -1,9 +1,10 @@
 import React from 'react';
 import s from './DialogsCSS.module.css'
-import {DialogItem, DialogItemType} from './DialogItem/DialogsItem';
-import {Message, MessageType} from './Message/Message';
+import {DialogItem} from './DialogItem/DialogsItem';
+import {Message} from './Message/Message';
+import {DialogItemType, MessageType} from '../../App';
 
-type DialogsPropsType = {
+export type DialogsPropsType = {
     dialogs: DialogItemType[]
     messages: MessageType[]
 }
