@@ -1,3 +1,5 @@
+import {PostsType} from '../App';
+
 let state = {
     profilePage: {
         posts: [ //Props Profile-MyPosts
@@ -26,6 +28,13 @@ let state = {
             {id: 3, name: 'Eugenia'}
         ]
     }
+}
+
+export const addPost = (postMessage: string) => {
+    const newPost: PostsType = {
+        id: new Date().getTime(), message: postMessage, likesCount: 0
+    }
+    state.profilePage.posts.push(newPost)
 }
 
 

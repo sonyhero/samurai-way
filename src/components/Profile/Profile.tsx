@@ -5,6 +5,7 @@ import {PostsType} from '../../App';
 
 export type ProfilePropsType = {
     state: ProfileStateType
+    addPost: (postMessage: string)=>void
 }
 
 export type ProfileStateType = {
@@ -15,7 +16,7 @@ export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.state.posts}/>
+            <MyPosts posts={props.state.posts} addPost={props.addPost}/>
         </div>
     )
 }

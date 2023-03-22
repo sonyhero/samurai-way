@@ -1,10 +1,14 @@
 import React from 'react';
 import s from './MyPostsCSS.module.css'
 import {Post} from './Post/Post';
-import {ProfileStateType} from '../Profile';
+import {PostsType} from '../../../App';
 
+type MyPostsPropsType = {
+    posts: PostsType[]
+    addPost: (postMessage: string) => void
+}
 
-export const MyPosts = (props: ProfileStateType) => {
+export const MyPosts = (props: MyPostsPropsType) => {
 
     const postDataMap = props.posts.map(p =>
         <Post id={p.id} message={p.message} likesCount={p.likesCount}/>
@@ -13,7 +17,8 @@ export const MyPosts = (props: ProfileStateType) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-            let text = newPostElement.current?.value
+        if(newPostElement.current)
+        props.addPost(newPostElement.current.value)
     }
 
     return (

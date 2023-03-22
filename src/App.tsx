@@ -50,6 +50,7 @@ export type PostsType = {
 
 type AppPropsType = {
     state: StateType
+    addPost: (postMessage: string)=>void
 }
 const App = (props: AppPropsType) => {
     return (
@@ -66,6 +67,7 @@ const App = (props: AppPropsType) => {
                     />}/>
                     <Route path="/profile" render={() => <Profile
                         state={props.state.profilePage}
+                        addPost={props.addPost}
                     />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
