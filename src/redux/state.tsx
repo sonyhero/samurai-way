@@ -1,6 +1,7 @@
 import {PostsType} from '../App';
+import {rerenderEntireTree} from '../render';
 
-let state = {
+const state = {
     profilePage: {
         posts: [ //Props Profile-MyPosts
             {id: 1, message: 'Hi, how are you?', likesCount: 23},
@@ -35,6 +36,7 @@ export const addPost = (postMessage: string) => {
         id: new Date().getTime(), message: postMessage, likesCount: 0
     }
     state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
 }
 
 
