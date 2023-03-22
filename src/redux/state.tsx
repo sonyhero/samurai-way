@@ -1,4 +1,4 @@
-import {PostsType} from '../App';
+import {MessageType, PostsType} from '../App';
 import {rerenderEntireTree} from '../render';
 
 const state = {
@@ -21,7 +21,8 @@ const state = {
             {id: 1, message: 'Hi'},
             {id: 2, message: 'Anton'},
             {id: 3, message: 'How are you'},
-        ]
+        ],
+        newMessageText: ''
     },
     sidebar: {
         friends: [
@@ -40,6 +41,7 @@ const state = {
 //     rerenderEntireTree(state)
 // }
 
+// Функции добавленияя постов
 export const addPost = () => {
     const newPost: PostsType = {
         id: new Date().getTime(), message: state.profilePage.newPostText, likesCount: 0
@@ -51,6 +53,21 @@ export const addPost = () => {
 
 export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
+    rerenderEntireTree(state)
+}
+
+// Функции добавленияя сообщений
+export const addMessage = () => {
+    const newMessage: MessageType = {
+        id: new Date().getTime(), message: state.dialogsPage.newMessageText
+    }
+    state.dialogsPage.messages.push(newMessage)
+    state.dialogsPage.newMessageText = ''
+    rerenderEntireTree(state)
+}
+
+export const updateNewMessageText = (newMessageText: string) => {
+    state.dialogsPage.newMessageText = newMessageText
     rerenderEntireTree(state)
 }
 

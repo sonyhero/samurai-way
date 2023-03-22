@@ -1,36 +1,46 @@
-import React from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './DialogsCSS.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
-import {DialogItemType, MessageType} from '../../App';
+import {DialogsPageType} from '../../App';
 
-export type DialogsPropsType = {
-    state: DialogsStateType
-
+type DialogsPropsType = {
+    dialogsPage: DialogsPageType
+    addMessage: () => void
+    updateNewMessageText: (newMessageText: string) => void
 }
 
-type DialogsStateType = {
-    dialogs: DialogItemType[]
-    messages: MessageType[]
-}
+// type DialogsStateType = {
+//     dialogs: DialogItemType[]
+//     messages: MessageType[]
+// }
 
 export const Dialogs = (props:DialogsPropsType) => {
 
     // let dialogsDataMap = props.dialogs.map(
     //     d => <DialogItem name={d.name} id={d.id}/>
     // )
-    const dialogsDataMap = props.state.dialogs.map(
+    const dialogsDataMap = props.dialogsPage.dialogs.map(
         d => <DialogItem name={d.name} id={d.id}/>
     )
 
-    const messagesDataMap = props.state.messages.map(
-        m => <Message message={m.message}/>
+    const messagesDataMap = props.dialogsPage.messages.map(
+        m => <Message message={m.message} id={m.id}/>
     )
 
-    const newMassageElement = React.createRef<HTMLTextAreaElement>()
-
     const addMessage = () => {
-      const text = newMassageElement.current?.value
+        if (props.dialogsPage.newMessageText.trim() !== '')
+            props.addMessage()
+    }
+
+    const onChangeMassage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewMessageText(e.currentTarget.value)
+    }
+
+    const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter') {
+            addMessage()
+        }
     }
 
     return (
@@ -45,7 +55,10 @@ export const Dialogs = (props:DialogsPropsType) => {
                 </div>
             </div>
             <div>
-                <textarea ref={newMassageElement}></textarea>
+                <textarea onChange={onChangeMassage}
+                          onKeyDown={onKeyDownHandler}
+                          value={props.dialogsPage.newMessageText}
+                />
             </div>
             <div>
                 <button onClick={addMessage}>Add message</button>

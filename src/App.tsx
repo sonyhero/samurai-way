@@ -24,6 +24,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     messages: MessageType[]
     dialogs: DialogItemType[]
+    newMessageText: string
 }
 
 export type SidebarType = {
@@ -35,6 +36,7 @@ export type DialogItemType = {
     name: string
 }
 export type MessageType = {
+    id: number
     message: string
 }
 export type FriendsType = {
@@ -53,6 +55,8 @@ type AppPropsType = {
     //addPost: (postMessage: string) => void
     addPost: () => void
     updateNewPostText: (newText: string) => void
+    addMessage: () => void
+    updateNewMessageText: (newMessageText: string) => void
 }
 const App = (props: AppPropsType) => {
     return (
@@ -65,7 +69,9 @@ const App = (props: AppPropsType) => {
                     {/*<Route path="/dialogs" component={Dialogs}/>*/}
 
                     <Route path="/dialogs" render={() => <Dialogs
-                        state={props.state.dialogsPage}
+                        dialogsPage={props.state.dialogsPage}
+                        addMessage={props.addMessage}
+                        updateNewMessageText={props.updateNewMessageText}
                     />}/>
                     <Route path="/profile" render={() => <Profile
                         profilePage={props.state.profilePage}
