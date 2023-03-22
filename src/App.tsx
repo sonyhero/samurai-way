@@ -18,7 +18,7 @@ export type StateType = {
 
 export type ProfilePageType = {
     posts: PostsType[]
-
+    newPostText: string
 }
 
 export type DialogsPageType = {
@@ -50,7 +50,9 @@ export type PostsType = {
 
 type AppPropsType = {
     state: StateType
-    addPost: (postMessage: string)=>void
+    //addPost: (postMessage: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 const App = (props: AppPropsType) => {
     return (
@@ -66,8 +68,9 @@ const App = (props: AppPropsType) => {
                         state={props.state.dialogsPage}
                     />}/>
                     <Route path="/profile" render={() => <Profile
-                        state={props.state.profilePage}
+                        profilePage={props.state.profilePage}
                         addPost={props.addPost}
+                        updateNewPostText={props.updateNewPostText}
                     />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>

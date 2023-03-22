@@ -4,19 +4,22 @@ import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {PostsType} from '../../App';
 
 export type ProfilePropsType = {
-    state: ProfileStateType
-    addPost: (postMessage: string)=>void
+    profilePage: ProfileStateType
+    //addPost: (postMessage: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 export type ProfileStateType = {
     posts: PostsType[]
+    newPostText: string
 }
 export const Profile = (props: ProfilePropsType) => {
 
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.state.posts} addPost={props.addPost}/>
+            <MyPosts newPostText={props.profilePage.newPostText} posts={props.profilePage.posts} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
         </div>
     )
 }

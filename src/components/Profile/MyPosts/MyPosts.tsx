@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './MyPostsCSS.module.css'
 import {Post} from './Post/Post';
 import {PostsType} from '../../../App';
 
 type MyPostsPropsType = {
     posts: PostsType[]
-    addPost: (postMessage: string) => void
+    //addPost: (postMessage: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+    newPostText: string
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
@@ -14,13 +17,20 @@ export const MyPosts = (props: MyPostsPropsType) => {
         <Post id={p.id} message={p.message} likesCount={p.likesCount}/>
     )
 
-    const newPostElement = React.createRef<HTMLTextAreaElement>()
-
+    // const addPost = () => {
+    //     if (props.newPostText.trim()!=='')
+    //         props.addPost(props.newPostText.trim())
+    //         props.updateNewPostText('')
+    //     }
     const addPost = () => {
-        if (newPostElement.current) {
-            props.addPost(newPostElement.current.value)
-            newPostElement.current.value = ''
-        }
+        if (props.newPostText.trim() !== '')
+            props.addPost()
+        props.updateNewPostText('')
+    }
+
+
+    const onChangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostText(e.currentTarget.value)
     }
 
     return (
@@ -28,7 +38,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={onChangePost} value={props.newPostText}></textarea>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>

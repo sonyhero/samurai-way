@@ -6,7 +6,8 @@ const state = {
         posts: [ //Props Profile-MyPosts
             {id: 1, message: 'Hi, how are you?', likesCount: 23},
             {id: 2, message: 'It\'s my first post!', likesCount: 100}
-        ]
+        ],
+        newPostText: ''
     },
     dialogsPage: {
         dialogs: [ // Props Dialogs-DialogsItem
@@ -31,13 +32,25 @@ const state = {
     }
 }
 
-export const addPost = (postMessage: string) => {
+// export const addPost = (postMessage: string) => {
+//     const newPost: PostsType = {
+//         id: new Date().getTime(), message: postMessage, likesCount: 0
+//     }
+//     state.profilePage.posts.push(newPost)
+//     rerenderEntireTree(state)
+// }
+
+export const addPost = () => {
     const newPost: PostsType = {
-        id: new Date().getTime(), message: postMessage, likesCount: 0
+        id: new Date().getTime(), message: state.profilePage.newPostText, likesCount: 0
     }
     state.profilePage.posts.push(newPost)
     rerenderEntireTree(state)
 }
 
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTree(state)
+}
 
 export default state;
