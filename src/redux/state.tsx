@@ -1,5 +1,8 @@
-import {MessageType, PostsType} from '../App';
-import {rerenderEntireTree} from '../render';
+import {MessageType, PostsType, StateType} from '../App';
+
+let rerenderEntireTree = (state: StateType) => {
+    console.log()
+}
 
 const state = {
     profilePage: {
@@ -69,6 +72,10 @@ export const addMessage = () => {
 export const updateNewMessageText = (newMessageText: string) => {
     state.dialogsPage.newMessageText = newMessageText
     rerenderEntireTree(state)
+}
+
+export const subscribe = (observer: ()=>void) => {
+    rerenderEntireTree = observer
 }
 
 export default state;
