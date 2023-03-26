@@ -1,6 +1,6 @@
-import {MessageType, PostsType, StateType} from '../App';
+import {MessageType, PostsType} from '../App';
 
-let rerenderEntireTree = (state: StateType) => {
+let rerenderEntireTree = () => {
     console.log()
 }
 
@@ -51,12 +51,12 @@ export const addPost = () => {
     }
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
 export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
 // Функции добавленияя сообщений
@@ -66,12 +66,12 @@ export const addMessage = () => {
     }
     state.dialogsPage.messages.push(newMessage)
     state.dialogsPage.newMessageText = ''
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
 export const updateNewMessageText = (newMessageText: string) => {
     state.dialogsPage.newMessageText = newMessageText
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
 export const subscribe = (observer: ()=>void) => {

@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App, {StateType} from './App';
+import App from './App';
 import {addMessage, addPost, subscribe, updateNewMessageText, updateNewPostText} from './redux/state';
 import state from './redux/state';
 
-const rerenderEntireTree = (state: StateType) => {
+const rerenderEntireTree = () => {
     ReactDOM.render(
         <App
             state={state}
@@ -17,6 +17,6 @@ const rerenderEntireTree = (state: StateType) => {
     );
 }
 
-rerenderEntireTree(state)
+rerenderEntireTree()
 
-subscribe(()=>rerenderEntireTree(state))
+subscribe(rerenderEntireTree)
