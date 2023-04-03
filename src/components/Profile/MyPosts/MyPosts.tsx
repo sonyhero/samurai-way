@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPostsCSS.module.css'
 import {Post} from './Post/Post';
-import {PostsType} from '../../../App';
+import {PostsType} from '../../../redux/state';
 
 type MyPostsPropsType = {
     posts: PostsType[]
@@ -32,11 +32,11 @@ export const MyPosts = (props: MyPostsPropsType) => {
         props.updateNewPostText(e.currentTarget.value)
     }
 
-   const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
             addPost()
         }
-   }
+    }
 
     return (
         <div className={s.postsBlock}>

@@ -34,7 +34,7 @@ export type PostsType = {
 }
 export type StoreType = {
     _state: StateType
-    getState: () => void
+    getState: () => StateType
     _callSubscriber: () => void
     addPost: () => void
     updateNewPostText: (newText: string) => void

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 import s from './NavbarCSS.module.css'
-import {NavLink} from 'react-router-dom';
-import {FriendsType} from '../../App';
+import {NavLink} from 'react-router-dom'
+import {FriendsType} from '../../redux/state';
 
 
 type NavbarPropsType = {
@@ -14,7 +14,7 @@ type NavbarStateType = {
 
 export const Navbar = (props: NavbarPropsType) => {
 
-    const friendsMap = props.state.friends.map(el=> <li>{el.name}</li>)
+    const friendsMap = props.state.friends.map(el => <li>{el.name}</li>)
 
     return (
         <nav className={s.nav}>
