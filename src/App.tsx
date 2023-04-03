@@ -9,46 +9,7 @@ import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import {Friends} from './components/Friends/Friends';
-
-export type StateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-    sidebar: SidebarType
-}
-
-export type ProfilePageType = {
-    posts: PostsType[]
-    newPostText: string
-}
-
-export type DialogsPageType = {
-    messages: MessageType[]
-    dialogs: DialogItemType[]
-    newMessageText: string
-}
-
-export type SidebarType = {
-    friends: FriendsType[]
-}
-
-export type DialogItemType = {
-    id: number
-    name: string
-}
-export type MessageType = {
-    id: number
-    message: string
-}
-export type FriendsType = {
-    id: number
-    name: string
-}
-
-export type PostsType = {
-    id: number
-    message: string
-    likesCount: number
-}
+import {StateType} from './redux/state';
 
 type AppPropsType = {
     state: StateType

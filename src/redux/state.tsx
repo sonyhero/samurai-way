@@ -1,6 +1,50 @@
-import {MessageType, PostsType} from '../App';
+export type StateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+    sidebar: SidebarType
+}
+export type ProfilePageType = {
+    posts: PostsType[]
+    newPostText: string
+}
+export type DialogsPageType = {
+    messages: MessageType[]
+    dialogs: DialogItemType[]
+    newMessageText: string
+}
+export type SidebarType = {
+    friends: FriendsType[]
+}
+export type DialogItemType = {
+    id: number
+    name: string
+}
+export type MessageType = {
+    id: number
+    message: string
+}
+export type FriendsType = {
+    id: number
+    name: string
+}
+export type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+export type StoreType = {
+    _state: StateType
+    getState: () => void
+    _callSubscriber: () => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+    addMessage: () => void
+    updateNewMessageText: (newMessageText: string) => void
+    subscribe: (observer: () => void) => void
 
-let store = {
+}
+
+let store: StoreType = {
     _state: {
         profilePage: {
             posts: [ //Props Profile-MyPosts
