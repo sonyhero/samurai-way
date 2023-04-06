@@ -10,16 +10,12 @@ import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import {Friends} from './components/Friends/Friends';
 import {
-    AddMessageActionType,
-    AddPostActionType,
-    StateType,
-    UpdateNewMessageTextActionType,
-    UpdateNewPostTextActionType
+    ActionsTypes, StateType,
 } from './redux/state';
 
 type AppPropsType = {
     state: StateType
-    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType) => void
+    dispatch: (action: ActionsTypes) => void
     //addPost: (postMessage: string) => void
     // addPost: () => void
     // updateNewPostText: (newText: string) => void

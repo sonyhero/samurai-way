@@ -3,17 +3,14 @@ import s from './DialogsCSS.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
 import {
-    AddMessageActionType,
-    AddPostActionType,
+    ActionsTypes,
     DialogsPageType,
-    UpdateNewMessageTextActionType,
-    UpdateNewPostTextActionType
 } from '../../redux/state';
 
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
-    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType) => void
+    dispatch: (action: ActionsTypes) => void
     // addMessage: () => void
     // updateNewMessageText: (newMessageText: string) => void
 }

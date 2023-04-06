@@ -2,11 +2,8 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPostsCSS.module.css'
 import {Post} from './Post/Post';
 import {
-    AddMessageActionType,
-    AddPostActionType,
+    ActionsTypes,
     PostsType,
-    UpdateNewMessageTextActionType,
-    UpdateNewPostTextActionType
 } from '../../../redux/state';
 
 type MyPostsPropsType = {
@@ -14,7 +11,7 @@ type MyPostsPropsType = {
     //addPost: (postMessage: string) => void
     // addPost: () => void
     // updateNewPostText: (newText: string) => void
-    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType) => void
+    dispatch: (action: ActionsTypes) => void
     newPostText: string
 }
 

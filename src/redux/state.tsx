@@ -43,20 +43,22 @@ export type StoreType = {
     // addMessage: () => void
     // updateNewMessageText: (newMessageText: string) => void
 
-    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType) => void
+    dispatch: (action: ActionsTypes) => void
 }
+// Объединение типов actions
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType
 
-export type AddPostActionType = {
+type AddPostActionType = {
     type: 'ADD-POST'
 }
-export type UpdateNewPostTextActionType = {
+type UpdateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
-export type AddMessageActionType = {
+type AddMessageActionType = {
     type: 'ADD-MESSAGE'
 }
-export type UpdateNewMessageTextActionType = {
+type UpdateNewMessageTextActionType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
     newMessageText: string
 }
