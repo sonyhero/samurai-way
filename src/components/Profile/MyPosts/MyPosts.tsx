@@ -8,9 +8,6 @@ import {
 
 type MyPostsPropsType = {
     posts: PostsType[]
-    //addPost: (postMessage: string) => void
-    // addPost: () => void
-    // updateNewPostText: (newText: string) => void
     dispatch: (action: ActionsTypes) => void
     newPostText: string
 }
@@ -18,20 +15,13 @@ type MyPostsPropsType = {
 export const MyPosts = (props: MyPostsPropsType) => {
 
     const postDataMap = props.posts.map(p =>
-        <Post id={p.id} message={p.message} likesCount={p.likesCount}/>
+        <Post id={p.id} postText={p.postText} likesCount={p.likesCount}/>
     )
-
-    // const addPost = () => {
-    //     if (props.newPostText.trim()!=='')
-    //         props.addPost(props.newPostText.trim())
-    //         props.updateNewPostText('')
-    //     }
 
     const addPost = () => {
         if (props.newPostText.trim() !== '')
             props.dispatch(addPostAC())
     }
-
 
     const onChangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.dispatch(updateNewPostTextAC(e.currentTarget.value))
@@ -48,9 +38,11 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea onChange={onChangePost}
-                              value={props.newPostText}
-                              onKeyDown={onKeyDownHandler}/>
+                    <textarea
+                        placeholder={'Enter post text'}
+                        value={props.newPostText}
+                        onChange={onChangePost}
+                        onKeyDown={onKeyDownHandler}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>

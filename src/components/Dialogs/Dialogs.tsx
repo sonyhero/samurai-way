@@ -2,34 +2,22 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './DialogsCSS.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
-import {
-    ActionsTypes, addMessageAC, DialogsPageType, updateNewMessageTextAC,
-} from '../../redux/state';
+import {ActionsTypes, addMessageAC, DialogsPageType, updateNewMessageTextAC,} from '../../redux/state';
 
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
-    dispatch: (action: ActionsTypes ) => void
-    // addMessage: () => void
-    // updateNewMessageText: (newMessageText: string) => void
+    dispatch: (action: ActionsTypes) => void
 }
-
-// type DialogsStateType = {
-//     dialogs: DialogItemType[]
-//     messages: MessageType[]
-// }
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-    // let dialogsDataMap = props.dialogs.map(
-    //     d => <DialogItem name={d.name} id={d.id}/>
-    // )
     const dialogsDataMap = props.dialogsPage.dialogs.map(
         d => <DialogItem name={d.name} id={d.id}/>
     )
 
     const messagesDataMap = props.dialogsPage.messages.map(
-        m => <Message message={m.message} id={m.id}/>
+        m => <Message messageText={m.messageText} id={m.id}/>
     )
 
     const addMessage = () => {
@@ -42,30 +30,27 @@ export const Dialogs = (props: DialogsPropsType) => {
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter') {
-            addMessage()
-        }
+        if (e.key === 'Enter') addMessage()
     }
 
     return (
         <div>
             Dialogs
             <div className={s.dialogs}>
-                <div className={s.dialogsItems}>
-                    {dialogsDataMap}
-                </div>
-                <div className={s.messages}>
-                    {messagesDataMap}
-                </div>
-            </div>
-            <div>
-                <textarea onChange={onChangeMassage}
-                          onKeyDown={onKeyDownHandler}
-                          value={props.dialogsPage.newMessageText}
+                <div className={s.dialogsItems}>{dialogsDataMap}</div>
+                <div className={s.messages}>{messagesDataMap}
+                    <div>
+                <textarea
+                    placeholder={'Enter message'}
+                    value={props.dialogsPage.newMessageText}
+                    onChange={onChangeMassage}
+                    onKeyDown={onKeyDownHandler}
                 />
-            </div>
-            <div>
-                <button onClick={addMessage}>Add message</button>
+                    </div>
+                    <div>
+                        <button onClick={addMessage}>Add message</button>
+                    </div>
+                </div>
             </div>
         </div>
     )

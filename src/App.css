@@ -1,4 +1,6 @@
 .app-wrapper {
+    font-family: 'Montserrat', sans-serif;
+
     margin: 0 auto;
     display: grid;
     width: 1000px;

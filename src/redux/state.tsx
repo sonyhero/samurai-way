@@ -21,7 +21,7 @@ export type DialogItemType = {
 }
 export type MessageType = {
     id: number
-    message: string
+    messageText: string
 }
 export type FriendsType = {
     id: number
@@ -29,7 +29,7 @@ export type FriendsType = {
 }
 export type PostsType = {
     id: number
-    message: string
+    postText: string
     likesCount: number
 }
 export type StoreType = {
@@ -57,7 +57,7 @@ type AddPostActionType = {
 }
 type UpdateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
+    newPostText: string
 }
 type AddMessageActionType = {
     type: 'ADD-MESSAGE'
@@ -69,22 +69,22 @@ type UpdateNewMessageTextActionType = {
 
 //Функции actions
 export const addPostAC = (): AddPostActionType => ({type: 'ADD-POST'})
-export const updateNewPostTextAC = (text: string): UpdateNewPostTextActionType => ({
+export const updateNewPostTextAC = (newPostText: string): UpdateNewPostTextActionType => ({
         type: 'UPDATE-NEW-POST-TEXT',
-        newText: text
+        newPostText
 })
 export const addMessageAC = (): AddMessageActionType => ({type: 'ADD-MESSAGE'})
-export const updateNewMessageTextAC = (text: string): UpdateNewMessageTextActionType => ({
+export const updateNewMessageTextAC = (newMessageText: string): UpdateNewMessageTextActionType => ({
         type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newMessageText: text
+        newMessageText
 })
 
 let store: StoreType = {
     _state: {
         profilePage: {
             posts: [ //Props Profile-MyPosts
-                {id: 1, message: 'Hi, how are you?', likesCount: 23},
-                {id: 2, message: 'It\'s my first post!', likesCount: 100}
+                {id: 1, postText: 'Hi, how are you?', likesCount: 23},
+                {id: 2, postText: 'It\'s my first post!', likesCount: 100}
             ],
             newPostText: ''
         },
@@ -97,9 +97,9 @@ let store: StoreType = {
                 {id: 5, name: 'Igor'},
             ],
             messages: [ //Props Dialogs-Message
-                {id: 1, message: 'Hi'},
-                {id: 2, message: 'Anton'},
-                {id: 3, message: 'How are you'},
+                {id: 1, messageText: 'Hi'},
+                {id: 2, messageText: 'Anton'},
+                {id: 3, messageText: 'How are you'},
             ],
             newMessageText: ''
         },
@@ -148,18 +148,20 @@ let store: StoreType = {
     // },
     dispatch(action) {
         if (action.type === 'ADD-POST') {
+            const newPostText = this._state.profilePage.newPostText
             const newPost: PostsType = {
-                id: new Date().getTime(), message: this._state.profilePage.newPostText, likesCount: 0
+                id: new Date().getTime(), postText: newPostText , likesCount: 0
             }
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber()
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText
+            this._state.profilePage.newPostText = action.newPostText
             this._callSubscriber()
         } else if (action.type === 'ADD-MESSAGE') {
+            const newMessageText = this._state.dialogsPage.newMessageText
             const newMessage: MessageType = {
-                id: new Date().getTime(), message: this._state.dialogsPage.newMessageText
+                id: new Date().getTime(), messageText: newMessageText
             }
             this._state.dialogsPage.messages.push(newMessage)
             this._state.dialogsPage.newMessageText = ''
