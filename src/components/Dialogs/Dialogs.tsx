@@ -3,14 +3,13 @@ import s from './DialogsCSS.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
 import {
-    ActionsTypes,
-    DialogsPageType,
+    ActionsTypes, addMessageAC, DialogsPageType, updateNewMessageTextAC,
 } from '../../redux/state';
 
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
-    dispatch: (action: ActionsTypes) => void
+    dispatch: (action: ActionsTypes ) => void
     // addMessage: () => void
     // updateNewMessageText: (newMessageText: string) => void
 }
@@ -35,11 +34,11 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     const addMessage = () => {
         if (props.dialogsPage.newMessageText.trim() !== '')
-            props.dispatch({type: 'ADD-MESSAGE'})
+            props.dispatch(addMessageAC())
     }
 
     const onChangeMassage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', newMessageText: e.currentTarget.value})
+        props.dispatch(updateNewMessageTextAC(e.currentTarget.value))
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {

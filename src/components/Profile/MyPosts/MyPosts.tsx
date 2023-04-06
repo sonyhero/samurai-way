@@ -2,8 +2,8 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPostsCSS.module.css'
 import {Post} from './Post/Post';
 import {
-    ActionsTypes,
-    PostsType,
+    ActionsTypes, addPostAC,
+    PostsType, updateNewPostTextAC,
 } from '../../../redux/state';
 
 type MyPostsPropsType = {
@@ -26,16 +26,15 @@ export const MyPosts = (props: MyPostsPropsType) => {
     //         props.addPost(props.newPostText.trim())
     //         props.updateNewPostText('')
     //     }
+
     const addPost = () => {
         if (props.newPostText.trim() !== '')
-            props.dispatch({type: 'ADD-POST'})
+            props.dispatch(addPostAC())
     }
 
 
     const onChangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({
-            type: 'UPDATE-NEW-POST-TEXT', newText: e.currentTarget.value
-        })
+        props.dispatch(updateNewPostTextAC(e.currentTarget.value))
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {

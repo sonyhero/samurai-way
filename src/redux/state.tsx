@@ -46,7 +46,11 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 // Объединение типов actions
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType
+export type ActionsTypes =
+    AddPostActionType
+    | UpdateNewPostTextActionType
+    | AddMessageActionType
+    | UpdateNewMessageTextActionType
 
 type AddPostActionType = {
     type: 'ADD-POST'
@@ -62,6 +66,18 @@ type UpdateNewMessageTextActionType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
     newMessageText: string
 }
+
+//Функции actions
+export const addPostAC = (): AddPostActionType => ({type: 'ADD-POST'})
+export const updateNewPostTextAC = (text: string): UpdateNewPostTextActionType => ({
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: text
+})
+export const addMessageAC = (): AddMessageActionType => ({type: 'ADD-MESSAGE'})
+export const updateNewMessageTextAC = (text: string): UpdateNewMessageTextActionType => ({
+        type: 'UPDATE-NEW-MESSAGE-TEXT',
+        newMessageText: text
+})
 
 let store: StoreType = {
     _state: {
