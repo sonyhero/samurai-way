@@ -1,13 +1,20 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPostsCSS.module.css'
 import {Post} from './Post/Post';
-import {PostsType} from '../../../redux/state';
+import {
+    AddMessageActionType,
+    AddPostActionType,
+    PostsType,
+    UpdateNewMessageTextActionType,
+    UpdateNewPostTextActionType
+} from '../../../redux/state';
 
 type MyPostsPropsType = {
     posts: PostsType[]
     //addPost: (postMessage: string) => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    // addPost: () => void
+    // updateNewPostText: (newText: string) => void
+    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType) => void
     newPostText: string
 }
 
@@ -24,12 +31,14 @@ export const MyPosts = (props: MyPostsPropsType) => {
     //     }
     const addPost = () => {
         if (props.newPostText.trim() !== '')
-            props.addPost()
+            props.dispatch({type: 'ADD-POST'})
     }
 
 
     const onChangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
+        props.dispatch({
+            type: 'UPDATE-NEW-POST-TEXT', newText: e.currentTarget.value
+        })
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
