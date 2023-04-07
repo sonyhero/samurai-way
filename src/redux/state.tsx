@@ -1,3 +1,7 @@
+import {profileReducer} from './profile-reducer';
+import {dialogsReducer} from './dialogs-reducer';
+import {sidebarReducer} from './sidebar-reducer';
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
@@ -37,47 +41,26 @@ export type StoreType = {
     _callSubscriber: () => void
     getState: () => StateType
     subscribe: (observer: () => void) => void
-
-    // addPost: () => void
-    // updateNewPostText: (newText: string) => void
-    // addMessage: () => void
-    // updateNewMessageText: (newMessageText: string) => void
-
     dispatch: (action: ActionsTypes) => void
 }
 // Объединение типов actions
 export type ActionsTypes =
-    AddPostActionType
-    | UpdateNewPostTextActionType
-    | AddMessageActionType
-    | UpdateNewMessageTextActionType
-
-type AddPostActionType = {
-    type: 'ADD-POST'
-}
-type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newPostText: string
-}
-type AddMessageActionType = {
-    type: 'ADD-MESSAGE'
-}
-type UpdateNewMessageTextActionType = {
-    type: 'UPDATE-NEW-MESSAGE-TEXT'
-    newMessageText: string
-}
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof addMessageAC>
+    | ReturnType<typeof updateNewMessageTextAC>
 
 //Функции actions
-export const addPostAC = (): AddPostActionType => ({type: 'ADD-POST'})
-export const updateNewPostTextAC = (newPostText: string): UpdateNewPostTextActionType => ({
-        type: 'UPDATE-NEW-POST-TEXT',
-        newPostText
-})
-export const addMessageAC = (): AddMessageActionType => ({type: 'ADD-MESSAGE'})
-export const updateNewMessageTextAC = (newMessageText: string): UpdateNewMessageTextActionType => ({
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newMessageText
-})
+export const addPostAC = () => ({type: 'ADD-POST'} as const)
+export const updateNewPostTextAC = (newPostText: string) => ({
+    type: 'UPDATE-NEW-POST-TEXT',
+    newPostText
+} as const)
+export const addMessageAC = () => ({type: 'ADD-MESSAGE'} as const)
+export const updateNewMessageTextAC = (newMessageText: string) => ({
+    type: 'UPDATE-NEW-MESSAGE-TEXT',
+    newMessageText
+} as const)
 
 let store: StoreType = {
     _state: {
@@ -122,136 +105,13 @@ let store: StoreType = {
         this._callSubscriber = observer
     },
 
-    // addPost() {
-    //     const newPost: PostsType = {
-    //         id: new Date().getTime(), message: this._state.profilePage.newPostText, likesCount: 0
-    //     }
-    //     this._state.profilePage.posts.push(newPost)
-    //     this._state.profilePage.newPostText = ''
-    //     this._callSubscriber()
-    // },
-    // updateNewPostText(newText: string) {
-    //     this._state.profilePage.newPostText = newText
-    //     this._callSubscriber()
-    // },
-    // addMessage() {
-    //     const newMessage: MessageType = {
-    //         id: new Date().getTime(), message: this._state.dialogsPage.newMessageText
-    //     }
-    //     this._state.dialogsPage.messages.push(newMessage)
-    //     this._state.dialogsPage.newMessageText = ''
-    //     this._callSubscriber()
-    // },
-    // updateNewMessageText(newMessageText: string) {
-    //     this._state.dialogsPage.newMessageText = newMessageText
-    //     this._callSubscriber()
-    // },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPostText = this._state.profilePage.newPostText
-            const newPost: PostsType = {
-                id: new Date().getTime(), postText: newPostText , likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newPostText
-            this._callSubscriber()
-        } else if (action.type === 'ADD-MESSAGE') {
-            const newMessageText = this._state.dialogsPage.newMessageText
-            const newMessage: MessageType = {
-                id: new Date().getTime(), messageText: newMessageText
-            }
-            this._state.dialogsPage.messages.push(newMessage)
-            this._state.dialogsPage.newMessageText = ''
-            this._callSubscriber()
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.dialogsPage.newMessageText = action.newMessageText
-            this._callSubscriber()
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._callSubscriber()
+
     }
 }
-
-// const rerenderEntireTree = () => {
-//     console.log('State changed')
-// }
-
-// const state = {
-//     profilePage: {
-//         posts: [ //Props Profile-MyPosts
-//             {id: 1, message: 'Hi, how are you?', likesCount: 23},
-//             {id: 2, message: 'It\'s my first post!', likesCount: 100}
-//         ],
-//         newPostText: ''
-//     },
-//     dialogsPage: {
-//         dialogs: [ // Props Dialogs-DialogsItem
-//             {id: 1, name: 'Dimych'},
-//             {id: 2, name: 'Sveta'},
-//             {id: 3, name: 'Viktor'},
-//             {id: 4, name: 'Maks'},
-//             {id: 5, name: 'Igor'},
-//         ],
-//         messages: [ //Props Dialogs-Message
-//             {id: 1, message: 'Hi'},
-//             {id: 2, message: 'Anton'},
-//             {id: 3, message: 'How are you'},
-//         ],
-//         newMessageText: ''
-//     },
-//     sidebar: {
-//         friends: [
-//             {id: 1, name: 'Dimych'},
-//             {id: 2, name: 'Nikita'},
-//             {id: 3, name: 'Eugenia'}
-//         ]
-//     }
-// }
-
-// export const addPost = (postMessage: string) => {
-//     const newPost: PostsType = {
-//         id: new Date().getTime(), message: postMessage, likesCount: 0
-//     }
-//     state.profilePage.posts.push(newPost)
-//     rerenderEntireTree(state)
-// }
-
-// Функции добавленияя постов
-// export const addPost = () => {
-//     const newPost: PostsType = {
-//         id: new Date().getTime(), message: state.profilePage.newPostText, likesCount: 0
-//     }
-//     state.profilePage.posts.push(newPost)
-//     state.profilePage.newPostText = ''
-//     rerenderEntireTree()
-// }
-
-// export const updateNewPostText = (newText: string) => {
-//     state.profilePage.newPostText = newText
-//     rerenderEntireTree()
-// }
-
-// Функции добавленияя сообщений
-// export const addMessage = () => {
-//     const newMessage: MessageType = {
-//         id: new Date().getTime(), message: state.dialogsPage.newMessageText
-//     }
-//     state.dialogsPage.messages.push(newMessage)
-//     state.dialogsPage.newMessageText = ''
-//     rerenderEntireTree()
-// }
-
-// export const updateNewMessageText = (newMessageText: string) => {
-//     state.dialogsPage.newMessageText = newMessageText
-//     rerenderEntireTree()
-// }
-
-// export const subscribe = (observer: () => void) => {
-//     rerenderEntireTree = observer
-// }
-
-// export default state
-//window.state = state
 export default store;
 // window.store = store
