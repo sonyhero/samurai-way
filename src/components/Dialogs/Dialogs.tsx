@@ -27,7 +27,8 @@ export const Dialogs = (props: DialogsPropsType) => {
     }
 
     const onChangeMassage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageTextAC(e.currentTarget.value))
+        const newMessageText = e.currentTarget.value
+        props.dispatch(updateNewMessageTextAC(newMessageText))
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {

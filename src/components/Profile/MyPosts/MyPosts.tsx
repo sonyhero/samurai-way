@@ -22,7 +22,8 @@ export const MyPosts = (props: MyPostsPropsType) => {
     }
 
     const onChangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewPostTextAC(e.currentTarget.value))
+        const newPostText = e.currentTarget.value
+        props.dispatch(updateNewPostTextAC(newPostText))
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
