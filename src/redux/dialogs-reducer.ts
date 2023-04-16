@@ -8,7 +8,23 @@ export const updateNewMessageTextAC = (newMessageText: string) => ({
     newMessageText
 } as const)
 
-export const dialogsReducer = (state: DialogsPageType, action: ActionsTypes) => {
+const initialState: DialogsPageType = {
+    dialogs: [ // Props Dialogs-DialogsItem
+        {id: 1, name: 'Dimych'},
+        {id: 2, name: 'Sveta'},
+        {id: 3, name: 'Viktor'},
+        {id: 4, name: 'Maks'},
+        {id: 5, name: 'Igor'},
+    ],
+    messages: [ //Props Dialogs-Message
+        {id: 1, messageText: 'Hi'},
+        {id: 2, messageText: 'Anton'},
+        {id: 3, messageText: 'How are you'},
+    ],
+    newMessageText: ''
+}
+
+export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes) => {
 
     switch (action.type) {
         case ADD_MESSAGE:
