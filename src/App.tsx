@@ -12,6 +12,7 @@ import {Friends} from './components/Friends/Friends';
 import {
     ActionsTypes, StateType, StoreType,
 } from './redux/state';
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
     state: StateType
@@ -26,9 +27,10 @@ export const App = (props: AppPropsType) => {
             <Navbar state={props.state.sidebar}/>
             <div className="app-wrapper-content">
 
-                <Route path="/dialogs" render={() => <Dialogs
-                    dialogsPage={props.state.dialogsPage}
-                    dispatch={props.dispatch}
+                <Route path="/dialogs" render={() => <DialogsContainer
+                    // dialogsPage={props.state.dialogsPage}
+                    // dispatch={props.dispatch}
+                    store={props.store}
                 />}/>
                 <Route path="/profile" render={() => <Profile
                     // profilePage={props.state.profilePage}

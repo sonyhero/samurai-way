@@ -2,13 +2,14 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './DialogsCSS.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
-import {ActionsTypes, DialogsPageType} from '../../redux/state';
+import {ActionsTypes, DialogsPageType, StoreType} from '../../redux/state';
 import {addMessageAC, updateNewMessageTextAC} from '../../redux/dialogs-reducer';
 
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
-    dispatch: (action: ActionsTypes) => void
+    addMessage: () => void
+    changeMassage: (newMessageText: string) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -21,18 +22,17 @@ export const Dialogs = (props: DialogsPropsType) => {
         m => <Message messageText={m.messageText} id={m.id}/>
     )
 
-    const addMessage = () => {
-        if (props.dialogsPage.newMessageText.trim() !== '')
-            props.dispatch(addMessageAC())
+    const onAddMessage = () => {
+        props.addMessage()
     }
 
     const onChangeMassage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const newMessageText = e.currentTarget.value
-        props.dispatch(updateNewMessageTextAC(newMessageText))
+        props.changeMassage(newMessageText)
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter') addMessage()
+        if (e.key === 'Enter') props.addMessage()
     }
 
     return (
@@ -50,7 +50,7 @@ export const Dialogs = (props: DialogsPropsType) => {
                 />
                     </div>
                     <div>
-                        <button onClick={addMessage}>Add message</button>
+                        <button onClick={onAddMessage}>Add message</button>
                     </div>
                 </div>
             </div>

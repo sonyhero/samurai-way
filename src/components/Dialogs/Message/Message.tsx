@@ -7,4 +7,3 @@ export const Message = (props: MessageType) => {
         <div className={s.message}>{props.messageText}</div>
     )
 }
-
