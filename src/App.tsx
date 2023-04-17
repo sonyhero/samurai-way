@@ -10,12 +10,13 @@ import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import {Friends} from './components/Friends/Friends';
 import {
-    ActionsTypes, StateType,
+    ActionsTypes, StateType, StoreType,
 } from './redux/state';
 
 type AppPropsType = {
     state: StateType
     dispatch: (action: ActionsTypes) => void
+    store: StoreType
 }
 
 export const App = (props: AppPropsType) => {
@@ -30,8 +31,9 @@ export const App = (props: AppPropsType) => {
                     dispatch={props.dispatch}
                 />}/>
                 <Route path="/profile" render={() => <Profile
-                    profilePage={props.state.profilePage}
-                    dispatch={props.dispatch}
+                    // profilePage={props.state.profilePage}
+                    // dispatch={props.dispatch}
+                    store={props.store}
                 />}/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
