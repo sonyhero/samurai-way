@@ -1,18 +1,19 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPostsCSS.module.css'
 import {Post} from './Post/Post';
-import {PostsType} from '../../../redux/state';
+import {InitialProfileReducerStateType} from '../../../redux/profile-reducer';
 
 type MyPostsPropsType = {
     addPost: () => void
     updateNewPostText: (newPostText: string) => void
-    posts: PostsType[]
-    newPostText: string
+    // posts: PostsType[]
+    // newPostText: string
+    profilePage: InitialProfileReducerStateType
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
-    const postDataMap = props.posts.map(p =>
+    const postDataMap = props.profilePage.posts.map(p =>
         <Post id={p.id} postText={p.postText} likesCount={p.likesCount}/>
     )
 
@@ -38,7 +39,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
                 <div>
                     <textarea
                         placeholder={'Enter post text'}
-                        value={props.newPostText}
+                        value={props.profilePage.newPostText}
                         onChange={onPostChange}
                         onKeyDown={onKeyDownHandler}/>
                 </div>
