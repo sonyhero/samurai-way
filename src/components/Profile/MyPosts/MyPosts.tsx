@@ -18,6 +18,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
     )
 
     const onAddPost = () => {
+        if (props.profilePage.newPostText.trim() !== '')
         props.addPost()
     }
 
@@ -28,7 +29,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
-            props.addPost()
+            onAddPost()
         }
     }
 

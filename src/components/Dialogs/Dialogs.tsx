@@ -35,7 +35,9 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter') props.addMessage()
+        if (e.key === 'Enter') {
+            onAddMessage()
+        }
     }
 
     return (

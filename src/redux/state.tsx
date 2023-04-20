@@ -1,37 +1,38 @@
-import {addPostAC, profileReducer, updateNewPostTextAC} from './profile-reducer';
-import {addMessageAC, dialogsReducer, updateNewMessageTextAC} from './dialogs-reducer';
+import {profileReducer} from './profile-reducer';
+import {dialogsReducer} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
+import {ActionsTypes} from './redux-store';
 
-export type StateType = {
+ type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
 }
-export type ProfilePageType = {
+ type ProfilePageType = {
     posts: PostsType[]
-    newPostText: string
+     newPostText: string
 }
-export type DialogsPageType = {
+ type DialogsPageType = {
     messages: MessageType[]
     dialogs: DialogItemType[]
     newMessageText: string
 }
-export type SidebarType = {
+ type SidebarType = {
     friends: FriendsType[]
 }
-export type DialogItemType = {
+ type DialogItemType = {
     id: number
     name: string
 }
-export type MessageType = {
+ type MessageType = {
     id: number
     messageText: string
 }
-export type FriendsType = {
+ type FriendsType = {
     id: number
     name: string
 }
-export type PostsType = {
+ type PostsType = {
     id: number
     postText: string
     likesCount: number
@@ -43,12 +44,7 @@ export type StoreType = {
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionsTypes) => void
 }
-// Объединение типов actions
-export type ActionsTypes =
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
-    | ReturnType<typeof addMessageAC>
-    | ReturnType<typeof updateNewMessageTextAC>
+
 
 
 let store: StoreType = {
