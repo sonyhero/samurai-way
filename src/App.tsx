@@ -3,39 +3,36 @@ import './App.css';
 import {Header} from './components/Header/Header';
 import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
-import {Dialogs} from './components/Dialogs/Dialogs';
 import {Route} from 'react-router-dom';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import {Friends} from './components/Friends/Friends';
-import {
-    ActionsTypes, StateType, StoreType,
-} from './redux/state';
+import store from './redux/state';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
-type AppPropsType = {
-    state: StateType
-    dispatch: (action: ActionsTypes) => void
-    store: StoreType
-}
+// type AppPropsType = {
+//     state: StateType
+//     dispatch: (action: ActionsTypes) => void
+//     store: StoreType
+// }
 
-export const App = (props: AppPropsType) => {
+export const App = () => {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar state={props.state.sidebar}/>
+            <Navbar state={store._state.sidebar}/>
             <div className="app-wrapper-content">
 
                 <Route path="/dialogs" render={() => <DialogsContainer
                     // dialogsPage={props.state.dialogsPage}
                     // dispatch={props.dispatch}
-                    store={props.store}
+                    // store={props.store}
                 />}/>
                 <Route path="/profile" render={() => <Profile
                     // profilePage={props.state.profilePage}
                     // dispatch={props.dispatch}
-                    store={props.store}
+                    // store={props.store}
                 />}/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>

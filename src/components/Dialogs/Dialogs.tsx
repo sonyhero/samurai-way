@@ -2,8 +2,7 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './DialogsCSS.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
-import {ActionsTypes, DialogsPageType, StoreType} from '../../redux/state';
-import {addMessageAC, updateNewMessageTextAC} from '../../redux/dialogs-reducer';
+import {DialogsPageType} from '../../redux/state';
 
 
 type DialogsPropsType = {
@@ -12,7 +11,7 @@ type DialogsPropsType = {
     changeMassage: (newMessageText: string) => void
 }
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     const dialogsDataMap = props.dialogsPage.dialogs.map(
         d => <DialogItem name={d.name} id={d.id}/>
@@ -23,6 +22,7 @@ export const Dialogs = (props: DialogsPropsType) => {
     )
 
     const onAddMessage = () => {
+        if (props.dialogsPage.newMessageText.trim() !== '')
         props.addMessage()
     }
 
