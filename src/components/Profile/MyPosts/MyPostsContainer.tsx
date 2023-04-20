@@ -1,9 +1,9 @@
 import React from 'react';
-import {PostsType} from '../../../redux/state';
 import {addPostAC, updateNewPostTextAC} from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
+import {AppStateType} from '../../../redux/redux-store';
 
 // type MyPostsContainerPropsType = {
 //     posts: PostsType[]
@@ -44,16 +44,12 @@ import {Dispatch} from 'redux';
 //     )
 // }
 
-export type MapStateToPropsType = {
-    newPostText: string
-    posts: PostsType[]
-}
 export type MapDispatchToPropsType = Dispatch
 
-const mapStateToProps = (state: MapStateToPropsType) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
-        newPostText: state.newPostText,
-        posts: state.posts
+        newPostText: state.profileReducer.newPostText,
+        posts: state.profileReducer.posts
     }
 }
 

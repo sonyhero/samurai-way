@@ -2,27 +2,29 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './DialogsCSS.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
-import {DialogsPageType} from '../../redux/state';
+import {DialogItemType, MessageType} from '../../redux/state';
 
 
 type DialogsPropsType = {
-    dialogsPage: DialogsPageType
+    dialogs: DialogItemType[]
+    messages: MessageType[]
+    newMessageText: string
     addMessage: () => void
     changeMassage: (newMessageText: string) => void
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    const dialogsDataMap = props.dialogsPage.dialogs.map(
+    const dialogsDataMap = props.dialogs.map(
         d => <DialogItem name={d.name} id={d.id}/>
     )
 
-    const messagesDataMap = props.dialogsPage.messages.map(
+    const messagesDataMap = props.messages.map(
         m => <Message messageText={m.messageText} id={m.id}/>
     )
 
     const onAddMessage = () => {
-        if (props.dialogsPage.newMessageText.trim() !== '')
+        if (props.newMessageText.trim() !== '')
         props.addMessage()
     }
 
@@ -44,7 +46,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
                     <div>
                 <textarea
                     placeholder={'Enter message'}
-                    value={props.dialogsPage.newMessageText}
+                    value={props.newMessageText}
                     onChange={onChangeMassage}
                     onKeyDown={onKeyDownHandler}
                 />
