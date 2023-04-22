@@ -6,9 +6,6 @@ import {InitialDialogsReducerStateType} from '../../redux/dialogs-reducer';
 
 
 type DialogsPropsType = {
-    // dialogs: DialogItemType[]
-    // messages: MessageType[]
-    // newMessageText: string
     addMessage: () => void
     changeMassage: (newMessageText: string) => void
     dialogsPage: InitialDialogsReducerStateType
