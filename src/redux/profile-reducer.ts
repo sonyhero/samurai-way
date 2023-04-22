@@ -25,13 +25,8 @@ export const profileReducer = (state: InitialProfileReducerStateType = initialSt
             const newPost: PostsType = {
                 id: new Date().getTime(), postText: newPostText, likesCount: 0
             }
-            // state.posts.push(newPost)
-            // state.newPostText = ''
-            // return state
             return {...state, posts: [...state.posts, newPost], newPostText: ''}
-
         case 'UPDATE_NEW_POST_TEXT':
-            // state.newPostText = action.newPostText
             return {...state,newPostText: action.newPostText}
         default:
             return state
