@@ -1,6 +1,8 @@
 import React from 'react';
 import {InitialUsersReducerStateType, UsersType} from '../../redux/users-reducer';
 import s from './UsersCSS.module.css'
+import axios from 'axios';
+import userPhoto from '../../assets/img/user.png'
 
 type UsersPropsType = {
     follow: (userId: number) => void
@@ -11,6 +13,13 @@ type UsersPropsType = {
 
 export const Users: React.FC<UsersPropsType> = (props) => {
     const {users, setUsers, follow, unFollow} = props
+    if (users.users.length === 0) {
+
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response=>{
+                setUsers(response.data.items)
+            })
+    }
 
     const changeFollow = (userId: number) => {
         follow(userId)
@@ -22,7 +31,10 @@ export const Users: React.FC<UsersPropsType> = (props) => {
     const mappedUsers = users.users.map(el => <div key={el.id}>
         <span>
             <div>
-            <img src={el.photoUrl} alt={'avatar'} className={s.usersPhoto}/>
+            <img src={el.photos.small !== null
+            ? el.photos.small
+            : userPhoto
+            } alt={'avatar'} className={s.usersPhoto}/>
         </div>
             <div>{
                 el.followed
@@ -32,12 +44,12 @@ export const Users: React.FC<UsersPropsType> = (props) => {
             </div>
         </span><span>
             <span>
-                <div>{el.fullName}</div>
+                <div>{el.name}</div>
                 <div>{el.status}</div>
             </span>
             <span>
-                <div>{el.location.country}</div>
-                <div>{el.location.city}</div>
+                <div>{'el.location.country'}</div>
+                <div>{'el.location.city'}</div>
             </span>
         </span>
 

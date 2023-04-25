@@ -5,9 +5,9 @@ export type InitialUsersReducerStateType = {
 }
 export type UsersType = {
     id: number
-    photoUrl: string
+    photos: PhotosType
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: LocationType
 }
@@ -15,24 +15,28 @@ type LocationType = {
     city: string
     country: string
 }
+type PhotosType = {
+    small: any
+    large: any
+}
 const initialState: InitialUsersReducerStateType = {
     users: [
-        {
-            id: 1, photoUrl: 'https://avatars.githubusercontent.com/u/71019041?v=4', followed: true, fullName: 'Roma', status: 'Team-Leader', location:
-                {city: 'Minsk', country: ' Belarus'}
-        },
-        {
-            id: 2, photoUrl: 'https://avatars.githubusercontent.com/u/113249072?v=4', followed: false, fullName: 'Anton', status: 'Pre-Junior', location:
-                {city: 'Minsk', country: ' Belarus'}
-        },
-        {
-            id: 3, photoUrl: 'https://avatars.githubusercontent.com/u/125352324?v=4', followed: true, fullName: 'Egor', status: 'Pre-Junior', location:
-                {city: 'Yaroslavl', country: 'Russia'}
-        },
-        {
-            id: 4, photoUrl: 'https://avatars.githubusercontent.com/u/68869871?v=4', followed: false, fullName: 'Artem', status: 'Pre-Junior', location:
-                {city: 'Baranovichi', country: ' Belarus'}
-        },
+        // {
+        //     id: 1, photoUrl: 'https://avatars.githubusercontent.com/u/71019041?v=4', followed: true, fullName: 'Roma', status: 'Team-Leader', location:
+        //         {city: 'Minsk', country: ' Belarus'}
+        // },
+        // {
+        //     id: 2, photoUrl: 'https://avatars.githubusercontent.com/u/113249072?v=4', followed: false, fullName: 'Anton', status: 'Pre-Junior', location:
+        //         {city: 'Minsk', country: ' Belarus'}
+        // },
+        // {
+        //     id: 3, photoUrl: 'https://avatars.githubusercontent.com/u/125352324?v=4', followed: true, fullName: 'Egor', status: 'Pre-Junior', location:
+        //         {city: 'Yaroslavl', country: 'Russia'}
+        // },
+        // {
+        //     id: 4, photoUrl: 'https://avatars.githubusercontent.com/u/68869871?v=4', followed: false, fullName: 'Artem', status: 'Pre-Junior', location:
+        //         {city: 'Baranovichi', country: ' Belarus'}
+        // },
     ]
 }
 
