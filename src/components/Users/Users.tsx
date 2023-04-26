@@ -12,14 +12,14 @@ type UsersPropsType = {
 }
 export class Users extends React.Component<UsersPropsType> {
 
-    getUsers = () => {
-        if (this.props.users.users.length === 0) {
+    constructor(props: UsersPropsType) {
+        super(props);
 
             axios.get('https://social-network.samuraijs.com/api/1.0/users')
                 .then(response=>{
                     this.props.setUsers(response.data.items)
                 })
-        }
+
     }
 
     render() {
@@ -58,7 +58,6 @@ export class Users extends React.Component<UsersPropsType> {
         </div>)
         return (
             <div>
-                <button onClick={()=>this.getUsers()}>Get Users</button>
                 {mappedUsers}
             </div>
         )
