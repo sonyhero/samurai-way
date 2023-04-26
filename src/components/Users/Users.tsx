@@ -10,35 +10,32 @@ type UsersPropsType = {
     setUsers: (users: UsersType[]) => void
     users: InitialUsersReducerStateType
 }
+export class Users extends React.Component<UsersPropsType> {
 
-export const Users: React.FC<UsersPropsType> = (props) => {
-    const {users, setUsers, follow, unFollow} = props
-
-    const getUsers = () => {
-        if (users.users.length === 0) {
+    getUsers = () => {
+        if (this.props.users.users.length === 0) {
 
             axios.get('https://social-network.samuraijs.com/api/1.0/users')
                 .then(response=>{
-                    setUsers(response.data.items)
+                    this.props.setUsers(response.data.items)
                 })
         }
     }
 
+    render() {
+        const changeFollow = (userId: number) => {
+            this.props.follow(userId)
+        }
+        const changeUnFollow = (userId: number) => {
+            this.props.unFollow(userId)
+        }
 
-
-    const changeFollow = (userId: number) => {
-        follow(userId)
-    }
-    const changeUnFollow = (userId: number) => {
-        unFollow(userId)
-    }
-
-    const mappedUsers = users.users.map(el => <div key={el.id}>
+        const mappedUsers = this.props.users.users.map(el => <div key={el.id}>
         <span>
             <div>
             <img src={el.photos.small !== null
-            ? el.photos.small
-            : userPhoto
+                ? el.photos.small
+                : userPhoto
             } alt={'avatar'} className={s.usersPhoto}/>
         </div>
             <div>{
@@ -58,11 +55,12 @@ export const Users: React.FC<UsersPropsType> = (props) => {
             </span>
         </span>
 
-    </div>)
-    return (
-        <div>
-            <button onClick={()=>getUsers()}>Get Users</button>
-            {mappedUsers}
-        </div>
-    );
-};
+        </div>)
+        return (
+            <div>
+                <button onClick={()=>this.getUsers()}>Get Users</button>
+                {mappedUsers}
+            </div>
+        )
+    }
+}
