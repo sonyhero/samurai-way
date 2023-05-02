@@ -38,13 +38,8 @@ export const dialogsReducer = (state: InitialDialogsReducerStateType = initialSt
             const newMessage: MessageType = {
                 id: new Date().getTime(), messageText: newMessageText
             }
-            // state.messages.push(newMessage)
-            // state.newMessageText = ''
-            // return state
             return {...state, messages: [...state.messages, newMessage], newMessageText: ''}
-
         case 'UPDATE_NEW_MESSAGE_TEXT':
-            // state.newMessageText = action.newMessageText
             return {...state, newMessageText: action.newMessageText}
         default:
             return state
