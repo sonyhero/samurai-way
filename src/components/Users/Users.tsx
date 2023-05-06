@@ -1,97 +1,81 @@
 import React from 'react';
-import {UsersType} from '../../redux/users-reducer';
-import s from './UsersCSS.module.css'
-import axios from 'axios';
-import userPhoto from '../../assets/img/user.png'
+import s from "./UsersCSS.module.css";
+import userPhoto from "../../assets/img/user.png";
+import {UsersType} from "../../redux/users-reducer";
 
 type UsersPropsType = {
+    totalUsersCount: number
+    pageSize: number
+    onPageChanged: (pageNumber: number) => void
+    currentPage: number
     follow: (userId: number) => void
     unFollow: (userId: number) => void
-    setUsers: (users: UsersType[]) => void
-    setCurrentPage: (currentPage: number) => void
-    setUsersTotalCount: (totalUsersCount: number) => void
     users: UsersType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
 }
+export const Users: React.FC<UsersPropsType> = (props) => {
 
-export class Users extends React.Component<UsersPropsType> {
+    const {
+        totalUsersCount,
+        pageSize,
+        onPageChanged,
+        currentPage,
+        follow,
+        unFollow,
+        users,
+    } = props
 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                // Засетал тотал каунт разделенный на 200 так как очень много данных
-                this.props.setUsersTotalCount(response.data.totalCount/200)
-            })
+    const pagesCount = Math.ceil(totalUsersCount / pageSize)
 
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
+    }
+    const mappedPages = pages.map((p, index) => {
+        return (
+            <span key={index}
+                  onClick={() => onPageChanged(p)}
+                  className={(currentPage === p)
+                      ? s.selectedPage
+                      : s.usualSpan
+                  }> {p} </span>)
+    })
+    const changeFollow = (userId: number) => {
+        follow(userId)
+    }
+    const changeUnFollow = (userId: number) => {
+        unFollow(userId)
     }
 
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-            })
-    }
-
-    render() {
-
-        const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-
-        let pages = []
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i)
-        }
-        const mappedPages = pages.map((p,index) => {
-            return (
-                <span key={index}
-                    onClick={(e)=>this.onPageChanged(p)}
-                    className={(this.props.currentPage === p)
-                    ? s.selectedPage
-                    : s.usualSpan
-                }> {p} </span>)
-        })
-        const changeFollow = (userId: number) => {
-            this.props.follow(userId)
-        }
-        const changeUnFollow = (userId: number) => {
-            this.props.unFollow(userId)
-        }
-
-        const mappedUsers = this.props.users.map(el => <div key={el.id}>
+    const mappedUsers = users.map(u => <div key={u.id}>
         <span>
             <div>
-            <img src={el.photos.small !== null
-                ? el.photos.small
+            <img src={u.photos.small !== null
+                ? u.photos.small
                 : userPhoto
             } alt={'avatar'} className={s.usersPhoto}/>
         </div>
             <div>{
-                el.followed
-                    ? <button onClick={() => changeUnFollow(el.id)}>Unfollow</button>
-                    : <button onClick={() => changeFollow(el.id)}>Follow</button>
+                u.followed
+                    ? <button onClick={() => changeUnFollow(u.id)}>Unfollow</button>
+                    : <button onClick={() => changeFollow(u.id)}>Follow</button>
             }
             </div>
         </span><span>
             <span>
-                <div>{el.name}</div>
-                <div>{el.status}</div>
+                <div>{u.name}</div>
+                <div>{u.status}</div>
             </span>
             <span>
                 <div>{'el.location.country'}</div>
                 <div>{'el.location.city'}</div>
             </span>
         </span>
+    </div>)
 
-        </div>)
-
-        return (
-            <div>
-                {mappedPages}
-                {mappedUsers}
-            </div>
-        )
-    }
+    return (
+        <div>
+            {mappedPages}
+            {mappedUsers}
+        </div>
+    )
 }

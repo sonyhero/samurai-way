@@ -25,7 +25,7 @@ export type InitialUsersReducerStateType = {
 const initialState: InitialUsersReducerStateType = {
     users: [],
     pageSize: 5,
-    totalUsersCount: 20,
+    totalUsersCount: 0,
     currentPage: 1
 }
 
