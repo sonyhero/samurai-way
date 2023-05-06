@@ -2,13 +2,13 @@ import {combineReducers, createStore} from "redux";
 import {addMessageAC, dialogsReducer, updateNewMessageTextAC} from './dialogs-reducer';
 import {addPostAC, profileReducer, updateNewPostTextAC} from './profile-reducer';
 import {sidebarReducer} from "./sidebar-reducer";
-import {followAC, setUsersAC, unFollowAC, usersReducer} from './users-reducer';
+import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unFollowAC, usersReducer} from './users-reducer';
 
 let rootReducer = combineReducers({
-    dialogsReducer,
-    profileReducer,
-    sidebarReducer,
-    usersReducer
+        dialogsReducer,
+        profileReducer,
+        sidebarReducer,
+        usersReducer
     }
 )
 
@@ -21,6 +21,8 @@ export type ActionsTypes =
     | ReturnType<typeof followAC>
     | ReturnType<typeof unFollowAC>
     | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setUsersTotalCountAC>
 
 export type AppStateType = ReturnType<typeof rootReducer>
 export const store = createStore(rootReducer)

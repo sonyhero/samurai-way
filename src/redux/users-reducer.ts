@@ -1,8 +1,5 @@
 import {ActionsTypes} from './redux-store';
 
-export type InitialUsersReducerStateType = {
-    users: UsersType[]
-}
 export type UsersType = {
     id: number
     photos: PhotosType
@@ -19,25 +16,17 @@ type PhotosType = {
     small: any
     large: any
 }
+export type InitialUsersReducerStateType = {
+    users: UsersType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+}
 const initialState: InitialUsersReducerStateType = {
-    users: [
-        // {
-        //     id: 1, photoUrl: 'https://avatars.githubusercontent.com/u/71019041?v=4', followed: true, fullName: 'Roma', status: 'Team-Leader', location:
-        //         {city: 'Minsk', country: ' Belarus'}
-        // },
-        // {
-        //     id: 2, photoUrl: 'https://avatars.githubusercontent.com/u/113249072?v=4', followed: false, fullName: 'Anton', status: 'Pre-Junior', location:
-        //         {city: 'Minsk', country: ' Belarus'}
-        // },
-        // {
-        //     id: 3, photoUrl: 'https://avatars.githubusercontent.com/u/125352324?v=4', followed: true, fullName: 'Egor', status: 'Pre-Junior', location:
-        //         {city: 'Yaroslavl', country: 'Russia'}
-        // },
-        // {
-        //     id: 4, photoUrl: 'https://avatars.githubusercontent.com/u/68869871?v=4', followed: false, fullName: 'Artem', status: 'Pre-Junior', location:
-        //         {city: 'Baranovichi', country: ' Belarus'}
-        // },
-    ]
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 20,
+    currentPage: 1
 }
 
 export const usersReducer = (state: InitialUsersReducerStateType = initialState, action: ActionsTypes):
@@ -59,7 +48,16 @@ export const usersReducer = (state: InitialUsersReducerStateType = initialState,
             }
         case 'SET_USERS':
             return {
-                ...state, users: [...state.users, ...action.payload.users]
+                // ...state, users: [...state.users, ...action.payload.users]
+                ...state, users: action.payload.users
+            }
+        case "SET_CURRENT_PAGE":
+            return {
+                ...state, currentPage: action.payload.currentPage
+            }
+        case "SET_TOTAL_USERS_COUNT":
+            return {
+                ...state, totalUsersCount: action.payload.totalUsersCount
             }
         default:
             return state
@@ -74,7 +72,6 @@ export const followAC = (userId: number) => {
         }
     } as const
 }
-
 export const unFollowAC = (userId: number) => {
     return {
         type: 'UNFOLLOW',
@@ -83,12 +80,27 @@ export const unFollowAC = (userId: number) => {
         }
     } as const
 }
-
 export const setUsersAC = (users: UsersType[]) => {
     return {
         type: 'SET_USERS',
         payload: {
             users
+        }
+    } as const
+}
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: 'SET_CURRENT_PAGE',
+        payload: {
+            currentPage
+        }
+    } as const
+}
+export const setUsersTotalCountAC = (totalUsersCount: number) => {
+    return {
+        type: 'SET_TOTAL_USERS_COUNT',
+        payload: {
+            totalUsersCount
         }
     } as const
 }
