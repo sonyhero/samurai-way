@@ -1,6 +1,6 @@
 import {combineReducers, createStore} from "redux";
 import {addMessageAC, dialogsReducer, updateNewMessageTextAC} from './dialogs-reducer';
-import {addPostAC, profileReducer, updateNewPostTextAC} from './profile-reducer';
+import {addPostAC, profileReducer, setUserProfile, updateNewPostTextAC} from './profile-reducer';
 import {sidebarReducer} from "./sidebar-reducer";
 import {
     follow,
@@ -32,6 +32,10 @@ export type ActionsTypes =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setUsersTotalCount>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setUserProfile>
 
 export type AppStateType = ReturnType<typeof rootReducer>
 export const store = createStore(rootReducer)
+
+// @ts-ignore
+window.store = store

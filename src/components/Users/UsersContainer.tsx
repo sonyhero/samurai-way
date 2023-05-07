@@ -12,7 +12,7 @@ import axios from 'axios';
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 
-type UsersPropsType = {
+type UsersAPIComponentType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     setUsers: (users: UsersType[]) => void
@@ -26,7 +26,7 @@ type UsersPropsType = {
     isFetching: boolean
 }
 
-export class UsersAPIComponent extends React.Component<UsersPropsType> {
+export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)

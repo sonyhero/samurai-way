@@ -14,7 +14,7 @@ type MyPostsPropsType = {
 export const MyPosts = (props: MyPostsPropsType) => {
 
     const postDataMap = props.profilePage.posts.map(p =>
-        <Post id={p.id} postText={p.postText} likesCount={p.likesCount}/>
+        <Post key={p.id} id={p.id} postText={p.postText} likesCount={p.likesCount}/>
     )
 
     const onAddPost = () => {
