@@ -3,12 +3,12 @@ import {addMessageAC, dialogsReducer, updateNewMessageTextAC} from './dialogs-re
 import {addPostAC, profileReducer, updateNewPostTextAC} from './profile-reducer';
 import {sidebarReducer} from "./sidebar-reducer";
 import {
-    followAC,
-    setCurrentPageAC,
-    setUsersAC,
-    setUsersTotalCountAC,
-    toggleIsFetchingAC,
-    unFollowAC,
+    follow,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount,
+    toggleIsFetching,
+    unFollow,
     usersReducer
 } from './users-reducer';
 
@@ -26,12 +26,12 @@ export type ActionsTypes =
     | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof addMessageAC>
     | ReturnType<typeof updateNewMessageTextAC>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unFollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setUsersTotalCountAC>
-    | ReturnType<typeof toggleIsFetchingAC>
+    | ReturnType<typeof follow>
+    | ReturnType<typeof unFollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setUsersTotalCount>
+    | ReturnType<typeof toggleIsFetching>
 
 export type AppStateType = ReturnType<typeof rootReducer>
 export const store = createStore(rootReducer)

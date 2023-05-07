@@ -70,7 +70,7 @@ export const usersReducer = (state: InitialUsersReducerStateType = initialState,
     }
 }
 
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
     return {
         type: 'FOLLOW',
         payload: {
@@ -78,7 +78,7 @@ export const followAC = (userId: number) => {
         }
     } as const
 }
-export const unFollowAC = (userId: number) => {
+export const unFollow = (userId: number) => {
     return {
         type: 'UNFOLLOW',
         payload: {
@@ -86,7 +86,7 @@ export const unFollowAC = (userId: number) => {
         }
     } as const
 }
-export const setUsersAC = (users: UsersType[]) => {
+export const setUsers = (users: UsersType[]) => {
     return {
         type: 'SET_USERS',
         payload: {
@@ -94,7 +94,7 @@ export const setUsersAC = (users: UsersType[]) => {
         }
     } as const
 }
-export const setCurrentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: 'SET_CURRENT_PAGE',
         payload: {
@@ -102,7 +102,7 @@ export const setCurrentPageAC = (currentPage: number) => {
         }
     } as const
 }
-export const setUsersTotalCountAC = (totalUsersCount: number) => {
+export const setUsersTotalCount = (totalUsersCount: number) => {
     return {
         type: 'SET_TOTAL_USERS_COUNT',
         payload: {
@@ -110,7 +110,7 @@ export const setUsersTotalCountAC = (totalUsersCount: number) => {
         }
     } as const
 }
-export const toggleIsFetchingAC = (isFetching: boolean) => {
+export const toggleIsFetching = (isFetching: boolean) => {
     return {
         type: 'TOGGLE_IS_FETCHING',
         payload: {
