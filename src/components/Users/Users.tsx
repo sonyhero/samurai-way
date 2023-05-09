@@ -50,7 +50,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
     const mappedUsers = users.map(u => <div key={u.id}>
         <span>
             <div>
-                <NavLink to={'/profile/'}>
+                <NavLink to={`/profile/${u.id}`}>
                     <img src={u.photos.small !== null
                         ? u.photos.small
                         : userPhoto
