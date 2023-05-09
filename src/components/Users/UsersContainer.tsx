@@ -26,7 +26,24 @@ import {Preloader} from "../common/Preloader/Preloader";
 //     isFetching: boolean
 // }
 
-type UsersAPIComponentType = MapStateToPropsType & MapDispatchToPropsType
+type MapDispatchToPropsType = {
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+    setUsers: (users: UsersType[]) => void
+    setCurrentPage: (currentPage: number) => void
+    setUsersTotalCount: (totalUsersCount: number) => void
+    toggleIsFetching: (isFetching: boolean) => void
+}
+
+type MapStateToPropsType = {
+    users: UsersType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+}
+
+export type UsersAPIComponentType = MapStateToPropsType & MapDispatchToPropsType
 
 export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
 
@@ -58,26 +75,16 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
                 ? <Preloader/>
                 : null
             }
-            <Users
-                totalUsersCount={this.props.totalUsersCount}
-                pageSize={this.props.pageSize}
-                onPageChanged={this.onPageChanged}
-                currentPage={this.props.currentPage}
-                follow={this.props.follow}
-                unFollow={this.props.unFollow}
-                users={this.props.users}
+            <Users {...this.props} onPageChanged={this.onPageChanged}
+                // totalUsersCount={this.props.totalUsersCount}
+                // pageSize={this.props.pageSize}
+                // currentPage={this.props.currentPage}
+                // follow={this.props.follow}
+                // unFollow={this.props.unFollow}
+                // users={this.props.users}
             />
         </>
     }
-}
-
-
-type MapStateToPropsType = {
-    users: UsersType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -88,15 +95,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         currentPage: state.usersReducer.currentPage,
         isFetching: state.usersReducer.isFetching
     }
-}
-
-type MapDispatchToPropsType = {
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    setUsers: (users: UsersType[]) => void
-    setCurrentPage: (currentPage: number) => void
-    setUsersTotalCount: (totalUsersCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
 }
 
 // const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {

@@ -1,18 +1,24 @@
 import React from 'react';
 import s from "./UsersCSS.module.css";
 import userPhoto from "../../assets/img/user.png";
-import {UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import {UsersAPIComponentType} from "./UsersContainer";
 
-type UsersPropsType = {
-    totalUsersCount: number
-    pageSize: number
+// type UsersPropsType = {
+//     totalUsersCount: number
+//     pageSize: number
+//     currentPage: number
+//     follow: (userId: number) => void
+//     unFollow: (userId: number) => void
+//     users: UsersType[]
+//     onPageChanged: (pageNumber: number) => void
+// }
+
+type UsersProps = {
     onPageChanged: (pageNumber: number) => void
-    currentPage: number
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    users: UsersType[]
 }
+
+type UsersPropsType = UsersProps & UsersAPIComponentType
 export const Users: React.FC<UsersPropsType> = (props) => {
 
     const {

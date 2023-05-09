@@ -11,12 +11,14 @@ import {
     unFollow,
     usersReducer
 } from './users-reducer';
+import {authReducer, setAuthUserData} from "./auth-reducer";
 
 let rootReducer = combineReducers({
         dialogsReducer,
         profileReducer,
         sidebarReducer,
-        usersReducer
+        usersReducer,
+        authReducer
     }
 )
 
@@ -33,6 +35,7 @@ export type ActionsTypes =
     | ReturnType<typeof setUsersTotalCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setAuthUserData>
 
 export type AppStateType = ReturnType<typeof rootReducer>
 export const store = createStore(rootReducer)
