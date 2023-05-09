@@ -37,16 +37,20 @@ export const Navbar = () => {
                 <NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink>
             </div>
             <div className={`${s.item} ${s.active}`}>
-                <NavLink to="/users" activeClassName={s.activeLink}>
-                    {/*<div>*/}
-                    {/*    <div>Users</div>*/}
-                    {/*    <ul>*/}
-                    {/*        {friendsMap}*/}
-                    {/*    </ul>*/}
-                    {/*</div>*/}
-
-                </NavLink>
+                <NavLink to="/users" activeClassName={s.activeLink}>Users</NavLink>
             </div>
+
+            {/*<div className={`${s.item} ${s.active}`}>*/}
+            {/*    <NavLink to="/users" activeClassName={s.activeLink}>*/}
+            {/*        <div>*/}
+            {/*            <div>Users</div>*/}
+            {/*            <ul>*/}
+            {/*                {friendsMap}*/}
+            {/*            </ul>*/}
+            {/*        </div>*/}
+            {/*    */}
+            {/*    </NavLink>*/}
+            {/*</div>*/}
         </nav>
     )
 }
