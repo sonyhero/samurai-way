@@ -12,19 +12,21 @@ import axios from 'axios';
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 
-type UsersAPIComponentType = {
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    setUsers: (users: UsersType[]) => void
-    setCurrentPage: (currentPage: number) => void
-    setUsersTotalCount: (totalUsersCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-    users: UsersType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-}
+// type UsersAPIComponentType = {
+//     follow: (userId: number) => void
+//     unFollow: (userId: number) => void
+//     setUsers: (users: UsersType[]) => void
+//     setCurrentPage: (currentPage: number) => void
+//     setUsersTotalCount: (totalUsersCount: number) => void
+//     toggleIsFetching: (isFetching: boolean) => void
+//     users: UsersType[]
+//     pageSize: number
+//     totalUsersCount: number
+//     currentPage: number
+//     isFetching: boolean
+// }
+
+type UsersAPIComponentType = MapStateToPropsType & MapDispatchToPropsType
 
 export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
 
@@ -88,43 +90,45 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-// type MapDispatchToPropsType = {
-//     follow: (userId: number) => void
-//     unFollow: (userId: number) => void
-//     setUsers: (users: UsersType[]) => void
-//     setCurrentPage: (currentPage: number) => void
-//     setUsersTotalCount: (totalUsersCount: number) => void
-//     toggleIsFetching: (isFetching: boolean) => void
-// }
-//
+type MapDispatchToPropsType = {
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+    setUsers: (users: UsersType[]) => void
+    setCurrentPage: (currentPage: number) => void
+    setUsersTotalCount: (totalUsersCount: number) => void
+    toggleIsFetching: (isFetching: boolean) => void
+}
+
 // const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
 //     return {
 //         follow(userId: number) {
-//             dispatch(followAC(userId))
+//             dispatch(follow(userId))
 //         },
 //         unFollow(userId: number) {
-//             dispatch(unFollowAC(userId))
+//             dispatch(unFollow(userId))
 //         },
 //         setUsers(users: UsersType[]) {
-//             dispatch(setUsersAC(users))
+//             dispatch(setUsers(users))
 //         },
 //         setCurrentPage(currentPage: number) {
-//             dispatch(setCurrentPageAC(currentPage))
+//             dispatch(setCurrentPage(currentPage))
 //         },
 //         setUsersTotalCount(totalUsersCount: number) {
-//             dispatch(setUsersTotalCountAC(totalUsersCount))
+//             dispatch(setUsersTotalCount(totalUsersCount))
 //         },
 //         toggleIsFetching(isFetching: boolean) {
-//             dispatch(toggleIsFetchingAC(isFetching))
+//             dispatch(toggleIsFetching(isFetching))
 //         }
 //     }
 // }
 
-export const UsersContainer = connect(mapStateToProps, {
+export const UsersContainer = connect(mapStateToProps,
+    {
     follow,
     unFollow,
     setUsers,
     setCurrentPage,
     setUsersTotalCount,
     toggleIsFetching
-})(UsersAPIComponent)
+}
+)(UsersAPIComponent)
