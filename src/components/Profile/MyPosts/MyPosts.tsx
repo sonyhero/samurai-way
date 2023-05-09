@@ -1,14 +1,15 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPostsCSS.module.css'
 import {Post} from './Post/Post';
-import {InitialProfileReducerStateType} from '../../../redux/profile-reducer';
+import {MapDispatchToPropsType, MapStateToPropsType} from './MyPostsContainer';
 
-type MyPostsPropsType = {
-    addPost: () => void
-    updateNewPostText: (newPostText: string) => void
-    profilePage: InitialProfileReducerStateType
-}
+// type MyPostsPropsType = {
+//     addPost: () => void
+//     updateNewPostText: (newPostText: string) => void
+//     profilePage: InitialProfileReducerStateType
+// }
 
+type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 export const MyPosts = (props: MyPostsPropsType) => {
 
     const postDataMap = props.profilePage.posts.map(p =>

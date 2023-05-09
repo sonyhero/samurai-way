@@ -4,6 +4,7 @@ import userPhoto from '../../assets/img/user.png';
 import {NavLink} from 'react-router-dom';
 import {UsersAPIComponentType} from './UsersContainer';
 import axios from 'axios';
+import {toggleFollowingProgress} from '../../redux/users-reducer';
 
 // type UsersPropsType = {
 //     totalUsersCount: number
@@ -25,11 +26,13 @@ export const Users: React.FC<UsersPropsType> = (props) => {
     const {
         totalUsersCount,
         pageSize,
-        onPageChanged,
         currentPage,
+        users,
+        followingInProgress,
         follow,
         unFollow,
-        users,
+        onPageChanged,
+        toggleFollowingProgress
     } = props
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
@@ -48,6 +51,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                   }> {p} </span>)
     })
     const changeFollow = (userId: number) => {
+        toggleFollowingProgress(true, userId)
         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
             {},
             {withCredentials: true})
@@ -56,10 +60,12 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                 if (response.data.resultCode === 0) {
                     follow(userId)
                 }
+                toggleFollowingProgress(false, userId)
             })
 
     }
     const changeUnFollow = (userId: number) => {
+        toggleFollowingProgress(true, userId)
         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
             {withCredentials: true})
             // lesson62
@@ -67,6 +73,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                 if (response.data.resultCode === 0) {
                     unFollow(userId)
                 }
+                toggleFollowingProgress(false, userId)
             })
 
     }
@@ -83,8 +90,8 @@ export const Users: React.FC<UsersPropsType> = (props) => {
         </div>
             <div>{
                 u.followed
-                    ? <button onClick={() => changeUnFollow(u.id)}>Unfollow</button>
-                    : <button onClick={() => changeFollow(u.id)}>Follow</button>
+                    ? <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => changeUnFollow(u.id)}>Unfollow</button>
+                    : <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => changeFollow(u.id)}>Follow</button>
             }
             </div>
         </span><span>

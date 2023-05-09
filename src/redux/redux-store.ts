@@ -1,13 +1,13 @@
 import {combineReducers, createStore} from 'redux';
 import {addMessage, dialogsReducer, updateNewMessageText} from './dialogs-reducer';
-import {addPostAC, profileReducer, setUserProfile, updateNewPostTextAC} from './profile-reducer';
+import {addPost, profileReducer, setUserProfile, updateNewPostText} from './profile-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 import {
     follow,
     setCurrentPage,
     setUsers,
     setUsersTotalCount,
-    toggleIsFetching,
+    toggleIsFetching, toggleFollowingProgress,
     unFollow,
     usersReducer
 } from './users-reducer';
@@ -24,8 +24,8 @@ let rootReducer = combineReducers({
 
 // Объединение типов actions
 export type ActionsTypes =
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
+    ReturnType<typeof addPost>
+    | ReturnType<typeof updateNewPostText>
     | ReturnType<typeof addMessage>
     | ReturnType<typeof updateNewMessageText>
     | ReturnType<typeof follow>
@@ -36,6 +36,7 @@ export type ActionsTypes =
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof toggleFollowingProgress>
 
 export type AppStateType = ReturnType<typeof rootReducer>
 export const store = createStore(rootReducer)

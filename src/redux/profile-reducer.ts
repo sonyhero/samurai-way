@@ -65,8 +65,8 @@ export const profileReducer = (state: InitialProfileReducerStateType = initialSt
     }
 }
 
-export const addPostAC = () => ({type: 'ADD_POST'} as const)
-export const updateNewPostTextAC = (newPostText: string) => ({
+export const addPost = () => ({type: 'ADD_POST'} as const)
+export const updateNewPostText = (newPostText: string) => ({
     type: 'UPDATE_NEW_POST_TEXT',
     newPostText
 } as const)
