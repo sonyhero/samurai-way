@@ -1,8 +1,9 @@
 import React from 'react';
-import s from "./UsersCSS.module.css";
-import userPhoto from "../../assets/img/user.png";
-import {NavLink} from "react-router-dom";
-import {UsersAPIComponentType} from "./UsersContainer";
+import s from './UsersCSS.module.css';
+import userPhoto from '../../assets/img/user.png';
+import {NavLink} from 'react-router-dom';
+import {UsersAPIComponentType} from './UsersContainer';
+import axios from 'axios';
 
 // type UsersPropsType = {
 //     totalUsersCount: number
@@ -47,10 +48,27 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                   }> {p} </span>)
     })
     const changeFollow = (userId: number) => {
-        follow(userId)
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
+            {},
+            {withCredentials: true})
+            // lesson62
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    follow(userId)
+                }
+            })
+
     }
     const changeUnFollow = (userId: number) => {
-        unFollow(userId)
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
+            {withCredentials: true})
+            // lesson62
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    unFollow(userId)
+                }
+            })
+
     }
 
     const mappedUsers = users.map(u => <div key={u.id}>

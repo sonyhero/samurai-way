@@ -1,7 +1,7 @@
-import {combineReducers, createStore} from "redux";
+import {combineReducers, createStore} from 'redux';
 import {addMessageAC, dialogsReducer, updateNewMessageTextAC} from './dialogs-reducer';
 import {addPostAC, profileReducer, setUserProfile, updateNewPostTextAC} from './profile-reducer';
-import {sidebarReducer} from "./sidebar-reducer";
+import {sidebarReducer} from './sidebar-reducer';
 import {
     follow,
     setCurrentPage,
@@ -11,7 +11,7 @@ import {
     unFollow,
     usersReducer
 } from './users-reducer';
-import {authReducer, setAuthUserData} from "./auth-reducer";
+import {authReducer, setAuthUserData} from './auth-reducer';
 
 let rootReducer = combineReducers({
         dialogsReducer,

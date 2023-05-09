@@ -6,8 +6,6 @@ import {InitialProfileReducerStateType} from '../../../redux/profile-reducer';
 type MyPostsPropsType = {
     addPost: () => void
     updateNewPostText: (newPostText: string) => void
-    // posts: PostsType[]
-    // newPostText: string
     profilePage: InitialProfileReducerStateType
 }
 

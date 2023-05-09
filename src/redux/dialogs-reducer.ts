@@ -5,7 +5,7 @@ export type InitialDialogsReducerStateType = {
     dialogs: DialogItemType[]
     newMessageText: string
 }
-    type MessageType = {
+type MessageType = {
     id: number
     messageText: string
 }
@@ -30,7 +30,8 @@ const initialState: InitialDialogsReducerStateType = {
     newMessageText: ''
 }
 
-export const dialogsReducer = (state: InitialDialogsReducerStateType = initialState, action: ActionsTypes): InitialDialogsReducerStateType  => {
+export const dialogsReducer = (state: InitialDialogsReducerStateType = initialState, action: ActionsTypes)
+    : InitialDialogsReducerStateType => {
 
     switch (action.type) {
         case 'ADD_MESSAGE':

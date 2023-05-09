@@ -16,6 +16,7 @@ const initialState: InitialStateSidebarReducerType  = {
         {id: 3, name: 'Eugenia'}
     ]
 }
-export const sidebarReducer = (state: InitialStateSidebarReducerType = initialState, action: ActionsTypes): InitialStateSidebarReducerType => {
+export const sidebarReducer = (state: InitialStateSidebarReducerType = initialState, action: ActionsTypes)
+    : InitialStateSidebarReducerType => {
     return state
 }

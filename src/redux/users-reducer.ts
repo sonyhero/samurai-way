@@ -53,15 +53,15 @@ export const usersReducer = (state: InitialUsersReducerStateType = initialState,
                 // ...state, users: [...state.users, ...action.payload.users]
                 ...state, users: action.payload.users
             }
-        case "SET_CURRENT_PAGE":
+        case 'SET_CURRENT_PAGE':
             return {
                 ...state, currentPage: action.payload.currentPage
             }
-        case "SET_TOTAL_USERS_COUNT":
+        case 'SET_TOTAL_USERS_COUNT':
             return {
                 ...state, totalUsersCount: action.payload.totalUsersCount
             }
-        case "TOGGLE_IS_FETCHING":
+        case 'TOGGLE_IS_FETCHING':
             return {
                 ...state, isFetching: action.payload.isFetching
             }

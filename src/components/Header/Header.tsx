@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import s from './HeaderCSS.module.css'
-import {NavLink} from "react-router-dom";
-import {HeaderAPIComponentType} from "./HeaderContainer";
+import {NavLink} from 'react-router-dom';
+import {HeaderAPIComponentType} from './HeaderContainer';
 
 type HeaderPropsType = HeaderAPIComponentType
 export const Header: React.FC<HeaderPropsType> = (props) => {

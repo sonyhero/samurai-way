@@ -49,19 +49,24 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=
+        ${this.props.currentPage}&count=
+        ${this.props.pageSize}`, {withCredentials: true})
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
                 // Засетал тотал каунт разделенный на 200 так как очень много данных
                 this.props.setUsersTotalCount(response.data.totalCount / 200)
             })
+
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=
+        ${pageNumber}&count=
+        ${this.props.pageSize}`, {withCredentials: true})
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
@@ -75,13 +80,9 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
                 ? <Preloader/>
                 : null
             }
-            <Users {...this.props} onPageChanged={this.onPageChanged}
-                // totalUsersCount={this.props.totalUsersCount}
-                // pageSize={this.props.pageSize}
-                // currentPage={this.props.currentPage}
-                // follow={this.props.follow}
-                // unFollow={this.props.unFollow}
-                // users={this.props.users}
+            <Users
+                {...this.props}
+                onPageChanged={this.onPageChanged}
             />
         </>
     }
@@ -96,29 +97,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         isFetching: state.usersReducer.isFetching
     }
 }
-
-// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-//     return {
-//         follow(userId: number) {
-//             dispatch(follow(userId))
-//         },
-//         unFollow(userId: number) {
-//             dispatch(unFollow(userId))
-//         },
-//         setUsers(users: UsersType[]) {
-//             dispatch(setUsers(users))
-//         },
-//         setCurrentPage(currentPage: number) {
-//             dispatch(setCurrentPage(currentPage))
-//         },
-//         setUsersTotalCount(totalUsersCount: number) {
-//             dispatch(setUsersTotalCount(totalUsersCount))
-//         },
-//         toggleIsFetching(isFetching: boolean) {
-//             dispatch(toggleIsFetching(isFetching))
-//         }
-//     }
-// }
 
 export const UsersContainer = connect(mapStateToProps,
     {
