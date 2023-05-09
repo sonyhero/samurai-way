@@ -2,33 +2,39 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './DialogsCSS.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
-import {InitialDialogsReducerStateType} from '../../redux/dialogs-reducer';
+import {MapDispatchToPropsType, MapStateToPropsType} from './DialogsContainer';
 
+// type DialogsPropsType = {
+//     addMessage: () => void
+//     updateNewMessageText: (newMessageText: string) => void
+//     dialogsPage: InitialDialogsReducerStateType
+// }
 
-type DialogsPropsType = {
-    addMessage: () => void
-    changeMassage: (newMessageText: string) => void
-    dialogsPage: InitialDialogsReducerStateType
-}
+type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    const dialogsDataMap = props.dialogsPage.dialogs.map(
+    const {addMessage,
+        updateNewMessageText,
+        dialogsPage
+    } = props
+
+    const dialogsDataMap = dialogsPage.dialogs.map(
         d => <DialogItem key={d.id} name={d.name} id={d.id}/>
     )
 
-    const messagesDataMap = props.dialogsPage.messages.map(
+    const messagesDataMap = dialogsPage.messages.map(
         m => <Message key={m.id} messageText={m.messageText} id={m.id}/>
     )
 
     const onAddMessage = () => {
-        if (props.dialogsPage.newMessageText.trim() !== '')
-        props.addMessage()
+        if (dialogsPage.newMessageText.trim() !== '')
+        addMessage()
     }
 
     const onChangeMassage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const newMessageText = e.currentTarget.value
-        props.changeMassage(newMessageText)
+        updateNewMessageText(newMessageText)
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {

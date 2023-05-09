@@ -11,6 +11,7 @@ import {
 import axios from 'axios';
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {usersAPI} from '../../api/api';
 
 // type UsersAPIComponentType = {
 //     follow: (userId: number) => void
@@ -49,27 +50,20 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=
-        ${this.props.currentPage}&count=
-        ${this.props.pageSize}`, {withCredentials: true})
-            .then(response => {
+            usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
                 // Засетал тотал каунт разделенный на 200 так как очень много данных
-                this.props.setUsersTotalCount(response.data.totalCount / 200)
+                this.props.setUsersTotalCount(data.totalCount / 200)
             })
-
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=
-        ${pageNumber}&count=
-        ${this.props.pageSize}`, {withCredentials: true})
-            .then(response => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
     }
 
