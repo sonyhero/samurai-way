@@ -3,8 +3,7 @@ import s from './UsersCSS.module.css';
 import userPhoto from '../../assets/img/user.png';
 import {NavLink} from 'react-router-dom';
 import {UsersAPIComponentType} from './UsersContainer';
-import axios from 'axios';
-import {toggleFollowingProgress} from '../../redux/users-reducer';
+import {usersAPI} from '../../api/api';
 
 // type UsersPropsType = {
 //     totalUsersCount: number
@@ -50,27 +49,41 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                       : s.usualSpan
                   }> {p} </span>)
     })
+
+    // const changeFollow = (userId: number) => {
+    //     toggleFollowingProgress(true, userId)
+    //     axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
+    //         {},
+    //         {withCredentials: true})
+    //         // lesson62
+    //         .then(response => {
+    //             if (response.data.resultCode === 0) {
+    //                 follow(userId)
+    //             }
+    //             toggleFollowingProgress(false, userId)
+    //         })
+    //
+    // }
+
     const changeFollow = (userId: number) => {
         toggleFollowingProgress(true, userId)
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
-            {},
-            {withCredentials: true})
+        usersAPI.followUsers(userId)
             // lesson62
-            .then(response => {
-                if (response.data.resultCode === 0) {
+            .then(data => {
+                if (data.resultCode === 0) {
                     follow(userId)
                 }
                 toggleFollowingProgress(false, userId)
             })
 
     }
+
     const changeUnFollow = (userId: number) => {
         toggleFollowingProgress(true, userId)
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
-            {withCredentials: true})
+        usersAPI.unFollowUsers(userId)
             // lesson62
-            .then(response => {
-                if (response.data.resultCode === 0) {
+            .then(data => {
+                if (data.resultCode === 0) {
                     unFollow(userId)
                 }
                 toggleFollowingProgress(false, userId)
