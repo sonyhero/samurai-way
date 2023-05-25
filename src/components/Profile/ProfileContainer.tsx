@@ -26,10 +26,6 @@ export class ProfileAPIComponent extends React.Component<ProfileAPIComponentType
         if (!userId) {
             userId = '28817'
         }
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-        //     .then(response => {
-        //         this.props.setUserProfile(response.data)
-        //     })
         usersAPI.getProfile(userId).then(data => {
             this.props.setUserProfile(data)
         })
