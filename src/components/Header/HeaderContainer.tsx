@@ -2,7 +2,7 @@ import React from 'react';
 import {Header} from './Header';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {AppStateType} from '../../redux/redux-store';
+import {RootReducerType} from '../../redux/redux-store';
 import {setAuthUserData} from '../../redux/auth-reducer';
 
 type MapStateToPropsType = {
@@ -33,7 +33,7 @@ export class HeaderAPIComponent extends React.Component<HeaderAPIComponentType> 
     }
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
         isAuth: state.authReducer.isAuth,
         login: state.authReducer.login,

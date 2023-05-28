@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from 'redux';
+import {AnyAction, applyMiddleware, combineReducers, createStore} from 'redux';
 import {addMessage, dialogsReducer, updateNewMessageText} from './dialogs-reducer';
 import {addPost, profileReducer, setUserProfile, updateNewPostText} from './profile-reducer';
 import {sidebarReducer} from './sidebar-reducer';
@@ -12,6 +12,7 @@ import {
     usersReducer
 } from './users-reducer';
 import {authReducer, setAuthUserData} from './auth-reducer';
+import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
 let rootReducer = combineReducers({
         dialogsReducer,
@@ -38,8 +39,17 @@ export type ActionsTypes =
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
 
-export type AppStateType = ReturnType<typeof rootReducer>
-export const store = createStore(rootReducer)
+export type RootReducerType = ReturnType<typeof rootReducer>
+export type RootStateType = ReturnType<typeof store.getState>
+export const store = createStore(rootReducer, applyMiddleware(thunk))
+
+export type AppDispatch = ThunkDispatch<RootStateType, unknown, AnyAction> // для санок
+export type AppThunk<ReturnType = void> = ThunkAction<
+ReturnType,
+    RootStateType,
+    unknown,
+    AnyAction
+>
 
 // @ts-ignore
 window.store = store

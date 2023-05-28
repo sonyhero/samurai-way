@@ -2,7 +2,7 @@ import React from 'react';
 import {Profile} from './Profile';
 import {connect} from 'react-redux';
 import {ProfileType, setUserProfile} from '../../redux/profile-reducer';
-import {AppStateType} from '../../redux/redux-store';
+import {RootReducerType} from '../../redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {usersAPI} from '../../api/api';
 
@@ -38,7 +38,7 @@ export class ProfileAPIComponent extends React.Component<ProfileAPIComponentType
     }
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
         profile: state.profileReducer.profile
     }

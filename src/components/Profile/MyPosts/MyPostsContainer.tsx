@@ -1,7 +1,7 @@
 import {addPost, InitialProfileReducerStateType, updateNewPostText} from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
-import {AppStateType} from '../../../redux/redux-store';
+import {RootReducerType} from '../../../redux/redux-store';
 
 export type MapStateToPropsType = {
     profilePage: InitialProfileReducerStateType
@@ -11,7 +11,7 @@ export type MapDispatchToPropsType = {
     addPost: () => void
     updateNewPostText: (newPostText: string) => void
 }
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
         profilePage: state.profileReducer
     }

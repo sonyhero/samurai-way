@@ -1,4 +1,6 @@
 import {ActionsTypes} from './redux-store';
+import {usersAPI} from '../api/api';
+import {Dispatch} from 'redux';
 
 export type UsersType = {
     id: number
@@ -70,14 +72,13 @@ export const usersReducer = (state: InitialUsersReducerStateType = initialState,
         case 'TOGGLE_IS_FOLLOWING_PROGRESS':
             return {
                 ...state, followingInProgress: action.payload.isFetching
-                        ? [...state.followingInProgress, action.payload.userId]
-                        : state.followingInProgress.filter(id => id !== action.payload.userId)
+                    ? [...state.followingInProgress, action.payload.userId]
+                    : state.followingInProgress.filter(id => id !== action.payload.userId)
             }
         default:
             return state
     }
 }
-
 
 export const follow = (userId: number) => {
     return {
@@ -127,7 +128,6 @@ export const toggleIsFetching = (isFetching: boolean) => {
         }
     } as const
 }
-
 export const toggleFollowingProgress = (isFetching: boolean, userId: number) => {
     return {
         type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
@@ -136,4 +136,40 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
             userId
         }
     } as const
+}
+
+export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true))
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(data.items))
+        // Засетал тотал каунт разделенный на 200 так как очень много данных
+        dispatch(setUsersTotalCount(data.totalCount / 200))
+    })
+}
+export const followUsers = (userId: number) => async (dispatch: Dispatch) => {
+    try {
+        dispatch(toggleFollowingProgress(true, userId))
+        let data = await usersAPI.followUsers(userId)
+        if (data.resultCode === 0) {
+            dispatch(follow(userId))
+        }
+    } catch (e) {
+        console.log(e)
+    } finally {
+        dispatch(toggleFollowingProgress(false, userId))
+    }
+}
+export const unFollowUsers = (userId: number) => async (dispatch: Dispatch) => {
+    try {
+        dispatch(toggleFollowingProgress(true, userId))
+        let data = await usersAPI.unFollowUsers(userId)
+        if (data.resultCode === 0) {
+            dispatch(unFollow(userId))
+        }
+    } catch (e) {
+        console.log(e)
+    } finally {
+        dispatch(toggleFollowingProgress(false, userId))
+    }
 }

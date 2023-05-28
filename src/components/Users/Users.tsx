@@ -3,7 +3,6 @@ import s from './UsersCSS.module.css';
 import userPhoto from '../../assets/img/user.png';
 import {NavLink} from 'react-router-dom';
 import {UsersAPIComponentType} from './UsersContainer';
-import {usersAPI} from '../../api/api';
 
 // type UsersPropsType = {
 //     totalUsersCount: number
@@ -28,10 +27,9 @@ export const Users: React.FC<UsersPropsType> = (props) => {
         currentPage,
         users,
         followingInProgress,
-        follow,
-        unFollow,
         onPageChanged,
-        toggleFollowingProgress
+        followUsers,
+        unFollowUsers
     } = props
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
@@ -75,32 +73,12 @@ export const Users: React.FC<UsersPropsType> = (props) => {
     //
     // }
 
-    const changeFollow = async (userId: number) => {
-        try {
-            toggleFollowingProgress(true, userId)
-            let data = await  usersAPI.followUsers(userId)
-            if (data.resultCode === 0) {
-                follow(userId)
-            }
-        } catch (e) {
-            console.log(e)
-        } finally {
-            toggleFollowingProgress(false, userId)
-        }
+    const changeFollow = (userId: number) => {
+        followUsers(userId)
     }
 
-    const changeUnFollow = async (userId: number) => {
-        try {
-            toggleFollowingProgress(true, userId)
-            let data = await usersAPI.unFollowUsers(userId)
-            if (data.resultCode === 0) {
-                unFollow(userId)
-            }
-        } catch (e) {
-            console.log(e)
-        } finally {
-            toggleFollowingProgress(false, userId)
-        }
+    const changeUnFollow = (userId: number) => {
+        unFollowUsers(userId)
     }
 
     const mappedUsers = users.map(u => <div key={u.id}>
