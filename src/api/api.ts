@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {ProfileType} from '../redux/profile-reducer';
+import {UsersType} from "../redux/users-reducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -9,15 +10,23 @@ const instance = axios.create({
     }
 })
 
-type FollowResponse<D> = {
+type ResponseType<D> = {
     resultCode: number
     messages: string[]
     data: D
 }
 
+
+export type UsersResponseDataType = {
+    items: UsersType[]
+    totalCount: number
+    error:string
+}
+
+
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
-        return instance.get(`users?page=
+        return instance.get<UsersResponseDataType>(`users?page=
         ${currentPage}&count=
         ${pageSize}`
         )
@@ -25,15 +34,28 @@ export const usersAPI = {
     },
     //----------------------------------------------------
     followUsers(userId: number) {
-        return instance.post<FollowResponse<{}>>(`follow/${userId}`)
+        return instance.post<ResponseType<{}>>(`follow/${userId}`)
             .then(response => response.data)
     },
     unFollowUsers(userId: number) {
-        return instance.delete<FollowResponse<{}>>(`follow/${userId}`)
+        return instance.delete<ResponseType<{}>>(`follow/${userId}`)
             .then(response => response.data)
     },
     getProfile(userId: string) {
         return instance.get<ProfileType>(`profile/${userId}`)
+            .then(response => response.data)
+    }
+}
+
+type AuthResponseData = {
+    id: number
+    email: string
+    login: string
+}
+
+export const authAPI = {
+    getAuth() {
+        return instance.get<ResponseType<AuthResponseData>>(`auth/me`)
             .then(response => response.data)
     }
 }

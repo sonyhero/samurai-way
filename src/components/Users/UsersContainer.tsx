@@ -1,7 +1,15 @@
 import React from 'react';
 import {RootReducerType} from '../../redux/redux-store';
 import {connect} from 'react-redux';
-import {followUsers, getUsers, setCurrentPage, unFollowUsers, UsersType} from '../../redux/users-reducer';
+import {
+    follow,
+    followUsers,
+    getUsers,
+    setCurrentPage, setUsers, setUsersTotalCount,
+    toggleFollowingProgress, toggleIsFetching, unFollow,
+    unFollowUsers,
+    UsersType
+} from '../../redux/users-reducer';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 
@@ -82,17 +90,13 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
 
 export const UsersContainer = connect(mapStateToProps,
     {
-        // follow,
-        // unFollow,
-        // setUsers,
-        // setCurrentPage,
-        // setUsersTotalCount,
-        // toggleIsFetching,
-        // toggleFollowingProgress,
-        // getUsers,
-        // followUsers,
-        // unFollowUsers
+        follow,
+        unFollow,
+        setUsers,
         setCurrentPage,
+        setUsersTotalCount,
+        toggleIsFetching,
+        toggleFollowingProgress,
         getUsers,
         followUsers,
         unFollowUsers

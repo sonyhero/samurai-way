@@ -12,6 +12,9 @@ import {UsersAPIComponentType} from './UsersContainer';
 //     unFollow: (userId: number) => void
 //     users: UsersType[]
 //     onPageChanged: (pageNumber: number) => void
+//     followingInProgress: number[]
+//     followUsers: (userId: number) => void
+//     unFollowUsers: (userId: number) => void
 // }
 
 type UsersProps = {
