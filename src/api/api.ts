@@ -54,7 +54,7 @@ type AuthResponseData = {
 }
 
 export const authAPI = {
-    getAuth() {
+    getAuthMe() {
         return instance.get<ResponseType<AuthResponseData>>(`auth/me`)
             .then(response => response.data)
     }

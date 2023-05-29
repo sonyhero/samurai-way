@@ -82,7 +82,7 @@ export const setUserProfile = (profile: ProfileType) => {
     } as const
 }
 
-export const getProfile = (userId: string) => async (dispatch: Dispatch) => {
+export const getProfileData = (userId: string) => async (dispatch: Dispatch) => {
     let data = await usersAPI.getProfile(userId)
     dispatch(setUserProfile(data))
 }

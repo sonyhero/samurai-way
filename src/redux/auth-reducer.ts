@@ -39,9 +39,9 @@ export const setAuthUserData = (userId: string, email: string, login: string) =>
     } as const
 }
 
-export const getAuth = () => async (dispatch: Dispatch) => {
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
     try {
-        let data = await authAPI.getAuth()
+        let data = await authAPI.getAuthMe()
         if (data.resultCode === 0) {
             const {id, email, login} = data.data
             dispatch(setAuthUserData(String(id), email, login))
