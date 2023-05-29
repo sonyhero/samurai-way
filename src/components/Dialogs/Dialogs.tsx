@@ -3,6 +3,7 @@ import s from './DialogsCSS.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
 import {MapDispatchToPropsType, MapStateToPropsType} from './DialogsContainer';
+import {Redirect} from "react-router-dom";
 
 // type DialogsPropsType = {
 //     addMessage: () => void
@@ -14,9 +15,11 @@ type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    const {addMessage,
+    const {
+        addMessage,
         updateNewMessageText,
-        dialogsPage
+        dialogsPage,
+        isAuth
     } = props
 
     const dialogsDataMap = dialogsPage.dialogs.map(
@@ -29,7 +32,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     const onAddMessage = () => {
         if (dialogsPage.newMessageText.trim() !== '')
-        addMessage()
+            addMessage()
     }
 
     const onChangeMassage = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -43,7 +46,9 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         }
     }
 
-    return (
+    if (!isAuth) {
+        return <Redirect to={'/login'}/>
+    } else return (
         <div>
             Dialogs
             <div className={s.dialogs}>
