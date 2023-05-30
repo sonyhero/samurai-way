@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {ProfileType} from '../redux/profile-reducer';
-import {UsersType} from "../redux/users-reducer";
+import {UsersType} from '../redux/users-reducer';
 
 const instance = axios.create({
     withCredentials: true,
@@ -20,7 +20,7 @@ type ResponseType<D> = {
 export type UsersResponseDataType = {
     items: UsersType[]
     totalCount: number
-    error:string
+    error: string
 }
 
 
@@ -44,7 +44,11 @@ export const usersAPI = {
     getProfile(userId: string) {
         return instance.get<ProfileType>(`profile/${userId}`)
             .then(response => response.data)
-    }
+    },
+    // getStatus(userId: string) {
+    //     return instance.get(`profile/status/${userId}`)
+    //         .then(response => response.data)
+    // }
 }
 
 type AuthResponseData = {
