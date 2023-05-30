@@ -5,11 +5,14 @@ import {ProfileType} from '../../redux/profile-reducer';
 
 type ProfilePropsType = {
     profile: ProfileType | null
+    profileStatus: string
 }
 export const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile}
+                         profileStatus={props.profileStatus}
+            />
             <MyPostsContainer/>
         </div>
     )

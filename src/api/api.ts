@@ -45,10 +45,10 @@ export const usersAPI = {
         return instance.get<ProfileType>(`profile/${userId}`)
             .then(response => response.data)
     },
-    // getStatus(userId: string) {
-    //     return instance.get(`profile/status/${userId}`)
-    //         .then(response => response.data)
-    // }
+    getStatus(userId: string) {
+        return instance.get(`profile/status/${userId}`)
+            .then(response => response.data)
+    }
 }
 
 type AuthResponseData = {

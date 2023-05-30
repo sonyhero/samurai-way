@@ -6,6 +6,7 @@ import {ProfileStatus} from './ProfileStatus';
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
+    profileStatus: string
 }
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
@@ -28,7 +29,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
                 }
                 ava+description
             </div>
-            <ProfileStatus status={'Hello'}/>
+            Status:<ProfileStatus status={props.profileStatus}/>
         </div>
     )
 }

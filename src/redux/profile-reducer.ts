@@ -1,11 +1,12 @@
 import {ActionsTypes} from './redux-store';
-import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {Dispatch} from 'redux';
+import {usersAPI} from '../api/api';
 
 export type InitialProfileReducerStateType = {
     newPostText: string
     posts: PostsType[]
     profile: ProfileType | null
+    profileStatus: string
 }
 type PostsType = {
     id: number
@@ -45,7 +46,8 @@ const initialState = {
         {id: 2, postText: 'It\'s my first post!', likesCount: 100}
     ],
     newPostText: '',
-    profile: null
+    profile: null,
+    profileStatus: ''
 }
 
 export const profileReducer = (state: InitialProfileReducerStateType = initialState, action: ActionsTypes):
@@ -59,9 +61,11 @@ export const profileReducer = (state: InitialProfileReducerStateType = initialSt
             return {...state, posts: [...state.posts, newPost], newPostText: ''}
         case 'UPDATE_NEW_POST_TEXT':
             return {...state, newPostText: action.newPostText}
-        case "SET_USER_PROFILE": {
+        case 'SET_USER_PROFILE': {
             return {...state, profile: action.payload.profile}
         }
+        case 'SET_USER_PROFILE_STATUS':
+            return {...state, profileStatus: action.payload.status}
         default:
             return state
     }
@@ -82,7 +86,21 @@ export const setUserProfile = (profile: ProfileType) => {
     } as const
 }
 
+export const setUserProfileStatus = (status: string) => {
+    return {
+        type: 'SET_USER_PROFILE_STATUS',
+        payload: {
+            status
+        }
+    } as const
+}
+
 export const getProfileData = (userId: string) => async (dispatch: Dispatch) => {
     let data = await usersAPI.getProfile(userId)
     dispatch(setUserProfile(data))
+}
+
+export const getProfileStatus = (userId: string) => async (dispatch: Dispatch) => {
+    let data = await usersAPI.getStatus(userId)
+    dispatch(setUserProfileStatus(data))
 }
