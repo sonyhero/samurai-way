@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {Profile} from './Profile';
 import {connect} from 'react-redux';
 import {getProfileData, ProfileType, setUserProfile} from '../../redux/profile-reducer';
 import {RootReducerType} from '../../redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import {compose} from 'redux';
 
 type MapStateToPropsType = {
     profile: ProfileType | null
@@ -44,8 +45,9 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     }
 }
 
-
-const WithUrlDataProfileContainer = withRouter(ProfileAPIComponent)
-
-export const ProfileContainer = withAuthRedirect(connect(mapStateToProps,
-    {setUserProfile, getProfileData})(WithUrlDataProfileContainer))
+export const ProfileContainer = compose<ComponentType>(
+    connect(mapStateToProps,
+        {setUserProfile, getProfileData}),
+    withRouter,
+    withAuthRedirect
+)(ProfileAPIComponent)

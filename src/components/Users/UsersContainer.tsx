@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {RootReducerType} from '../../redux/redux-store';
 import {connect} from 'react-redux';
 import {
@@ -12,6 +12,8 @@ import {
 } from '../../redux/users-reducer';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
+import {compose} from 'redux';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 // type UsersAPIComponentType = {
 //     follow: (userId: number) => void
@@ -88,17 +90,19 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps,
-    {
-        follow,
-        unFollow,
-        setUsers,
-        setCurrentPage,
-        setUsersTotalCount,
-        toggleIsFetching,
-        toggleFollowingProgress,
-        getUsers,
-        followUsers,
-        unFollowUsers
-    }
+export const UsersContainer = compose<ComponentType>(
+    connect(mapStateToProps,
+        {
+            follow,
+            unFollow,
+            setUsers,
+            setCurrentPage,
+            setUsersTotalCount,
+            toggleIsFetching,
+            toggleFollowingProgress,
+            getUsers,
+            followUsers,
+            unFollowUsers
+        }),
+    withAuthRedirect
 )(UsersAPIComponent)
