@@ -1,4 +1,4 @@
-import {AnyAction, applyMiddleware, combineReducers, createStore} from 'redux';
+import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {addMessage, dialogsReducer, updateNewMessageText} from './dialogs-reducer';
 import {addPost, profileReducer, setUserProfile, setUserProfileStatus, updateNewPostText} from './profile-reducer';
 import {sidebarReducer} from './sidebar-reducer';
@@ -7,7 +7,8 @@ import {
     setCurrentPage,
     setUsers,
     setUsersTotalCount,
-    toggleIsFetching, toggleFollowingProgress,
+    toggleFollowingProgress,
+    toggleIsFetching,
     unFollow,
     usersReducer
 } from './users-reducer';
@@ -44,12 +45,12 @@ export type RootReducerType = ReturnType<typeof rootReducer>
 export type RootStateType = ReturnType<typeof store.getState>
 export const store = createStore(rootReducer, applyMiddleware(thunk))
 
-export type AppDispatch = ThunkDispatch<RootStateType, unknown, AnyAction> // для санок
+export type AppDispatch = ThunkDispatch<RootStateType, unknown, ActionsTypes> // для санок
 export type AppThunk<ReturnType = void> = ThunkAction<
 ReturnType,
     RootStateType,
     unknown,
-    AnyAction
+    ActionsTypes
 >
 
 // @ts-ignore

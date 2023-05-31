@@ -1,7 +1,13 @@
 import React, {ComponentType} from 'react';
 import {Profile} from './Profile';
 import {connect} from 'react-redux';
-import {getProfileData, getProfileStatus, ProfileType, setUserProfile} from '../../redux/profile-reducer';
+import {
+    getProfileData,
+    getProfileStatus,
+    ProfileType,
+    updateProfileStatus,
+    setUserProfile
+} from '../../redux/profile-reducer';
 import {RootReducerType} from '../../redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
@@ -16,6 +22,7 @@ type MapDispatchToPropsType = {
     setUserProfile: (profile: ProfileType) => void
     getProfileData: (userId: string) => void
     getProfileStatus: (userId: string) => void
+    updateProfileStatus: (status: string) => void
 }
 
 type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType
@@ -54,7 +61,7 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
 
 export const ProfileContainer = compose<ComponentType>(
     connect(mapStateToProps,
-        {setUserProfile, getProfileData, getProfileStatus}),
+        {setUserProfile, getProfileData, getProfileStatus, updateProfileStatus}),
     withRouter,
     withAuthRedirect
 )(ProfileAPIComponent)

@@ -7,10 +7,12 @@ import {ProfileStatus} from './ProfileStatus';
 type ProfileInfoPropsType = {
     profile: ProfileType | null
     profileStatus: string
+    updateProfileStatus: (status: string) => void
 }
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
 
+    const {profile, profileStatus, updateProfileStatus} = props
     // if(!props.profile){
     //     return <Preloader/>
     // }
@@ -23,13 +25,15 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
                     alt="itachi content" width="600px" height="200px"/>
             </div>
             <div className={s.descriptionBlock}>
-                {(!props.profile)
+                {(!profile)
                     ? <Preloader/>
-                    : <img src={props.profile.photos.large} alt={"profile"}/>
+                    : <img src={profile.photos.large} alt={"profile"}/>
                 }
                 ava+description
             </div>
-            Status:<ProfileStatus status={props.profileStatus}/>
+            Status:<ProfileStatus status={profileStatus}
+                                  updateProfileStatus={updateProfileStatus}
+        />
         </div>
     )
 }

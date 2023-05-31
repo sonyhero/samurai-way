@@ -48,6 +48,25 @@ export const usersAPI = {
     getStatus(userId: string) {
         return instance.get(`profile/status/${userId}`)
             .then(response => response.data)
+    },
+    setStatus(status: string) {
+        return instance.put<ResponseType<{}>>('profile/status', {status})
+            // .then(response => response.data)
+    }
+}
+
+export const profileAPI = {
+    getProfile(userId: string) {
+        return instance.get<ProfileType>(`profile/${userId}`)
+            .then(response => response.data)
+    },
+    getStatus(userId: string) {
+        return instance.get(`profile/status/${userId}`)
+            .then(response => response.data)
+    },
+    updateStatus(status: string) {
+        return instance.put<ResponseType<{}>>('profile/status', {status})
+        .then(response => response.data)
     }
 }
 

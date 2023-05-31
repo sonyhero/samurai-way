@@ -1,6 +1,6 @@
 import {ActionsTypes} from './redux-store';
 import {Dispatch} from 'redux';
-import {usersAPI} from '../api/api';
+import {profileAPI} from '../api/api';
 
 export type InitialProfileReducerStateType = {
     newPostText: string
@@ -96,11 +96,18 @@ export const setUserProfileStatus = (status: string) => {
 }
 
 export const getProfileData = (userId: string) => async (dispatch: Dispatch) => {
-    let data = await usersAPI.getProfile(userId)
+    let data = await profileAPI.getProfile(userId)
     dispatch(setUserProfile(data))
 }
 
 export const getProfileStatus = (userId: string) => async (dispatch: Dispatch) => {
-    let data = await usersAPI.getStatus(userId)
+    let data = await profileAPI.getStatus(userId)
     dispatch(setUserProfileStatus(data))
+}
+
+export const updateProfileStatus = (status: string) => async (dispatch: Dispatch) => {
+    let data = await profileAPI.updateStatus(status)
+    if (data.resultCode === 0) {
+        dispatch(setUserProfileStatus(status))
+    }
 }
