@@ -30,43 +30,43 @@ export const usersAPI = {
         ${currentPage}&count=
         ${pageSize}`
         )
-            .then(response => response.data)
+            .then(res => res.data)
     },
     //----------------------------------------------------
     followUsers(userId: number) {
         return instance.post<ResponseType<{}>>(`follow/${userId}`)
-            .then(response => response.data)
+            .then(res => res.data)
     },
     unFollowUsers(userId: number) {
         return instance.delete<ResponseType<{}>>(`follow/${userId}`)
-            .then(response => response.data)
+            .then(res => res.data)
     },
     getProfile(userId: string) {
         return instance.get<ProfileType>(`profile/${userId}`)
-            .then(response => response.data)
+            .then(res => res.data)
     },
     getStatus(userId: string) {
         return instance.get(`profile/status/${userId}`)
-            .then(response => response.data)
+            .then(res => res.data)
     },
     setStatus(status: string) {
         return instance.put<ResponseType<{}>>('profile/status', {status})
-            // .then(response => response.data)
+        // .then(response => response.data)
     }
 }
 
 export const profileAPI = {
     getProfile(userId: string) {
         return instance.get<ProfileType>(`profile/${userId}`)
-            .then(response => response.data)
+            .then(res => res.data)
     },
     getStatus(userId: string) {
         return instance.get(`profile/status/${userId}`)
-            .then(response => response.data)
+            .then(res => res.data)
     },
     updateStatus(status: string) {
         return instance.put<ResponseType<{}>>('profile/status', {status})
-        .then(response => response.data)
+            .then(res => res.data)
     }
 }
 
@@ -79,7 +79,17 @@ type AuthResponseData = {
 export const authAPI = {
     getAuthMe() {
         return instance.get<ResponseType<AuthResponseData>>(`auth/me`)
-            .then(response => response.data)
+            .then(res => res.data)
+    },
+    logIn(email: string, password: string, rememberMe: boolean, captcha: boolean) {
+        return instance.post<ResponseType<{ userId: number }>>(`auth/login`, {
+            email, password, rememberMe, captcha
+        })
+            .then(res => res.data)
+    },
+    logOut() {
+        return instance.delete<ResponseType<{}>>(`auth/login`)
+            .then(res => res.data)
     }
 }
 

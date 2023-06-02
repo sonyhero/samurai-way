@@ -14,13 +14,15 @@ import {
 } from './users-reducer';
 import {authReducer, setAuthUserData} from './auth-reducer';
 import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk';
+import {reducer as formReducer} from 'redux-form'
 
 let rootReducer = combineReducers({
         dialogsReducer,
         profileReducer,
         sidebarReducer,
         usersReducer,
-        authReducer
+        authReducer,
+    form: formReducer
     }
 )
 
