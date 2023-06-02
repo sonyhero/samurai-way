@@ -5,6 +5,10 @@ type ProfileStatusType = {
     status: string
     updateProfileStatus: (status: string) => void
 }
+type LocalStateType = {
+    editMode: boolean
+    status: string
+}
 
 export class ProfileStatus extends React.Component<ProfileStatusType> {
 
@@ -34,6 +38,14 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
        if (e.key === 'Enter') {
            this.deActivateEditMode()
        }
+    }
+
+    componentDidUpdate(prevProps: ProfileStatusType, prevState: LocalStateType) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {
