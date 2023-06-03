@@ -51,7 +51,7 @@ export const usersAPI = {
     },
     setStatus(status: string) {
         return instance.put<ResponseType<{}>>('profile/status', {status})
-        // .then(response => response.data)
+        // .then(res => res.data)
     }
 }
 

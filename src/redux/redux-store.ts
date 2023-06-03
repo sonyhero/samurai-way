@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
-import {addMessage, dialogsReducer, updateNewMessageText} from './dialogs-reducer';
+import {addMessage, dialogsReducer} from './dialogs-reducer';
 import {addPost, profileReducer, setUserProfile, setUserProfileStatus} from './profile-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 import {
@@ -29,9 +29,7 @@ let rootReducer = combineReducers({
 // Объединение типов actions
 export type ActionsTypes =
     ReturnType<typeof addPost>
-    // | ReturnType<typeof updateNewPostText>
     | ReturnType<typeof addMessage>
-    | ReturnType<typeof updateNewMessageText>
     | ReturnType<typeof follow>
     | ReturnType<typeof unFollow>
     | ReturnType<typeof setUsers>

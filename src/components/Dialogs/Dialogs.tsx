@@ -1,14 +1,9 @@
-import React, {ChangeEvent, KeyboardEvent} from 'react';
+import React from 'react';
 import s from './DialogsCSS.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
 import {MapDispatchToPropsType, MapStateToPropsType} from './DialogsContainer';
-
-// type DialogsPropsType = {
-//     addMessage: () => void
-//     updateNewMessageText: (newMessageText: string) => void
-//     dialogsPage: InitialDialogsReducerStateType
-// }
+import {AddMessageReduxForm} from './AddMessageForm';
 
 type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -16,7 +11,6 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     const {
         addMessage,
-        updateNewMessageText,
         dialogsPage,
     } = props
 
@@ -28,21 +22,16 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         m => <Message key={m.id} messageText={m.messageText} id={m.id}/>
     )
 
-    const onAddMessage = () => {
-        if (dialogsPage.newMessageText.trim() !== '')
-            addMessage()
+    const onAddMessage = (data: {messageText: string}) => {
+        // if (dialogsPage.newMessageText.trim() !== '')
+            addMessage(data.messageText)
     }
 
-    const onChangeMassage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        const newMessageText = e.currentTarget.value
-        updateNewMessageText(newMessageText)
-    }
-
-    const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter') {
-            onAddMessage()
-        }
-    }
+    // const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    //     if (e.key === 'Enter') {
+    //         onAddMessage()
+    //     }
+    // }
 
     return (
         <div>
@@ -50,17 +39,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
             <div className={s.dialogs}>
                 <div className={s.dialogsItems}>{dialogsDataMap}</div>
                 <div className={s.messages}>{messagesDataMap}
-                    <div>
-                <textarea
-                    placeholder={'Enter message'}
-                    value={props.dialogsPage.newMessageText}
-                    onChange={onChangeMassage}
-                    onKeyDown={onKeyDownHandler}
-                />
-                    </div>
-                    <div>
-                        <button onClick={onAddMessage}>Add message</button>
-                    </div>
+                    <AddMessageReduxForm onSubmit={onAddMessage}/>
                 </div>
             </div>
         </div>

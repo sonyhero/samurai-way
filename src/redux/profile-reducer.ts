@@ -45,7 +45,6 @@ const initialState = {
         {id: 1, postText: 'Hi, how are you?', likesCount: 23},
         {id: 2, postText: 'It\'s my first post!', likesCount: 100}
     ],
-    // newPostText: '',
     profile: null,
     profileStatus: ''
 }
@@ -54,13 +53,10 @@ export const profileReducer = (state: InitialProfileReducerStateType = initialSt
     InitialProfileReducerStateType => {
     switch (action.type) {
         case 'ADD_POST':
-            // const newPostText = action.newPostText
             const newPost: PostsType = {
                 id: new Date().getTime(), postText: action.newPostText, likesCount: 0
             }
-            return {...state, posts: [...state.posts, newPost]
-                // , newPostText: ''
-            }
+            return {...state, posts: [...state.posts, newPost]}
         // case 'UPDATE_NEW_POST_TEXT':
         //     return {...state, newPostText: action.newPostText}
         case 'SET_USER_PROFILE': {
@@ -73,10 +69,7 @@ export const profileReducer = (state: InitialProfileReducerStateType = initialSt
     }
 }
 
-export const addPost = (newPostText: string) => (
-    {type: 'ADD_POST',
-        newPostText
-    } as const)
+export const addPost = (newPostText: string) => ({type: 'ADD_POST', newPostText} as const)
 // export const updateNewPostText = (newPostText: string) => ({
 //     type: 'UPDATE_NEW_POST_TEXT',
 //     newPostText
