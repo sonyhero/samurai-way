@@ -5,7 +5,7 @@ type FormAddMessageDataType = {
     messageText: string
 }
 
-const AddMessageForm: React.FC<InjectedFormProps<FormAddMessageDataType>> =(props)=> {
+const AddMessageForm: React.FC<InjectedFormProps<FormAddMessageDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <Field

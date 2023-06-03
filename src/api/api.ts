@@ -10,7 +10,7 @@ const instance = axios.create({
     }
 })
 
-type ResponseType<D> = {
+type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
     data: D
@@ -34,11 +34,11 @@ export const usersAPI = {
     },
     //----------------------------------------------------
     followUsers(userId: number) {
-        return instance.post<ResponseType<{}>>(`follow/${userId}`)
+        return instance.post<ResponseType>(`follow/${userId}`)
             .then(res => res.data)
     },
     unFollowUsers(userId: number) {
-        return instance.delete<ResponseType<{}>>(`follow/${userId}`)
+        return instance.delete<ResponseType>(`follow/${userId}`)
             .then(res => res.data)
     },
     getProfile(userId: string) {
@@ -50,7 +50,7 @@ export const usersAPI = {
             .then(res => res.data)
     },
     setStatus(status: string) {
-        return instance.put<ResponseType<{}>>('profile/status', {status})
+        return instance.put<ResponseType>('profile/status', {status})
         // .then(res => res.data)
     }
 }
@@ -65,7 +65,7 @@ export const profileAPI = {
             .then(res => res.data)
     },
     updateStatus(status: string) {
-        return instance.put<ResponseType<{}>>('profile/status', {status})
+        return instance.put<ResponseType>('profile/status', {status})
             .then(res => res.data)
     }
 }
@@ -88,16 +88,7 @@ export const authAPI = {
             .then(res => res.data)
     },
     logOut() {
-        return instance.delete<ResponseType<{}>>(`auth/login`)
+        return instance.delete<ResponseType>(`auth/login`)
             .then(res => res.data)
     }
 }
-
-// Получение пользователей в компоненте UsersContainer
-// export const getUsers = (currentPage: number, pageSize: number) => {
-//     return instance.get(`users?page=
-//         ${currentPage}&count=
-//         ${pageSize}`
-//     )
-//         .then(response => response.data)
-// }

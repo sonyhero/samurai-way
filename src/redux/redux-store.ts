@@ -22,7 +22,7 @@ let rootReducer = combineReducers({
         sidebarReducer,
         usersReducer,
         authReducer,
-    form: formReducer
+        form: formReducer
     }
 )
 
@@ -47,7 +47,7 @@ export const store = createStore(rootReducer, applyMiddleware(thunk))
 
 export type AppDispatch = ThunkDispatch<RootStateType, unknown, ActionsTypes> // для санок
 export type AppThunk<ReturnType = void> = ThunkAction<
-ReturnType,
+    ReturnType,
     RootStateType,
     unknown,
     ActionsTypes

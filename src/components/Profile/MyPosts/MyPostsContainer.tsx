@@ -9,7 +9,6 @@ export type MapStateToPropsType = {
 
 export type MapDispatchToPropsType = {
     addPost: (newPostText: string) => void
-    // updateNewPostText: (newPostText: string) => void
 }
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
@@ -17,17 +16,6 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     }
 }
 
-// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-//     return {
-//         addPost: () => {
-//             dispatch(addPostAC())
-//         },
-//         updateNewPostText: (newPostText: string) => {
-//             dispatch(updateNewPostTextAC(newPostText))
-//         }
-//     }
-// }
 export const MyPostsContainer = connect(mapStateToProps, {
     addPost,
-    // updateNewPostText
 })(MyPosts)
