@@ -1,7 +1,7 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {maxLength, minLength, required} from '../../../utils/validators';
-import {FormsControls} from '../../common/FormsControls/FormsControls';
+import {TextArea} from '../../common/FormsControls/FormsControl';
 
 type FormAddPostDataType = {
     postText: string
@@ -18,7 +18,7 @@ const AddPostForm: React.FC<InjectedFormProps<FormAddPostDataType>> = (props) =>
                 name={'postText'}
                 placeholder={'Enter post text'}
                 value={'newPostText'}
-                component={FormsControls}
+                component={TextArea}
                 validate={[required, maxLength10, minLength2]}
                 // onKeyDown={onKeyDownHandler}
             />
