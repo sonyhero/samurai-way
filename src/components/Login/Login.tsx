@@ -9,10 +9,14 @@ const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name={'email'} placeholder={'Email'} component={Input} validate={[required]}/>
+                <Field name={'email'} placeholder={'Email'} component={Input}
+                       // validate={[required]}
+                />
             </div>
             <div>
-                <Field name={'password'} placeholder={'Password'} component={Input} type={'password'} validate={[required]}/>
+                <Field name={'password'} placeholder={'Password'} component={Input} type={'password'}
+                       // validate={[required]}
+                />
             </div>
             <div
             ><Field name={'rememberMe'} type={'checkbox'} component={Input}/> remember me
@@ -29,11 +33,13 @@ const LoginReduxForm =
         form: 'login'
     })(LoginForm)
 
-const Login:React.FC<LoginPropsType> = ({login}) => {
+const Login:React.FC<LoginPropsType> = (props) => {
 
     const onSubmit = (formData: FormLoginDataType) => {
+        debugger
+        console.log(formData)
         const {email, password, rememberMe} = formData
-        login(email, password, rememberMe)
+        props.login(email, password, rememberMe)
     }
 
     return (
