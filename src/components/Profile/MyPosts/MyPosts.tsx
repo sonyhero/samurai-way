@@ -2,7 +2,7 @@ import React from 'react';
 import s from './MyPostsCSS.module.css'
 import {Post} from './Post/Post';
 import {MapDispatchToPropsType, MapStateToPropsType} from './MyPostsContainer';
-import {AddPostReduxForm} from "./AddPostForm";
+import {AddPostReduxForm, FormAddPostDataType} from "./AddPostForm";
 
 // type MyPostsPropsType = {
 //     addPost: () => void
@@ -17,7 +17,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
         <Post key={p.id} id={p.id} postText={p.postText} likesCount={p.likesCount}/>
     )
 
-    const onAddPost = (data: { postText: string }) => {
+    const onAddPost = (data: FormAddPostDataType) => {
         console.log(data.postText)
         // if (props.profilePage.newPostText.trim() !== '')
 

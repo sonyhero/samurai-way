@@ -10,12 +10,12 @@ const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field name={'email'} placeholder={'Email'} component={Input}
-                       // validate={[required]}
+                       validate={[required]}
                 />
             </div>
             <div>
                 <Field name={'password'} placeholder={'Password'} component={Input} type={'password'}
-                       // validate={[required]}
+                       validate={[required]}
                 />
             </div>
             <div
@@ -28,15 +28,13 @@ const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
     )
 }
 
-const LoginReduxForm =
-    reduxForm<FormLoginDataType>({
+const LoginReduxForm = reduxForm<FormLoginDataType>({
         form: 'login'
     })(LoginForm)
 
 const Login:React.FC<LoginPropsType> = (props) => {
 
     const onSubmit = (formData: FormLoginDataType) => {
-        debugger
         console.log(formData)
         const {email, password, rememberMe} = formData
         props.login(email, password, rememberMe)

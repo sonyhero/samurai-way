@@ -3,7 +3,7 @@ import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {maxLength, minLength, required} from '../../../utils/validators';
 import {TextArea} from '../../common/FormsControls/FormsControl';
 
-type FormAddPostDataType = {
+export type FormAddPostDataType = {
     postText: string
 }
 

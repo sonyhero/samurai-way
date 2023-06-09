@@ -11,8 +11,8 @@ type FormControlType = {
         value: string;
     }
     meta: {
-        touched: boolean;
-        error: string;
+        touched?: boolean;
+        error?: string;
     }
     children: React.ReactNode
 }
@@ -39,11 +39,17 @@ export const FormControl: React.FC<FormControlType> = (props) => {
 // type TextAreaType = TextareaHTMLAttributes<HTMLTextAreaElement>;
 export const TextArea: React.FC<FormControlType> = (props) => {
     const {input, meta, ...restProps} = props
-    return <FormControl {...props}><textarea  {...input} {...restProps} /></FormControl>
+    return (
+        <FormControl {...props}>
+            <textarea  {...input} {...restProps} />
+        </FormControl>)
 }
 
 // type InputType = InputHTMLAttributes<HTMLInputElement>
 export const Input: React.FC<FormControlType> = (props) => {
-    const {meta, ...restProps} = props
-    return <FormControl {...props}><input {...restProps} /></FormControl>
+    const {input, meta, ...restProps} = props
+    return (
+        <FormControl {...props}>
+            <input {...input} {...restProps} />
+        </FormControl>)
 }
