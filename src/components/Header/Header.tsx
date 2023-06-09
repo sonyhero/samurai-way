@@ -6,7 +6,7 @@ import {HeaderAPIComponentType} from './HeaderContainer';
 type HeaderPropsType = HeaderAPIComponentType
 export const Header: React.FC<HeaderPropsType> = (props) => {
 
-    const {isAuth, login} = props
+    const {isAuth, login, logout} = props
 
     return (
         <header className={s.header}>
@@ -15,7 +15,7 @@ export const Header: React.FC<HeaderPropsType> = (props) => {
                 alt="itachi logo"/>
             <div className={s.loginBlock}>
                 {isAuth
-                    ? login
+                    ? <div>{login} - <button onClick={logout}>Log out</button></div>
                     : <NavLink to={'/login'}>Login</NavLink>
                 }
             </div>

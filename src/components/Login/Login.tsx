@@ -4,6 +4,8 @@ import {Input} from "../common/FormsControls/FormsControl";
 import {required} from "../../utils/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
+import {RootReducerType} from "../../redux/redux-store";
+import {Redirect} from "react-router-dom";
 
 const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
     return (
@@ -29,34 +31,49 @@ const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
 }
 
 const LoginReduxForm = reduxForm<FormLoginDataType>({
-        form: 'login'
-    })(LoginForm)
+    form: 'login'
+})(LoginForm)
 
-const Login:React.FC<LoginPropsType> = (props) => {
+const Login: React.FC<LoginPropsType> = (props) => {
+
+    const {login, isAuth} = props
 
     const onSubmit = (formData: FormLoginDataType) => {
-        console.log(formData)
         const {email, password, rememberMe} = formData
-        props.login(email, password, rememberMe)
+        login(email, password, rememberMe)
     }
 
-    return (
-        <div>
+
+    return (isAuth)
+        ? <Redirect to={'/profile'}/>
+        : <div>
             <h1>Login</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
         </div>
-    )
+
 }
 
-export default connect(null,({
+const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
+    return {
+        isAuth: state.authReducer.isAuth
+    }
+}
+
+export default connect(mapStateToProps, ({
     login
 }))(Login)
+
+export type MapStateToPropsType = {
+    isAuth: boolean
+}
+
+type MapDispatchToPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+}
 
 type FormLoginDataType = {
     email: string
     password: string
     rememberMe: boolean
 }
-type LoginPropsType = {
-    login: (email: string, password: string, rememberMe: boolean) => void
-}
+type LoginPropsType = MapStateToPropsType & MapDispatchToPropsType
