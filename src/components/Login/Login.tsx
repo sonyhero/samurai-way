@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {RootReducerType} from "../../redux/redux-store";
 import {Redirect} from "react-router-dom";
+import s from "./LoginCSS.module.css";
 
 const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
     return (
@@ -23,6 +24,7 @@ const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
             <div
             ><Field name={'rememberMe'} type={'checkbox'} component={Input}/> remember me
             </div>
+            {props.error && <div className={s.summeryError}>{props.error}</div>}
             <div>
                 <button>Login</button>
             </div>

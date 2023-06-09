@@ -1,5 +1,3 @@
-import {ActionsTypes} from './redux-store';
-
 export type InitialDialogsReducerStateType = {
     messages: MessageType[]
     dialogs: DialogItemType[]
@@ -28,7 +26,7 @@ const initialState: InitialDialogsReducerStateType = {
     ]
 }
 
-export const dialogsReducer = (state: InitialDialogsReducerStateType = initialState, action: ActionsTypes)
+export const dialogsReducer = (state: InitialDialogsReducerStateType = initialState, action: DialogsReducerType)
     : InitialDialogsReducerStateType => {
 
     switch (action.type) {
@@ -38,8 +36,6 @@ export const dialogsReducer = (state: InitialDialogsReducerStateType = initialSt
                 id: new Date().getTime(), messageText: newMessageText
             }
             return {...state, messages: [...state.messages, newMessage]}
-        // case 'UPDATE_NEW_MESSAGE_TEXT':
-        //     return {...state, newMessageText: action.newMessageText}
         default:
             return state
     }
@@ -49,7 +45,5 @@ export const addMessage = (messageText: string) => (
     {type: 'ADD_MESSAGE',
         messageText
     } as const)
-// export const updateNewMessageText = (newMessageText: string) => ({
-//     type: 'UPDATE_NEW_MESSAGE_TEXT',
-//     newMessageText
-// } as const)
+
+export type DialogsReducerType = ReturnType<typeof addMessage>

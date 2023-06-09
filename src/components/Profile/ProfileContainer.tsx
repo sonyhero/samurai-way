@@ -16,6 +16,8 @@ import {compose} from 'redux';
 type MapStateToPropsType = {
     profile: ProfileType | null
     profileStatus: string
+    authorizedUserId: string | null
+    isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -37,7 +39,8 @@ export class ProfileAPIComponent extends React.Component<ProfileAPIComponentType
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '28817'
+            if (this.props.authorizedUserId !== null) userId = this.props.authorizedUserId
+            // userId = '28817'
         }
         this.props.getProfileData(userId)
         this.props.getProfileStatus(userId)
@@ -53,7 +56,9 @@ export class ProfileAPIComponent extends React.Component<ProfileAPIComponentType
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
         profile: state.profileReducer.profile,
-        profileStatus: state.profileReducer.profileStatus
+        profileStatus: state.profileReducer.profileStatus,
+        authorizedUserId: state.authReducer.userId,
+        isAuth: state.authReducer.isAuth
     }
 }
 

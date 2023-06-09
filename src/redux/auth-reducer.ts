@@ -1,6 +1,7 @@
-import {ActionsTypes, AppThunk} from './redux-store';
-import {Dispatch} from "redux";
+import {AppThunk} from './redux-store';
+
 import {authAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 
 export type InitialUsersReducerStateType = {
@@ -16,7 +17,7 @@ const initialState: InitialUsersReducerStateType = {
     isAuth: false
 }
 
-export const authReducer = (state: InitialUsersReducerStateType = initialState, action: ActionsTypes):
+export const authReducer = (state: InitialUsersReducerStateType = initialState, action: AuthReducerType):
     InitialUsersReducerStateType => {
     switch (action.type) {
         case 'SET_USER_DATA':
@@ -30,15 +31,15 @@ export const setAuthUserData = (userId: string | null, email: string | null, log
     return {
         type: 'SET_USER_DATA',
         payload: {
-                userId,
-                email,
-                login,
-                isAuth
+            userId,
+            email,
+            login,
+            isAuth
         }
     } as const
 }
 
-export const getAuthUserData = () => async (dispatch: Dispatch) => {
+export const getAuthUserData = (): AppThunk => async (dispatch) => {
     try {
         let data = await authAPI.getAuthMe()
         if (data.resultCode === 0) {
@@ -54,6 +55,11 @@ export const login = (email: string, password: string, rememberMe: boolean): App
         let data = await authAPI.logIn(email, password, rememberMe)
         if (data.resultCode === 0) {
             await dispatch(getAuthUserData())
+        } else {
+            let errorMessage = data.messages.length > 0
+                ? data.messages[0]
+                : 'Some error'
+            await dispatch(stopSubmit('login', {_error: errorMessage}))
         }
     } catch (e) {
         console.log(e)
@@ -69,3 +75,5 @@ export const logout = (): AppThunk => async (dispatch) => {
         console.log(e)
     }
 }
+
+export type AuthReducerType = ReturnType<typeof setAuthUserData>
