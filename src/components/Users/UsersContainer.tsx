@@ -5,15 +5,18 @@ import {
     follow,
     followUsers,
     getUsers,
-    setCurrentPage, setUsers, setUsersTotalCount,
-    toggleFollowingProgress, toggleIsFetching, unFollow,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount,
+    toggleFollowingProgress,
+    toggleIsFetching,
+    unFollow,
     unFollowUsers,
     UsersType
 } from '../../redux/users-reducer';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {compose} from 'redux';
-import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 // type UsersAPIComponentType = {
 //     follow: (userId: number) => void
@@ -104,5 +107,5 @@ export const UsersContainer = compose<ComponentType>(
             followUsers,
             unFollowUsers
         }),
-    withAuthRedirect
+    // withAuthRedirect
 )(UsersAPIComponent)

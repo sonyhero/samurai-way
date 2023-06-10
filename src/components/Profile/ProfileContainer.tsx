@@ -39,7 +39,9 @@ export class ProfileAPIComponent extends React.Component<ProfileAPIComponentType
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            if (this.props.authorizedUserId !== null) userId = this.props.authorizedUserId
+            if (this.props.authorizedUserId !== null) {
+                userId = this.props.authorizedUserId
+            } else this.props.history.push('/login')
             // userId = '28817'
         }
         this.props.getProfileData(userId)
