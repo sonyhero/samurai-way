@@ -113,9 +113,10 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
     } as const
 }
 //Thunks
-export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+export const requestUsers = (page: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true))
-    usersAPI.getUsers(currentPage, pageSize).then(data => {
+    dispatch(setCurrentPage(page))
+    usersAPI.getUsers(page, pageSize).then(data => {
         dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
         // Засетал тотал каунт разделенный на 200 так как очень много данных
