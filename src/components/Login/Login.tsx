@@ -7,6 +7,7 @@ import {login} from "../../redux/auth-reducer";
 import {RootReducerType} from "../../redux/redux-store";
 import {Redirect} from "react-router-dom";
 import s from "./LoginCSS.module.css";
+import {getIsAuth} from '../../redux/selectors/auth-selector';
 
 const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
     return (
@@ -57,7 +58,7 @@ const Login: React.FC<LoginPropsType> = (props) => {
 
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
-        isAuth: state.authReducer.isAuth
+        isAuth: getIsAuth(state)
     }
 }
 
@@ -65,14 +66,13 @@ export default connect(mapStateToProps, ({
     login
 }))(Login)
 
+//Types
 export type MapStateToPropsType = {
     isAuth: boolean
 }
-
 type MapDispatchToPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
 }
-
 type FormLoginDataType = {
     email: string
     password: string

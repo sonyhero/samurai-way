@@ -12,27 +12,8 @@ import {RootReducerType} from '../../redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
-
-type MapStateToPropsType = {
-    profile: ProfileType | null
-    profileStatus: string
-    authorizedUserId: string | null
-    isAuth: boolean
-}
-
-type MapDispatchToPropsType = {
-    setUserProfile: (profile: ProfileType) => void
-    getProfileData: (userId: string) => void
-    getProfileStatus: (userId: string) => void
-    updateProfileStatus: (status: string) => void
-}
-
-type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType
-
-type MatchParamsType = {
-    userId: string
-}
-type ProfileAPIComponentType = RouteComponentProps<MatchParamsType> & ProfileContainerType
+import {getProfile, getStatus} from '../../redux/selectors/profile-selector';
+import {getIsAuth, getUserId} from '../../redux/selectors/auth-selector';
 
 export class ProfileAPIComponent extends React.Component<ProfileAPIComponentType> {
 
@@ -57,10 +38,10 @@ export class ProfileAPIComponent extends React.Component<ProfileAPIComponentType
 
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
-        profile: state.profileReducer.profile,
-        profileStatus: state.profileReducer.profileStatus,
-        authorizedUserId: state.authReducer.userId,
-        isAuth: state.authReducer.isAuth
+        profile: getProfile(state),
+        profileStatus: getStatus(state),
+        authorizedUserId: getUserId(state),
+        isAuth: getIsAuth(state)
     }
 }
 
@@ -70,3 +51,21 @@ export const ProfileContainer = compose<ComponentType>(
     withRouter,
     withAuthRedirect
 )(ProfileAPIComponent)
+//Types
+type MapStateToPropsType = {
+    profile: ProfileType | null
+    profileStatus: string
+    authorizedUserId: string | null
+    isAuth: boolean
+}
+type MapDispatchToPropsType = {
+    setUserProfile: (profile: ProfileType) => void
+    getProfileData: (userId: string) => void
+    getProfileStatus: (userId: string) => void
+    updateProfileStatus: (status: string) => void
+}
+type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType
+type MatchParamsType = {
+    userId: string
+}
+type ProfileAPIComponentType = RouteComponentProps<MatchParamsType> & ProfileContainerType
