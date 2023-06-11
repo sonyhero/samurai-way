@@ -4,18 +4,6 @@ import {connect} from 'react-redux';
 import {RootReducerType} from '../../redux/redux-store';
 import {logout} from '../../redux/auth-reducer';
 
-type MapStateToPropsType = {
-    isAuth: boolean
-    login: string | null
-}
-
-type MapDispatchToPropsType = {
-    // getAuthUserData: () => void
-    logout: () => void
-}
-
-export type HeaderAPIComponentType = MapStateToPropsType & MapDispatchToPropsType
-
 export class HeaderAPIComponent extends React.Component<HeaderAPIComponentType> {
 
     // componentDidMount() {
@@ -39,3 +27,13 @@ export const HeaderContainer = connect(mapStateToProps, {
     // getAuthUserData,
     logout
 })(HeaderAPIComponent)
+//Types
+type MapStateToPropsType = {
+    isAuth: boolean
+    login: string | null
+}
+type MapDispatchToPropsType = {
+    // getAuthUserData: () => void
+    logout: () => void
+}
+export type HeaderAPIComponentType = MapStateToPropsType & MapDispatchToPropsType
