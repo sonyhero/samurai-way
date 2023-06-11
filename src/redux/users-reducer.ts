@@ -1,30 +1,6 @@
 import {usersAPI} from '../api/api';
 import {Dispatch} from 'redux';
 
-export type UsersType = {
-    id: number
-    photos: PhotosType
-    followed: boolean
-    name: string
-    status: string
-    location: LocationType
-}
-type LocationType = {
-    city: string
-    country: string
-}
-type PhotosType = {
-    small: any
-    large: any
-}
-export type InitialUsersReducerStateType = {
-    users: UsersType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-    followingInProgress: number[]
-}
 const initialState: InitialUsersReducerStateType = {
     users: [],
     pageSize: 5,
@@ -78,7 +54,7 @@ export const usersReducer = (state: InitialUsersReducerStateType = initialState,
             return state
     }
 }
-
+//Actions
 export const follow = (userId: number) => {
     return {
         type: 'FOLLOW',
@@ -136,7 +112,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
         }
     } as const
 }
-
+//Thunks
 export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true))
     usersAPI.getUsers(currentPage, pageSize).then(data => {
@@ -172,7 +148,31 @@ export const unFollowUsers = (userId: number) => async (dispatch: Dispatch) => {
         dispatch(toggleFollowingProgress(false, userId))
     }
 }
-
+//Types
+export type UsersType = {
+    id: number
+    photos: PhotosType
+    followed: boolean
+    name: string
+    status: string
+    location: LocationType
+}
+type LocationType = {
+    city: string
+    country: string
+}
+type PhotosType = {
+    small: any
+    large: any
+}
+export type InitialUsersReducerStateType = {
+    users: UsersType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+    followingInProgress: number[]
+}
 export type UsersReducerType =
     | ReturnType<typeof follow>
     | ReturnType<typeof unFollow>

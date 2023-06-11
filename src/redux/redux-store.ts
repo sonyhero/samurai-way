@@ -18,7 +18,9 @@ let rootReducer = combineReducers({
         appReducer
     }
 )
-
+export const store = createStore(rootReducer, applyMiddleware(thunk))
+// @ts-ignore
+window.store = store
 // Объединение типов actions
 export type ActionsTypes =
     | UsersReducerType
@@ -29,8 +31,6 @@ export type ActionsTypes =
 
 export type RootReducerType = ReturnType<typeof rootReducer>
 export type RootStateType = ReturnType<typeof store.getState>
-export const store = createStore(rootReducer, applyMiddleware(thunk))
-
 export type AppDispatch = ThunkDispatch<RootStateType, unknown, ActionsTypes> // для санок
 export type AppThunk<ReturnType = void> = ThunkAction<
     ReturnType,
@@ -38,6 +38,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
     unknown,
     ActionsTypes
 >
-
-// @ts-ignore
-window.store = store

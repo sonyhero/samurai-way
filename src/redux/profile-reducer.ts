@@ -1,44 +1,6 @@
 import {AppThunk} from './redux-store';
 import {profileAPI} from '../api/api';
 
-export type InitialProfileReducerStateType = {
-    // newPostText: string
-    posts: PostsType[]
-    profile: ProfileType | null
-    profileStatus: string
-}
-type PostsType = {
-    id: number
-    postText: string
-    likesCount: number
-}
-
-type ContactsType = {
-    facebook: string
-    website: string
-    vk: string
-    twitter: string
-    instagram: string
-    youtube: string
-    github: string
-    mainLink: string
-}
-
-type PhotosType = {
-    small: string
-    large: string
-}
-
-export type ProfileType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: ContactsType
-    photos: PhotosType
-    aboutMe: string
-}
-
 const initialState = {
     posts: [ //Props Profile-MyPosts
         {id: 1, postText: 'Hi, how are you?', likesCount: 23},
@@ -67,7 +29,7 @@ export const profileReducer = (state: InitialProfileReducerStateType = initialSt
 }
 
 export const addPost = (newPostText: string) => ({type: 'ADD_POST', newPostText} as const)
-
+//Actions
 export const setUserProfile = (profile: ProfileType) => {
     return {
         type: 'SET_USER_PROFILE',
@@ -76,7 +38,6 @@ export const setUserProfile = (profile: ProfileType) => {
         }
     } as const
 }
-
 export const setUserProfileStatus = (status: string) => {
     return {
         type: 'SET_USER_PROFILE_STATUS',
@@ -85,24 +46,56 @@ export const setUserProfileStatus = (status: string) => {
         }
     } as const
 }
-
+//Thunks
 export const getProfileData = (userId: string): AppThunk => async (dispatch) => {
     let data = await profileAPI.getProfile(userId)
     dispatch(setUserProfile(data))
 }
-
 export const getProfileStatus = (userId: string): AppThunk => async (dispatch) => {
     let data = await profileAPI.getStatus(userId)
     dispatch(setUserProfileStatus(data))
 }
-
 export const updateProfileStatus = (status: string): AppThunk => async (dispatch) => {
     let data = await profileAPI.updateStatus(status)
     if (data.resultCode === 0) {
         dispatch(setUserProfileStatus(status))
     }
 }
-
+//Types
+export type InitialProfileReducerStateType = {
+    // newPostText: string
+    posts: PostsType[]
+    profile: ProfileType | null
+    profileStatus: string
+}
+type PostsType = {
+    id: number
+    postText: string
+    likesCount: number
+}
+type ContactsType = {
+    facebook: string
+    website: string
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: string
+    github: string
+    mainLink: string
+}
+type PhotosType = {
+    small: string
+    large: string
+}
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
+    aboutMe: string
+}
 export type ProfileReducerType =
     | ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>

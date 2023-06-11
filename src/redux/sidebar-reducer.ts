@@ -1,13 +1,4 @@
-import {ActionsTypes} from './redux-store';
-
-type InitialStateSidebarReducerType = {
-    friends: FriendsType[]
-}
-
-type FriendsType = {
-    id: number
-    name: string
-}
+import {ActionsTypes} from './redux-store'
 
 const initialState: InitialStateSidebarReducerType  = {
     friends: [
@@ -19,4 +10,12 @@ const initialState: InitialStateSidebarReducerType  = {
 export const sidebarReducer = (state: InitialStateSidebarReducerType = initialState, action: ActionsTypes)
     : InitialStateSidebarReducerType => {
     return state
+}
+//Types
+type InitialStateSidebarReducerType = {
+    friends: FriendsType[]
+}
+type FriendsType = {
+    id: number
+    name: string
 }

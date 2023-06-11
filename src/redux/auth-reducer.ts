@@ -3,13 +3,6 @@ import {AppThunk} from './redux-store';
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-
-export type InitialUsersReducerStateType = {
-    userId: string | null
-    email: string | null
-    login: string | null
-    isAuth: boolean
-}
 const initialState: InitialUsersReducerStateType = {
     userId: null,
     email: null,
@@ -26,7 +19,7 @@ export const authReducer = (state: InitialUsersReducerStateType = initialState, 
             return state
     }
 }
-
+//Actions
 export const setAuthUserData = (userId: string | null, email: string | null, login: string | null, isAuth: boolean) => {
     return {
         type: 'SET_USER_DATA',
@@ -38,7 +31,7 @@ export const setAuthUserData = (userId: string | null, email: string | null, log
         }
     } as const
 }
-
+//Thunks
 export const getAuthUserData = (): AppThunk => async (dispatch) => {
     try {
         let data = await authAPI.getAuthMe()
@@ -75,5 +68,11 @@ export const logout = (): AppThunk => async (dispatch) => {
         console.log(e)
     }
 }
-
+//Types
+export type InitialUsersReducerStateType = {
+    userId: string | null
+    email: string | null
+    login: string | null
+    isAuth: boolean
+}
 export type AuthReducerType = ReturnType<typeof setAuthUserData>

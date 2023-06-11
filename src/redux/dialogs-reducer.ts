@@ -1,15 +1,3 @@
-export type InitialDialogsReducerStateType = {
-    messages: MessageType[]
-    dialogs: DialogItemType[]
-}
-type MessageType = {
-    id: number
-    messageText: string
-}
-type DialogItemType = {
-    id: number
-    name: string
-}
 
 const initialState: InitialDialogsReducerStateType = {
     dialogs: [ // Props Dialogs-DialogsItem
@@ -40,10 +28,22 @@ export const dialogsReducer = (state: InitialDialogsReducerStateType = initialSt
             return state
     }
 }
-
+//Actions
 export const addMessage = (messageText: string) => (
     {type: 'ADD_MESSAGE',
         messageText
     } as const)
-
+//Types
+export type InitialDialogsReducerStateType = {
+    messages: MessageType[]
+    dialogs: DialogItemType[]
+}
+type MessageType = {
+    id: number
+    messageText: string
+}
+type DialogItemType = {
+    id: number
+    name: string
+}
 export type DialogsReducerType = ReturnType<typeof addMessage>
