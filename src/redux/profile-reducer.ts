@@ -27,9 +27,8 @@ export const profileReducer = (state: InitialProfileReducerStateType = initialSt
             return state
     }
 }
-
-export const addPost = (newPostText: string) => ({type: 'ADD_POST', newPostText} as const)
 //Actions
+export const addPost = (newPostText: string) => ({type: 'ADD_POST', newPostText} as const)
 export const setUserProfile = (profile: ProfileType) => {
     return {
         type: 'SET_USER_PROFILE',
