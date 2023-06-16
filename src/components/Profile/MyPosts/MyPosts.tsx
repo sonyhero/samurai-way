@@ -13,12 +13,12 @@ type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
-    const {addPost, profilePage} = props
+    const {addPost, profilePage, deletePost} = props
 
     console.log('render my posts')
 
     const postDataMap = profilePage.posts.map(p =>
-        <Post key={p.id} id={p.id} postText={p.postText} likesCount={p.likesCount}/>
+        <Post key={p.id} id={p.id} postText={p.postText} likesCount={p.likesCount} deletePost={deletePost}/>
     )
 
     const onAddPost = (data: FormAddPostDataType) => {

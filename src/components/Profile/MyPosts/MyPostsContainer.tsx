@@ -1,4 +1,4 @@
-import {addPost, InitialProfileReducerStateType} from '../../../redux/profile-reducer/profile-reducer';
+import {addPost, deletePost, InitialProfileReducerStateType} from '../../../redux/profile-reducer/profile-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
 import {RootReducerType} from '../../../redux/redux-store';
@@ -9,6 +9,7 @@ export type MapStateToPropsType = {
 
 export type MapDispatchToPropsType = {
     addPost: (newPostText: string) => void
+    deletePost: (id: number) => void
 }
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
@@ -18,4 +19,5 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
 
 export const MyPostsContainer = connect(mapStateToProps, {
     addPost,
+    deletePost
 })(MyPosts)

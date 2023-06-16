@@ -1,18 +1,28 @@
 import React from 'react';
 import s from './PostCSS.module.css'
+import {Button} from '../../../common/Button/Button';
 
 type PostsType = {
     id: number
     postText: string
     likesCount: number
+    deletePost: (id: number) => void
 }
-export const Post = (props: PostsType) => {
+export const Post: React.FC<PostsType> = (props) => {
+
+const {id, postText, likesCount, deletePost} = props
+
+    const deletePostHandler = () => {
+        deletePost(id)
+    }
+
     return (
-        <div key={props.id} className={s.item}>
+        <div key={id} className={s.item}>
             <img src="https://i.pinimg.com/736x/11/f7/83/11f78374741b89e4dea99e0b6356ee3c.jpg" alt="itachi logo"/>
-            {props.postText}
+            {postText}
             <div>
-                <span> {props.likesCount} likes</span>
+                <span> {likesCount} likes</span>
+                <Button name={'x'} callback={deletePostHandler} xType={'red'}/>
             </div>
         </div>
     )
