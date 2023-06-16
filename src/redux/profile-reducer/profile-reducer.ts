@@ -1,5 +1,5 @@
-import {AppThunk} from './redux-store';
-import {profileAPI} from '../api/api';
+import {AppThunk} from '../redux-store';
+import {profileAPI} from '../../api/api';
 
 const initialState = {
     posts: [ //Props Profile-MyPosts
@@ -23,6 +23,8 @@ export const profileReducer = (state: InitialProfileReducerStateType = initialSt
         }
         case 'SET_USER_PROFILE_STATUS':
             return {...state, profileStatus: action.payload.status}
+        case 'DELETE_POST':
+            return {...state, posts: state.posts.filter(p=> p.id !== action.id)}
         default:
             return state
     }
@@ -43,6 +45,12 @@ export const setUserProfileStatus = (status: string) => {
         payload: {
             status
         }
+    } as const
+}
+export const deletePost = (id: number) => {
+    return {
+        type: 'DELETE_POST',
+        id
     } as const
 }
 //Thunks
@@ -91,7 +99,7 @@ export type ProfileType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    contacts: ContactsType
+    contacts?: ContactsType
     photos: PhotosType
     aboutMe: string
 }
@@ -99,3 +107,4 @@ export type ProfileReducerType =
     | ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setUserProfileStatus>
+    | ReturnType<typeof deletePost>

@@ -7,7 +7,7 @@ import {
     ProfileType,
     updateProfileStatus,
     setUserProfile
-} from '../../redux/profile-reducer';
+} from '../../redux/profile-reducer/profile-reducer';
 import {RootReducerType} from '../../redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
