@@ -1,7 +1,7 @@
 import React, {ComponentType} from 'react';
 import './App.css';
 import {Navbar} from './components/Navbar/Navbar';
-import {Route, withRouter} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
@@ -31,14 +31,19 @@ class App extends React.Component<AppPropsType> {
                     <HeaderContainer/>
                     <Navbar/>
                     <div className="app-wrapper-content">
-                        <Route path="/dialogs" render={() => <DialogsContainer
-                        />}/>
-                        <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
-                        <Route path="/users" render={() => <UsersContainer/>}/>
-                        <Route path="/news" render={() => <News/>}/>
-                        <Route path="/music" render={() => <Music/>}/>
-                        <Route path="/settings" render={() => <Settings/>}/>
-                        <Route path="/login" render={() => <Login/>}/>
+                        <Switch>
+                            <Route path="/dialogs" render={() => <DialogsContainer
+                            />}/>
+                            <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                            <Route path="/users" render={() => <UsersContainer/>}/>
+                            <Route path="/news" render={() => <News/>}/>
+                            <Route path="/music" render={() => <Music/>}/>
+                            <Route path="/settings" render={() => <Settings/>}/>
+                            <Route path="/login" render={() => <Login/>}/>
+                            <Route exact path="/" render={() => <ProfileContainer/>}/>
+                            <Route path="/login" render={() => <Login/>}/>
+                            <Route path='*' render={() => <h1>404: PAGE NOT FOUND</h1>} />
+                        </Switch>
                     </div>
                 </div>
             )
