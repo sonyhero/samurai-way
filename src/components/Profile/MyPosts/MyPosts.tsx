@@ -1,17 +1,12 @@
-import React from 'react';
+import React, {memo} from 'react';
 import s from './MyPostsCSS.module.css'
 import {Post} from './Post/Post';
 import {MapDispatchToPropsType, MapStateToPropsType} from './MyPostsContainer';
 import {AddPostReduxForm, FormAddPostDataType} from './AddPostForm';
 
-// type MyPostsPropsType = {
-//     addPost: (data: string) => void
-//     profilePage: InitialProfileReducerStateType
-// }
-
 type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
+export const MyPosts: React.FC<MyPostsPropsType> = memo((props) => {
 
     const {addPost, profilePage, deletePost} = props
 
@@ -43,4 +38,4 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
             </div>
         </div>
     )
-}
+})

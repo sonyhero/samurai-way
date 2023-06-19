@@ -46,7 +46,6 @@ const Login: React.FC<LoginPropsType> = (props) => {
         login(email, password, rememberMe)
     }
 
-
     return (isAuth)
         ? <Redirect to={'/profile'}/>
         : <div>

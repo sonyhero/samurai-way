@@ -18,7 +18,8 @@ import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {compose} from 'redux';
 import {
-    getCurrentPage, getFollowingInProgress,
+    getCurrentPage,
+    getFollowingInProgress,
     getIsFetching,
     getPageSize,
     getTotalUsersCount,
@@ -74,8 +75,7 @@ export const UsersContainer = compose<ComponentType>(
             requestUsers,
             followUsers,
             unFollowUsers
-        }),
-    // withAuthRedirect
+        })
 )(UsersAPIComponent)
 //Types
 type MapDispatchToPropsType = {
@@ -99,16 +99,3 @@ type MapStateToPropsType = {
     followingInProgress: number[]
 }
 export type UsersAPIComponentType = MapStateToPropsType & MapDispatchToPropsType
-// type UsersAPIComponentType = {
-//     follow: (userId: number) => void
-//     unFollow: (userId: number) => void
-//     setUsers: (users: UsersType[]) => void
-//     setCurrentPage: (currentPage: number) => void
-//     setUsersTotalCount: (totalUsersCount: number) => void
-//     toggleIsFetching: (isFetching: boolean) => void
-//     users: UsersType[]
-//     pageSize: number
-//     totalUsersCount: number
-//     currentPage: number
-//     isFetching: boolean
-// }

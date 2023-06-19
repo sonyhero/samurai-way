@@ -4,19 +4,6 @@ import userPhoto from '../../assets/img/user.png';
 import {NavLink} from 'react-router-dom';
 import {UsersAPIComponentType} from './UsersContainer';
 
-// type UsersPropsType = {
-//     totalUsersCount: number
-//     pageSize: number
-//     currentPage: number
-//     follow: (userId: number) => void
-//     unFollow: (userId: number) => void
-//     users: UsersType[]
-//     onPageChanged: (pageNumber: number) => void
-//     followingInProgress: number[]
-//     followUsers: (userId: number) => void
-//     unFollowUsers: (userId: number) => void
-// }
-
 type UsersProps = {
     onPageChanged: (pageNumber: number) => void
 }
@@ -50,31 +37,6 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                       : s.usualSpan
                   }> {p} </span>)
     })
-
-    // const changeFollow = (userId: number) => {
-    //     toggleFollowingProgress(true, userId)
-    //     usersAPI.followUsers(userId)
-    //         // lesson62
-    //         .then(data => {
-    //             if (data.resultCode === 0) {
-    //                 follow(userId)
-    //             }
-    //             toggleFollowingProgress(false, userId)
-    //         })
-    // }
-
-    // const changeUnFollow = (userId: number) => {
-    //     toggleFollowingProgress(true, userId)
-    //     usersAPI.unFollowUsers(userId)
-    //         // lesson62
-    //         .then(data => {
-    //             if (data.resultCode === 0) {
-    //                 unFollow(userId)
-    //             }
-    //             toggleFollowingProgress(false, userId)
-    //         })
-    //
-    // }
 
     const changeFollow = (userId: number) => {
         followUsers(userId)

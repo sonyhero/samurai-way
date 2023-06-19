@@ -51,17 +51,6 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
     render() {
         return (
             <>
-                {/*{!this.state.editMode*/}
-                {/*    ? <div>*/}
-                {/*    <span onDoubleClick={this.activateEditMode}>*/}
-                {/*        {this.props.status ? this.props.status : 'Hello'}*/}
-                {/*    </span></div>*/}
-                {/*    : <div>*/}
-                {/*        <input autoFocus*/}
-                {/*               onBlur={this.deActivateEditMode} value={this.props.status ? this.props.status : 'Hello'}*/}
-                {/*        /></div>*/}
-                {/*}*/}
-
                 {!this.state.editMode
                     ? <div>
                     <span onDoubleClick={this.activateEditMode}>
@@ -75,7 +64,6 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
                         /></div>
                 }
             </>
-            // <EditableSpan title={this.props.status}/>
         )
     }
 }

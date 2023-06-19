@@ -23,8 +23,6 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
 }
 
 export const HeaderContainer = connect(mapStateToProps, {
-    // setAuthUserData,
-    // getAuthUserData,
     logout
 })(HeaderAPIComponent)
 //Types
