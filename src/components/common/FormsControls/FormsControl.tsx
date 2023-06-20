@@ -20,9 +20,9 @@ type FormControlType = {
 
 export const FormControl: React.FC<FormControlType> = (props) => {
 
-    const {input, meta, children, ...restProps} = props
+    const {input, meta: {touched, error}, children, ...restProps} = props
 
-    const isError = meta.touched && meta.error
+    const isError = touched && error
     const finalClassName = `${s.formControl} ${isError
         ? s.error
         : ''}`
@@ -31,7 +31,7 @@ export const FormControl: React.FC<FormControlType> = (props) => {
         <div className={finalClassName}>
             <div>{children}</div>
             <div>
-                {isError && <span>{meta.error}</span>}
+                {isError && <span>{error}</span>}
             </div>
         </div>
     )

@@ -3,6 +3,7 @@ import s from './UsersCSS.module.css';
 import userPhoto from '../../assets/img/user.png';
 import {NavLink} from 'react-router-dom';
 import {UsersAPIComponentType} from './UsersContainer';
+import {Pagination} from '../common/Pagination/Pagination';
 
 type UsersProps = {
     onPageChanged: (pageNumber: number) => void
@@ -21,22 +22,6 @@ export const Users: React.FC<UsersPropsType> = (props) => {
         followUsers,
         unFollowUsers
     } = props
-
-    const pagesCount = Math.ceil(totalUsersCount / pageSize)
-
-    let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
-    const mappedPages = pages.map((p, index) => {
-        return (
-            <span key={index}
-                  onClick={() => onPageChanged(p)}
-                  className={(currentPage === p)
-                      ? s.selectedPage
-                      : s.usualSpan
-                  }> {p} </span>)
-    })
 
     const changeFollow = (userId: number) => {
         followUsers(userId)
@@ -76,7 +61,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
     return (
         <div>
-            {mappedPages}
+            <Pagination pageSize={pageSize} totalUsersCount={totalUsersCount} currentPage={currentPage} onPageChanged={onPageChanged}/>
             {mappedUsers}
         </div>
     )
