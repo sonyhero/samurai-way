@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './FormsControls.module.css'
+import {Field} from 'redux-form';
 
 
 type FormControlType = {
@@ -52,4 +53,18 @@ export const Input: React.FC<FormControlType> = (props) => {
         <FormControl {...props}>
             <input {...input} {...restProps} />
         </FormControl>)
+}
+
+//Рефакторинг урок 90 - функция используется в компоненте Login
+export const FieldCreator = (name: string, placeholder: string, validate: any[], component: React.FC<FormControlType>, props?: {
+    type: string
+}, text: string = '') => {
+    return (
+        <div>
+            <Field name={name} placeholder={placeholder} component={component}
+                   validate={validate}
+                   {...props}
+            />{text}
+        </div>
+    )
 }
