@@ -27,12 +27,12 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
             <div className={s.descriptionBlock}>
                 {(!profile)
                     ? <Preloader/>
-                    : <img src={profile.photos.large} alt={"profile"}/>
+                    : <img src={profile.photos.large} alt={'profile'}/>
                 }
                 ava+description
             </div>
             Status:<ProfileStatusUseState status={profileStatus}
-                                  updateProfileStatus={updateProfileStatus}
+                                          updateProfileStatus={updateProfileStatus}
         />
         </div>
     )

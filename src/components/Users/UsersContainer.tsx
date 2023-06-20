@@ -12,7 +12,7 @@ import {
     toggleIsFetching,
     unFollow,
     unFollowUsers,
-    UsersType
+    UserType
 } from './users-reducer';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
@@ -29,11 +29,13 @@ import {
 export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.requestUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.requestUsers(pageNumber, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.requestUsers(pageNumber, pageSize)
     }
 
     render() {
@@ -81,7 +83,7 @@ export const UsersContainer = compose<ComponentType>(
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void
-    setUsers: (users: UsersType[]) => void
+    setUsers: (users: UserType[]) => void
     setCurrentPage: (currentPage: number) => void
     setUsersTotalCount: (totalUsersCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
@@ -91,7 +93,7 @@ type MapDispatchToPropsType = {
     unFollowUsers: (userId: number) => void
 }
 type MapStateToPropsType = {
-    users: UsersType[]
+    users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number

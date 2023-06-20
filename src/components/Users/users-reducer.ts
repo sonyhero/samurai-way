@@ -74,7 +74,7 @@ export const unFollow = (userId: number) => {
         }
     } as const
 }
-export const setUsers = (users: UsersType[]) => {
+export const setUsers = (users: UserType[]) => {
     return {
         type: 'SET_USERS',
         payload: {
@@ -174,7 +174,7 @@ export const unFollowUsers = (userId: number) => async (dispatch: Dispatch) => {
     // }
 }
 //Types
-export type UsersType = {
+export type UserType = {
     id: number
     photos: PhotosType
     followed: boolean
@@ -191,7 +191,7 @@ type PhotosType = {
     large: any
 }
 export type InitialUsersReducerStateType = {
-    users: UsersType[]
+    users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number

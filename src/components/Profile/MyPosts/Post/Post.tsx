@@ -22,7 +22,7 @@ const {id, postText, likesCount, deletePost} = props
             {postText}
             <div>
                 <span> {likesCount} likes</span>
-                <Button name={'x'} callback={deletePostHandler} xType={'red'}/>
+                <Button name={'x'} callback={deletePostHandler} xType={'delete'}/>
             </div>
         </div>
     )

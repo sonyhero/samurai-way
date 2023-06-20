@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {ProfileType} from '../components/Profile/profile-reducer/profile-reducer';
-import {UsersType} from '../components/Users/users-reducer';
+import {UserType} from '../components/Users/users-reducer';
 
 const instance = axios.create({
     withCredentials: true,
@@ -17,7 +17,7 @@ export type ResponseType<D = {}> = {
 }
 
 export type UsersResponseDataType = {
-    items: UsersType[]
+    items: UserType[]
     totalCount: number
     error: string
 }
