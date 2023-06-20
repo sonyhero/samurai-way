@@ -29,7 +29,7 @@ const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
             {/*Рефакторинг*/}
             {FieldCreator('email', 'Email', [required], Input)}
             {FieldCreator('password', 'Password', [required], Input, {type: 'password'})}
-            {FieldCreator('rememberMe', '', [required], Input, {type: 'checkbox'}, 'rememberMe')}
+            {FieldCreator('rememberMe', '', [], Input, {type: 'checkbox'}, 'rememberMe')}
             {/*//--------------------------------------------------------*/}
 
             {props.error && <div className={s.summeryError}>{props.error}</div>}
