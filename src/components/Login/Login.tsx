@@ -3,11 +3,11 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControl";
 import {required} from "../../utils/validators";
 import {connect} from "react-redux";
-import {login} from "../../redux/auth-reducer";
-import {RootReducerType} from "../../redux/redux-store";
+import {login} from "./auth-reducer";
+import {RootReducerType} from "../../app/store";
 import {Redirect} from "react-router-dom";
 import s from "./LoginCSS.module.css";
-import {getIsAuth} from '../../redux/selectors/auth-selector';
+import {getIsAuth} from '../../app/selectors/auth-selector';
 
 const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
     return (

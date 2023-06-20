@@ -1,4 +1,4 @@
-import {RootReducerType} from '../redux-store';
+import {RootReducerType} from '../store';
 
 export const getUserId = (state: RootReducerType) => state.authReducer.userId
 export const getEmail = (state: RootReducerType) => state.authReducer.email

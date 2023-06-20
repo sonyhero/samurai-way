@@ -1,4 +1,4 @@
-import {usersAPI} from '../api/api';
+import {ResponseType, usersAPI} from '../../api/api';
 import {Dispatch} from 'redux';
 
 const initialState: InitialUsersReducerStateType = {
@@ -15,21 +15,24 @@ export const usersReducer = (state: InitialUsersReducerStateType = initialState,
     switch (action.type) {
         case 'FOLLOW':
             return {
-                ...state, users: state.users.map(el => el.id === action.payload.userId
+                ...state,
+                // users: updateObjectInArray(state.users, action.payload.userId, 'id', {followed: true} )
+                users: state.users.map(el => el.id === action.payload.userId
                     ? {...el, followed: true}
                     : el
                 )
             }
         case 'UNFOLLOW':
             return {
-                ...state, users: state.users.map(el => el.id === action.payload.userId
+                ...state,
+                // users: updateObjectInArray(state.users, action.payload.userId, 'id', {followed: false} )
+                users: state.users.map(el => el.id === action.payload.userId
                     ? {...el, followed: false}
                     : el
                 )
             }
         case 'SET_USERS':
             return {
-                // ...state, users: [...state.users, ...action.payload.users]
                 ...state, users: action.payload.users
             }
         case 'SET_CURRENT_PAGE':
@@ -123,12 +126,17 @@ export const requestUsers = (page: number, pageSize: number) => (dispatch: Dispa
         dispatch(setUsersTotalCount(data.totalCount / 200))
     })
 }
-export const followUsers = (userId: number) => async (dispatch: Dispatch) => {
+
+//Рефакторинг выпуск 90
+const followUnfollowUsers = async (
+    dispatch: Dispatch,
+    userId: number, actionCreator: (userId: number) => ReturnType<typeof follow> | ReturnType<typeof unFollow>,
+    apiMethod: (userId: number) => Promise<ResponseType>) => {
     try {
         dispatch(toggleFollowingProgress(true, userId))
-        let data = await usersAPI.followUsers(userId)
+        let data = await apiMethod(userId)
         if (data.resultCode === 0) {
-            dispatch(follow(userId))
+            dispatch(actionCreator(userId))
         }
     } catch (e) {
         console.log(e)
@@ -136,18 +144,34 @@ export const followUsers = (userId: number) => async (dispatch: Dispatch) => {
         dispatch(toggleFollowingProgress(false, userId))
     }
 }
+
+export const followUsers = (userId: number) => async (dispatch: Dispatch) => {
+    await followUnfollowUsers(dispatch, userId, follow, usersAPI.followUsers.bind(usersAPI))
+    // try {
+    //     dispatch(toggleFollowingProgress(true, userId))
+    //     let data = await usersAPI.followUsers(userId)
+    //     if (data.resultCode === 0) {
+    //         dispatch(follow(userId))
+    //     }
+    // } catch (e) {
+    //     console.log(e)
+    // } finally {
+    //     dispatch(toggleFollowingProgress(false, userId))
+    // }
+}
 export const unFollowUsers = (userId: number) => async (dispatch: Dispatch) => {
-    try {
-        dispatch(toggleFollowingProgress(true, userId))
-        let data = await usersAPI.unFollowUsers(userId)
-        if (data.resultCode === 0) {
-            dispatch(unFollow(userId))
-        }
-    } catch (e) {
-        console.log(e)
-    } finally {
-        dispatch(toggleFollowingProgress(false, userId))
-    }
+    await followUnfollowUsers(dispatch, userId, unFollow, usersAPI.unFollowUsers.bind(usersAPI))
+    // try {
+    //     dispatch(toggleFollowingProgress(true, userId))
+    //     let data = await usersAPI.unFollowUsers(userId)
+    //     if (data.resultCode === 0) {
+    //         dispatch(unFollow(userId))
+    //     }
+    // } catch (e) {
+    //     console.log(e)
+    // } finally {
+    //     dispatch(toggleFollowingProgress(false, userId))
+    // }
 }
 //Types
 export type UsersType = {

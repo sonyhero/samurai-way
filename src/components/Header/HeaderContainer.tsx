@@ -1,8 +1,8 @@
 import React from 'react';
 import {Header} from './Header';
 import {connect} from 'react-redux';
-import {RootReducerType} from '../../redux/redux-store';
-import {logout} from '../../redux/auth-reducer';
+import {RootReducerType} from '../../app/store';
+import {logout} from '../Login/auth-reducer';
 
 export class HeaderAPIComponent extends React.Component<HeaderAPIComponentType> {
 

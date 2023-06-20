@@ -1,5 +1,5 @@
-import {AppThunk} from './redux-store';
-import {getAuthUserData} from './auth-reducer';
+import {AppThunk} from './store';
+import {getAuthUserData} from '../components/Login/auth-reducer';
 
 const initialState: InitialUsersReducerStateType = {
     initialized: false

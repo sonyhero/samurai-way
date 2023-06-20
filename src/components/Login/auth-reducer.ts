@@ -1,6 +1,6 @@
-import {AppThunk} from './redux-store';
+import {AppThunk} from '../../app/store';
 
-import {authAPI} from "../api/api";
+import {authAPI} from "../../api/api";
 import {stopSubmit} from "redux-form";
 
 const initialState: InitialUsersReducerStateType = {

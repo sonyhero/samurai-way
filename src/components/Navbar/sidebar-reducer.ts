@@ -1,4 +1,4 @@
-import {ActionsTypes} from './redux-store'
+import {ActionsTypes} from '../../app/store'
 
 const initialState: InitialStateSidebarReducerType  = {
     friends: [

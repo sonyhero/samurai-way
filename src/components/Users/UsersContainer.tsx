@@ -1,5 +1,5 @@
 import React, {ComponentType} from 'react';
-import {RootReducerType} from '../../redux/redux-store';
+import {RootReducerType} from '../../app/store';
 import {connect} from 'react-redux';
 import {
     follow,
@@ -13,7 +13,7 @@ import {
     unFollow,
     unFollowUsers,
     UsersType
-} from '../../redux/users-reducer';
+} from './users-reducer';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {compose} from 'redux';
@@ -24,7 +24,7 @@ import {
     getPageSize,
     getTotalUsersCount,
     getUsers
-} from '../../redux/selectors/users-selector';
+} from '../../app/selectors/users-selector';
 
 export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
 

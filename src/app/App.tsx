@@ -1,20 +1,20 @@
 import React, {ComponentType} from 'react';
 import './App.css';
-import {Navbar} from './components/Navbar/Navbar';
+import {Navbar} from '../components/Navbar/Navbar';
 import {Route, Switch, withRouter} from 'react-router-dom';
-import {News} from './components/News/News';
-import {Music} from './components/Music/Music';
-import {Settings} from './components/Settings/Settings';
-import {DialogsContainer} from './components/Dialogs/DialogsContainer';
-import {UsersContainer} from './components/Users/UsersContainer';
-import {ProfileContainer} from './components/Profile/ProfileContainer';
-import {HeaderContainer} from './components/Header/HeaderContainer';
-import Login from './components/Login/Login';
+import {News} from '../components/News/News';
+import {Music} from '../components/Music/Music';
+import {Settings} from '../components/Settings/Settings';
+import {DialogsContainer} from '../components/Dialogs/DialogsContainer';
+import {UsersContainer} from '../components/Users/UsersContainer';
+import {ProfileContainer} from '../components/Profile/ProfileContainer';
+import {HeaderContainer} from '../components/Header/HeaderContainer';
+import Login from '../components/Login/Login';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import {initializeApp} from './redux/app-reducer';
-import {RootReducerType} from './redux/redux-store';
-import {Preloader} from './components/common/Preloader/Preloader';
+import {initializeApp} from './app-reducer';
+import {RootReducerType} from './store';
+import {Preloader} from '../components/common/Preloader/Preloader';
 
 class App extends React.Component<AppPropsType> {
 

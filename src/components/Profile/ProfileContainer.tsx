@@ -7,13 +7,13 @@ import {
     ProfileType,
     updateProfileStatus,
     setUserProfile
-} from '../../redux/profile-reducer/profile-reducer';
-import {RootReducerType} from '../../redux/redux-store';
+} from './profile-reducer/profile-reducer';
+import {RootReducerType} from '../../app/store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
-import {getProfile, getStatus} from '../../redux/selectors/profile-selector';
-import {getIsAuth, getUserId} from '../../redux/selectors/auth-selector';
+import {getProfile, getStatus} from '../../app/selectors/profile-selector';
+import {getIsAuth, getUserId} from '../../app/selectors/auth-selector';
 
 export class ProfileAPIComponent extends React.Component<ProfileAPIComponentType> {
 

@@ -1,4 +1,4 @@
-import {RootReducerType} from '../redux-store';
+import {RootReducerType} from '../store';
 
 export const getUsers = (state: RootReducerType) => state.usersReducer.users
 export const getPageSize = (state: RootReducerType) => state.usersReducer.pageSize

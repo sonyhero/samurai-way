@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {ProfileType} from '../redux/profile-reducer/profile-reducer';
-import {UsersType} from '../redux/users-reducer';
+import {ProfileType} from '../components/Profile/profile-reducer/profile-reducer';
+import {UsersType} from '../components/Users/users-reducer';
 
 const instance = axios.create({
     withCredentials: true,
@@ -10,12 +10,11 @@ const instance = axios.create({
     }
 })
 
-type ResponseType<D = {}> = {
+export type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
     data: D
 }
-
 
 export type UsersResponseDataType = {
     items: UsersType[]
@@ -23,13 +22,11 @@ export type UsersResponseDataType = {
     error: string
 }
 
-
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
         return instance.get<UsersResponseDataType>(`users?page=
         ${currentPage}&count=
-        ${pageSize}`
-        )
+        ${pageSize}`)
             .then(res => res.data)
     },
     //----------------------------------------------------

@@ -1,5 +1,5 @@
-import {AppThunk} from '../redux-store';
-import {profileAPI} from '../../api/api';
+import {AppThunk} from '../../../app/store';
+import {profileAPI} from '../../../api/api';
 
 const initialState = {
     posts: [ //Props Profile-MyPosts
