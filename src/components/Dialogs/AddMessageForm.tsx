@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {TextArea} from '../common/FormsControls/FormsControl';
 import {maxLength, minLength, required} from '../../utils/validators';
+import {Button} from '../common/Button/Button';
 
 type FormAddMessageDataType = {
     messageText: string
@@ -22,7 +23,7 @@ const AddMessageForm: React.FC<InjectedFormProps<FormAddMessageDataType>> = (pro
                 // onKeyDown={onKeyDownHandler}
             />
             <br/>
-            <button>Add message</button>
+            <Button name={'Add message'}/>
         </form>
     )
 }

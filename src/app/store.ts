@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from 'redux';
+import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import {dialogsReducer, DialogsReducerType} from '../components/Dialogs/dialogs-reducer';
 import {profileReducer} from '../components/Profile/profile-reducer/profile-reducer';
 import {sidebarReducer} from '../components/Navbar/sidebar-reducer';
@@ -18,7 +18,10 @@ let rootReducer = combineReducers({
         appReducer
     }
 )
-export const store = createStore(rootReducer, applyMiddleware(thunk))
+//Redux dev tools
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 // @ts-ignore
 window.store = store
 // Объединение типов actions

@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {maxLength, minLength, required} from '../../../utils/validators';
 import {TextArea} from '../../common/FormsControls/FormsControl';
+import {Button} from '../../common/Button/Button';
 
 export type FormAddPostDataType = {
     postText: string
@@ -23,7 +24,7 @@ const AddPostForm: React.FC<InjectedFormProps<FormAddPostDataType>> = (props) =>
                 // onKeyDown={onKeyDownHandler}
             />
             <div>
-                <button>Add post</button>
+                <Button name={'Add post'}/>
             </div>
         </form>
     )

@@ -8,6 +8,7 @@ import {RootReducerType} from '../../app/store';
 import {Redirect} from 'react-router-dom';
 import s from './LoginCSS.module.css';
 import {getIsAuth} from '../../app/selectors/auth-selector';
+import {Button} from '../common/Button/Button';
 
 const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
     return (
@@ -34,7 +35,7 @@ const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
 
             {props.error && <div className={s.summeryError}>{props.error}</div>}
             <div>
-                <button>Login</button>
+                <Button name={'Login'}/>
             </div>
         </form>
     )

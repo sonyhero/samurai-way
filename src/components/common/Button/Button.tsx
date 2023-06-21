@@ -4,7 +4,7 @@ import s from './Button.module.css';
 type ButtonType = {
     name: string
     disabled?: boolean
-    callback: () => void
+    callback?: () => void
     className?: boolean
     xType?: string
 }
@@ -21,6 +21,7 @@ export const Button: React.FC<ButtonType> = memo((props) => {
     `
 
     const onClickHandler = () => {
+        if (callback)
         callback()
     }
     return (

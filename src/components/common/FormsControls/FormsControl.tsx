@@ -56,15 +56,19 @@ export const Input: React.FC<FormControlType> = (props) => {
 }
 
 //Рефакторинг урок 90 - функция используется в компоненте Login
-export const FieldCreator = (name: string, placeholder: string, validate: any[], component: React.FC<FormControlType>, props?: {
-    type: string
-}, text: string = '') => {
-    return (
-        <div>
-            <Field name={name} placeholder={placeholder} component={component}
-                   validate={validate}
-                   {...props}
-            />{text}
-        </div>
-    )
-}
+export const FieldCreator =
+    (name: string,
+     placeholder: string,
+     validate: any[],
+     component: React.FC<FormControlType>,
+     props?: { type: string },
+     text: string = '') => {
+        return (
+            <div>
+                <Field name={name} placeholder={placeholder} component={component}
+                       validate={validate}
+                       {...props}
+                />{text}
+            </div>
+        )
+    }
