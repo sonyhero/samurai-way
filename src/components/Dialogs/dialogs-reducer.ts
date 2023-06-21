@@ -18,7 +18,7 @@ export const dialogsReducer = (state: InitialDialogsReducerStateType = initialSt
     : InitialDialogsReducerStateType => {
 
     switch (action.type) {
-        case 'ADD_MESSAGE':
+        case 'DIALOGS/ADD_MESSAGE':
             const newMessageText = action.messageText
             const newMessage: MessageType = {
                 id: new Date().getTime(), messageText: newMessageText
@@ -30,7 +30,7 @@ export const dialogsReducer = (state: InitialDialogsReducerStateType = initialSt
 }
 //Actions
 export const addMessage = (messageText: string) => (
-    {type: 'ADD_MESSAGE',
+    {type: 'DIALOGS/ADD_MESSAGE',
         messageText
     } as const)
 //Types

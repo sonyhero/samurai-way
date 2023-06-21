@@ -13,27 +13,27 @@ const initialState = {
 export const profileReducer = (state: InitialProfileReducerStateType = initialState, action: ProfileReducerType):
     InitialProfileReducerStateType => {
     switch (action.type) {
-        case 'ADD_POST':
+        case 'PROFILE/ADD_POST':
             const newPost: PostsType = {
                 id: new Date().getTime(), postText: action.newPostText, likesCount: 0
             }
             return {...state, posts: [...state.posts, newPost]}
-        case 'SET_USER_PROFILE': {
+        case 'PROFILE/SET_USER_PROFILE': {
             return {...state, profile: action.payload.profile}
         }
-        case 'SET_USER_PROFILE_STATUS':
+        case 'PROFILE/SET_USER_PROFILE_STATUS':
             return {...state, profileStatus: action.payload.status}
-        case 'DELETE_POST':
+        case 'PROFILE/DELETE_POST':
             return {...state, posts: state.posts.filter(p=> p.id !== action.id)}
         default:
             return state
     }
 }
 //Actions
-export const addPost = (newPostText: string) => ({type: 'ADD_POST', newPostText} as const)
+export const addPost = (newPostText: string) => ({type: 'PROFILE/ADD_POST', newPostText} as const)
 export const setUserProfile = (profile: ProfileType) => {
     return {
-        type: 'SET_USER_PROFILE',
+        type: 'PROFILE/SET_USER_PROFILE',
         payload: {
             profile
         }
@@ -41,7 +41,7 @@ export const setUserProfile = (profile: ProfileType) => {
 }
 export const setUserProfileStatus = (status: string) => {
     return {
-        type: 'SET_USER_PROFILE_STATUS',
+        type: 'PROFILE/SET_USER_PROFILE_STATUS',
         payload: {
             status
         }
@@ -49,7 +49,7 @@ export const setUserProfileStatus = (status: string) => {
 }
 export const deletePost = (id: number) => {
     return {
-        type: 'DELETE_POST',
+        type: 'PROFILE/DELETE_POST',
         id
     } as const
 }

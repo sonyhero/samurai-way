@@ -13,7 +13,7 @@ const initialState: InitialUsersReducerStateType = {
 export const authReducer = (state: InitialUsersReducerStateType = initialState, action: AuthReducerType):
     InitialUsersReducerStateType => {
     switch (action.type) {
-        case 'SET_USER_DATA':
+        case 'AUTH/SET_USER_DATA':
             return {...state, ...action.payload}
         default:
             return state
@@ -22,7 +22,7 @@ export const authReducer = (state: InitialUsersReducerStateType = initialState, 
 //Actions
 export const setAuthUserData = (userId: string | null, email: string | null, login: string | null, isAuth: boolean) => {
     return {
-        type: 'SET_USER_DATA',
+        type: 'AUTH/SET_USER_DATA',
         payload: {
             userId,
             email,
