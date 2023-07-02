@@ -1,7 +1,7 @@
 import React, {ComponentType} from 'react';
 import './App.css';
 import {Navbar} from '../components/Navbar/Navbar';
-import {Route, Switch, withRouter} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, withRouter} from 'react-router-dom';
 import {News} from '../components/News/News';
 import {Music} from '../components/Music/Music';
 import {Settings} from '../components/Settings/Settings';
@@ -10,10 +10,10 @@ import {UsersContainer} from '../components/Users/UsersContainer';
 import {ProfileContainer} from '../components/Profile/ProfileContainer';
 import {HeaderContainer} from '../components/Header/HeaderContainer';
 import Login from '../components/Login/Login';
-import {connect} from 'react-redux';
+import {connect, Provider} from 'react-redux';
 import {compose} from 'redux';
 import {initializeApp} from './app-reducer';
-import {RootReducerType} from './store';
+import {RootReducerType, store} from './store';
 import {Preloader} from '../components/common/Preloader/Preloader';
 
 class App extends React.Component<AppPropsType> {
@@ -42,7 +42,7 @@ class App extends React.Component<AppPropsType> {
                             <Route path="/login" render={() => <Login/>}/>
                             <Route exact path="/" render={() => <ProfileContainer/>}/>
                             <Route path="/login" render={() => <Login/>}/>
-                            <Route path='*' render={() => <h1>404: PAGE NOT FOUND</h1>} />
+                            <Route path="*" render={() => <h1>404: PAGE NOT FOUND</h1>}/>
                         </Switch>
                     </div>
                 </div>
@@ -56,18 +56,22 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     }
 }
 
-export default compose<ComponentType>(
+const AppContainer = compose<ComponentType>(
     withRouter,
     connect(mapStateToProps, {initializeApp}))(App)
+
+export const AppMain = () => <BrowserRouter>
+    <Provider store={store}>
+        <AppContainer/>
+    </Provider>
+</BrowserRouter>
 
 type MapStateToPropsType = {
     initialized: boolean
 }
-
 type MapDispatchToPropsType = {
     initializeApp: () => void
 }
-
 type AppPropsType = MapDispatchToPropsType & MapStateToPropsType
 
 
