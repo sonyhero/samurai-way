@@ -122,8 +122,7 @@ export const requestUsers = (page: number, pageSize: number) => (dispatch: Dispa
     usersAPI.getUsers(page, pageSize).then(data => {
         dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
-        // Засетал тотал каунт разделенный на 200 так как очень много данных
-        dispatch(setUsersTotalCount(data.totalCount / 200))
+        dispatch(setUsersTotalCount(data.totalCount))
     })
 }
 

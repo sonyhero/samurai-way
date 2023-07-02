@@ -32,8 +32,13 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
     return (
         <div>
-            <Pagination pageSize={pageSize} totalUsersCount={totalUsersCount} currentPage={currentPage}
-                        onPageChanged={onPageChanged}/>
+            <Pagination
+                pageSize={pageSize}
+                totalItemsCount={totalUsersCount}
+                currentPage={currentPage}
+                onPageChanged={onPageChanged}
+                portionSize={10}
+            />
             {mappedUsers}
         </div>
     )
