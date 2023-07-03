@@ -45,7 +45,7 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     }
 }
 
-export const ProfileContainer = compose<ComponentType>(
+export default compose<ComponentType>(
     connect(mapStateToProps,
         {setUserProfile, getProfileData, getProfileStatus, updateProfileStatus}),
     withRouter,

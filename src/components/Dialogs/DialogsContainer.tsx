@@ -13,7 +13,7 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     }
 }
 
-export const DialogsContainer = compose<ComponentType>(
+export default compose<ComponentType>(
     connect(mapStateToProps, {
         addMessage
     }),

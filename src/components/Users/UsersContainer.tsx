@@ -64,7 +64,7 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     }
 }
 
-export const UsersContainer = compose<ComponentType>(
+export default compose<ComponentType>(
     connect(mapStateToProps,
         {
             follow,
