@@ -6,7 +6,27 @@ const initialState = {
         {id: 1, postText: 'Hi, how are you?', likesCount: 23},
         {id: 2, postText: 'It\'s my first post!', likesCount: 100}
     ],
-    profile: null,
+    profile: {
+        aboutMe: '',
+        contacts: {
+            facebook: '',
+            website: '',
+            vk: '',
+            twitter: '',
+            instagram: '',
+            youtube: '',
+            github: '',
+            mainLink: '',
+        },
+        lookingForAJob: true,
+        lookingForAJobDescription: '',
+        fullName: '',
+        userId: 28769,
+        photos: {
+            small: '',
+            large: '',
+        }
+    },
     profileStatus: ''
 }
 
@@ -24,7 +44,9 @@ export const profileReducer = (state: InitialProfileReducerStateType = initialSt
         case 'PROFILE/SET_USER_PROFILE_STATUS':
             return {...state, profileStatus: action.payload.status}
         case 'PROFILE/DELETE_POST':
-            return {...state, posts: state.posts.filter(p=> p.id !== action.id)}
+            return {...state, posts: state.posts.filter(p => p.id !== action.id)}
+        case 'PROFILE/SAVE_PHOTO':
+            return {...state, profile: {...state.profile, photos: action.photos}}
         default:
             return state
     }
@@ -53,6 +75,12 @@ export const deletePost = (id: number) => {
         id
     } as const
 }
+export const savePhotoSuccess = (photos: PhotosType) => {
+    return {
+        type: 'PROFILE/SAVE_PHOTO',
+        photos
+    } as const
+}
 //Thunks
 export const getProfileData = (userId: string): AppThunk => async (dispatch) => {
     let data = await profileAPI.getProfile(userId)
@@ -68,11 +96,17 @@ export const updateProfileStatus = (status: string): AppThunk => async (dispatch
         dispatch(setUserProfileStatus(status))
     }
 }
+export const savePhoto = (file: File): AppThunk => async (dispatch) => {
+    let data = await profileAPI.updatePhoto(file)
+    if (data.resultCode === 0) {
+        dispatch(savePhotoSuccess(data.data.photos))
+    }
+}
 //Types
 export type InitialProfileReducerStateType = {
     // newPostText: string
     posts: PostsType[]
-    profile: ProfileType | null
+    profile: ProfileType
     profileStatus: string
 }
 type PostsType = {
@@ -90,7 +124,7 @@ type ContactsType = {
     github: string
     mainLink: string
 }
-type PhotosType = {
+export type PhotosType = {
     small: string
     large: string
 }
@@ -108,3 +142,4 @@ export type ProfileReducerType =
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setUserProfileStatus>
     | ReturnType<typeof deletePost>
+    | ReturnType<typeof savePhotoSuccess>

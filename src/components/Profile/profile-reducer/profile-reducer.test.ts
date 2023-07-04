@@ -15,9 +15,29 @@ describe('profileReducer', () => {
                 {id: 1, postText: 'Hi, how are you?', likesCount: 23},
                 {id: 2, postText: 'It\'s my first post!', likesCount: 100},
             ],
-            profile: null,
-            profileStatus: '',
-        };
+            profile: {
+                aboutMe: '',
+                contacts: {
+                    facebook: '',
+                    website: '',
+                    vk: '',
+                    twitter: '',
+                    instagram: '',
+                    youtube: '',
+                    github: '',
+                    mainLink: '',
+                },
+                lookingForAJob: true,
+                lookingForAJobDescription: '',
+                fullName: '',
+                userId: 28769,
+                photos: {
+                    small: '',
+                    large: '',
+                }
+            },
+            profileStatus: ''
+        }
     });
 
     it('should add new post to state', () => {

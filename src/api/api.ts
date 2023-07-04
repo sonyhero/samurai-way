@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ProfileType} from '../components/Profile/profile-reducer/profile-reducer';
+import {PhotosType, ProfileType} from '../components/Profile/profile-reducer/profile-reducer';
 import {UserType} from '../components/Users/users-reducer';
 
 const instance = axios.create({
@@ -64,9 +64,17 @@ export const profileAPI = {
     updateStatus(status: string) {
         return instance.put<ResponseType>('profile/status', {status})
             .then(res => res.data)
+    },
+    updatePhoto(file: File) {
+        const formData = new FormData()
+        formData.append('image', file)
+        return instance.post<ResponseType<{ photos: PhotosType }>>(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(res => res.data)
     }
 }
-
 type AuthResponseData = {
     id: number
     email: string

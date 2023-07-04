@@ -6,7 +6,7 @@ import {
     getProfileStatus,
     ProfileType,
     updateProfileStatus,
-    setUserProfile
+    setUserProfile, savePhoto
 } from './profile-reducer/profile-reducer';
 import {RootReducerType} from '../../app/store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
@@ -17,7 +17,7 @@ import {getIsAuth, getUserId} from '../../app/selectors/auth-selector';
 
 export class ProfileAPIComponent extends React.Component<ProfileAPIComponentType> {
 
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
             if (this.props.authorizedUserId !== null) {
@@ -29,9 +29,19 @@ export class ProfileAPIComponent extends React.Component<ProfileAPIComponentType
         this.props.getProfileStatus(userId)
     }
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: ProfileAPIComponentType) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.refreshProfile()
+        }
+    }
+
     render() {
         return (
-            <Profile {...this.props}/>
+            <Profile {...this.props} isOwner={!this.props.match.params.userId}/>
         )
     }
 }
@@ -47,7 +57,7 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
 
 export default compose<ComponentType>(
     connect(mapStateToProps,
-        {setUserProfile, getProfileData, getProfileStatus, updateProfileStatus}),
+        {setUserProfile, getProfileData, getProfileStatus, updateProfileStatus, savePhoto}),
     withRouter,
     withAuthRedirect
 )(ProfileAPIComponent)
@@ -63,6 +73,7 @@ type MapDispatchToPropsType = {
     getProfileData: (userId: string) => void
     getProfileStatus: (userId: string) => void
     updateProfileStatus: (status: string) => void
+    savePhoto: (value: File) => void
 }
 type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType
 type MatchParamsType = {
