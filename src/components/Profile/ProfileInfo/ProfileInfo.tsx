@@ -1,12 +1,12 @@
 import React, {ChangeEvent} from 'react';
 import s from './ProfileInfoCSS.module.css'
-import {Preloader} from '../../common/Preloader/Preloader';
 import {ProfileType} from '../profile-reducer/profile-reducer';
 import {ProfileStatusUseState} from './ProfileStatusUseState';
-import user from '../../../assets/img/user.png'
+import {ProfileDescription} from '../ProfileDescription/ProfileDescription';
+import {ProfileAvatar} from '../ProfileAvatar/ProfileAvatar';
 
 type ProfileInfoPropsType = {
-    profile: ProfileType | null
+    profile: ProfileType
     profileStatus: string
     updateProfileStatus: (status: string) => void
     isOwner: boolean
@@ -16,9 +16,6 @@ type ProfileInfoPropsType = {
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
 
     const {profile, profileStatus, updateProfileStatus, isOwner, savePhoto} = props
-    // if(!props.profile){
-    //     return <Preloader/>
-    // }
 
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
@@ -34,15 +31,11 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
                     alt="itachi content" width="600px" height="200px"/>
             </div>
             <div className={s.descriptionBlock}>
-                <div>
-                    {(!profile)
-                        ? <Preloader/>
-                        : <img src={profile.photos.large || user} alt={'profile'}/>
-                    }</div>
-                ava+description
+                <ProfileAvatar isAvatar={!profile} photos={profile.photos}/>
                 <div>
                     {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
                 </div>
+                <ProfileDescription profile={profile}/>
             </div>
             Status:<ProfileStatusUseState status={profileStatus}
                                           updateProfileStatus={updateProfileStatus}

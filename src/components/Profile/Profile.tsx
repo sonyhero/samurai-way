@@ -4,7 +4,7 @@ import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 import {ProfileType} from './profile-reducer/profile-reducer';
 
 type ProfilePropsType = {
-    profile: ProfileType | null
+    profile: ProfileType
     profileStatus: string
     updateProfileStatus: (status: string) => void
     isOwner: boolean

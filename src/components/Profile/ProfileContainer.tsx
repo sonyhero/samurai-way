@@ -63,7 +63,7 @@ export default compose<ComponentType>(
 )(ProfileAPIComponent)
 //Types
 type MapStateToPropsType = {
-    profile: ProfileType | null
+    profile: ProfileType
     profileStatus: string
     authorizedUserId: string | null
     isAuth: boolean
