@@ -1,11 +1,11 @@
 import React from "react";
 import {InjectedFormProps, reduxForm} from "redux-form";
-import {FieldCreator, Input} from "../../common/FormsControls/FormsControl";
+import {fieldCreator, Input} from "../../common/FormsControls/FormsControl";
 import {required} from "../../../utils/validators";
 import s from "../LoginCSS.module.css";
 import {Button} from "../../common/Button/Button";
 
-const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             {/*<div>*/}
@@ -23,9 +23,9 @@ const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
             {/*</div>*/}
 
             {/*Рефакторинг*/}
-            {FieldCreator('email', 'Email', [required], Input)}
-            {FieldCreator('password', 'Password', [required], Input, {type: 'password'})}
-            {FieldCreator('rememberMe', '', [], Input, {type: 'checkbox'}, 'rememberMe')}
+            {fieldCreator('email', 'Email', [required], Input)}
+            {fieldCreator('password', 'Password', [required], Input, {type: 'password'})}
+            {fieldCreator('rememberMe', '', [], Input, {type: 'checkbox'}, 'rememberMe')}
             {/*//--------------------------------------------------------*/}
 
             {props.error && <div className={s.summeryError}>{props.error}</div>}
@@ -36,12 +36,12 @@ const LoginForm: React.FC<InjectedFormProps<FormLoginDataType>> = (props) => {
     )
 }
 
-export const LoginReduxForm = reduxForm<FormLoginDataType>({
+export const LoginReduxForm = reduxForm<LoginFormDataType>({
     form: 'login'
 })(LoginForm)
 
 // Types
-export type FormLoginDataType = {
+export type LoginFormDataType = {
     email: string
     password: string
     rememberMe: boolean

@@ -4,14 +4,14 @@ import {login} from './auth-reducer';
 import {RootReducerType} from '../../app/store';
 import {Redirect} from 'react-router-dom';
 import {getIsAuth} from '../../app/selectors/auth-selector';
-import {FormLoginDataType, LoginReduxForm} from "./LoginForm/LoginForm";
+import {LoginFormDataType, LoginReduxForm} from "./LoginForm/LoginForm";
 
 
 const Login: React.FC<LoginPropsType> = (props) => {
 
     const {login, isAuth} = props
 
-    const onSubmit = (formData: FormLoginDataType) => {
+    const onSubmit = (formData: LoginFormDataType) => {
         const {email, password, rememberMe} = formData
         login(email, password, rememberMe)
     }

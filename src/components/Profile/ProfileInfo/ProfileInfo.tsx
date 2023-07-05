@@ -4,7 +4,7 @@ import {ProfileType} from '../profile-reducer/profile-reducer';
 import {ProfileStatusUseState} from './ProfileStatus/ProfileStatusUseState';
 import {ProfileDescription} from './ProfileDescription/ProfileDescription';
 import {ProfileAvatar} from './ProfileAvatar/ProfileAvatar';
-import {ProfileForm} from "./ProfileForm/ProfileForm";
+import ProfileForm, {ProfileFormType} from "./ProfileForm/ProfileForm";
 
 type ProfileInfoPropsType = {
     profile: ProfileType
@@ -24,6 +24,15 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
             savePhoto(e.target.files[0])
         }
     }
+    const onSetEditModeHandler = () => {
+        setEditMode(true)
+    }
+
+    const onSubmit = (formData: ProfileFormType) => {
+        const {lookingForAJob, fullName, aboutMe} = formData
+        // editProfile(lookingForAJob, fullName, aboutMe)
+    }
+
 
     return (
         <div>
@@ -40,8 +49,12 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
                 </div>
                 <span>------------------</span>
                 {editMode
-                    ?<ProfileForm/>
-                    :<ProfileDescription profile={profile} isOwner={isOwner}/>}
+                    ?<ProfileForm onSubmit={onSubmit}/>
+                    :<ProfileDescription
+                        profile={profile}
+                        isOwner={isOwner}
+                        setEditMode={onSetEditModeHandler}
+                    />}
                 <span>------------------</span>
             </div>
             Status:

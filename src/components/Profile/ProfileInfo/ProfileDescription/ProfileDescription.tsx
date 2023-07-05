@@ -5,13 +5,14 @@ import {Button} from "../../../common/Button/Button";
 type ProfileDescriptionType = {
     profile: ProfileType
     isOwner: boolean
+    setEditMode: () => void
 }
 
-export const ProfileDescription: React.FC<ProfileDescriptionType> = ({profile, isOwner}) => {
+export const ProfileDescription: React.FC<ProfileDescriptionType> = ({profile, isOwner, setEditMode}) => {
 
     return (
         <div>
-            {isOwner && <Button name={'Edit profile'}/>}
+            {isOwner && <Button callback={setEditMode} name={'Edit profile'}/>}
             <div>Full name: {profile.fullName}</div>
             <div>About me: {profile.aboutMe}</div>
             <div>Looking for a job: {profile.lookingForAJob ? 'yes' : ' no'}</div>
