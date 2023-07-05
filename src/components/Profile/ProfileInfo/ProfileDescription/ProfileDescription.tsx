@@ -1,14 +1,17 @@
 import React from 'react';
-import {ProfileType} from '../profile-reducer/profile-reducer';
+import {ProfileType} from '../../profile-reducer/profile-reducer';
+import {Button} from "../../../common/Button/Button";
 
 type ProfileDescriptionType = {
     profile: ProfileType
+    isOwner: boolean
 }
 
-export const ProfileDescription: React.FC<ProfileDescriptionType> = ({profile}) => {
+export const ProfileDescription: React.FC<ProfileDescriptionType> = ({profile, isOwner}) => {
 
     return (
         <div>
+            {isOwner && <Button name={'Edit profile'}/>}
             <div>Full name: {profile.fullName}</div>
             <div>About me: {profile.aboutMe}</div>
             <div>Looking for a job: {profile.lookingForAJob ? 'yes' : ' no'}</div>

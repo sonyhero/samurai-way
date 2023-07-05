@@ -1,5 +1,6 @@
-import {ProfileStatus} from './ProfileStatus';
+
 import {create, ReactTestInstance} from 'react-test-renderer';
+import {ProfileStatus} from "./ProfileStatus";
 
 describe('Profile status component', () => {
 
@@ -10,11 +11,11 @@ describe('Profile status component', () => {
         expect(instance?.props.status).toBe('New status')
     })
 
-    test('after creation <span> should be displayed', () => {
+    test('after creation <span> should be displayed', async () => {
         const component = create(<ProfileStatus status={'New Status'} updateProfileStatus={() => {
         }}/>);
         const root = component.root
-        const span = root.findByType('span')
+        const span = await root.findByType('span')
         expect(span).not.toBe(null)
     })
     test('after creation <input> shouldn\'t be displayed', () => {
@@ -23,20 +24,20 @@ describe('Profile status component', () => {
         const root = component.root
         expect(() => root.findByType('input')).toThrow()
     })
-    test('after creation <span>should contains correct status', () => {
+    test('after creation <span>should contains correct status', async () => {
         const component = create(<ProfileStatus status={'New Status'} updateProfileStatus={() => {
         }}/>);
         const root = component.root
-        const span = root.findByType('span')
+        const span = await root.findByType('span')
         expect(span.children[0]).toBe('New Status')
     })
-    test('input should be displayed in editMode instead of span', () => {
+    test('input should be displayed in editMode instead of span', async () => {
         const component = create(<ProfileStatus status={'New Status'} updateProfileStatus={() => {
         }}/>);
         const root = component.root
-        const span = root.findByType('span')
+        const span = await root.findByType('span')
         span.props.onDoubleClick()
-        const input = root.findByType('input')
+        const input = await root.findByType('input')
         expect(input.props.value).toBe('New Status')
     })
     test('callback should be called', () => {

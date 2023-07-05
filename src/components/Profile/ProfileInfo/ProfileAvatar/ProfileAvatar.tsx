@@ -1,7 +1,7 @@
-import {PhotosType} from '../profile-reducer/profile-reducer';
+import {PhotosType} from '../../profile-reducer/profile-reducer';
 import React from 'react';
-import {Preloader} from '../../common/Preloader/Preloader';
-import user from '../../../assets/img/user.png';
+import {Preloader} from '../../../common/Preloader/Preloader';
+import user from '../../../../assets/img/user.png';
 
 type ProfileAvatarType = {
     isAvatar: boolean
