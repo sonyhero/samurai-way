@@ -1,6 +1,8 @@
 import {AppThunk} from '../../../app/store';
-import {profileAPI} from '../../../api/api';
+import {authAPI, profileAPI} from '../../../api/api';
 import {ProfileFormType} from "../ProfileInfo/ProfileForm/ProfileForm";
+import {stopSubmit} from "redux-form";
+import {getAuthUserData} from "../../Login/auth-reducer";
 
 const initialState = {
     posts: [ //Props Profile-MyPosts
@@ -104,10 +106,18 @@ export const savePhoto = (file: File): AppThunk => async (dispatch) => {
     }
 }
 export const saveProfile = (profile: ProfileFormType): AppThunk => async (dispatch, getState) => {
-    const userId = getState().authReducer.userId
+    try {
+        const userId = getState().authReducer.userId
         const data = await profileAPI.updateProfile(profile)
-    if (data.resultCode === 0) {
-        dispatch(getProfileData(`${userId}`))
+        if (data.resultCode === 0) {
+            dispatch(getProfileData(`${userId}`))
+
+        } else {
+            dispatch(stopSubmit('editProfile', {_error: data.messages[0]}))
+            // dispatch(stopSubmit('editProfile', {'contacts': {_error: data.messages[0]}}))
+        }
+    } catch (e) {
+        console.warn(e)
     }
 }
 //Types
@@ -141,7 +151,7 @@ export type ProfileType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    contacts?: ContactsType
+    contacts: ContactsType
     photos: PhotosType
     aboutMe: string
 }

@@ -71,7 +71,17 @@ describe('profileReducer', () => {
             aboutMe: '',
             photos: {small: '', large: ''},
             lookingForAJob: false,
-            lookingForAJobDescription: ''
+            lookingForAJobDescription: '',
+            contacts: {
+                facebook: '',
+                website: '',
+                vk: '',
+                twitter: '',
+                instagram: '',
+                youtube: '',
+                github: '',
+                mainLink: '',
+            },
         };
         const action = setUserProfile(profile);
         const newState = profileReducer(initialState, action);

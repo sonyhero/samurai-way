@@ -47,12 +47,10 @@ export const login = (email: string, password: string, rememberMe: boolean): App
     try {
         let data = await authAPI.logIn(email, password, rememberMe)
         if (data.resultCode === 0) {
-            await dispatch(getAuthUserData())
+            dispatch(getAuthUserData())
         } else {
-            let errorMessage = data.messages.length > 0
-                ? data.messages[0]
-                : 'Some error'
-            await dispatch(stopSubmit('login', {_error: errorMessage}))
+            let errorMessage = data.messages.length > 0 ? data.messages[0] : 'Some error'
+            dispatch(stopSubmit('login', {_error: errorMessage}))
         }
     } catch (e) {
         console.log(e)

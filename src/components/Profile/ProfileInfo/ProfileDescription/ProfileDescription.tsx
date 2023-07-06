@@ -1,6 +1,7 @@
 import React from 'react';
 import {ProfileType} from '../../profile-reducer/profile-reducer';
 import {Button} from "../../../common/Button/Button";
+import {Contacts} from "./Contacts";
 
 type ProfileDescriptionType = {
     profile: ProfileType
@@ -18,27 +19,23 @@ export const ProfileDescription: React.FC<ProfileDescriptionType> = ({profile, i
             <div>Looking for a job: {profile.lookingForAJob ? 'yes' : ' no'}</div>
             {profile.lookingForAJob &&
                 <div>My professional skills: {profile.lookingForAJobDescription}</div>}
-            <div>Contacts: {profile.contacts && Object.entries(profile.contacts).map((key, index) => {
-                return (
-                    <Contacts
-                        key={index}
-                        title={key[0]}
-                        value={key[1]}
-                    />)
-            })} </div>
+            <div>Contacts: <Contacts/></div>
         </div>
     )
 }
 
+// type ContactsType = {
+//     title: string
+//     value: string
+// }
 
-type ContactsType = {
-    title: string
-    value: string
-}
+// const Contacts = ({title, value}: ContactsType) => {
+//
+//
+//     return (
+//         <div>{title}: {value}</div>
+//     )
+// }
 
-const Contacts = ({title, value}: ContactsType) => {
-    return (
-        <div>{title}: {value}</div>
-    )
-}
+
 
