@@ -4,7 +4,6 @@ import {ProfileFormType} from "../ProfileInfo/ProfileForm/ProfileForm";
 import {stopSubmit} from "redux-form";
 
 const initialState = {
-    profileFormUpdateStatus: null,
     posts: [ //Props Profile-MyPosts
         {id: 1, postText: 'Hi, how are you?', likesCount: 23},
         {id: 2, postText: 'It\'s my first post!', likesCount: 100}
@@ -50,8 +49,6 @@ export const profileReducer = (state: InitialProfileReducerStateType = initialSt
             return {...state, posts: state.posts.filter(p => p.id !== action.id)}
         case 'PROFILE/SAVE_PHOTO':
             return {...state, profile: {...state.profile, photos: action.photos}}
-        case "PROFILE/UPDATE_PROFILE_FORM_STATUS":
-            return {...state, profileFormUpdateStatus: action.value}
         default:
             return state
     }
@@ -119,13 +116,11 @@ export const saveProfile = (profile: ProfileFormType): AppThunk => async (dispat
         const data = await profileAPI.updateProfile(profile)
         if (data.resultCode === 0) {
             dispatch(getProfileData(`${userId}`))
-            dispatch(setProfileUpdateFormStatus('success'))
         } else {
-            dispatch(setProfileUpdateFormStatus(null))
             const key = data.messages[0].match(/(?<=->)[^)]+/)
             key &&
             dispatch(stopSubmit('editProfile', {'contacts': {[key[0].toLocaleLowerCase()]: data.messages[0]}}))
-
+            return Promise.reject(data.messages[0])
         }
     } catch (e) {
         console.warn(e)
@@ -133,7 +128,6 @@ export const saveProfile = (profile: ProfileFormType): AppThunk => async (dispat
 }
 //Types
 export type InitialProfileReducerStateType = {
-    profileFormUpdateStatus: string | null
     posts: PostsType[]
     profile: ProfileType
     profileStatus: string
@@ -172,4 +166,3 @@ export type ProfileReducerType =
     | ReturnType<typeof setUserProfileStatus>
     | ReturnType<typeof deletePost>
     | ReturnType<typeof savePhotoSuccess>
-    | ReturnType<typeof setProfileUpdateFormStatus>

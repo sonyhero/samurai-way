@@ -77,7 +77,7 @@ type MapDispatchToPropsType = {
     getProfileStatus: (userId: string) => void
     updateProfileStatus: (status: string) => void
     savePhoto: (value: File) => void
-    saveProfile: (profile: ProfileFormType) => void
+    saveProfile: (profile: ProfileFormType) => Promise<void | string>
 }
 type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType
 type MatchParamsType = {

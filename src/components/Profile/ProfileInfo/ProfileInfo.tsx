@@ -5,8 +5,6 @@ import {ProfileStatusUseState} from './ProfileStatus/ProfileStatusUseState';
 import {ProfileDescription} from './ProfileDescription/ProfileDescription';
 import {ProfileAvatar} from './ProfileAvatar/ProfileAvatar';
 import ProfileForm, {ProfileFormType} from "./ProfileForm/ProfileForm";
-import {useSelector} from "react-redux";
-import {RootStateType} from "../../../app/store";
 
 type ProfileInfoPropsType = {
     profile: ProfileType
@@ -14,13 +12,13 @@ type ProfileInfoPropsType = {
     updateProfileStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (value: File) => void
-    saveProfile: (profile: ProfileFormType) => void
+    saveProfile: (profile: ProfileFormType) => Promise<void | string>
 }
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
 
     const {profile, profileStatus, updateProfileStatus, isOwner, savePhoto, saveProfile} = props
-    const edit = useSelector<RootStateType>(state => state.profileReducer.profileFormUpdateStatus)
+    // const edit = useSelector<RootStateType>(state => state.profileReducer.profileFormUpdateStatus)
     const [editMode, setEditMode] = useState<boolean>(false)
 
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,8 +31,10 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
     }
 
     const onSubmit = (formData: ProfileFormType) => {
-        saveProfile(formData)
-        edit && setEditMode(false)
+        saveProfile(formData).then(()=>{
+            setEditMode(false)
+        })
+        // edit && setEditMode(false)
     }
 
 
