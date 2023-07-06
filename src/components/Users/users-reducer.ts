@@ -134,7 +134,7 @@ const followUnfollowUsers = async (
     apiMethod: (userId: number) => Promise<ResponseType>) => {
     try {
         dispatch(toggleFollowingProgress(true, userId))
-        let data = await apiMethod(userId)
+        const data = await apiMethod(userId)
         if (data.resultCode === 0) {
             dispatch(actionCreator(userId))
         }

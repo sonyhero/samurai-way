@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfoCSS.module.css'
-import {ProfileType, saveProfile} from '../profile-reducer/profile-reducer';
+import {ProfileType} from '../profile-reducer/profile-reducer';
 import {ProfileStatusUseState} from './ProfileStatus/ProfileStatusUseState';
 import {ProfileDescription} from './ProfileDescription/ProfileDescription';
 import {ProfileAvatar} from './ProfileAvatar/ProfileAvatar';
@@ -17,7 +17,7 @@ type ProfileInfoPropsType = {
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
 
-    const {profile, profileStatus, updateProfileStatus, isOwner, savePhoto} = props
+    const {profile, profileStatus, updateProfileStatus, isOwner, savePhoto, saveProfile} = props
     const [editMode, setEditMode] = useState<boolean>(false)
 
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +31,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
 
     const onSubmit = (formData: ProfileFormType) => {
         saveProfile(formData)
+        setEditMode(false)
     }
 
 
@@ -49,8 +50,8 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
                 </div>
                 <span>------------------</span>
                 {editMode
-                    ?<ProfileForm onSubmit={onSubmit}/>
-                    :<ProfileDescription
+                    ? <ProfileForm initialValues={profile} onSubmit={onSubmit}/>
+                    : <ProfileDescription
                         profile={profile}
                         isOwner={isOwner}
                         setEditMode={onSetEditModeHandler}
@@ -60,7 +61,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
             Status:
             <ProfileStatusUseState status={profileStatus}
                                    updateProfileStatus={updateProfileStatus}
-        />
+            />
             <span>------------------</span>
         </div>
     )

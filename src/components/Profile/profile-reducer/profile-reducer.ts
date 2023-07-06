@@ -82,37 +82,32 @@ export const savePhotoSuccess = (photos: PhotosType) => {
         photos
     } as const
 }
-export const saveProfileSuccess = (profile: ProfileFormType) => {
-    return {
-        type: 'PROFILE/PROFILE',
-        profile
-    } as const
-}
 //Thunks
 export const getProfileData = (userId: string): AppThunk => async (dispatch) => {
-    let data = await profileAPI.getProfile(userId)
+    const data = await profileAPI.getProfile(userId)
     dispatch(setUserProfile(data))
 }
 export const getProfileStatus = (userId: string): AppThunk => async (dispatch) => {
-    let data = await profileAPI.getStatus(userId)
+    const data = await profileAPI.getStatus(userId)
     dispatch(setUserProfileStatus(data))
 }
 export const updateProfileStatus = (status: string): AppThunk => async (dispatch) => {
-    let data = await profileAPI.updateStatus(status)
+    const data = await profileAPI.updateStatus(status)
     if (data.resultCode === 0) {
         dispatch(setUserProfileStatus(status))
     }
 }
 export const savePhoto = (file: File): AppThunk => async (dispatch) => {
-    let data = await profileAPI.updatePhoto(file)
+    const data = await profileAPI.updatePhoto(file)
     if (data.resultCode === 0) {
         dispatch(savePhotoSuccess(data.data.photos))
     }
 }
-export const saveProfile = (profile: ProfileFormType): AppThunk => async (dispatch) => {
-    let data = await profileAPI.updateProfile(profile)
+export const saveProfile = (profile: ProfileFormType): AppThunk => async (dispatch, getState) => {
+    const userId = getState().authReducer.userId
+        const data = await profileAPI.updateProfile(profile)
     if (data.resultCode === 0) {
-        // dispatch(savePhotoSuccess(data.data.photos))
+        dispatch(getProfileData(`${userId}`))
     }
 }
 //Types
