@@ -1,7 +1,9 @@
 import {
-    addPost, deletePost,
+    addPost,
+    deletePost,
     InitialProfileReducerStateType,
-    profileReducer, ProfileType,
+    profileReducer,
+    ProfileType,
     setUserProfile,
     setUserProfileStatus
 } from './profile-reducer';
@@ -11,6 +13,7 @@ describe('profileReducer', () => {
 
     beforeEach(() => {
         initialState = {
+            profileFormUpdateStatus: null,
             posts: [
                 {id: 1, postText: 'Hi, how are you?', likesCount: 23},
                 {id: 2, postText: 'It\'s my first post!', likesCount: 100},

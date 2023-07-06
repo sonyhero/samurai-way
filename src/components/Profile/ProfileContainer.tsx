@@ -5,8 +5,10 @@ import {
     getProfileData,
     getProfileStatus,
     ProfileType,
-    updateProfileStatus,
-    setUserProfile, savePhoto, saveProfile
+    savePhoto,
+    saveProfile,
+    setUserProfile,
+    updateProfileStatus
 } from './profile-reducer/profile-reducer';
 import {RootReducerType} from '../../app/store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
