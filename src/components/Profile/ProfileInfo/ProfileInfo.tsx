@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfoCSS.module.css'
-import {ProfileType} from '../profile-reducer/profile-reducer';
+import {ProfileType, saveProfile} from '../profile-reducer/profile-reducer';
 import {ProfileStatusUseState} from './ProfileStatus/ProfileStatusUseState';
 import {ProfileDescription} from './ProfileDescription/ProfileDescription';
 import {ProfileAvatar} from './ProfileAvatar/ProfileAvatar';
@@ -12,6 +12,7 @@ type ProfileInfoPropsType = {
     updateProfileStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (value: File) => void
+    saveProfile: (profile: ProfileFormType) => void
 }
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
@@ -29,8 +30,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
     }
 
     const onSubmit = (formData: ProfileFormType) => {
-        const {lookingForAJob, fullName, aboutMe} = formData
-        // editProfile(lookingForAJob, fullName, aboutMe)
+        saveProfile(formData)
     }
 
 

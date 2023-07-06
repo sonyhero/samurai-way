@@ -6,7 +6,7 @@ import {
     getProfileStatus,
     ProfileType,
     updateProfileStatus,
-    setUserProfile, savePhoto
+    setUserProfile, savePhoto, saveProfile
 } from './profile-reducer/profile-reducer';
 import {RootReducerType} from '../../app/store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
@@ -14,6 +14,7 @@ import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
 import {getProfile, getStatus} from '../../app/selectors/profile-selector';
 import {getIsAuth, getUserId} from '../../app/selectors/auth-selector';
+import {ProfileFormType} from "./ProfileInfo/ProfileForm/ProfileForm";
 
 export class ProfileAPIComponent extends React.Component<ProfileAPIComponentType> {
 
@@ -57,7 +58,7 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
 
 export default compose<ComponentType>(
     connect(mapStateToProps,
-        {setUserProfile, getProfileData, getProfileStatus, updateProfileStatus, savePhoto}),
+        {setUserProfile, getProfileData, getProfileStatus, updateProfileStatus, savePhoto, saveProfile}),
     withRouter,
     withAuthRedirect
 )(ProfileAPIComponent)
@@ -74,6 +75,7 @@ type MapDispatchToPropsType = {
     getProfileStatus: (userId: string) => void
     updateProfileStatus: (status: string) => void
     savePhoto: (value: File) => void
+    saveProfile: (profile: ProfileFormType) => void
 }
 type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType
 type MatchParamsType = {

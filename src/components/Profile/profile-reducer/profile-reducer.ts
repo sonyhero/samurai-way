@@ -1,5 +1,6 @@
 import {AppThunk} from '../../../app/store';
 import {profileAPI} from '../../../api/api';
+import {ProfileFormType} from "../ProfileInfo/ProfileForm/ProfileForm";
 
 const initialState = {
     posts: [ //Props Profile-MyPosts
@@ -81,6 +82,12 @@ export const savePhotoSuccess = (photos: PhotosType) => {
         photos
     } as const
 }
+export const saveProfileSuccess = (profile: ProfileFormType) => {
+    return {
+        type: 'PROFILE/PROFILE',
+        profile
+    } as const
+}
 //Thunks
 export const getProfileData = (userId: string): AppThunk => async (dispatch) => {
     let data = await profileAPI.getProfile(userId)
@@ -100,6 +107,12 @@ export const savePhoto = (file: File): AppThunk => async (dispatch) => {
     let data = await profileAPI.updatePhoto(file)
     if (data.resultCode === 0) {
         dispatch(savePhotoSuccess(data.data.photos))
+    }
+}
+export const saveProfile = (profile: ProfileFormType): AppThunk => async (dispatch) => {
+    let data = await profileAPI.updateProfile(profile)
+    if (data.resultCode === 0) {
+        // dispatch(savePhotoSuccess(data.data.photos))
     }
 }
 //Types

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {PhotosType, ProfileType} from '../components/Profile/profile-reducer/profile-reducer';
 import {UserType} from '../components/Users/users-reducer';
+import {ProfileFormType} from "../components/Profile/ProfileInfo/ProfileForm/ProfileForm";
 
 const instance = axios.create({
     withCredentials: true,
@@ -73,6 +74,10 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(res => res.data)
+    },
+    updateProfile(profile: ProfileFormType) {
+        return instance.put<ResponseType>(`profile`, profile)
+            .then(res => res.data)
     }
 }
 type AuthResponseData = {
