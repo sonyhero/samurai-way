@@ -11,18 +11,6 @@ const instance = axios.create({
     }
 })
 
-export type ResponseType<D = {}> = {
-    resultCode: number
-    messages: string[]
-    data: D
-}
-
-export type UsersResponseDataType = {
-    items: UserType[]
-    totalCount: number
-    error: string
-}
-
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
         return instance.get<UsersResponseDataType>(`users?page=
@@ -38,18 +26,6 @@ export const usersAPI = {
     unFollowUsers(userId: number) {
         return instance.delete<ResponseType>(`follow/${userId}`)
             .then(res => res.data)
-    },
-    getProfile(userId: string) {
-        return instance.get<ProfileType>(`profile/${userId}`)
-            .then(res => res.data)
-    },
-    getStatus(userId: string) {
-        return instance.get(`profile/status/${userId}`)
-            .then(res => res.data)
-    },
-    setStatus(status: string) {
-        return instance.put<ResponseType>('profile/status', {status})
-        // .then(res => res.data)
     }
 }
 
@@ -80,10 +56,11 @@ export const profileAPI = {
             .then(res => res.data)
     }
 }
-type AuthResponseData = {
-    id: number
-    email: string
-    login: string
+export const securityAPI = {
+    getCaptchaUrl(){
+        return instance.get<{url: string}>(`/security/get-captcha-url`)
+            .then(res=> res.data)
+    }
 }
 
 export const authAPI = {
@@ -101,4 +78,22 @@ export const authAPI = {
         return instance.delete<ResponseType>(`auth/login`)
             .then(res => res.data)
     }
+}
+
+//Types
+export type ResponseType<D = {}> = {
+    resultCode: number
+    messages: string[]
+    data: D
+}
+
+export type UsersResponseDataType = {
+    items: UserType[]
+    totalCount: number
+    error: string
+}
+type AuthResponseData = {
+    id: number
+    email: string
+    login: string
 }
