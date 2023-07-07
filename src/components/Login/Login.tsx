@@ -4,7 +4,7 @@ import {login} from './auth-reducer';
 import {RootReducerType} from '../../app/store';
 import {Redirect} from 'react-router-dom';
 import {getIsAuth} from '../../app/selectors/auth-selector';
-import {LoginFormDataType, LoginReduxForm} from "./LoginForm/LoginForm";
+import {LoginFormDataType, LoginReduxForm} from './LoginForm/LoginForm';
 
 
 const Login: React.FC<LoginPropsType> = (props) => {
@@ -27,6 +27,7 @@ const Login: React.FC<LoginPropsType> = (props) => {
 
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
+        // captchaUrl: getCaptchaUrl(state),
         isAuth: getIsAuth(state)
     }
 }
@@ -37,6 +38,7 @@ export default connect(mapStateToProps, ({
 
 //Types
 export type MapStateToPropsType = {
+    // captchaUrl: string | null
     isAuth: boolean
 }
 type MapDispatchToPropsType = {

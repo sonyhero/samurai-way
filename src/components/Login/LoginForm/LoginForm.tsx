@@ -1,11 +1,16 @@
-import React from "react";
-import {InjectedFormProps, reduxForm} from "redux-form";
-import {fieldCreator, Input} from "../../common/FormsControls/FormsControl";
-import {required} from "../../../utils/validators";
-import s from "../LoginCSS.module.css";
-import {Button} from "../../common/Button/Button";
+import React from 'react';
+import {InjectedFormProps, reduxForm} from 'redux-form';
+import {fieldCreator, Input} from '../../common/FormsControls/FormsControl';
+import {required} from '../../../utils/validators';
+import s from '../LoginCSS.module.css';
+import {Button} from '../../common/Button/Button';
+import {useSelector} from 'react-redux';
+import {RootReducerType} from '../../../app/store';
 
 const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
+
+    const captcha = useSelector<RootReducerType>(state => state.authReducer.captchaUrl)
+
     return (
         <form onSubmit={props.handleSubmit}>
             {/*<div>*/}
@@ -29,6 +34,9 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
             {/*//--------------------------------------------------------*/}
 
             {props.error && <div className={s.summeryError}>{props.error}</div>}
+
+            {captcha && <img src={`${captcha}`} alt={'anti-bot captcha'}/>}
+
             <div>
                 <Button name={'Login'}/>
             </div>

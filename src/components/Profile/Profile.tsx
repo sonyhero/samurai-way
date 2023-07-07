@@ -2,7 +2,7 @@ import React from 'react';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 import {ProfileType} from './profile-reducer/profile-reducer';
-import {ProfileFormType} from "./ProfileInfo/ProfileForm/ProfileForm";
+import {ProfileFormType} from './ProfileInfo/ProfileForm/ProfileForm';
 
 type ProfilePropsType = {
     profile: ProfileType

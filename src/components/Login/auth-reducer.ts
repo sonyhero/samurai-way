@@ -17,7 +17,7 @@ export const authReducer = (state: InitialUsersReducerStateType = initialState, 
         case 'AUTH/SET_USER_DATA':
             return {...state, ...action.payload}
         case 'AUTH/GET_CUPTCHA-URL-SUCCESS':
-            return {...state, captchaUrl: action.payload.captchaUrl}
+            return {...state, ...action.payload}
         default:
             return state
     }
@@ -61,7 +61,10 @@ export const login = (email: string, password: string, rememberMe: boolean): App
         if (data.resultCode === 0) {
             dispatch(getAuthUserData())
         } else {
-            let errorMessage = data.messages.length > 0 ? data.messages[0] : 'Some error'
+            if (data.resultCode === 10) {
+                dispatch(getCaptcha())
+            }
+            const errorMessage = data.messages.length > 0 ? data.messages[0] : 'Some error'
             dispatch(stopSubmit('login', {_error: errorMessage}))
         }
     } catch (e) {
