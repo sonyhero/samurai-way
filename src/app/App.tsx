@@ -1,7 +1,7 @@
 import React, {ComponentType} from 'react';
 import './App.css';
 import {Navbar} from '../components/Navbar/Navbar';
-import {HashRouter, Route, Switch, withRouter} from 'react-router-dom';
+import {HashRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {News} from '../components/News/News';
 import {Music} from '../components/Music/Music';
 import {Settings} from '../components/Settings/Settings';
@@ -37,7 +37,7 @@ class App extends React.Component<AppPropsType> {
                             <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
                             <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
                             <Route path="/users" render={withSuspense(UsersContainer)}/>
-                            <Route exact path="/" render={withSuspense(ProfileContainer)}/>
+                            <Route exact path="/" render={()=> <Redirect to={'/profile'}/>}/>
 
                             <Route path="/news" render={() => <News/>}/>
                             <Route path="/music" render={() => <Music/>}/>
