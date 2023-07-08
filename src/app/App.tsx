@@ -1,7 +1,7 @@
 import React, {ComponentType} from 'react';
 import './App.css';
 import {Navbar} from '../components/Navbar/Navbar';
-import {BrowserRouter, Route, Switch, withRouter} from 'react-router-dom';
+import {HashRouter, Route, Switch, withRouter} from 'react-router-dom';
 import {News} from '../components/News/News';
 import {Music} from '../components/Music/Music';
 import {Settings} from '../components/Settings/Settings';
@@ -66,11 +66,11 @@ const AppContainer = compose<ComponentType>(
     withRouter,
     connect(mapStateToProps, {initializeApp}))(App)
 
-export const AppMain = () => <BrowserRouter>
+export const AppMain = () => <HashRouter>
     <Provider store={store}>
         <AppContainer/>
     </Provider>
-</BrowserRouter>
+</HashRouter>
 
 type MapStateToPropsType = {
     initialized: boolean
