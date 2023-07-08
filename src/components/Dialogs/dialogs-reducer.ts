@@ -1,13 +1,13 @@
 
 const initialState: InitialDialogsReducerStateType = {
-    dialogs: [ // Props Dialogs-DialogsItem
+    dialogs: [
         {id: 1, name: 'Dimych'},
         {id: 2, name: 'Sveta'},
         {id: 3, name: 'Viktor'},
         {id: 4, name: 'Maks'},
         {id: 5, name: 'Igor'},
     ],
-    messages: [ //Props Dialogs-Message
+    messages: [
         {id: 1, messageText: 'Hi'},
         {id: 2, messageText: 'Anton'},
         {id: 3, messageText: 'How are you'},

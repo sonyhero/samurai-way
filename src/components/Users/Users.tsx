@@ -3,11 +3,6 @@ import {UsersAPIComponentType} from './UsersContainer';
 import {Pagination} from '../common/Pagination/Pagination';
 import {User} from './User/User';
 
-type UsersProps = {
-    onPageChanged: (pageNumber: number) => void
-}
-
-type UsersPropsType = UsersProps & UsersAPIComponentType
 export const Users: React.FC<UsersPropsType> = (props) => {
 
     const {
@@ -43,3 +38,9 @@ export const Users: React.FC<UsersPropsType> = (props) => {
         </div>
     )
 }
+
+//Types
+type UsersProps = {
+    onPageChanged: (pageNumber: number) => void
+}
+type UsersPropsType = UsersProps & UsersAPIComponentType

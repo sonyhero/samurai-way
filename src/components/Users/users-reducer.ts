@@ -16,7 +16,6 @@ export const usersReducer = (state: InitialUsersReducerStateType = initialState,
         case 'USERS/FOLLOW':
             return {
                 ...state,
-                // users: updateObjectInArray(state.users, action.payload.userId, 'id', {followed: true} )
                 users: state.users.map(el => el.id === action.payload.userId
                     ? {...el, followed: true}
                     : el
@@ -25,7 +24,6 @@ export const usersReducer = (state: InitialUsersReducerStateType = initialState,
         case 'USERS/UNFOLLOW':
             return {
                 ...state,
-                // users: updateObjectInArray(state.users, action.payload.userId, 'id', {followed: false} )
                 users: state.users.map(el => el.id === action.payload.userId
                     ? {...el, followed: false}
                     : el
@@ -147,31 +145,9 @@ const followUnfollowUsers = async (
 
 export const followUsers = (userId: number) => async (dispatch: Dispatch) => {
     await followUnfollowUsers(dispatch, userId, follow, usersAPI.followUsers.bind(usersAPI))
-    // try {
-    //     dispatch(toggleFollowingProgress(true, userId))
-    //     let data = await usersAPI.followUsers(userId)
-    //     if (data.resultCode === 0) {
-    //         dispatch(follow(userId))
-    //     }
-    // } catch (e) {
-    //     console.log(e)
-    // } finally {
-    //     dispatch(toggleFollowingProgress(false, userId))
-    // }
 }
 export const unFollowUsers = (userId: number) => async (dispatch: Dispatch) => {
     await followUnfollowUsers(dispatch, userId, unFollow, usersAPI.unFollowUsers.bind(usersAPI))
-    // try {
-    //     dispatch(toggleFollowingProgress(true, userId))
-    //     let data = await usersAPI.unFollowUsers(userId)
-    //     if (data.resultCode === 0) {
-    //         dispatch(unFollow(userId))
-    //     }
-    // } catch (e) {
-    //     console.log(e)
-    // } finally {
-    //     dispatch(toggleFollowingProgress(false, userId))
-    // }
 }
 //Types
 export type UserType = {

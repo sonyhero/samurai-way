@@ -6,19 +6,12 @@ import {ProfileDescription} from './ProfileDescription/ProfileDescription';
 import {ProfileAvatar} from './ProfileAvatar/ProfileAvatar';
 import ProfileForm, {ProfileFormType} from "./ProfileForm/ProfileForm";
 
-type ProfileInfoPropsType = {
-    profile: ProfileType
-    profileStatus: string
-    updateProfileStatus: (status: string) => void
-    isOwner: boolean
-    savePhoto: (value: File) => void
-    saveProfile: (profile: ProfileFormType) => Promise<void | string>
-}
+
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
 
     const {profile, profileStatus, updateProfileStatus, isOwner, savePhoto, saveProfile} = props
-    // const edit = useSelector<RootStateType>(state => state.profileReducer.profileFormUpdateStatus)
+
     const [editMode, setEditMode] = useState<boolean>(false)
 
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +27,6 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
         saveProfile(formData).then(()=>{
             setEditMode(false)
         })
-        // edit && setEditMode(false)
     }
 
 
@@ -68,4 +60,14 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
             <span>------------------</span>
         </div>
     )
+}
+
+//Types
+type ProfileInfoPropsType = {
+    profile: ProfileType
+    profileStatus: string
+    updateProfileStatus: (status: string) => void
+    isOwner: boolean
+    savePhoto: (value: File) => void
+    saveProfile: (profile: ProfileFormType) => Promise<void | string>
 }

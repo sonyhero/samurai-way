@@ -2,22 +2,6 @@ import React from 'react';
 import s from './FormsControls.module.css'
 import {Field} from 'redux-form';
 
-
-type FormControlType = {
-    input: {
-        name: string;
-        // onBlur: () => void;
-        // onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-        // onFocus: () => void;
-        value: string;
-    }
-    meta: {
-        touched?: boolean;
-        error?: string;
-    }
-    children: React.ReactNode
-}
-
 export const FormControl: React.FC<FormControlType> = (props) => {
 
     const {input, meta: {touched, error}, children, ...restProps} = props
@@ -72,3 +56,16 @@ export const fieldCreator =
             </div>
         )
     }
+
+//Types
+type FormControlType = {
+    input: {
+        name: string;
+        value: string;
+    }
+    meta: {
+        touched?: boolean;
+        error?: string;
+    }
+    children: React.ReactNode
+}

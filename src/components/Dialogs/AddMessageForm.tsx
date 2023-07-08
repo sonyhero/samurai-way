@@ -4,10 +4,6 @@ import {TextArea} from '../common/FormsControls/FormsControl';
 import {maxLength, minLength, required} from '../../utils/validators';
 import {Button} from '../common/Button/Button';
 
-type FormAddMessageDataType = {
-    messageText: string
-}
-
 const maxLength100 = maxLength(100)
 const minLength1 = minLength(1)
 
@@ -29,3 +25,8 @@ const AddMessageForm: React.FC<InjectedFormProps<FormAddMessageDataType>> = (pro
 }
 
 export const AddMessageReduxForm = reduxForm<FormAddMessageDataType>({form: 'addMessage'})(AddMessageForm)
+
+//Types
+type FormAddMessageDataType = {
+    messageText: string
+}

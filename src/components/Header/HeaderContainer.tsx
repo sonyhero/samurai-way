@@ -6,10 +6,6 @@ import {logout} from '../Login/auth-reducer';
 
 export class HeaderAPIComponent extends React.Component<HeaderAPIComponentType> {
 
-    // componentDidMount() {
-    //     this.props.getAuthUserData()
-    // }
-
     render() {
         return <Header {...this.props}/>
     }

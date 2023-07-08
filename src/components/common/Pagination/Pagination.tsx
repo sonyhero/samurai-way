@@ -3,13 +3,6 @@ import s from './PaginationCSS.module.css';
 import {Button} from '../Button/Button';
 import cn from 'classnames'
 
-type PaginationType = {
-    pageSize: number
-    onPageChanged: (pageNumber: number) => void
-    totalItemsCount: number
-    currentPage?: number
-    portionSize: number
-}
 export const Pagination: React.FC<PaginationType> = (props) => {
 
     const {
@@ -19,7 +12,6 @@ export const Pagination: React.FC<PaginationType> = (props) => {
         onPageChanged,
         portionSize
     } = props
-
 
     const pagesCount = Math.ceil(totalItemsCount / pageSize)
     const portionCount = Math.ceil(pagesCount / portionSize)
@@ -57,4 +49,13 @@ export const Pagination: React.FC<PaginationType> = (props) => {
             <Button name={'End'} callback={() => setPortionNumber(lastPages)}/>
         </div>
     )
+}
+
+//Types
+type PaginationType = {
+    pageSize: number
+    onPageChanged: (pageNumber: number) => void
+    totalItemsCount: number
+    currentPage?: number
+    portionSize: number
 }

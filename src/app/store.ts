@@ -24,20 +24,20 @@ const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ||
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 // @ts-ignore
 window.store = store
-// Объединение типов actions
-export type ActionsTypes =
-    | UsersReducerType
-    | DialogsReducerType
-    | AuthReducerType
-    | FormAction
-    | AppReducerType
 
+//Types
 export type RootReducerType = ReturnType<typeof rootReducer>
 export type RootStateType = ReturnType<typeof store.getState>
-export type AppDispatch = ThunkDispatch<RootStateType, unknown, ActionsTypes> // для санок
+export type AppDispatch = ThunkDispatch<RootStateType, unknown, ActionsTypes>
 export type AppThunk<ReturnType = void> = ThunkAction<
     ReturnType,
     RootStateType,
     unknown,
     ActionsTypes
 >
+export type ActionsTypes =
+    | UsersReducerType
+    | DialogsReducerType
+    | AuthReducerType
+    | FormAction
+    | AppReducerType

@@ -4,7 +4,6 @@ import {NavLink} from 'react-router-dom';
 import {HeaderAPIComponentType} from './HeaderContainer';
 import {Button} from '../common/Button/Button';
 
-type HeaderPropsType = HeaderAPIComponentType
 export const Header: React.FC<HeaderPropsType> = (props) => {
 
     const {isAuth, login, logout} = props
@@ -23,3 +22,6 @@ export const Header: React.FC<HeaderPropsType> = (props) => {
         </header>
     )
 }
+
+//Types
+type HeaderPropsType = HeaderAPIComponentType

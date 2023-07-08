@@ -5,13 +5,6 @@ import {NavLink} from 'react-router-dom';
 import {UserType} from '../users-reducer';
 import {Button} from '../../common/Button/Button';
 
-type UserPropsType = {
-    user: UserType
-    followingInProgress: number[]
-    followUsers: (userId: number) => void
-    unFollowUsers: (userId: number) => void
-}
-
 export const User: React.FC<UserPropsType> = (props) => {
 
     const {
@@ -60,4 +53,12 @@ export const User: React.FC<UserPropsType> = (props) => {
             </span>
         </span>
     </div>)
+}
+
+//Types
+type UserPropsType = {
+    user: UserType
+    followingInProgress: number[]
+    followUsers: (userId: number) => void
+    unFollowUsers: (userId: number) => void
 }

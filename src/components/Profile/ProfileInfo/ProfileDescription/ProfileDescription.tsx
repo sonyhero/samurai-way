@@ -3,12 +3,6 @@ import {ProfileType} from '../../profile-reducer/profile-reducer';
 import {Button} from "../../../common/Button/Button";
 import {Contacts} from "./Contacts";
 
-type ProfileDescriptionType = {
-    profile: ProfileType
-    isOwner: boolean
-    setEditMode: () => void
-}
-
 export const ProfileDescription: React.FC<ProfileDescriptionType> = ({profile, isOwner, setEditMode}) => {
 
     return (
@@ -24,18 +18,12 @@ export const ProfileDescription: React.FC<ProfileDescriptionType> = ({profile, i
     )
 }
 
-// type ContactsType = {
-//     title: string
-//     value: string
-// }
-
-// const Contacts = ({title, value}: ContactsType) => {
-//
-//
-//     return (
-//         <div>{title}: {value}</div>
-//     )
-// }
+//Types
+type ProfileDescriptionType = {
+    profile: ProfileType
+    isOwner: boolean
+    setEditMode: () => void
+}
 
 
 

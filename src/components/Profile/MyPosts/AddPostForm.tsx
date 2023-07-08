@@ -4,13 +4,8 @@ import {maxLength, minLength, required} from '../../../utils/validators';
 import {TextArea} from '../../common/FormsControls/FormsControl';
 import {Button} from '../../common/Button/Button';
 
-export type FormAddPostDataType = {
-    postText: string
-}
-
 const maxLength10 = maxLength(10)
 const minLength2 = minLength(2)
-
 
 const AddPostForm: React.FC<InjectedFormProps<FormAddPostDataType>> = (props) => {
     return (
@@ -21,7 +16,6 @@ const AddPostForm: React.FC<InjectedFormProps<FormAddPostDataType>> = (props) =>
                 value={'newPostText'}
                 component={TextArea}
                 validate={[required, maxLength10, minLength2]}
-                // onKeyDown={onKeyDownHandler}
             />
             <div>
                 <Button name={'Add post'}/>
@@ -31,3 +25,8 @@ const AddPostForm: React.FC<InjectedFormProps<FormAddPostDataType>> = (props) =>
 }
 
 export const AddPostReduxForm = reduxForm<FormAddPostDataType>({form: 'addPost'})(AddPostForm)
+
+//Types
+export type FormAddPostDataType = {
+    postText: string
+}

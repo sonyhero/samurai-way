@@ -42,5 +42,4 @@ export type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
-
 type LoginPropsType = MapStateToPropsType & MapDispatchToPropsType

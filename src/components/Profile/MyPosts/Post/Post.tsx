@@ -2,12 +2,6 @@ import React from 'react';
 import s from './PostCSS.module.css'
 import {Button} from '../../../common/Button/Button';
 
-type PostsType = {
-    id: number
-    postText: string
-    likesCount: number
-    deletePost: (id: number) => void
-}
 export const Post: React.FC<PostsType> = (props) => {
 
 const {id, postText, likesCount, deletePost} = props
@@ -26,4 +20,12 @@ const {id, postText, likesCount, deletePost} = props
             </div>
         </div>
     )
+}
+
+//Types
+type PostsType = {
+    id: number
+    postText: string
+    likesCount: number
+    deletePost: (id: number) => void
 }

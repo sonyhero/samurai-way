@@ -5,8 +5,6 @@ import {Message} from './Message/Message';
 import {MapDispatchToPropsType, MapStateToPropsType} from './DialogsContainer';
 import {AddMessageReduxForm} from './AddMessageForm';
 
-type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
-
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     const {
@@ -23,15 +21,8 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     )
 
     const onAddMessage = (data: {messageText: string}) => {
-        // if (dialogsPage.newMessageText.trim() !== '')
             addMessage(data.messageText)
     }
-
-    // const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    //     if (e.key === 'Enter') {
-    //         onAddMessage()
-    //     }
-    // }
 
     return (
         <div>
@@ -45,3 +36,6 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         </div>
     )
 }
+
+//Types
+type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType

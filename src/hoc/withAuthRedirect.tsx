@@ -3,10 +3,6 @@ import {Redirect} from 'react-router-dom';
 import {RootReducerType} from '../app/store';
 import {connect} from 'react-redux';
 
-type MapStateToPropsType = {
-    isAuth: boolean
-}
-
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
         isAuth: state.authReducer.isAuth
@@ -28,5 +24,7 @@ export function withAuthRedirect<T>(Component: ComponentType<T>){
     return connect(mapStateToProps)(RedirectComponent)
 }
 
-
-
+//Types
+type MapStateToPropsType = {
+    isAuth: boolean
+}

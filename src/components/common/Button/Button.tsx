@@ -1,14 +1,6 @@
 import React, {memo} from 'react';
 import s from './Button.module.css';
 
-type ButtonType = {
-    name: string
-    disabled?: boolean
-    callback?: () => void
-    className?: boolean
-    xType?: string
-}
-
 export const Button: React.FC<ButtonType> = memo((props) => {
 
     const {name, disabled, callback, className, xType} = props
@@ -28,3 +20,12 @@ export const Button: React.FC<ButtonType> = memo((props) => {
         <button disabled={disabled} className={finalClassName} onClick={onClickHandler}>{name}</button>
     )
 })
+
+//Types
+type ButtonType = {
+    name: string
+    disabled?: boolean
+    callback?: () => void
+    className?: boolean
+    xType?: string
+}

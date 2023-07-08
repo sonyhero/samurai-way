@@ -34,11 +34,6 @@ class App extends React.Component<AppPropsType> {
                     <Navbar/>
                     <div className="app-wrapper-content">
                         <Switch>
-                            {/*<Route path="/dialogs" render={() => <DialogsContainer/>}/>*/}
-                            {/*<Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>*/}
-                            {/*<Route path="/users" render={() => <UsersContainer/>}/>*/}
-                            {/*<Route exact path="/" render={() => <ProfileContainer/>}/>*/}
-
                             <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
                             <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
                             <Route path="/users" render={withSuspense(UsersContainer)}/>
@@ -72,6 +67,7 @@ export const AppMain = () => <HashRouter>
     </Provider>
 </HashRouter>
 
+//Types
 type MapStateToPropsType = {
     initialized: boolean
 }

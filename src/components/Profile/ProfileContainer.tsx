@@ -64,6 +64,7 @@ export default compose<ComponentType>(
     withRouter,
     withAuthRedirect
 )(ProfileAPIComponent)
+
 //Types
 type MapStateToPropsType = {
     profile: ProfileType

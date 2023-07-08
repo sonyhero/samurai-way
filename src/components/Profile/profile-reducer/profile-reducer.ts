@@ -4,7 +4,7 @@ import {ProfileFormType} from "../ProfileInfo/ProfileForm/ProfileForm";
 import {stopSubmit} from "redux-form";
 
 const initialState = {
-    posts: [ //Props Profile-MyPosts
+    posts: [
         {id: 1, postText: 'Hi, how are you?', likesCount: 23},
         {id: 2, postText: 'It\'s my first post!', likesCount: 100}
     ],

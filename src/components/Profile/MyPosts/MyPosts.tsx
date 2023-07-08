@@ -4,8 +4,6 @@ import {Post} from './Post/Post';
 import {MapDispatchToPropsType, MapStateToPropsType} from './MyPostsContainer';
 import {AddPostReduxForm, FormAddPostDataType} from './AddPostForm';
 
-type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
-
 export const MyPosts: React.FC<MyPostsPropsType> = memo((props) => {
 
     const {addPost, profilePage, deletePost} = props
@@ -17,15 +15,9 @@ export const MyPosts: React.FC<MyPostsPropsType> = memo((props) => {
     )
 
     const onAddPost = (data: FormAddPostDataType) => {
-        // if (props.profilePage.newPostText.trim() !== '')
         addPost(data.postText)
     }
 
-    // const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    //     if (e.key === 'Enter') {
-    //         onAddPost()
-    //     }
-    // }
 
     return (
         <div className={s.postsBlock}>
@@ -39,3 +31,6 @@ export const MyPosts: React.FC<MyPostsPropsType> = memo((props) => {
         </div>
     )
 })
+
+//Types
+type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
