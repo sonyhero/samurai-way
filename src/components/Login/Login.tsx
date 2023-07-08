@@ -12,8 +12,8 @@ const Login: React.FC<LoginPropsType> = (props) => {
     const {login, isAuth} = props
 
     const onSubmit = (formData: LoginFormDataType) => {
-        const {email, password, rememberMe} = formData
-        login(email, password, rememberMe)
+        const {email, password, rememberMe, captcha} = formData
+        login(email, password, rememberMe, captcha)
     }
 
     return (isAuth)
@@ -27,7 +27,6 @@ const Login: React.FC<LoginPropsType> = (props) => {
 
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
-        // captchaUrl: getCaptchaUrl(state),
         isAuth: getIsAuth(state)
     }
 }
@@ -38,11 +37,10 @@ export default connect(mapStateToProps, ({
 
 //Types
 export type MapStateToPropsType = {
-    // captchaUrl: string | null
     isAuth: boolean
 }
 type MapDispatchToPropsType = {
-    login: (email: string, password: string, rememberMe: boolean) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
 
 type LoginPropsType = MapStateToPropsType & MapDispatchToPropsType

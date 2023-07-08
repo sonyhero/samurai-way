@@ -36,6 +36,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
             {props.error && <div className={s.summeryError}>{props.error}</div>}
 
             {captcha && <img src={`${captcha}`} alt={'anti-bot captcha'}/>}
+            {captcha && fieldCreator('captcha', '', [required], Input)}
 
             <div>
                 <Button name={'Login'}/>
@@ -53,4 +54,5 @@ export type LoginFormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    captcha: string
 }
