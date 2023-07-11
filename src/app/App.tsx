@@ -31,7 +31,7 @@ class App extends React.Component<AppPropsType> {
             : (
                 <div className="app-wrapper">
                     <HeaderContainer/>
-                    <Navbar/>
+                    {this.props.isAuth && <Navbar/>}
                     <div className="app-wrapper-content">
                         <Switch>
                             <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
@@ -53,13 +53,14 @@ class App extends React.Component<AppPropsType> {
 
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
-        initialized: state.appReducer.initialized
+        initialized: state.appReducer.initialized,
+        isAuth: state.authReducer.isAuth
     }
 }
 
 const AppContainer = compose<ComponentType>(
     withRouter,
-    connect(mapStateToProps, {initializeApp}))(App)
+    connect(mapStateToProps, {initializeApp, }))(App)
 
 export const AppMain = () => <HashRouter>
     <Provider store={store}>
@@ -70,6 +71,7 @@ export const AppMain = () => <HashRouter>
 //Types
 type MapStateToPropsType = {
     initialized: boolean
+    isAuth: boolean
 }
 type MapDispatchToPropsType = {
     initializeApp: () => void
