@@ -14,7 +14,7 @@ export const FormControl: React.FC<FormControlType> = (props) => {
     return (
         <div className={finalClassName}>
             <div>{children}</div>
-            <div>
+            <div className={s.summeryError}>
                 {isError && <span>{error}</span>}
             </div>
         </div>

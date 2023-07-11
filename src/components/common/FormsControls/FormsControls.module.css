@@ -10,3 +10,7 @@
 .formControl.error span {
     color: red;
 }
+
+.summeryError {
+    margin-top: 10px;
+}

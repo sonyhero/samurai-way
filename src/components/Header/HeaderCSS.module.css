@@ -1,16 +1,20 @@
 .header {
-    grid-area: h;
-    background-color: indianred;
+    display: flex;
+    width: 100%;
+    background-color: #fff7ec;
+    height: 80px;
+    /*justify-content: space-between;*/
+    align-items: center;
 }
 
-.header img {
-    width: 30px;
+.networkName {
+    margin-left: 20px;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
 }
 
 .loginBlock{
     float: right;
-}
-
-.loginBlock a {
-    color: white;
 }
