@@ -18,11 +18,7 @@ const Login: React.FC<LoginPropsType> = (props) => {
 
     return (isAuth)
         ? <Redirect to={'/profile'}/>
-        : <div>
-            <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
-        </div>
-
+        : <LoginReduxForm onSubmit={onSubmit}/>
 }
 
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {

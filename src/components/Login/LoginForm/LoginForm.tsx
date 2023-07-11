@@ -12,21 +12,30 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
     const captcha = useSelector<RootReducerType>(state => state.authReducer.captchaUrl)
 
     return (
-        <form onSubmit={props.handleSubmit}>
-            {/*Рефакторинг*/}
-            {fieldCreator('email', 'Email', [required], Input)}
-            {fieldCreator('password', 'Password', [required], Input, {type: 'password'})}
-            {fieldCreator('rememberMe', '', [], Input, {type: 'checkbox'}, 'rememberMe')}
-            {/*//--------------------------------------------------------*/}
-            {props.error && <div className={s.summeryError}>{props.error}</div>}
+        <div className={s.container}>
+            <form onSubmit={props.handleSubmit} className={s.formContainer}>
+                <h3>Login Here</h3>
+                {/*Рефакторинг*/}
+                <div className={s.input}>
+                    {fieldCreator('email', 'Email', [required], Input)}
+                </div>
+                <div className={s.input}>
+                    {fieldCreator('password', 'Password', [required], Input, {type: 'password'})}
+                </div>
+                <div>
+                    {fieldCreator('rememberMe', '', [], Input, {type: 'checkbox'}, 'rememberMe')}
+                </div>
+                {/*//--------------------------------------------------------*/}
+                {props.error && <div >{props.error}</div>}
 
-            {captcha && <img src={`${captcha}`} alt={'anti-bot captcha'}/>}
-            {captcha && fieldCreator('captcha', '', [required], Input)}
+                {captcha && <img src={`${captcha}`} alt={'anti-bot captcha'}/>}
+                {captcha && fieldCreator('captcha', '', [required], Input)}
 
-            <div>
-                <Button name={'Login'}/>
-            </div>
-        </form>
+                <div>
+                    <Button name={'Login'}/>
+                </div>
+            </form>
+        </div>
     )
 }
 
