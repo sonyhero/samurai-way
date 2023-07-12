@@ -1,35 +1,31 @@
 .container{
-    height: 100vh;
+    width: 90vw;
+    height: 90vh;
+    /*height: 100%;*/
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    margin: -100px auto;
+    flex-direction: column;
+    margin: 0 auto;
 }
-
-/*.formContainer{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    align-items: flex-start;*/
-/*}*/
 
 .formContainer {
-    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
     background-color: #fff7ec;
-    /*margin-top: 50px;*/
-    align-items: center;
     border-radius: 10px;
-    backdrop-filter: blur(10px);
-    /*border: 2px solid rgba(255, 255, 255, 0.1);*/
-    /*box-shadow: 0 0 40px rgba( 8, 7, 16, 0.6);*/
-    padding: 50px 35px;
+    padding: 20px 20px;
 }
 .formContainer * {
-    color: #000;
+    color: #747474;
     letter-spacing: 0.5px;
     outline: none;
     border: none
 }
 .formContainer h3 {
+    margin: 0 auto;
     font-size: 32px;
     font-weight: 500;
     line-height: 42px;
@@ -37,15 +33,15 @@
 }
 
 .formContainer label {
-    display: block;
+    /*display: block;*/
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
 }
 .input input{
-    display: block;
+    /*display: block;*/
     height: 50px;
-    width: 100%;
+    width: 300px;
     border: 1px solid #747474;
     border-radius: 3px;
     padding: 0 10px;
@@ -57,17 +53,25 @@
 .input input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px #fcf9f9 inset !important;
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #fff7ec inset !important;
+}
+
+.input input:focus,
+.input input:hover,
+.input input:active {
+    border-color: #a7e0e9;
 }
 
 .checkBox {
     display: flex;
     align-items: center;
 }
+.checkBox input  {
+    cursor: pointer;
+}
 
 .formContainer button {
-    margin-top: 50px;
     width: 100%;
     background-color: #a7e0e9;
     padding: 15px 0;
@@ -81,6 +85,27 @@ input:-webkit-autofill:active{
     background-color: #68d7e5;
 }
 
+.error {
+    color: #ce4467;
+    padding: 0 10px;
+}
+
 .sbtButton {
-    padding: 10px;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.testData {
+    /*width: 352px;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+}
+
+.testData p {
+    color: #747474;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 1em;
 }

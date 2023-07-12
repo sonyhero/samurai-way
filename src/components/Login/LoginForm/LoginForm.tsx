@@ -25,15 +25,20 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
                     {fieldCreator('rememberMe', '', [], Input, {type: 'checkbox'}, 'Remember Me')}
                 </div>
                 {/*//--------------------------------------------------------*/}
-                {props.error && <div >{props.error}</div>}
+                {props.error && <div className={s.error}>{props.error}</div>}
 
                 {captcha && <img src={`${captcha}`} alt={'anti-bot captcha'}/>}
-                {captcha && fieldCreator('captcha', '', [required], Input)}
+                {captcha && <div className={s.input} >{fieldCreator('captcha', 'Captcha', [required], Input)}</div>}
 
                 <div className={s.sbtButton}>
                     <button type={'submit'}>Login</button>
                 </div>
             </form>
+            <div className={s.testData}>
+                <div><p>You can also use common test account credentials:</p></div>
+                <div><p>Email: free@samuraijs.com</p></div>
+                <div><p>Password: free</p></div>
+            </div>
         </div>
     )
 }

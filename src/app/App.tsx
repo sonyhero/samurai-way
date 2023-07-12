@@ -29,7 +29,7 @@ class App extends React.Component<AppPropsType> {
         return (!this.props.initialized)
             ? <Preloader/>
             : (
-                <div className="app-wrapper">
+                <div>
                     <HeaderContainer/>
                     {this.props.isAuth && <Navbar/>}
                     <div className="app-wrapper-content">

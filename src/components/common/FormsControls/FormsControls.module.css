@@ -2,13 +2,8 @@
     padding: 10px;
 }
 
-.formControl.error input,
-.formControl.error textarea {
-    border: 1px solid red;
-}
-
 .formControl.error span {
-    color: red;
+    color: #ce4467;
 }
 
 .summeryError {
@@ -18,3 +13,4 @@
 .fieldName {
     padding: 0 0 10px 10px;
 }
+
