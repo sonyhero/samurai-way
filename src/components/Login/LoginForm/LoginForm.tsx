@@ -3,7 +3,6 @@ import {InjectedFormProps, reduxForm} from 'redux-form';
 import {fieldCreator, Input} from '../../common/FormsControls/FormsControl';
 import {required} from '../../../utils/validators';
 import s from '../LoginCSS.module.css';
-import {Button} from '../../common/Button/Button';
 import {useSelector} from 'react-redux';
 import {RootReducerType} from '../../../app/store';
 
@@ -22,8 +21,8 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
                 <div className={s.input}>
                     {fieldCreator('password', 'Password', [required], Input, {type: 'password'})}
                 </div>
-                <div>
-                    {fieldCreator('rememberMe', '', [], Input, {type: 'checkbox'}, 'rememberMe')}
+                <div className={s.checkBox}>
+                    {fieldCreator('rememberMe', '', [], Input, {type: 'checkbox'}, 'Remember Me')}
                 </div>
                 {/*//--------------------------------------------------------*/}
                 {props.error && <div >{props.error}</div>}
@@ -31,8 +30,8 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
                 {captcha && <img src={`${captcha}`} alt={'anti-bot captcha'}/>}
                 {captcha && fieldCreator('captcha', '', [required], Input)}
 
-                <div>
-                    <Button name={'Login'}/>
+                <div className={s.sbtButton}>
+                    <button type={'submit'}>Login</button>
                 </div>
             </form>
         </div>
