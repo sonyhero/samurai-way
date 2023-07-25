@@ -1,7 +1,6 @@
 .container{
     width: 90vw;
     height: 90vh;
-    /*height: 100%;*/
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -33,13 +32,11 @@
 }
 
 .formContainer label {
-    /*display: block;*/
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
 }
 .input input{
-    /*display: block;*/
     height: 50px;
     width: 300px;
     border: 1px solid #747474;
@@ -96,7 +93,6 @@ input:-webkit-autofill:active {
 }
 
 .testData {
-    /*width: 352px;*/
     display: flex;
     flex-direction: column;
     align-items: center;

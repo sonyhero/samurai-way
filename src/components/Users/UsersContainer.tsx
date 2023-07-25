@@ -40,16 +40,12 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
 
     render() {
 
-        return <>
-            {this.props.isFetching
+        return this.props.isFetching
                 ? <Preloader/>
-                : null
-            }
-            <Users
-                {...this.props}
-                onPageChanged={this.onPageChanged}
-            />
-        </>
+                : <Users
+                    {...this.props}
+                    onPageChanged={this.onPageChanged}
+                />
     }
 }
 

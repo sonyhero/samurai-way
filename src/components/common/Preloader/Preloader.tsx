@@ -5,13 +5,10 @@ import {HeaderContainer} from '../../Header/HeaderContainer';
 
 export const Preloader = () => {
     return (
-        <div><HeaderContainer/>
             <div className={s.preloaderContainer}>
-
                 <div className={s.preloader}>
                     <img src={preloader} alt={'loading'}/>
                 </div>
             </div>
-        </div>
     )
 }

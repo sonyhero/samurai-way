@@ -6,7 +6,6 @@ import {News} from '../components/News/News';
 import {Music} from '../components/Music/Music';
 import {Settings} from '../components/Settings/Settings';
 import {HeaderContainer} from '../components/Header/HeaderContainer';
-import Login from '../components/Login/Login';
 import {connect, Provider} from 'react-redux';
 import {compose} from 'redux';
 import {initializeApp} from './app-reducer';
@@ -18,6 +17,7 @@ import s from './App.module.css'
 const DialogsContainer = React.lazy(() => import('../components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('../components/Profile/ProfileContainer'))
 const UsersContainer = React.lazy(() => import('../components/Users/UsersContainer'))
+const LoginContainer = React.lazy(() => import('../components/Login/Login'))
 
 class App extends React.Component<AppPropsType> {
 
@@ -41,10 +41,12 @@ class App extends React.Component<AppPropsType> {
                             <Route path="/users" render={withSuspense(UsersContainer)}/>
                             <Route exact path="/" render={()=> <Redirect to={'/profile'}/>}/>
 
+                            <Route path="/login" render={withSuspense(LoginContainer)}/>
+
                             <Route path="/news" render={() => <News/>}/>
                             <Route path="/music" render={() => <Music/>}/>
                             <Route path="/settings" render={() => <Settings/>}/>
-                            <Route path="/login" render={() => <Login/>}/>
+
                             <Route path="*" render={() => <h1>404: PAGE NOT FOUND</h1>}/>
                         </Switch>
                     </div>
