@@ -1,5 +1,6 @@
 import {ResponseType, usersAPI} from '../../api/api';
 import {Dispatch} from 'redux';
+import {ResultCodesEnum} from './enums';
 
 const initialState: InitialUsersReducerStateType = {
     users: [],
@@ -134,7 +135,7 @@ const followUnfollowUsers = async (
     try {
         dispatch(toggleFollowingProgress(true, userId))
         const data = await apiMethod(userId)
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCodesEnum.Success) {
             dispatch(actionCreator(userId))
         }
     } catch (e) {

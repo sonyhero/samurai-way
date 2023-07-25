@@ -1,7 +1,8 @@
 import {AppThunk} from '../../../app/store';
 import {profileAPI} from '../../../api/api';
-import {ProfileFormType} from "../ProfileInfo/ProfileForm/ProfileForm";
-import {stopSubmit} from "redux-form";
+import {ProfileFormType} from '../ProfileInfo/ProfileForm/ProfileForm';
+import {stopSubmit} from 'redux-form';
+import {ResultCodesEnum} from '../../Users/enums';
 
 const initialState = {
     posts: [
@@ -100,13 +101,13 @@ export const getProfileStatus = (userId: string): AppThunk => async (dispatch) =
 }
 export const updateProfileStatus = (status: string): AppThunk => async (dispatch) => {
     const data = await profileAPI.updateStatus(status)
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(setUserProfileStatus(status))
     }
 }
 export const savePhoto = (file: File): AppThunk => async (dispatch) => {
     const data = await profileAPI.updatePhoto(file)
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(savePhotoSuccess(data.data.photos))
     }
 }
@@ -114,7 +115,7 @@ export const saveProfile = (profile: ProfileFormType): AppThunk => async (dispat
     try {
         const userId = getState().authReducer.userId
         const data = await profileAPI.updateProfile(profile)
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCodesEnum.Success) {
             dispatch(getProfileData(`${userId}`))
         } else {
             const key = data.messages[0].match(/(?<=->)[^)]+/)

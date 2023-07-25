@@ -2,6 +2,7 @@ import axios from 'axios';
 import {PhotosType, ProfileType} from '../components/Profile/profile-reducer/profile-reducer';
 import {UserType} from '../components/Users/users-reducer';
 import {ProfileFormType} from "../components/Profile/ProfileInfo/ProfileForm/ProfileForm";
+import {ResultCodeForCapctha, ResultCodesEnum} from '../components/Users/enums';
 
 const instance = axios.create({
     withCredentials: true,
@@ -82,8 +83,9 @@ export const authAPI = {
 
 //Types
 export type ResponseType<D = {}> = {
-    resultCode: number
+    resultCode:  ResultCodesEnum | ResultCodeForCapctha
     messages: string[]
+    fieldsErrors: string[]
     data: D
 }
 

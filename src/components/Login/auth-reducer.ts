@@ -2,6 +2,7 @@ import {AppThunk} from '../../app/store';
 
 import {authAPI, securityAPI} from '../../api/api';
 import {stopSubmit} from 'redux-form';
+import {ResultCodeForCapctha, ResultCodesEnum} from '../Users/enums';
 
 const initialState: InitialUsersReducerStateType = {
     userId: null,
@@ -47,7 +48,7 @@ export const getCaptchaUrlSuccess = (captchaUrl: string) => {
 export const getAuthUserData = (): AppThunk => async (dispatch) => {
     try {
         const data = await authAPI.getAuthMe()
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCodesEnum.Success) {
             const {id, email, login} = data.data
             dispatch(setAuthUserData(String(id), email, login, true))
         }
@@ -58,10 +59,10 @@ export const getAuthUserData = (): AppThunk => async (dispatch) => {
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string): AppThunk => async (dispatch) => {
     try {
         const data = await authAPI.logIn(email, password, rememberMe, captcha)
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCodesEnum.Success) {
             dispatch(getAuthUserData())
         } else {
-            if (data.resultCode === 10) {
+            if (data.resultCode === ResultCodeForCapctha.CaptchaIsRequired) {
                 dispatch(getCaptcha())
             }
             const errorMessage = data.messages.length > 0 ? data.messages[0] : 'Some error'
@@ -74,7 +75,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 export const logout = (): AppThunk => async (dispatch) => {
     try {
         const data = await authAPI.logOut()
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCodesEnum.Success) {
             dispatch(setAuthUserData(null, null, null, false))
         }
     } catch (e) {
