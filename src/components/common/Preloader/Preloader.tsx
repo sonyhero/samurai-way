@@ -1,7 +1,6 @@
 import React from 'react';
-import preloader from "../../../assets/img/preloader.svg";
-import s from "./PreloaderCSS.module.css";
-import {HeaderContainer} from '../../Header/HeaderContainer';
+import preloader from '../../../assets/img/preloader.svg';
+import s from './PreloaderCSS.module.css';
 
 export const Preloader = () => {
     return (
