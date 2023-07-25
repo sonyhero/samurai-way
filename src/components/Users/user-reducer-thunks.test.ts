@@ -1,13 +1,13 @@
-import {follow, followUsers, toggleFollowingProgress, unFollow, unFollowUsers} from './users-reducer';
+import {followUsers, unFollowUsers, userActions} from './users-reducer';
 import {ResponseType, usersAPI} from '../../api/api';
 import {ResultCodesEnum} from './enums';
 
 jest.mock('../../api/api');
 
+const {follow, toggleFollowingProgress, unFollow} = userActions
 const userAPIMock = usersAPI as jest.Mocked<typeof usersAPI>
-
 const result: ResponseType = {
-    resultCode:ResultCodesEnum.Success,
+    resultCode: ResultCodesEnum.Success,
     messages: [],
     fieldsErrors: [],
     data: {}

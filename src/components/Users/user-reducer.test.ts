@@ -1,4 +1,6 @@
-import {follow, InitialUsersReducerStateType, unFollow, usersReducer} from './users-reducer';
+import {InitialUsersReducerStateType, userActions, usersReducer} from './users-reducer';
+
+const { follow, unFollow } = userActions
 
 let state: InitialUsersReducerStateType;
 

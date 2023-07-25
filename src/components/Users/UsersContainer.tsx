@@ -2,15 +2,9 @@ import React, {ComponentType} from 'react';
 import {RootReducerType} from '../../app/store';
 import {connect} from 'react-redux';
 import {
-    follow,
+    userActions,
     followUsers,
     requestUsers,
-    setCurrentPage,
-    setUsers,
-    setUsersTotalCount,
-    toggleFollowingProgress,
-    toggleIsFetching,
-    unFollow,
     unFollowUsers,
     UserType
 } from './users-reducer';
@@ -25,6 +19,16 @@ import {
     getTotalUsersCount,
     getUsers
 } from '../../app/selectors/users-selector';
+
+const {
+    follow,
+    unFollow,
+    setUsers,
+    setCurrentPage,
+    setUsersTotalCount,
+    toggleIsFetching,
+    toggleFollowingProgress
+} = userActions
 
 export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
 
@@ -41,11 +45,11 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
     render() {
 
         return this.props.isFetching
-                ? <Preloader/>
-                : <Users
-                    {...this.props}
-                    onPageChanged={this.onPageChanged}
-                />
+            ? <Preloader/>
+            : <Users
+                {...this.props}
+                onPageChanged={this.onPageChanged}
+            />
     }
 }
 
