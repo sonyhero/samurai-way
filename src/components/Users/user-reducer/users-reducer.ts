@@ -1,6 +1,6 @@
 import {ResponseType, ResultCodesEnum} from '../../../api/api';
 import {Dispatch} from 'redux';
-import {InferActionsTypes} from '../../../app/store';
+import {AppThunk, InferActionsTypes} from '../../../app/store';
 import {usersAPI} from '../../../api/users-api';
 
 const initialState: InitialUsersReducerStateType = {
@@ -102,10 +102,10 @@ const followUnfollowUsers = async (
     }
 }
 
-export const followUsers = (userId: number) => async (dispatch: Dispatch) => {
+export const followUsers = (userId: number): AppThunk => async (dispatch) => {
     await followUnfollowUsers(dispatch, userId, userActions.follow, usersAPI.followUsers.bind(usersAPI))
 }
-export const unFollowUsers = (userId: number) => async (dispatch: Dispatch) => {
+export const unFollowUsers = (userId: number): AppThunk => async (dispatch) => {
     await followUnfollowUsers(dispatch, userId, userActions.unFollow, usersAPI.unFollowUsers.bind(usersAPI))
 }
 //Types
