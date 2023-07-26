@@ -2,7 +2,7 @@ import {followUsers, unFollowUsers, userActions} from './users-reducer';
 import {ResponseType, ResultCodesEnum} from '../../../api/api';
 import {usersAPI} from '../../../api/users-api';
 
-jest.mock('../../api/api');
+jest.mock('../../../api/users-api');
 
 const {follow, toggleFollowingProgress, unFollow} = userActions
 const userAPIMock = usersAPI as jest.Mocked<typeof usersAPI>
