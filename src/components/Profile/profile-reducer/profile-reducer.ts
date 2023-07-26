@@ -62,7 +62,6 @@ export const profileActions = {
     deletePost: (id: number) => ({type: 'PROFILE/DELETE_POST', id} as const),
     savePhotoSuccess: (photos: PhotosType) => ({type: 'PROFILE/SAVE_PHOTO', photos} as const)
 }
-
 //Thunks
 export const getProfileData = (userId: string): AppThunk => async (dispatch) => {
     const data = await profileAPI.getProfile(userId)

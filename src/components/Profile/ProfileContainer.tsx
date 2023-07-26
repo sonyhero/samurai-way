@@ -3,11 +3,10 @@ import {Profile} from './Profile';
 import {connect} from 'react-redux';
 import {
     getProfileData,
-    getProfileStatus,
+    getProfileStatus, profileActions,
     ProfileType,
     savePhoto,
     saveProfile,
-    setUserProfile,
     updateProfileStatus
 } from './profile-reducer/profile-reducer';
 import {RootReducerType} from '../../app/store';
@@ -17,6 +16,8 @@ import {compose} from 'redux';
 import {getProfile, getStatus} from '../../app/selectors/profile-selector';
 import {getIsAuth, getUserId} from '../../app/selectors/auth-selector';
 import {ProfileFormType} from "./ProfileInfo/ProfileForm/ProfileForm";
+
+const {setUserProfile} = profileActions
 
 export class ProfileAPIComponent extends React.Component<ProfileAPIComponentType> {
 
