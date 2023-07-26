@@ -1,12 +1,15 @@
 import {
-    addPost,
-    deletePost,
-    InitialProfileReducerStateType,
+    InitialProfileReducerStateType, profileActions,
     profileReducer,
     ProfileType,
+} from './profile-reducer';
+
+const {
+    addPost,
+    deletePost,
     setUserProfile,
     setUserProfileStatus
-} from './profile-reducer';
+} = profileActions
 
 describe('profileReducer', () => {
     let initialState: InitialProfileReducerStateType;

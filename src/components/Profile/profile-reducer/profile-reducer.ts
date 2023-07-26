@@ -1,4 +1,4 @@
-import {AppThunk} from '../../../app/store';
+import {AppThunk, InferActionsTypes} from '../../../app/store';
 import {ProfileFormType} from '../ProfileInfo/ProfileForm/ProfileForm';
 import {stopSubmit} from 'redux-form';
 import {profileAPI} from '../../../api/profile-api';
@@ -42,10 +42,10 @@ export const profileReducer = (state: InitialProfileReducerStateType = initialSt
             }
             return {...state, posts: [...state.posts, newPost]}
         case 'PROFILE/SET_USER_PROFILE': {
-            return {...state, profile: action.payload.profile}
+            return {...state, profile: action.profile}
         }
         case 'PROFILE/SET_USER_PROFILE_STATUS':
-            return {...state, profileStatus: action.payload.status}
+            return {...state, profileStatus: action.status}
         case 'PROFILE/DELETE_POST':
             return {...state, posts: state.posts.filter(p => p.id !== action.id)}
         case 'PROFILE/SAVE_PHOTO':
@@ -55,60 +55,34 @@ export const profileReducer = (state: InitialProfileReducerStateType = initialSt
     }
 }
 //Actions
-export const addPost = (newPostText: string) => ({type: 'PROFILE/ADD_POST', newPostText} as const)
-export const setUserProfile = (profile: ProfileType) => {
-    return {
-        type: 'PROFILE/SET_USER_PROFILE',
-        payload: {
-            profile
-        }
-    } as const
+export const profileActions = {
+    addPost: (newPostText: string) => ({type: 'PROFILE/ADD_POST', newPostText} as const),
+    setUserProfile: (profile: ProfileType) => ({type: 'PROFILE/SET_USER_PROFILE', profile} as const),
+    setUserProfileStatus: (status: string) => ({type: 'PROFILE/SET_USER_PROFILE_STATUS', status} as const),
+    deletePost: (id: number) => ({type: 'PROFILE/DELETE_POST', id} as const),
+    savePhotoSuccess: (photos: PhotosType) => ({type: 'PROFILE/SAVE_PHOTO', photos} as const)
 }
-export const setUserProfileStatus = (status: string) => {
-    return {
-        type: 'PROFILE/SET_USER_PROFILE_STATUS',
-        payload: {
-            status
-        }
-    } as const
-}
-export const deletePost = (id: number) => {
-    return {
-        type: 'PROFILE/DELETE_POST',
-        id
-    } as const
-}
-export const savePhotoSuccess = (photos: PhotosType) => {
-    return {
-        type: 'PROFILE/SAVE_PHOTO',
-        photos
-    } as const
-}
-export const setProfileUpdateFormStatus = (value: string | null) => {
-    return {
-        type: 'PROFILE/UPDATE_PROFILE_FORM_STATUS',
-        value
-    } as const
-}
+
+
 //Thunks
 export const getProfileData = (userId: string): AppThunk => async (dispatch) => {
     const data = await profileAPI.getProfile(userId)
-    dispatch(setUserProfile(data))
+    dispatch(profileActions.setUserProfile(data))
 }
 export const getProfileStatus = (userId: string): AppThunk => async (dispatch) => {
     const data = await profileAPI.getStatus(userId)
-    dispatch(setUserProfileStatus(data))
+    dispatch(profileActions.setUserProfileStatus(data))
 }
 export const updateProfileStatus = (status: string): AppThunk => async (dispatch) => {
     const data = await profileAPI.updateStatus(status)
     if (data.resultCode === ResultCodesEnum.Success) {
-        dispatch(setUserProfileStatus(status))
+        dispatch(profileActions.setUserProfileStatus(status))
     }
 }
 export const savePhoto = (file: File): AppThunk => async (dispatch) => {
     const data = await profileAPI.updatePhoto(file)
     if (data.resultCode === ResultCodesEnum.Success) {
-        dispatch(savePhotoSuccess(data.data.photos))
+        dispatch(profileActions.savePhotoSuccess(data.data.photos))
     }
 }
 export const saveProfile = (profile: ProfileFormType): AppThunk => async (dispatch, getState) => {
@@ -161,9 +135,10 @@ export type ProfileType = {
     photos: PhotosType
     aboutMe: string
 }
-export type ProfileReducerType =
-    | ReturnType<typeof addPost>
-    | ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setUserProfileStatus>
-    | ReturnType<typeof deletePost>
-    | ReturnType<typeof savePhotoSuccess>
+// export type ProfileReducerType =
+//     | ReturnType<typeof addPost>
+//     | ReturnType<typeof setUserProfile>
+//     | ReturnType<typeof setUserProfileStatus>
+//     | ReturnType<typeof deletePost>
+//     | ReturnType<typeof savePhotoSuccess>
+export type ProfileReducerType = InferActionsTypes<typeof profileActions>
