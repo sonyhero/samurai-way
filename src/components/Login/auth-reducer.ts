@@ -1,8 +1,9 @@
 import {AppThunk} from '../../app/store';
 
-import {authAPI, securityAPI} from '../../api/api';
 import {stopSubmit} from 'redux-form';
-import {ResultCodeForCapctha, ResultCodesEnum} from '../Users/enums';
+import {authAPI} from '../../api/auth-api';
+import {securityAPI} from '../../api/security-api';
+import {ResultCodeForCapctha, ResultCodesEnum} from '../../api/api';
 
 const initialState: InitialUsersReducerStateType = {
     userId: null,

@@ -1,7 +1,7 @@
-import {ResponseType, usersAPI} from '../../api/api';
+import {ResponseType, ResultCodesEnum} from '../../api/api';
 import {Dispatch} from 'redux';
-import {ResultCodesEnum} from './enums';
 import {InferActionsTypes} from '../../app/store';
+import {usersAPI} from '../../api/users-api';
 
 const initialState: InitialUsersReducerStateType = {
     users: [],

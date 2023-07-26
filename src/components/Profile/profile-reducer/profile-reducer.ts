@@ -1,8 +1,8 @@
 import {AppThunk} from '../../../app/store';
-import {profileAPI} from '../../../api/api';
 import {ProfileFormType} from '../ProfileInfo/ProfileForm/ProfileForm';
 import {stopSubmit} from 'redux-form';
-import {ResultCodesEnum} from '../../Users/enums';
+import {profileAPI} from '../../../api/profile-api';
+import {ResultCodesEnum} from '../../../api/api';
 
 const initialState = {
     posts: [
