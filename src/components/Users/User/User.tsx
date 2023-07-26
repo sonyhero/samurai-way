@@ -2,7 +2,7 @@ import React from 'react';
 import s from './UserCSS.module.css';
 import userPhoto from '../../../assets/img/user.png';
 import {NavLink} from 'react-router-dom';
-import {UserType} from '../users-reducer';
+import {UserType} from '../user-reducer/users-reducer';
 import {Button} from '../../common/Button/Button';
 
 export const User: React.FC<UserPropsType> = (props) => {

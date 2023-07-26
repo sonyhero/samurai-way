@@ -1,4 +1,4 @@
-import {UserType} from '../components/Users/users-reducer';
+import {UserType} from '../components/Users/user-reducer/users-reducer';
 import {instance, ResponseType} from './api';
 
 export const usersAPI = {

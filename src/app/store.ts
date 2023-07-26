@@ -2,7 +2,7 @@ import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import {dialogsReducer, DialogsReducerType} from '../components/Dialogs/dialogs-reducer';
 import {profileReducer} from '../components/Profile/profile-reducer/profile-reducer';
 import {sidebarReducer} from '../components/Navbar/sidebar-reducer';
-import {usersReducer, UsersReducerType} from '../components/Users/users-reducer';
+import {usersReducer, UsersReducerType} from '../components/Users/user-reducer/users-reducer';
 import {authReducer, AuthReducerType} from '../components/Login/auth-reducer';
 import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {FormAction, reducer as formReducer} from 'redux-form'

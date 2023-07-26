@@ -7,7 +7,7 @@ import {
     requestUsers,
     unFollowUsers,
     UserType
-} from './users-reducer';
+} from './user-reducer/users-reducer';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {compose} from 'redux';
