@@ -1,7 +1,9 @@
-import {addPost, deletePost, InitialProfileReducerStateType} from '../profile-reducer/profile-reducer';
+import {InitialProfileReducerStateType, profileActions} from '../profile-reducer/profile-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
 import {RootReducerType} from '../../../app/store';
+
+const {addPost, deletePost} = profileActions
 
 export type MapStateToPropsType = {
     profilePage: InitialProfileReducerStateType
