@@ -1,6 +1,7 @@
 import React from 'react'
 import s from './FormsControls.module.css'
 import { Field } from 'redux-form'
+import { TextField } from '../../ui/textfield'
 
 export const FormControl: React.FC<FormControlType> = (props) => {
   const {
@@ -33,6 +34,15 @@ export const TextArea: React.FC<FormControlType> = (props) => {
 
 // type InputType = InputHTMLAttributes<HTMLInputElement>
 export const Input: React.FC<FormControlType> = (props) => {
+  const { input, meta, ...restProps } = props
+  return (
+    <FormControl {...props}>
+      <TextField {...input} errorMessage={meta.error} {...restProps} />
+    </FormControl>
+  )
+}
+
+export const CheckBox: React.FC<FormControlType> = (props) => {
   const { input, meta, ...restProps } = props
   return (
     <FormControl {...props}>

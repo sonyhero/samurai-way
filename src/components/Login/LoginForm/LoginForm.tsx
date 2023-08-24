@@ -1,6 +1,6 @@
 import React from 'react'
 import { InjectedFormProps, reduxForm } from 'redux-form'
-import { fieldCreator, Input } from '../../common/FormsControls/FormsControl'
+import { CheckBox, fieldCreator, Input } from '../../common/FormsControls/FormsControl'
 import { required } from '../../../utils/validators'
 import s from './Login-formCSS.module.css'
 import { useSelector } from 'react-redux'
@@ -30,10 +30,10 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
         <div className={s.input}>{fieldCreator('email', 'Email', [required], Input)}</div>
         <div className={s.input}>{fieldCreator('password', 'Password', [required], Input, { type: 'password' })}</div>
         <div className={s.checkBox}>
-          {fieldCreator('rememberMe', '', [], Input, { type: 'checkbox' }, 'Remember Me')}
+          {fieldCreator('rememberMe', '', [], CheckBox, { type: 'checkbox' }, 'Remember Me')}
         </div>
         {/*//--------------------------------------------------------*/}
-        {props.error && <div className={s.error}>{props.error}</div>}
+        {/*{props.error && <div className={s.error}>{props.error}</div>}*/}
 
         {captcha && <img src={`${captcha}`} alt={'anti-bot captcha'} />}
         {captcha && <div className={s.input}>{fieldCreator('captcha', 'Captcha', [required], Input)}</div>}
