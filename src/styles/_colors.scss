@@ -54,4 +54,10 @@
   --color-dark-500: #333;
   --color-dark-700: #171717;
   --color-dark-900: #000;
+
+  // palette 1
+  --color-palette-100: var(--color-accent-700);
+  --color-palette-200: #a5dbdd;
+  --color-palette-300: var(--color-light-300);
+  --color-palette-400: #d3e1e2;
 }
