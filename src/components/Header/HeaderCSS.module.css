@@ -1,27 +1,26 @@
 .header {
-    width: 100%;
-    background-color: #fff7ec;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  background-color: #fff7ec;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .networkName {
-    margin-left: 20px;
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 42px;
-    text-align: center;
-    color: #747474;
+  margin-left: 20px;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 42px;
+  text-align: center;
+  color: #747474;
 }
 
-.loginContainer{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.loginContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .loginBlock {
-
 }

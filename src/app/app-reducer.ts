@@ -1,28 +1,30 @@
-import {AppThunk} from './store';
-import {getAuthUserData} from '../components/Login/auth-reducer';
+import { AppThunk } from './store'
+import { getAuthUserData } from '../components/Login/auth-reducer'
 
 const initialState: InitialUsersReducerStateType = {
-    initialized: false
+  initialized: false,
 }
 
-export const appReducer = (state: InitialUsersReducerStateType = initialState, action: AppReducerType):
-    InitialUsersReducerStateType => {
-    switch (action.type) {
-        case 'APP/INITIALIZED_SUCCESS':
-            return {...state, initialized: true}
-        default:
-            return state
-    }
+export const appReducer = (
+  state: InitialUsersReducerStateType = initialState,
+  action: AppReducerType,
+): InitialUsersReducerStateType => {
+  switch (action.type) {
+    case 'APP/INITIALIZED_SUCCESS':
+      return { ...state, initialized: true }
+    default:
+      return state
+  }
 }
 //Actions
-export const initializedSuccess = () => ({type: 'APP/INITIALIZED_SUCCESS'} as const)
+export const initializedSuccess = () => ({ type: 'APP/INITIALIZED_SUCCESS' }) as const
 //Thunks
 export const initializeApp = (): AppThunk => async (dispatch) => {
-    await dispatch(getAuthUserData())
-    dispatch(initializedSuccess())
+  await dispatch(getAuthUserData())
+  dispatch(initializedSuccess())
 }
 //Types
 export type InitialUsersReducerStateType = {
-    initialized: boolean
+  initialized: boolean
 }
 export type AppReducerType = ReturnType<typeof initializedSuccess>

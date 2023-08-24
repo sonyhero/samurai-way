@@ -1,14 +1,14 @@
 .preloaderContainer {
-    background-color: #fad6ca;
-    height: 90vh;
-    /* height: 100%; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0 auto;
+  background-color: #fad6ca;
+  height: 90vh;
+  /* height: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
 }
 
 .preloader {
-    width: 200px;
+  width: 200px;
 }

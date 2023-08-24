@@ -1,16 +1,15 @@
 .formControl {
-    padding: 10px;
+  padding: 10px;
 }
 
 .formControl.error span {
-    color: #ce4467;
+  color: #ce4467;
 }
 
 .summeryError {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .fieldName {
-    padding: 0 0 10px 10px;
+  padding: 0 0 10px 10px;
 }
-
