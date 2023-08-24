@@ -3,7 +3,7 @@ import { Button } from '../../../common/Button/Button'
 import { fieldCreator, Input, TextArea } from '../../../common/FormsControls/FormsControl'
 import { InjectedFormProps, reduxForm } from 'redux-form'
 import { ContactsForm } from './ContactsForm'
-import s from '../../../Login/LoginCSS.module.css'
+import s from '../../../Login/LoginForm/Login-formCSS.module.css'
 
 export const ProfileForm: React.FC<InjectedFormProps<ProfileFormType>> = (props) => {
   return (

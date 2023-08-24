@@ -2,18 +2,31 @@ import React from 'react'
 import { InjectedFormProps, reduxForm } from 'redux-form'
 import { fieldCreator, Input } from '../../common/FormsControls/FormsControl'
 import { required } from '../../../utils/validators'
-import s from '../LoginCSS.module.css'
+import s from './Login-formCSS.module.css'
 import { useSelector } from 'react-redux'
 import { RootReducerType } from '../../../app/store'
+import { Typography } from '../../ui/typography'
+import { Button } from '../../ui/button'
+import { Card } from '../../ui/card'
 
 const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
   const captcha = useSelector<RootReducerType>((state) => state.authReducer.captchaUrl)
 
   return (
-    <div className={s.container}>
+    <Card className={s.container}>
+      <Typography>
+        To log in get registered on{' '}
+        <Typography as={'a'} href={'https://social-network.samuraijs.com/'} target={'_blank'} rel="noreferrer">
+          this site
+        </Typography>
+      </Typography>
+      <Typography>or use common test account credentials:</Typography>
+      <Typography>Email: free@samuraijs.com</Typography>
+      <Typography>Password: free</Typography>
+      <Typography className={s.title} variant={'large'}>
+        Login
+      </Typography>
       <form onSubmit={props.handleSubmit} className={s.formContainer}>
-        <h3>Login Here</h3>
-        {/*Рефакторинг*/}
         <div className={s.input}>{fieldCreator('email', 'Email', [required], Input)}</div>
         <div className={s.input}>{fieldCreator('password', 'Password', [required], Input, { type: 'password' })}</div>
         <div className={s.checkBox}>
@@ -25,22 +38,11 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
         {captcha && <img src={`${captcha}`} alt={'anti-bot captcha'} />}
         {captcha && <div className={s.input}>{fieldCreator('captcha', 'Captcha', [required], Input)}</div>}
 
-        <div className={s.sbtButton}>
-          <button type={'submit'}>Login</button>
-        </div>
+        <Button fullWidth={true} className={s.submit} type={'submit'}>
+          Login
+        </Button>
       </form>
-      <div className={s.testData}>
-        <div>
-          <p>You can also use common test account credentials:</p>
-        </div>
-        <div>
-          <p>Email: free@samuraijs.com</p>
-        </div>
-        <div>
-          <p>Password: free</p>
-        </div>
-      </div>
-    </div>
+    </Card>
   )
 }
 
