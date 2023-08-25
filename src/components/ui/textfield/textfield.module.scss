@@ -51,8 +51,8 @@
     }
 
     &.error {
-      color: var(--color-danger-300);
-      border-color: var(--color-danger-300);
+      color: var(--color-danger-100);
+      border-color: var(--color-danger-100);
     }
   }
 
@@ -80,5 +80,5 @@
 }
 
 .errorMessage {
-  color: var(--color-danger-300);
+  color: var(--color-danger-100);
 }
