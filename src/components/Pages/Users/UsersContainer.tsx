@@ -1,7 +1,7 @@
 import React, { ComponentType } from 'react'
 import { RootReducerType } from '../../../app/store'
 import { connect } from 'react-redux'
-import { userActions, followUsers, requestUsers, unFollowUsers, UserType } from './user-reducer/users-reducer'
+import { followUsers, requestUsers, unFollowUsers, userActions, UserType } from './user-reducer/users-reducer'
 import { Users } from './Users'
 import { Preloader } from '../../common/Preloader/Preloader'
 import { compose } from 'redux'
@@ -13,6 +13,8 @@ import {
   getTotalUsersCount,
   getUsers,
 } from '../../../app/selectors/users-selector'
+import { getIsAuth } from '../../../app/selectors/auth-selector'
+import { Redirect } from 'react-router-dom'
 
 const { follow, unFollow, setUsers, setCurrentPage, setUsersTotalCount, toggleIsFetching, toggleFollowingProgress } =
   userActions
@@ -29,12 +31,14 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
   }
 
   render() {
+    if (!this.props.isAuth) return <Redirect to={'/login'} />
     return this.props.isFetching ? <Preloader /> : <Users {...this.props} onPageChanged={this.onPageChanged} />
   }
 }
 
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
   return {
+    isAuth: getIsAuth(state),
     users: getUsers(state),
     pageSize: getPageSize(state),
     totalUsersCount: getTotalUsersCount(state),
@@ -72,6 +76,7 @@ type MapDispatchToPropsType = {
   unFollowUsers: (userId: number) => void
 }
 type MapStateToPropsType = {
+  isAuth: boolean
   users: UserType[]
   pageSize: number
   totalUsersCount: number

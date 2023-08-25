@@ -4,8 +4,13 @@ import { DialogItem } from './DialogItem/DialogsItem'
 import { Message } from './Message/Message'
 import { MapDispatchToPropsType, MapStateToPropsType } from './DialogsContainer'
 import { AddMessageReduxForm } from './AddMessageForm'
+import { useAppSelector } from '../../../app/store'
+import { getIsAuth } from '../../../app/selectors/auth-selector'
+import { Redirect } from 'react-router-dom'
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+  const isAuth = useAppSelector(getIsAuth)
+
   const { addMessage, dialogsPage } = props
 
   const dialogsDataMap = dialogsPage.dialogs.map((d) => <DialogItem key={d.id} name={d.name} id={d.id} />)
@@ -16,7 +21,9 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     addMessage(data.messageText)
   }
 
-  return (
+  return !isAuth ? (
+    <Redirect to={'/login'} />
+  ) : (
     <div>
       Dialogs
       <div className={s.dialogs}>

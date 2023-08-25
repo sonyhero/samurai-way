@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux'
 import { getContacts } from '../../../../../app/selectors/profile-selector'
 import React from 'react'
+import { useAppSelector } from '../../../../../app/store'
 
 export const Contacts = () => {
-  const contacts = useSelector(getContacts)
+  const contacts = useAppSelector(getContacts)
   const mappedContacts = Object.entries(contacts).map((key, index) => {
     return (
       <div key={index}>
