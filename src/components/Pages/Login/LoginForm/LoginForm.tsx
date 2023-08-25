@@ -2,7 +2,7 @@ import React from 'react'
 import { InjectedFormProps, reduxForm } from 'redux-form'
 import { CheckBox, fieldCreator, Input } from '../../../common/FormsControls/FormsControl'
 import { required } from '../../../../utils/validators'
-import s from './Login-formCSS.module.css'
+import s from './Login-form.module.scss'
 import { useSelector } from 'react-redux'
 import { RootReducerType } from '../../../../app/store'
 import { Typography } from '../../../ui/typography'
@@ -27,8 +27,10 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
         Login
       </Typography>
       <form onSubmit={props.handleSubmit} className={s.formContainer}>
-        <div className={s.input}>{fieldCreator('email', 'Email', [required], Input)}</div>
-        <div className={s.input}>{fieldCreator('password', 'Password', [required], Input, { type: 'password' })}</div>
+        <div className={s.inputBox}>{fieldCreator('email', 'Email', [required], Input)}</div>
+        <div className={s.inputBox}>
+          {fieldCreator('password', 'Password', [required], Input, { type: 'password' })}
+        </div>
         <div className={s.checkBox}>
           {fieldCreator('rememberMe', '', [], CheckBox, { type: 'checkbox' }, 'Remember Me')}
         </div>
@@ -36,7 +38,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
         {/*{props.error && <div className={s.error}>{props.error}</div>}*/}
 
         {captcha && <img src={`${captcha}`} alt={'anti-bot captcha'} />}
-        {captcha && <div className={s.input}>{fieldCreator('captcha', 'Captcha', [required], Input)}</div>}
+        {captcha && <div className={s.inputBox}>{fieldCreator('captcha', 'Captcha', [required], Input)}</div>}
 
         <Button fullWidth={true} className={s.submit} type={'submit'}>
           Login

@@ -3,27 +3,32 @@
   flex-direction: column;
 
   width: 26.5rem;
-  margin: 2.25rem auto 0;
+  margin: 5rem auto 0;
   padding: 2.06rem 2.25rem;
 
   .title {
     margin-bottom: 1.69rem;
     text-align: center;
   }
+
   .formContainer {
-    .submit {
-      padding: 0.375rem 0;
-      margin-top: 0.75rem;
+    .inputBox {
+      padding-bottom: 30px;
     }
 
     .checkBox {
       display: flex;
-      /*justify-content: center;*/
       align-items: center;
-    }
-    & input {
       color: var(--color-dark-300);
+    }
+
+    & input {
       cursor: pointer;
+    }
+
+    .submit {
+      padding: 0.375rem 0;
+      margin-top: 0.75rem;
     }
   }
 }

@@ -1,25 +1,12 @@
 import React from 'react'
-import s from './FormsControls.module.css'
+import s from './FormsControls.module.scss'
 import { Field } from 'redux-form'
 import { TextField } from '../../ui/textfield'
 
 export const FormControl: React.FC<FormControlType> = (props) => {
-  const {
-    input,
-    meta: { touched, error },
-    children,
-    ...restProps
-  } = props
+  const { input, meta, children, ...restProps } = props
 
-  const isError = touched && error
-  const finalClassName = `${s.formControl} ${isError ? s.error : ''}`
-
-  return (
-    <div className={finalClassName}>
-      <div>{children}</div>
-      <div className={s.summeryError}>{isError && <span>{error}</span>}</div>
-    </div>
-  )
+  return <>{children}</>
 }
 
 // type TextAreaType = TextareaHTMLAttributes<HTMLTextAreaElement>;
@@ -27,7 +14,7 @@ export const TextArea: React.FC<FormControlType> = (props) => {
   const { input, meta, ...restProps } = props
   return (
     <FormControl {...props}>
-      <textarea {...input} {...restProps} />
+      <TextField {...input} errorMessage={meta.error} {...restProps} />
     </FormControl>
   )
 }
