@@ -12,9 +12,12 @@ export const FormControl: React.FC<FormControlType> = (props) => {
 // type TextAreaType = TextareaHTMLAttributes<HTMLTextAreaElement>;
 export const TextArea: React.FC<FormControlType> = (props) => {
   const { input, meta, ...restProps } = props
+
+  const error = meta.touched && meta.error ? meta.error : ''
+
   return (
     <FormControl {...props}>
-      <TextField {...input} errorMessage={meta.error} {...restProps} />
+      <TextField {...input} errorMessage={error} {...restProps} />
     </FormControl>
   )
 }
@@ -22,9 +25,12 @@ export const TextArea: React.FC<FormControlType> = (props) => {
 // type InputType = InputHTMLAttributes<HTMLInputElement>
 export const Input: React.FC<FormControlType> = (props) => {
   const { input, meta, ...restProps } = props
+
+  const error = meta.touched && meta.error ? meta.error : ''
+
   return (
     <FormControl {...props}>
-      <TextField {...input} errorMessage={meta.error} {...restProps} />
+      <TextField {...input} errorMessage={error} {...restProps} />
     </FormControl>
   )
 }
