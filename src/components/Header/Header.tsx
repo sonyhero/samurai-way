@@ -9,18 +9,20 @@ export const Header: React.FC<HeaderPropsType> = (props) => {
 
   return (
     <header className={s.header}>
-      <Typography className={s.networkName} variant={'large'}>
-        Social Network
-      </Typography>
-      <div className={s.loginBlock}>
-        {isAuth && (
-          <>
-            <Typography className={s.userName}>{login}</Typography>
-            <Button className={s.logoutBtn} variant={'secondary'} onClick={logout}>
-              Log out
-            </Button>
-          </>
-        )}
+      <div className={s.contentBox}>
+        <Typography className={s.networkName} variant={'large'}>
+          Social Network
+        </Typography>
+        <div className={s.loginBlock}>
+          {isAuth && (
+            <>
+              <Typography className={s.userName}>{login}</Typography>
+              <Button className={s.logoutBtn} variant={'secondary'} onClick={logout}>
+                Log out
+              </Button>
+            </>
+          )}
+        </div>
       </div>
     </header>
   )

@@ -1,22 +1,29 @@
+@import 'src/styles/mixins';
+
 .header {
-  width: 100%;
+  display: flex;
   background-color: var(--color-palette-200);
   height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
-  .networkName {
-    margin-left: 20px;
-  }
-
-  .loginBlock {
+  .contentBox {
+    @include container();
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .userName,
-    .logoutBtn {
-      margin-right: 20px;
+
+    .networkName {
+      margin-left: 20px;
+    }
+
+    .loginBlock {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .userName,
+      .logoutBtn {
+        margin-right: 20px;
+      }
     }
   }
 }
