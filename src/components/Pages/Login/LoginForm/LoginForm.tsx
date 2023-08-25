@@ -4,13 +4,14 @@ import { CheckBox, fieldCreator, Input } from '../../../common/FormsControls/For
 import { required } from '../../../../utils/validators'
 import s from './Login-form.module.scss'
 import { useSelector } from 'react-redux'
-import { RootReducerType } from '../../../../app/store'
+import { RootReducerType, useAppSelector } from '../../../../app/store'
 import { Typography } from '../../../ui/typography'
 import { Button } from '../../../ui/button'
 import { Card } from '../../../ui/card'
+import { getCaptchaUrl } from '../../../../app/selectors/auth-selector'
 
 const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
-  const captcha = useSelector<RootReducerType>((state) => state.authReducer.captchaUrl)
+  const captcha = useAppSelector(getCaptchaUrl)
 
   return (
     <Card className={s.container}>
