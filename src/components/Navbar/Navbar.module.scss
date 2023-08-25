@@ -1,0 +1,16 @@
+.nav {
+  width: 200px;
+  background-color: var(--color-palette-400);
+  padding: 20px;
+  height: 100vh;
+
+  .item a {
+    color: var(--color-dark-900);
+    text-decoration: none;
+  }
+
+  .item a.activeLink {
+    color: var(--color-dark-100);
+    font-size: 20px;
+  }
+}

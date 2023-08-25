@@ -1,5 +1,5 @@
 import React, { ComponentType } from 'react'
-import './App.module.css'
+import s from './App.module.scss'
 import { Navbar } from '../components/Navbar/Navbar'
 import { HashRouter, withRouter } from 'react-router-dom'
 import { HeaderContainer } from '../components/Header/HeaderContainer'
@@ -21,8 +21,10 @@ class App extends React.Component<AppPropsType> {
     ) : (
       <div>
         <HeaderContainer />
-        {this.props.isAuth && <Navbar />}
-        <Routing />
+        <div className={s.appBox}>
+          {this.props.isAuth && <Navbar />}
+          <Routing />
+        </div>
       </div>
     )
   }
