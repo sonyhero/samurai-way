@@ -2,6 +2,7 @@ import React from 'react'
 import s from './HeaderCSS.module.css'
 import { HeaderAPIComponentType } from './HeaderContainer'
 import { Button } from '../common/Button/Button'
+import { Typography } from '../ui/typography'
 
 export const Header: React.FC<HeaderPropsType> = (props) => {
   const { isAuth, login, logout } = props
@@ -9,7 +10,7 @@ export const Header: React.FC<HeaderPropsType> = (props) => {
   return (
     <header className={s.header}>
       <div className={s.networkName}>
-        <h1>Social Network</h1>
+        <Typography variant={'large'}>Social Network</Typography>
       </div>
       <div className={s.loginBlock}>
         {isAuth && (

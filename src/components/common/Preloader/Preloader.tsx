@@ -5,9 +5,7 @@ import s from './PreloaderCSS.module.css'
 export const Preloader = () => {
   return (
     <div className={s.preloaderContainer}>
-      <div className={s.preloader}>
-        <img src={preloader} alt={'loading'} />
-      </div>
+      <img src={preloader} alt={'loading'} />
     </div>
   )
 }
