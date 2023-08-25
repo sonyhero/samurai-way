@@ -1,0 +1,22 @@
+.header {
+  width: 100%;
+  background-color: var(--color-palette-200);
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .networkName {
+    margin-left: 20px;
+  }
+
+  .loginBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .userName,
+    .logoutBtn {
+      margin-right: 20px;
+    }
+  }
+}
