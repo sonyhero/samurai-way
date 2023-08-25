@@ -2,7 +2,7 @@ import React from 'react'
 import s from './Navbar.module.scss'
 import { NavLink } from 'react-router-dom'
 import { MessagesNav, MusicNav, NewsNav, ProfileNav, SettingsNav } from '../../assets/iconsNavbar'
-import { UsersNav } from '../../assets/iconsNavbar/users-nav'
+import { UsersNav } from '../../assets/iconsNavbar'
 
 export const Navbar = () => {
   return (

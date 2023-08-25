@@ -4,13 +4,19 @@
   padding: 20px;
   min-height: 100vh;
 
-  .item a {
-    color: var(--color-dark-900);
-    text-decoration: none;
-  }
+  .item {
+    display: flex;
+    margin-bottom: 10px;
 
-  .item a.activeLink {
-    color: var(--color-dark-100);
-    font-size: 20px;
+    & a {
+      color: var(--color-dark-900);
+      text-decoration: none;
+      margin-left: 10px;
+    }
+
+    & a.activeLink {
+      color: var(--color-dark-100);
+      font-size: 20px;
+    }
   }
 }
