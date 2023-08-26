@@ -3,6 +3,7 @@ import s from './MyPostsCSS.module.css'
 import { Post } from './Post/Post'
 import { MapDispatchToPropsType, MapStateToPropsType } from './MyPostsContainer'
 import { AddPostReduxForm, FormAddPostDataType } from './AddPostForm'
+import { Typography } from '../../../ui/typography'
 
 export const MyPosts: React.FC<MyPostsPropsType> = memo((props) => {
   const { addPost, profilePage, deletePost } = props
@@ -19,10 +20,8 @@ export const MyPosts: React.FC<MyPostsPropsType> = memo((props) => {
 
   return (
     <div className={s.postsBlock}>
-      <h3>My posts</h3>
-      <div>
-        <AddPostReduxForm onSubmit={onAddPost} />
-      </div>
+      <Typography variant={'h3'}>My posts</Typography>
+      <AddPostReduxForm onSubmit={onAddPost} />
       <div className={s.posts}>{postDataMap}</div>
     </div>
   )
