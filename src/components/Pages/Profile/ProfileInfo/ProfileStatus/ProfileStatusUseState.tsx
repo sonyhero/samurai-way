@@ -1,4 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
+import { TextField } from '../../../../ui/textfield'
+import { Typography } from '../../../../ui/typography'
 
 type ProfileStatusType = {
   status: string
@@ -36,7 +38,7 @@ export const ProfileStatusUseState: React.FC<ProfileStatusType> = (props) => {
     <>
       {editMode ? (
         <div>
-          <input
+          <TextField
             autoFocus
             onBlur={deActivateEditMode}
             value={statusProfile}
@@ -46,7 +48,7 @@ export const ProfileStatusUseState: React.FC<ProfileStatusType> = (props) => {
         </div>
       ) : (
         <div>
-          <span onDoubleClick={activateEditMode}>{status || 'No status'}</span>
+          <Typography onDoubleClick={activateEditMode}>{status || 'No status'}</Typography>
         </div>
       )}
     </>

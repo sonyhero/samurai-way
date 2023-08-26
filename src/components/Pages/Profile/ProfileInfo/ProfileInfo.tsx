@@ -5,6 +5,7 @@ import { ProfileStatusUseState } from './ProfileStatus/ProfileStatusUseState'
 import { ProfileDescription } from './ProfileDescription/ProfileDescription'
 import { ProfileAvatar } from './ProfileAvatar/ProfileAvatar'
 import ProfileForm, { ProfileFormType } from './ProfileForm/ProfileForm'
+import { Typography } from '../../../ui/typography'
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
   const { profile, profileStatus, updateProfileStatus, isOwner, savePhoto, saveProfile } = props
@@ -28,9 +29,6 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
 
   return (
     <div>
-      <div>
-        <img src="https://cdn.wallpapersafari.com/66/25/slYcCE.jpg" alt="itachi content" width="600px" height="200px" />
-      </div>
       <div className={s.descriptionBlock}>
         <ProfileAvatar isAvatar={!profile} photos={profile.photos} />
         <span>------------------</span>
@@ -43,7 +41,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
         )}
         <span>------------------</span>
       </div>
-      Status:
+      <Typography>Status:</Typography>
       <ProfileStatusUseState status={profileStatus} updateProfileStatus={updateProfileStatus} />
       <span>------------------</span>
     </div>
