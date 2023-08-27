@@ -15,6 +15,8 @@ export const Users: React.FC<UsersPropsType> = (props) => {
     unFollowUsers,
   } = props
 
+  const pagesCount = Math.ceil(totalUsersCount / pageSize)
+
   const mappedUsers = users.map((u) => (
     <User
       key={u.id}
@@ -34,7 +36,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
       {/*  onPageChanged={onPageChanged}*/}
       {/*  portionSize={10}*/}
       {/*/>*/}
-      <Pagination count={totalUsersCount} page={currentPage} onChange={onPageChanged} />
+      <Pagination count={pagesCount} page={currentPage} onChange={onPageChanged} />
       {mappedUsers}
     </div>
   )
