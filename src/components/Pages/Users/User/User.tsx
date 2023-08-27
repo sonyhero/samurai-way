@@ -3,7 +3,7 @@ import s from './UserCSS.module.css'
 import userPhoto from '../../../../assets/img/user.png'
 import { NavLink } from 'react-router-dom'
 import { UserType } from '../user-reducer/users-reducer'
-import { Button } from '../../../common/Button/Button'
+import { Button } from '../../../ui/button'
 
 export const User: React.FC<UserPropsType> = (props) => {
   const { user, followingInProgress, followUsers, unFollowUsers } = props
@@ -26,17 +26,16 @@ export const User: React.FC<UserPropsType> = (props) => {
         <div>
           {user.followed ? (
             <Button
-              name={'Unfollow'}
-              xType={'red'}
+              variant={'secondary'}
               disabled={followingInProgress.some((id) => id === user.id)}
-              callback={() => changeUnFollow(user.id)}
-            />
+              onClick={() => changeUnFollow(user.id)}
+            >
+              Unfollow
+            </Button>
           ) : (
-            <Button
-              name={'Follow'}
-              disabled={followingInProgress.some((id) => id === user.id)}
-              callback={() => changeFollow(user.id)}
-            />
+            <Button disabled={followingInProgress.some((id) => id === user.id)} onClick={() => changeFollow(user.id)}>
+              Follow
+            </Button>
           )}
         </div>
       </span>
