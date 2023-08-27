@@ -1,7 +1,7 @@
 import React from 'react'
 import { UsersAPIComponentType } from './UsersContainer'
-import { Pagination } from '../../common/Pagination/Pagination'
 import { User } from './User/User'
+import { Pagination } from '../../ui/pagination'
 
 export const Users: React.FC<UsersPropsType> = (props) => {
   const {
@@ -27,13 +27,14 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
   return (
     <div>
-      <Pagination
-        pageSize={pageSize}
-        totalItemsCount={totalUsersCount}
-        currentPage={currentPage}
-        onPageChanged={onPageChanged}
-        portionSize={10}
-      />
+      {/*<Pagination*/}
+      {/*  pageSize={pageSize}*/}
+      {/*  totalItemsCount={totalUsersCount}*/}
+      {/*  currentPage={currentPage}*/}
+      {/*  onPageChanged={onPageChanged}*/}
+      {/*  portionSize={10}*/}
+      {/*/>*/}
+      <Pagination count={totalUsersCount} page={currentPage} onChange={onPageChanged} />
       {mappedUsers}
     </div>
   )
