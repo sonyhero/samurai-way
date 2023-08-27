@@ -1,0 +1,21 @@
+.dialogsBox {
+  width: 100%;
+  border: 1px solid red;
+
+  .dialogs {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #00ff59;
+
+    .messages {
+      border: 1px solid #170080;
+    }
+    .dialogsItems {
+      display: flex;
+      flex-direction: column;
+      margin-right: 10px;
+      border: 1px solid #ffdd00;
+    }
+  }
+}

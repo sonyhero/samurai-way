@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './DialogsCSS.module.css'
+import s from './Dialogs.module.scss'
 import { DialogItem } from './DialogItem/DialogsItem'
 import { Message } from './Message/Message'
 import { MapDispatchToPropsType, MapStateToPropsType } from './DialogsContainer'
@@ -24,14 +24,14 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
   return !isAuth ? (
     <Redirect to={'/login'} />
   ) : (
-    <div>
+    <div className={s.dialogsBox}>
       Dialogs
       <div className={s.dialogs}>
-        <div className={s.dialogsItems}>{dialogsDataMap}</div>
         <div className={s.messages}>
           {messagesDataMap}
           <AddMessageReduxForm onSubmit={onAddMessage} />
         </div>
+        <div className={s.dialogsItems}>{dialogsDataMap}</div>
       </div>
     </div>
   )

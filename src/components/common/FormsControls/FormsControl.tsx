@@ -4,7 +4,8 @@ import { Field } from 'redux-form'
 import { TextField } from '../../ui/textfield'
 
 export const FormControl: React.FC<FormControlType> = (props) => {
-  const { input, meta, children, ...restProps } = props
+  // const { input, meta, children, ...restProps } = props
+  const { children } = props
 
   return <>{children}</>
 }
