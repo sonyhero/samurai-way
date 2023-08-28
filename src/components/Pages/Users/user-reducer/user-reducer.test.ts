@@ -40,11 +40,12 @@ beforeEach(() => {
         status: 'status 3',
       },
     ],
-    pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1,
     isFetching: false,
     followingInProgress: [],
+    paginationOptions: [{ value: 5 }, { value: 10 }, { value: 20 }, { value: 50 }, { value: 100 }],
+    pageSize: 5,
+    currentPage: 1,
   }
 })
 

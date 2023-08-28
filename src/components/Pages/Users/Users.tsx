@@ -2,6 +2,9 @@ import React from 'react'
 import { UsersAPIComponentType } from './UsersContainer'
 import { User } from './User/User'
 import { Pagination } from '../../ui/pagination'
+import { Typography } from '../../ui/typography'
+import { SuperSelect } from '../../ui/select'
+import s from './Users.module.scss'
 
 export const Users: React.FC<UsersPropsType> = (props) => {
   const {
@@ -13,6 +16,8 @@ export const Users: React.FC<UsersPropsType> = (props) => {
     onPageChanged,
     followUsers,
     unFollowUsers,
+    options,
+    onSetPerPage,
   } = props
 
   const pagesCount = Math.ceil(totalUsersCount / pageSize)
@@ -36,7 +41,19 @@ export const Users: React.FC<UsersPropsType> = (props) => {
       {/*  onPageChanged={onPageChanged}*/}
       {/*  portionSize={10}*/}
       {/*/>*/}
-      <Pagination count={pagesCount} page={currentPage} onChange={onPageChanged} />
+      <div className={s.pagination}>
+        <Pagination count={pagesCount} page={currentPage} onChange={onPageChanged} />
+        <Typography variant={'body2'}>Показать</Typography>
+        <SuperSelect
+          options={options}
+          // value={`${pageSize}`}
+          defaultValue={pageSize}
+          onValueChange={onSetPerPage}
+          classname={s.selectPagination}
+        />
+        <Typography variant={'body2'}>На странице</Typography>
+      </div>
+
       {mappedUsers}
     </div>
   )
@@ -45,5 +62,6 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 //Types
 type UsersProps = {
   onPageChanged: (pageNumber: number) => void
+  onSetPerPage: (value: number) => void
 }
 type UsersPropsType = UsersProps & UsersAPIComponentType

@@ -6,3 +6,4 @@ export const getTotalUsersCount = (state: RootReducerType) => state.usersReducer
 export const getCurrentPage = (state: RootReducerType) => state.usersReducer.currentPage
 export const getIsFetching = (state: RootReducerType) => state.usersReducer.isFetching
 export const getFollowingInProgress = (state: RootReducerType) => state.usersReducer.followingInProgress
+export const getOptions = (state: RootReducerType) => state.usersReducer.paginationOptions

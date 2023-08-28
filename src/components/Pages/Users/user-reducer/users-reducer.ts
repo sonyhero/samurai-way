@@ -5,11 +5,12 @@ import { usersAPI } from '../../../../api/users-api'
 
 const initialState: InitialUsersReducerStateType = {
   users: [],
-  pageSize: 5,
   totalUsersCount: 0,
-  currentPage: 1,
   isFetching: false,
   followingInProgress: [],
+  paginationOptions: [{ value: 5 }, { value: 10 }, { value: 20 }, { value: 50 }, { value: 100 }],
+  pageSize: 5,
+  currentPage: 1,
 }
 
 export const usersReducer = (
@@ -54,6 +55,11 @@ export const usersReducer = (
           ? [...state.followingInProgress, action.userId]
           : state.followingInProgress.filter((id) => id !== action.userId),
       }
+    case 'SET_PER_PAGE':
+      return {
+        ...state,
+        pageSize: action.value,
+      }
     default:
       return state
   }
@@ -72,6 +78,7 @@ export const userActions = {
       isFetching,
       userId,
     }) as const,
+  setPerPage: (value: number) => ({ type: 'SET_PER_PAGE', value }) as const,
 }
 
 //Thunks
@@ -134,11 +141,12 @@ type PhotosType = {
 }
 export type InitialUsersReducerStateType = {
   users: UserType[]
-  pageSize: number
   totalUsersCount: number
-  currentPage: number
   isFetching: boolean
   followingInProgress: number[]
+  paginationOptions: { value: number }[]
+  pageSize: number
+  currentPage: number
 }
 // export type UsersReducerType =
 //     | ReturnType<typeof follow>
