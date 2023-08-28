@@ -1,12 +1,16 @@
 import React from 'react'
-import s from './PostCSS.module.css'
+import s from './Post.module.scss'
 import { Button } from '../../../../ui/button'
 import { Trash } from '../../../../../assets'
 import { Typography } from '../../../../ui/typography'
-// import { Button } from '../../../../common/Button/Button'
+import { AvatarDemo } from '../../../../ui/avatar'
+import { useAppSelector } from '../../../../../app/store'
 
 export const Post: React.FC<PostsType> = (props) => {
   const { id, postText, likesCount, deletePost } = props
+
+  const userPhoto = useAppSelector((state) => state.profileReducer.profile.photos.small)
+  const fullName = useAppSelector((state) => state.profileReducer.profile.fullName)
 
   const deletePostHandler = () => {
     deletePost(id)
@@ -14,12 +18,12 @@ export const Post: React.FC<PostsType> = (props) => {
 
   return (
     <div key={id} className={s.item}>
-      <img src="https://i.pinimg.com/736x/11/f7/83/11f78374741b89e4dea99e0b6356ee3c.jpg" alt="itachi logo" />
+      <AvatarDemo name={fullName} src={userPhoto} />
       <Typography>{postText}</Typography>
       <div>
         <Typography> {likesCount} likes</Typography>
         <Button variant={'icon'} onClick={deletePostHandler}>
-          <Trash fill={'#2D606BFF'} />
+          <Trash className={s.icon} />
         </Button>
       </div>
     </div>
