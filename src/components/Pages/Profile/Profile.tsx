@@ -17,7 +17,7 @@ export const Profile: React.FC<ProfilePropsType> = (props) => {
         savePhoto={savePhoto}
         saveProfile={saveProfile}
       />
-      <MyPostsContainer />
+      {isOwner && <MyPostsContainer />}
     </div>
   )
 }

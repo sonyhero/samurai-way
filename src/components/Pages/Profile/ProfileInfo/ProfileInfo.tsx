@@ -1,11 +1,12 @@
 import React, { ChangeEvent, useState } from 'react'
-import s from './ProfileInfoCSS.module.css'
+import s from './ProfileInfo.module.scss'
 import { ProfileType } from '../profile-reducer/profile-reducer'
 import { ProfileStatusUseState } from './ProfileStatus/ProfileStatusUseState'
 import { ProfileDescription } from './ProfileDescription/ProfileDescription'
-import { ProfileAvatar } from './ProfileAvatar/ProfileAvatar'
 import ProfileForm, { ProfileFormType } from './ProfileForm/ProfileForm'
 import { Typography } from '../../../ui/typography'
+import { AvatarDemo } from '../../../ui/avatar'
+import { Edit } from '../../../../assets'
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
   const { profile, profileStatus, updateProfileStatus, isOwner, savePhoto, saveProfile } = props
@@ -28,19 +29,29 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
   }
 
   return (
-    <div>
-      <div className={s.descriptionBlock}>
-        <ProfileAvatar isAvatar={!profile} photos={profile.photos} />
-        <span>------------------</span>
-        <div>{isOwner && <input type={'file'} onChange={onMainPhotoSelected} />}</div>
-        <span>------------------</span>
-        {editMode ? (
-          <ProfileForm initialValues={profile} onSubmit={onSubmit} />
-        ) : (
-          <ProfileDescription profile={profile} isOwner={isOwner} setEditMode={onSetEditModeHandler} />
-        )}
-        <span>------------------</span>
+    <div className={s.profileInfoBox}>
+      <div className={s.profileBox}>
+        {/*<ProfileAvatar isAvatar={!profile} photos={profile.photos} />*/}
+        <div className={s.avatarBox}>
+          <AvatarDemo className={s.avatar} src={profile.photos.large || profile.photos.small} />
+          {isOwner && (
+            <label htmlFor={'mainPhotoInput'}>
+              <div className={s.avatarEdit}>
+                <Edit />
+              </div>
+              <input type={'file'} id={'mainPhotoInput'} onChange={onMainPhotoSelected} className={s.mainPhotoInput} />
+            </label>
+          )}
+        </div>
+        <div className={s.descriptionBox}>
+          {editMode ? (
+            <ProfileForm initialValues={profile} onSubmit={onSubmit} />
+          ) : (
+            <ProfileDescription profile={profile} isOwner={isOwner} setEditMode={onSetEditModeHandler} />
+          )}
+        </div>
       </div>
+      <span>------------------</span>
       <Typography>Status:</Typography>
       <ProfileStatusUseState status={profileStatus} updateProfileStatus={updateProfileStatus} />
       <span>------------------</span>
