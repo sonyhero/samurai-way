@@ -20,9 +20,10 @@
       justify-content: space-between;
       align-items: center;
 
+      .avatar,
       .userName,
       .logoutBtn {
-        margin-right: 20px;
+        margin: 0 20px 0 0;
       }
     }
   }
