@@ -23,7 +23,11 @@
       .avatar,
       .userName,
       .logoutBtn {
-        margin: 0 20px 0 0;
+        margin: 0 10px 0 0;
+      }
+      .avatar {
+        min-height: 36px;
+        min-width: 36px;
       }
     }
   }
