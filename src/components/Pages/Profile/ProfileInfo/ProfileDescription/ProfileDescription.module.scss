@@ -1,0 +1,19 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  .descriptionBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    //flex-shrink: 0;
+  }
+  .buttonBox {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+    //width: 100%;
+  }
+}

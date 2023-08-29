@@ -2,18 +2,26 @@ import React from 'react'
 import { ProfileType } from '../../profile-reducer/profile-reducer'
 import { Contacts } from './Contacts'
 import { Button } from '../../../../ui/button'
+import { Typography } from '../../../../ui/typography'
+import s from './ProfileDescription.module.scss'
 
 export const ProfileDescription: React.FC<ProfileDescriptionType> = ({ profile, isOwner, setEditMode }) => {
   return (
-    <div>
-      {isOwner && <Button onClick={setEditMode}>Edit profile</Button>}
-      <div>Full name: {profile.fullName}</div>
-      <div>About me: {profile.aboutMe}</div>
-      <div>Looking for a job: {profile.lookingForAJob ? 'yes' : ' no'}</div>
-      {profile.lookingForAJob && <div>My professional skills: {profile.lookingForAJobDescription}</div>}
-      <div>
-        Contacts: <Contacts />
+    <div className={s.wrap}>
+      <div className={s.buttonBox}>
+        <Button>More</Button>
+        {isOwner && <Button onClick={setEditMode}>Edit profile</Button>}
       </div>
+      <div className={s.descriptionBox}>
+        <Typography variant={'h2'}>{profile.fullName}</Typography>
+        <Typography>About me: {profile.aboutMe}</Typography>
+      </div>
+
+      {/*<div>Looking for a job: {profile.lookingForAJob ? 'yes' : ' no'}</div>*/}
+      {/*{profile.lookingForAJob && <div>My professional skills: {profile.lookingForAJobDescription}</div>}*/}
+      {/*<div>*/}
+      {/*  Contacts: <Contacts />*/}
+      {/*</div>*/}
     </div>
   )
 }
