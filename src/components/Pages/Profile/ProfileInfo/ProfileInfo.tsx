@@ -43,18 +43,16 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
             </label>
           )}
         </div>
-        <div className={s.descriptionBox}>
-          {editMode ? (
-            <ProfileForm initialValues={profile} onSubmit={onSubmit} />
-          ) : (
-            <ProfileDescription profile={profile} isOwner={isOwner} setEditMode={onSetEditModeHandler} />
-          )}
-        </div>
+        {editMode ? (
+          <ProfileForm initialValues={profile} onSubmit={onSubmit} />
+        ) : (
+          <ProfileDescription profile={profile} isOwner={isOwner} setEditMode={onSetEditModeHandler} />
+        )}
       </div>
-      <span>------------------</span>
-      <Typography>Status:</Typography>
-      <ProfileStatusUseState status={profileStatus} updateProfileStatus={updateProfileStatus} />
-      <span>------------------</span>
+      <div className={s.statusBox}>
+        <Typography>Status:</Typography>
+        <ProfileStatusUseState status={profileStatus} updateProfileStatus={updateProfileStatus} />
+      </div>
     </div>
   )
 }
