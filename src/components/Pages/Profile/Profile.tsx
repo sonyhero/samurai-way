@@ -3,12 +3,13 @@ import { ProfileInfo } from './ProfileInfo/ProfileInfo'
 import { MyPostsContainer } from './MyPosts/MyPostsContainer'
 import { ProfileType } from './profile-reducer/profile-reducer'
 import { ProfileFormType } from './ProfileInfo/ProfileForm/ProfileForm'
+import s from './Profile.module.scss'
 
 export const Profile: React.FC<ProfilePropsType> = (props) => {
   const { profile, profileStatus, updateProfileStatus, isOwner, savePhoto, saveProfile } = props
 
   return (
-    <div>
+    <div className={s.profileBlock}>
       <ProfileInfo
         profile={profile}
         profileStatus={profileStatus}
