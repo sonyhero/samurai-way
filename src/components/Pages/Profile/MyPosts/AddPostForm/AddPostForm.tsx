@@ -1,16 +1,17 @@
 import React from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
-import { maxLength, minLength, required } from '../../../../utils/validators'
-import { TextArea } from '../../../common/FormsControls/FormsControl'
-import { Button } from '../../../ui/button'
+import { TextArea } from '../../../../common/FormsControls/FormsControl'
+import { Button } from '../../../../ui/button'
+import { maxLength, minLength, required } from '../../../../../utils/validators'
+import s from './AddPostForm.module.scss'
 
 const maxLength10 = maxLength(10)
 const minLength2 = minLength(2)
 
 const AddPostForm: React.FC<InjectedFormProps<FormAddPostDataType>> = (props) => {
   return (
-    <div>
-      <form onSubmit={props.handleSubmit}>
+    <form className={s.formBox} onSubmit={props.handleSubmit}>
+      <div className={s.field}>
         <Field
           name={'postText'}
           placeholder={'Enter post text'}
@@ -18,9 +19,9 @@ const AddPostForm: React.FC<InjectedFormProps<FormAddPostDataType>> = (props) =>
           component={TextArea}
           validate={[required, maxLength10, minLength2]}
         />
-        <Button>Add post</Button>
-      </form>
-    </div>
+      </div>
+      <Button className={s.formButton}>Add post</Button>
+    </form>
   )
 }
 

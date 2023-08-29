@@ -1,0 +1,12 @@
+.formBox {
+  display: flex;
+  //flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  .field {
+    width: 100%;
+  }
+  .formButton {
+    height: 26px;
+  }
+}
