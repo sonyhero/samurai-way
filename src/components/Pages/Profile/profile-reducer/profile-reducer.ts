@@ -6,8 +6,8 @@ import { ResultCodesEnum } from '../../../../api/api'
 
 const initialState = {
   posts: [
-    { id: 1, postText: 'Hi, how are you?', likesCount: 23 },
-    { id: 2, postText: "It's my first post!", likesCount: 100 },
+    { id: 1, postText: 'Hi, how are you?', likesCount: 23, isLiked: false },
+    { id: 2, postText: "It's my first post!", likesCount: 100, isLiked: false },
   ],
   profile: {
     aboutMe: '',
@@ -43,6 +43,7 @@ export const profileReducer = (
         id: new Date().getTime(),
         postText: action.newPostText,
         likesCount: 0,
+        isLiked: false,
       }
       return { ...state, posts: [...state.posts, newPost] }
     case 'PROFILE/SET_USER_PROFILE': {
@@ -54,6 +55,20 @@ export const profileReducer = (
       return { ...state, posts: state.posts.filter((p) => p.id !== action.id) }
     case 'PROFILE/SAVE_PHOTO':
       return { ...state, profile: { ...state.profile, photos: action.photos } }
+    case 'PROFILE/LIKE_POST': {
+      return {
+        ...state,
+        posts: state.posts.map((p) =>
+          p.id === action.id
+            ? {
+                ...p,
+                likesCount: p.likesCount + 1,
+                isLiked: true,
+              }
+            : p,
+        ),
+      }
+    }
     default:
       return state
   }
@@ -65,6 +80,7 @@ export const profileActions = {
   setUserProfileStatus: (status: string) => ({ type: 'PROFILE/SET_USER_PROFILE_STATUS', status }) as const,
   deletePost: (id: number) => ({ type: 'PROFILE/DELETE_POST', id }) as const,
   savePhotoSuccess: (photos: PhotosType) => ({ type: 'PROFILE/SAVE_PHOTO', photos }) as const,
+  setLikePost: (id: number, isLike: boolean) => ({ type: 'PROFILE/LIKE_POST', id, isLike }) as const,
 }
 //Thunks
 export const getProfileData =
@@ -122,6 +138,7 @@ type PostsType = {
   id: number
   postText: string
   likesCount: number
+  isLiked: boolean
 }
 export type ContactsType = {
   facebook: string

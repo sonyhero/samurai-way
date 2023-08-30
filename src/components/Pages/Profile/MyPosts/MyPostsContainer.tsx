@@ -3,7 +3,7 @@ import { MyPosts } from './MyPosts'
 import { connect } from 'react-redux'
 import { RootReducerType } from '../../../../app/store'
 
-const { addPost, deletePost } = profileActions
+const { addPost, deletePost, setLikePost } = profileActions
 
 export type MapStateToPropsType = {
   profilePage: InitialProfileReducerStateType
@@ -12,6 +12,7 @@ export type MapStateToPropsType = {
 export type MapDispatchToPropsType = {
   addPost: (newPostText: string) => void
   deletePost: (id: number) => void
+  setLikePost: (id: number, isLike: boolean) => void
 }
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
   return {
@@ -22,4 +23,5 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
 export const MyPostsContainer = connect(mapStateToProps, {
   addPost,
   deletePost,
+  setLikePost,
 })(MyPosts)

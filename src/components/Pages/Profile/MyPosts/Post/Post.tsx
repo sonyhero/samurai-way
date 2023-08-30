@@ -7,13 +7,17 @@ import { AvatarDemo } from '../../../../ui/avatar'
 import { useAppSelector } from '../../../../../app/store'
 
 export const Post: React.FC<PostsType> = (props) => {
-  const { id, postText, likesCount, deletePost } = props
+  const { id, postText, likesCount, deletePost, isLiked, setLikePost } = props
 
   const userPhoto = useAppSelector((state) => state.profileReducer.profile.photos.small)
   const fullName = useAppSelector((state) => state.profileReducer.profile.fullName)
 
   const deletePostHandler = () => {
     deletePost(id)
+  }
+
+  const likePostHandler = () => {
+    if (!isLiked) setLikePost(id, true)
   }
 
   return (
@@ -33,8 +37,8 @@ export const Post: React.FC<PostsType> = (props) => {
       </div>
       <div className={s.textBox}>
         <Typography className={s.postText}>{postText}</Typography>
-        <Button variant={'icon'}>
-          <Like />
+        <Button variant={'icon'} onClick={likePostHandler}>
+          <Like isLiked={isLiked} />
           {likesCount}
         </Button>
       </div>
@@ -48,4 +52,6 @@ type PostsType = {
   postText: string
   likesCount: number
   deletePost: (id: number) => void
+  isLiked: boolean
+  setLikePost: (id: number, isLike: boolean) => void
 }

@@ -8,8 +8,8 @@ describe('profileReducer', () => {
   beforeEach(() => {
     initialState = {
       posts: [
-        { id: 1, postText: 'Hi, how are you?', likesCount: 23 },
-        { id: 2, postText: "It's my first post!", likesCount: 100 },
+        { id: 1, postText: 'Hi, how are you?', likesCount: 23, isLiked: false },
+        { id: 2, postText: "It's my first post!", likesCount: 100, isLiked: false },
       ],
       profile: {
         aboutMe: '',
