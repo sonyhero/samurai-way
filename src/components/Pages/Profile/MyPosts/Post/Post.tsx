@@ -38,7 +38,7 @@ export const Post: React.FC<PostsType> = (props) => {
       <div className={s.textBox}>
         <Typography className={s.postText}>{postText}</Typography>
         <Button variant={'icon'} onClick={likePostHandler}>
-          <Like isLiked={isLiked} />
+          <Like like={isLiked ? '#990f2b' : '#4c4c4c'} />
           {likesCount}
         </Button>
       </div>
