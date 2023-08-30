@@ -1,10 +1,35 @@
-.item {
+.postBox {
+  display: flex;
+  flex-direction: column;
   background-color: var(--color-palette-400);
   border-radius: 4px;
   margin-top: 10px;
   padding: 10px;
 
-  .icon {
-    fill: var(--color-accent-900);
+  .postHeader {
+    display: flex;
+    justify-content: space-between;
+
+    .postInfo {
+      display: flex;
+      align-items: center;
+
+      .fullName {
+        margin-left: 10px;
+        color: var(--color-accent-900);
+      }
+    }
+    .icon {
+      fill: var(--color-accent-700);
+      &:active {
+        fill: var(--color-light-100);
+      }
+    }
+  }
+  .textBox {
+    margin-top: 10px;
+    .postText {
+      margin-bottom: 10px;
+    }
   }
 }
