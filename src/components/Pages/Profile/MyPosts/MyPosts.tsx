@@ -21,7 +21,9 @@ export const MyPosts: React.FC<MyPostsPropsType> = memo((props) => {
   return (
     <div className={s.postsBox}>
       <div className={s.addPostBox}>
-        <Typography variant={'h3'}>My posts</Typography>
+        <Typography className={s.addPostLabel} variant={'h3'}>
+          My posts
+        </Typography>
         <AddPostReduxForm onSubmit={onAddPost} />
       </div>
       <div className={s.posts}>{postDataMap}</div>
