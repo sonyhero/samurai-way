@@ -5,7 +5,7 @@ import { Button } from '../../../../ui/button'
 import { maxLength, minLength, required } from '../../../../../utils/validators'
 import s from './AddPostForm.module.scss'
 
-const maxLength10 = maxLength(10)
+const maxLength100 = maxLength(100)
 const minLength2 = minLength(2)
 
 const AddPostForm: React.FC<InjectedFormProps<FormAddPostDataType>> = (props) => {
@@ -17,7 +17,7 @@ const AddPostForm: React.FC<InjectedFormProps<FormAddPostDataType>> = (props) =>
           placeholder={'Enter post text'}
           value={'newPostText'}
           component={TextArea}
-          validate={[required, maxLength10, minLength2]}
+          validate={[required, maxLength100, minLength2]}
         />
       </div>
       <Button className={s.formButton}>Add post</Button>
