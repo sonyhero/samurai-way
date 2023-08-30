@@ -50,7 +50,9 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
         )}
       </div>
       <div className={s.statusBox}>
-        <Typography>Status:</Typography>
+        <Typography className={s.statusLabel} variant={'h3'}>
+          Status:
+        </Typography>
         <ProfileStatusUseState status={profileStatus} updateProfileStatus={updateProfileStatus} />
       </div>
     </div>
