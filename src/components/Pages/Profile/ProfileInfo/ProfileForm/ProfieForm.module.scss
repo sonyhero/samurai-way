@@ -1,0 +1,28 @@
+.formBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+
+  .buttonBox {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+    //width: 100%;
+  }
+
+  .field {
+    width: 100%;
+  }
+
+  .checkboxBlock {
+    display: flex;
+    align-items: center;
+
+    .fieldCheckbox {
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+  }
+}

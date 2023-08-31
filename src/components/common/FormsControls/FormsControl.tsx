@@ -56,9 +56,7 @@ export const fieldCreator = (
 ) => {
   return (
     <>
-      <div>
         <Field name={name} placeholder={placeholder} component={component} validate={validate} {...props} />
-      </div>
       <div className={s.fieldName}>{text}</div>
     </>
   )

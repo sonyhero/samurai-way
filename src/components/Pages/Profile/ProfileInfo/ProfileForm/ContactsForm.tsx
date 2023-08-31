@@ -8,7 +8,7 @@ export const ContactsForm = () => {
   const mappedContacts = Object.keys(contacts).map((key, index) => {
     return (
       <div key={index}>
-        {key}: {fieldCreator(`contacts.${key}`, key, [], Input)}
+        {key}: {fieldCreator(`contacts.${key}`, `enter valid ${key} adress`, [], Input)}
       </div>
     )
   })
