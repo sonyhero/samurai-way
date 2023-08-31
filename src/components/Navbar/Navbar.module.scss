@@ -6,7 +6,10 @@
 
   .item {
     display: flex;
+    align-items: center;
     margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 4px;
 
     & a {
       color: var(--color-dark-900);
@@ -15,8 +18,12 @@
     }
 
     & a.activeLink {
-      color: var(--color-dark-100);
-      font-size: 20px;
+      color: var(--color-palette-100);
+      //font-size: 20px;
     }
+
+    &:hover {
+    background-color: var(--color-palette-400);
+  }
   }
 }
