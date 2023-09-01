@@ -28,6 +28,12 @@
       .avatar {
         min-height: 36px;
         min-width: 36px;
+        &:hover {
+          outline: 2px solid var(--color-palette-300);
+        }
+        &:active {
+          outline: 2px solid var(--color-palette-100);
+        }
       }
     }
   }
