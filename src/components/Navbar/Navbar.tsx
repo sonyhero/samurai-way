@@ -13,32 +13,32 @@ export const Navbar = () => {
           Profile
         </NavLink>
       </div>
-      <div className={`${s.item} ${s.active}`}>
+      <div className={s.item}>
         <NewsNav />
         <NavLink to="/news" activeClassName={s.activeLink}>
           News
         </NavLink>
       </div>
-      <div className={`${s.item} ${s.active}`}>
+      <div className={s.item}>
         <MessagesNav />
         <NavLink to="/dialogs" activeClassName={s.activeLink}>
           Messages
         </NavLink>
       </div>
-      <div className={`${s.item} ${s.active}`}>
+      <div className={s.item}>
         <UsersNav />
         <NavLink to="/users" activeClassName={s.activeLink}>
           Users
         </NavLink>
       </div>
 
-      <div className={`${s.item} ${s.active}`}>
+      <div className={s.item}>
         <MusicNav />
         <NavLink to="/music" activeClassName={s.activeLink}>
           Music
         </NavLink>
       </div>
-      <div className={`${s.item} ${s.active}`}>
+      <div className={s.item}>
         <SettingsNav />
         <NavLink to="/settings" activeClassName={s.activeLink}>
           Settings

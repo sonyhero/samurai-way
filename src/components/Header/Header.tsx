@@ -6,11 +6,26 @@ import { HeaderAPIComponentType } from './HeaderContainer'
 import { Logout } from '../../assets'
 import { AvatarDemo } from '../ui/avatar'
 import { useAppSelector } from '../../app/store'
+import { DropDownMenuDemo } from '../ui/dropDownMenu'
+import { SettingsNav } from '../../assets/iconsNavbar'
+import { NavLink } from 'react-router-dom'
 
 export const Header: React.FC<HeaderPropsType> = (props) => {
   const { isAuth, login, logout } = props
 
   const userPhoto = useAppSelector((state) => state.profileReducer.profile.photos.small)
+  const dropDownItems = [
+    { id: 1, component: <Typography className={s.userName}>{login}</Typography> },
+    {
+      id: 2,
+      component: (
+        <Button className={s.logoutBtn} variant={'secondary'} onClick={logout}>
+          <Logout />
+          Log out
+        </Button>
+      ),
+    },
+  ]
 
   return (
     <header className={s.header}>
@@ -21,12 +36,15 @@ export const Header: React.FC<HeaderPropsType> = (props) => {
         <div className={s.loginBlock}>
           {isAuth && (
             <>
-              <AvatarDemo className={s.avatar} name={login ? login : ''} src={userPhoto} />
               <Typography className={s.userName}>{login}</Typography>
-              <Button className={s.logoutBtn} variant={'secondary'} onClick={logout}>
-                <Logout />
-                Log out
-              </Button>
+              <DropDownMenuDemo
+                items={dropDownItems}
+                trigger={<AvatarDemo className={s.avatar} name={login ? login : ''} src={userPhoto} />}
+              />
+              {/*<Button className={s.logoutBtn} variant={'secondary'} onClick={logout}>*/}
+              {/*  <Logout />*/}
+              {/*  Log out*/}
+              {/*</Button>*/}
             </>
           )}
         </div>
