@@ -1,0 +1,21 @@
+.userBlock {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-palette-400);
+  border-radius: 4px;
+  padding: 10px;
+  width: 130px;
+
+  .linkBlock {
+    margin: 0 auto;
+
+    .usersPhoto {
+      width: 60px;
+      /*border-radius: 30px;*/
+    }
+  }
+
+  .userDescription {
+    word-break: break-all;
+  }
+}

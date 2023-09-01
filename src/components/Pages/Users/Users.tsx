@@ -33,14 +33,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
   ))
 
   return (
-    <div>
-      {/*<Pagination*/}
-      {/*  pageSize={pageSize}*/}
-      {/*  totalItemsCount={totalUsersCount}*/}
-      {/*  currentPage={currentPage}*/}
-      {/*  onPageChanged={onPageChanged}*/}
-      {/*  portionSize={10}*/}
-      {/*/>*/}
+    <div className={s.usersPageBlock}>
       <div className={s.pagination}>
         <Pagination count={pagesCount} page={currentPage} onChange={onPageChanged} />
         <Typography variant={'body2'}>Показать</Typography>
@@ -53,8 +46,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
         />
         <Typography variant={'body2'}>На странице</Typography>
       </div>
-
-      {mappedUsers}
+      <div className={s.usersBlock}>{mappedUsers}</div>
     </div>
   )
 }
