@@ -2,6 +2,7 @@ import { ResponseType, ResultCodesEnum } from '../../../../api/api'
 import { Dispatch } from 'redux'
 import { AppThunk, InferActionsTypes } from '../../../../app/store'
 import { usersAPI } from '../../../../api/users-api'
+import NProgress from 'nprogress'
 
 const initialState: InitialUsersReducerStateType = {
   users: [],
@@ -83,12 +84,14 @@ export const userActions = {
 
 //Thunks
 export const requestUsers = (page: number, pageSize: number) => (dispatch: Dispatch) => {
+  NProgress.start()
   dispatch(userActions.toggleIsFetching(true))
   dispatch(userActions.setCurrentPage(page))
   usersAPI.getUsers(page, pageSize).then((data) => {
     dispatch(userActions.toggleIsFetching(false))
     dispatch(userActions.setUsers(data.items))
     dispatch(userActions.setUsersTotalCount(data.totalCount))
+    NProgress.done()
   })
 }
 

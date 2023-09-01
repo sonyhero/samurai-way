@@ -38,6 +38,9 @@ dependencies:
   '@testing-library/user-event':
     specifier: 13.2.1
     version: 13.2.1(@testing-library/dom@9.3.1)
+  '@types/nprogress':
+    specifier: ^0.2.0
+    version: 0.2.0
   axios:
     specifier: 0.26.0
     version: 0.26.0
@@ -56,6 +59,9 @@ dependencies:
   jest:
     specifier: 27.5.1
     version: 27.5.1
+  nprogress:
+    specifier: ^0.2.0
+    version: 0.2.0
   prettier:
     specifier: 3.0.2
     version: 3.0.2
@@ -3322,6 +3328,10 @@ packages:
 
   /@types/node@16.7.13:
     resolution: {integrity: sha512-pLUPDn+YG3FYEt/pHI74HmnJOWzeR+tOIQzUx93pi9M7D8OE7PSLr97HboXwk5F+JS+TLtWuzCOW97AHjmOXXA==}
+
+  /@types/nprogress@0.2.0:
+    resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
+    dev: false
 
   /@types/parse-json@4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
@@ -8217,6 +8227,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       path-key: 3.1.1
+    dev: false
+
+  /nprogress@0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
     dev: false
 
   /nth-check@1.0.2:

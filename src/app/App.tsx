@@ -9,6 +9,7 @@ import { initializeApp } from './app-reducer'
 import { RootReducerType, store } from './store'
 import { Preloader } from '../components/common/Preloader/Preloader'
 import { Routing } from './Routing'
+import 'nprogress/nprogress.css'
 
 class App extends React.Component<AppPropsType> {
   componentDidMount() {

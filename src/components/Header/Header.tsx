@@ -7,8 +7,6 @@ import { Logout } from '../../assets'
 import { AvatarDemo } from '../ui/avatar'
 import { useAppSelector } from '../../app/store'
 import { DropDownMenuDemo } from '../ui/dropDownMenu'
-import { SettingsNav } from '../../assets/iconsNavbar'
-import { NavLink } from 'react-router-dom'
 
 export const Header: React.FC<HeaderPropsType> = (props) => {
   const { isAuth, login, logout } = props
