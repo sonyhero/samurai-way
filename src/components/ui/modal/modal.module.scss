@@ -11,10 +11,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 4px;
 
   width: 33.875rem;
 
-  background-color: var(--color-dark-700);
+  background-color: var(--color-palette-400);
 
   .buttonBottom {
     display: flex;

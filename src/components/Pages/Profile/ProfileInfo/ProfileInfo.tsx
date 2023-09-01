@@ -34,7 +34,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
         {/*<ProfileAvatar isAvatar={!profile} photos={profile.photos} />*/}
         <div className={s.avatarBox}>
           <AvatarDemo className={s.avatar} src={profile.photos.large || profile.photos.small} />
-          {isOwner && (
+          {isOwner && editMode && (
             <label htmlFor={'mainPhotoInput'}>
               <div className={s.avatarEdit}>
                 <Edit />
