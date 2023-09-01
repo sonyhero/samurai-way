@@ -6,8 +6,20 @@ import { ResultCodesEnum } from '../../../../api/api'
 
 const initialState = {
   posts: [
-    { id: 1, postText: 'Hi, how are you?', likesCount: 23, isLiked: false },
-    { id: 2, postText: "It's my first post!", likesCount: 100, isLiked: false },
+    {
+      id: 1,
+      date: new Date(2021, 11, 31, 12, 0, 3),
+      postText: "It's my first post!",
+      likesCount: 100,
+      isLiked: false,
+    },
+    {
+      id: 2,
+      date: new Date(2023, 1, 1, 9, 5, 23),
+      postText: 'Hi, how are you?',
+      likesCount: 23,
+      isLiked: false,
+    },
   ],
   profile: {
     aboutMe: '',
@@ -41,6 +53,7 @@ export const profileReducer = (
     case 'PROFILE/ADD_POST':
       const newPost: PostsType = {
         id: new Date().getTime(),
+        date: new Date(),
         postText: action.newPostText,
         likesCount: 0,
         isLiked: false,
@@ -134,8 +147,9 @@ export type InitialProfileReducerStateType = {
   profile: ProfileType
   profileStatus: string
 }
-type PostsType = {
+export type PostsType = {
   id: number
+  date: Date
   postText: string
   likesCount: number
   isLiked: boolean

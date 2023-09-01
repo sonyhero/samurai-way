@@ -5,12 +5,25 @@ import { Like, Trash } from '../../../../../assets'
 import { Typography } from '../../../../ui/typography'
 import { AvatarDemo } from '../../../../ui/avatar'
 import { useAppSelector } from '../../../../../app/store'
+import { PostsType } from '../../profile-reducer/profile-reducer'
 
-export const Post: React.FC<PostsType> = (props) => {
-  const { id, postText, likesCount, deletePost, isLiked, setLikePost } = props
+export const Post: React.FC<PropsType> = (props) => {
+  const { post, deletePost, setLikePost } = props
+  const { id, date, postText, likesCount, isLiked } = post
 
   const userPhoto = useAppSelector((state) => state.profileReducer.profile.photos.small)
   const fullName = useAppSelector((state) => state.profileReducer.profile.fullName)
+
+  const stringTime = new Intl.DateTimeFormat('ru', {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+  }).format(date)
+  const stringDate = new Intl.DateTimeFormat('ru', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  }).format(date)
 
   const deletePostHandler = () => {
     deletePost(id)
@@ -25,9 +38,14 @@ export const Post: React.FC<PostsType> = (props) => {
       <div className={s.postHeader}>
         <div className={s.postInfo}>
           <AvatarDemo name={fullName} src={userPhoto} />
-          <Typography variant={'h3'} className={s.fullName}>
-            {fullName}
-          </Typography>
+          <div>
+            <Typography variant={'h3'} className={s.fullName}>
+              {fullName}
+            </Typography>
+            <Typography variant={'caption'} className={s.time}>
+              {stringTime}
+            </Typography>
+          </div>
         </div>
         <div>
           <Button variant={'icon'} onClick={deletePostHandler}>
@@ -37,21 +55,23 @@ export const Post: React.FC<PostsType> = (props) => {
       </div>
       <div className={s.textBox}>
         <Typography className={s.postText}>{postText}</Typography>
-        <Button variant={'icon'} onClick={likePostHandler}>
-          <Like like={isLiked ? '#990f2b' : '#4c4c4c'} />
-          {likesCount}
-        </Button>
+        <div className={s.postFooter}>
+          <Button variant={'icon'} onClick={likePostHandler}>
+            <Like like={isLiked ? '#990f2b' : '#4c4c4c'} />
+            {likesCount}
+          </Button>
+          <Typography variant={'caption'} className={s.timeDate}>
+            {stringDate}
+          </Typography>
+        </div>
       </div>
     </div>
   )
 }
 
 //Types
-type PostsType = {
-  id: number
-  postText: string
-  likesCount: number
+type PropsType = {
+  post: PostsType
   deletePost: (id: number) => void
-  isLiked: boolean
   setLikePost: (id: number, isLike: boolean) => void
 }
