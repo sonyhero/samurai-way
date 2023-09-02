@@ -1,14 +1,17 @@
 import { authAPI } from '../../../../api/auth-api'
-import { ResponseType, ResultCodesEnum } from '../../../../api/api'
+import { ResponseAppType, ResultCodesEnum } from '../../../../api/api'
 import { login } from '../auth-reducer'
 
 jest.mock('../../../api/auth-api')
 
 const authAPIMock = authAPI as jest.Mocked<typeof authAPI>
-const result: ResponseType<{ userId: number }> = {
+const result: ResponseAppType<{ userId: number }> = {
   resultCode: ResultCodesEnum.Success,
   messages: [],
-  fieldsErrors: [],
+  fieldsErrors: {
+    error: '',
+    field: '',
+  },
   data: {
     userId: 1,
   },

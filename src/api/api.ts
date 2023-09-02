@@ -9,18 +9,20 @@ export const instance = axios.create({
 })
 
 //Types
-export type ResponseType<D = {}> = {
+export type ResponseAppType<D = {}> = {
   resultCode: ResultCodesEnum | ResultCodeForCapctha
   messages: string[]
-  fieldsErrors: string[]
+  fieldsErrors: FieldErrorType
   data: D
 }
-
 export enum ResultCodesEnum {
   Success = 0,
   Error = 1,
 }
-
 export enum ResultCodeForCapctha {
   CaptchaIsRequired = 10,
+}
+type FieldErrorType = {
+  error: string
+  field: string
 }

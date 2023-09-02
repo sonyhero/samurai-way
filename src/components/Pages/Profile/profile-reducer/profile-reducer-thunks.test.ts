@@ -1,14 +1,17 @@
-import { ResponseType, ResultCodesEnum } from '../../../../api/api'
+import { ResponseAppType, ResultCodesEnum } from '../../../../api/api'
 import { profileAPI } from '../../../../api/profile-api'
 import { getProfileData, getProfileStatus, PhotosType } from './profile-reducer'
 
 jest.mock('../../../api/profile-api')
 
 const profileAPIMock = profileAPI as jest.Mocked<typeof profileAPI>
-const result: ResponseType = {
+const result: ResponseAppType = {
   resultCode: ResultCodesEnum.Success,
   messages: [],
-  fieldsErrors: [],
+  fieldsErrors: {
+    error: '',
+    field: '',
+  },
   data: {},
 }
 test('get profile success', async () => {
@@ -32,10 +35,13 @@ test('get profile status success', async () => {
   expect(dispatchMock).toBeCalledTimes(1)
 })
 test('save profile photo success', async () => {
-  const result: ResponseType<{ photos: PhotosType }> = {
+  const result: ResponseAppType<{ photos: PhotosType }> = {
     resultCode: ResultCodesEnum.Success,
     messages: [],
-    fieldsErrors: [],
+    fieldsErrors: {
+      error: '',
+      field: '',
+    },
     data: {
       photos: {
         small: '',
