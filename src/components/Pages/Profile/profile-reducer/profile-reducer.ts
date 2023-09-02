@@ -3,6 +3,8 @@ import { ProfileFormType } from '../ProfileInfo/ProfileForm/ProfileForm'
 import { stopSubmit } from 'redux-form'
 import { profileAPI } from '../../../../api/profile-api'
 import { ResultCodesEnum } from '../../../../api/api'
+import NProgress from 'nprogress'
+import { handleServerAppError, handleServerNetworkError } from '../../../../utils/error-utils'
 
 const initialState = {
   posts: [
@@ -105,40 +107,65 @@ export const getProfileData =
 export const getProfileStatus =
   (userId: string): AppThunk =>
   async (dispatch) => {
-    const data = await profileAPI.getStatus(userId)
-    dispatch(profileActions.setUserProfileStatus(data))
+    try {
+      NProgress.start()
+      const data = await profileAPI.getStatus(userId)
+      dispatch(profileActions.setUserProfileStatus(data))
+      NProgress.done()
+    } catch (e) {
+      handleServerNetworkError(e)
+    }
   }
 export const updateProfileStatus =
   (status: string): AppThunk =>
   async (dispatch) => {
-    const data = await profileAPI.updateStatus(status)
-    if (data.resultCode === ResultCodesEnum.Success) {
-      dispatch(profileActions.setUserProfileStatus(status))
+    try {
+      NProgress.start()
+      const data = await profileAPI.updateStatus(status)
+      if (data.resultCode === ResultCodesEnum.Success) {
+        dispatch(profileActions.setUserProfileStatus(status))
+        NProgress.done()
+      } else {
+        handleServerAppError(data)
+      }
+    } catch (e) {
+      handleServerNetworkError(e)
     }
   }
 export const savePhoto =
   (file: File): AppThunk =>
   async (dispatch) => {
-    const data = await profileAPI.updatePhoto(file)
-    if (data.resultCode === ResultCodesEnum.Success) {
-      dispatch(profileActions.savePhotoSuccess(data.data.photos))
+    try {
+      NProgress.start()
+      const data = await profileAPI.updatePhoto(file)
+      if (data.resultCode === ResultCodesEnum.Success) {
+        dispatch(profileActions.savePhotoSuccess(data.data.photos))
+        NProgress.done()
+      } else {
+        handleServerAppError(data)
+      }
+    } catch (e) {
+      handleServerNetworkError(e)
     }
   }
 export const saveProfile =
   (profile: ProfileFormType): AppThunk =>
   async (dispatch, getState) => {
     try {
+      NProgress.start()
       const userId = getState().authReducer.userId
       const data = await profileAPI.updateProfile(profile)
       if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(getProfileData(`${userId}`))
+        NProgress.done()
       } else {
         const key = data.messages[0].match(/(?<=->)[^)]+/)
         key && dispatch(stopSubmit('editProfile', { contacts: { [key[0].toLocaleLowerCase()]: data.messages[0] } }))
+        NProgress.done()
         return Promise.reject(data.messages[0])
       }
     } catch (e) {
-      console.warn(e)
+      handleServerNetworkError(e)
     }
   }
 //Types
@@ -177,10 +204,4 @@ export type ProfileType = {
   photos: PhotosType
   aboutMe: string
 }
-// export type ProfileReducerType =
-//     | ReturnType<typeof addPost>
-//     | ReturnType<typeof setUserProfile>
-//     | ReturnType<typeof setUserProfileStatus>
-//     | ReturnType<typeof deletePost>
-//     | ReturnType<typeof savePhotoSuccess>
 export type ProfileReducerType = InferActionsTypes<typeof profileActions>
