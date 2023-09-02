@@ -1,5 +1,5 @@
 import { UserType } from '../components/Pages/Users/user-reducer/users-reducer'
-import { instance, ResponseType } from './api'
+import { instance, ResponseAppType } from './api'
 
 export const usersAPI = {
   getUsers(currentPage: number, pageSize: number) {
@@ -13,10 +13,10 @@ export const usersAPI = {
   },
   //----------------------------------------------------
   followUsers(userId: number) {
-    return instance.post<ResponseType>(`follow/${userId}`).then((res) => res.data)
+    return instance.post<ResponseAppType>(`follow/${userId}`).then((res) => res.data)
   },
   unFollowUsers(userId: number) {
-    return instance.delete<ResponseType>(`follow/${userId}`).then((res) => res.data)
+    return instance.delete<ResponseAppType>(`follow/${userId}`).then((res) => res.data)
   },
 }
 export type UsersResponseDataType = {

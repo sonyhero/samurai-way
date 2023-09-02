@@ -101,8 +101,14 @@ export const profileActions = {
 export const getProfileData =
   (userId: string): AppThunk =>
   async (dispatch) => {
-    const data = await profileAPI.getProfile(userId)
-    dispatch(profileActions.setUserProfile(data))
+    try {
+      NProgress.start()
+      const data = await profileAPI.getProfile(userId)
+      dispatch(profileActions.setUserProfile(data))
+      NProgress.done()
+    } catch (e) {
+      handleServerNetworkError(e)
+    }
   }
 export const getProfileStatus =
   (userId: string): AppThunk =>

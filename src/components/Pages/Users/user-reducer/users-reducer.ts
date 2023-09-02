@@ -1,8 +1,9 @@
-import { ResponseType, ResultCodesEnum } from '../../../../api/api'
+import { ResponseAppType, ResultCodesEnum } from '../../../../api/api'
 import { Dispatch } from 'redux'
 import { AppThunk, InferActionsTypes } from '../../../../app/store'
 import { usersAPI } from '../../../../api/users-api'
 import NProgress from 'nprogress'
+import { handleServerAppError, handleServerNetworkError } from '../../../../utils/error-utils'
 
 const initialState: InitialUsersReducerStateType = {
   users: [],
@@ -84,15 +85,19 @@ export const userActions = {
 
 //Thunks
 export const requestUsers = (page: number, pageSize: number) => (dispatch: Dispatch) => {
-  NProgress.start()
-  dispatch(userActions.toggleIsFetching(true))
-  dispatch(userActions.setCurrentPage(page))
-  usersAPI.getUsers(page, pageSize).then((data) => {
-    dispatch(userActions.toggleIsFetching(false))
-    dispatch(userActions.setUsers(data.items))
-    dispatch(userActions.setUsersTotalCount(data.totalCount))
-    NProgress.done()
-  })
+  try {
+    NProgress.start()
+    dispatch(userActions.toggleIsFetching(true))
+    dispatch(userActions.setCurrentPage(page))
+    usersAPI.getUsers(page, pageSize).then((data) => {
+      dispatch(userActions.toggleIsFetching(false))
+      dispatch(userActions.setUsers(data.items))
+      dispatch(userActions.setUsersTotalCount(data.totalCount))
+      NProgress.done()
+    })
+  } catch (e) {
+    handleServerNetworkError(e)
+  }
 }
 
 //Рефакторинг выпуск 90
@@ -100,16 +105,20 @@ const followUnfollowUsers = async (
   dispatch: Dispatch,
   userId: number,
   actionCreator: (userId: number) => UsersReducerType,
-  apiMethod: (userId: number) => Promise<ResponseType>,
+  apiMethod: (userId: number) => Promise<ResponseAppType>,
 ) => {
   try {
+    NProgress.start()
     dispatch(userActions.toggleFollowingProgress(true, userId))
     const data = await apiMethod(userId)
     if (data.resultCode === ResultCodesEnum.Success) {
       dispatch(actionCreator(userId))
+      NProgress.done()
+    } else {
+      handleServerAppError(data)
     }
   } catch (e) {
-    console.log(e)
+    handleServerNetworkError(e)
   } finally {
     dispatch(userActions.toggleFollowingProgress(false, userId))
   }
@@ -151,13 +160,4 @@ export type InitialUsersReducerStateType = {
   pageSize: number
   currentPage: number
 }
-// export type UsersReducerType =
-//     | ReturnType<typeof follow>
-//     | ReturnType<typeof unFollow>
-//     | ReturnType<typeof setUsers>
-//     | ReturnType<typeof setCurrentPage>
-//     | ReturnType<typeof setUsersTotalCount>
-//     | ReturnType<typeof toggleIsFetching>
-//     | ReturnType<typeof toggleFollowingProgress>
-
 export type UsersReducerType = InferActionsTypes<typeof userActions>
