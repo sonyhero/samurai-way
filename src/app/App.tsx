@@ -10,6 +10,8 @@ import { RootReducerType, store } from './store'
 import { Preloader } from '../components/common/Preloader/Preloader'
 import { Routing } from './Routing'
 import 'nprogress/nprogress.css'
+import 'react-toastify/dist/ReactToastify.css'
+import { Toast } from '../components/Toast/Toast'
 
 class App extends React.Component<AppPropsType> {
   componentDidMount() {
@@ -17,16 +19,19 @@ class App extends React.Component<AppPropsType> {
   }
 
   render() {
-    return !this.props.initialized ? (
-      <Preloader />
-    ) : (
-      <div>
+    return (
+      <>
+        <Toast />
         <HeaderContainer />
-        <div className={s.appBox}>
-          {this.props.isAuth && <Navbar />}
-          <Routing />
-        </div>
-      </div>
+        {!this.props.initialized ? (
+          <Preloader />
+        ) : (
+          <div className={s.appBox}>
+            {this.props.isAuth && <Navbar />}
+            <Routing />
+          </div>
+        )}
+      </>
     )
   }
 }
