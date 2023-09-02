@@ -1,5 +1,6 @@
 import { AppThunk } from './store'
 import { getAuthUserData } from '../components/Pages/Login/auth-reducer'
+import NProgress from 'nprogress'
 
 const initialState: InitialUsersReducerStateType = {
   initialized: false,
@@ -20,7 +21,9 @@ export const appReducer = (
 export const initializedSuccess = () => ({ type: 'APP/INITIALIZED_SUCCESS' }) as const
 //Thunks
 export const initializeApp = (): AppThunk => async (dispatch) => {
+  NProgress.start()
   await dispatch(getAuthUserData())
+  NProgress.done()
   dispatch(initializedSuccess())
 }
 //Types
