@@ -31,11 +31,11 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
         <div className={s.inputBox}>
           {fieldCreator('password', 'Password', [required], Input, { type: 'password' })}
         </div>
+        {props.error && <div className={s.error}>{props.error}</div>}
         <div className={s.checkBox}>
           {fieldCreator('rememberMe', '', [], CheckBox, { type: 'checkbox' }, 'Remember Me')}
         </div>
         {/*//--------------------------------------------------------*/}
-        {/*{props.error && <div className={s.error}>{props.error}</div>}*/}
 
         {captcha && <img src={`${captcha}`} alt={'anti-bot captcha'} />}
         {captcha && <div className={s.inputBox}>{fieldCreator('captcha', 'Captcha', [required], Input)}</div>}

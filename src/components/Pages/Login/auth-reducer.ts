@@ -72,7 +72,8 @@ export const login =
         }
         const errorMessage = data.messages.length > 0 ? data.messages[0] : 'Some error'
         dispatch(stopSubmit('login', { _error: errorMessage }))
-        handleServerAppError(data)
+        // handleServerAppError(data)
+        NProgress.done()
       }
     } catch (e) {
       handleServerNetworkError(e)
