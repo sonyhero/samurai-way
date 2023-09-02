@@ -8,7 +8,9 @@ import { Typography } from '../../../ui/typography'
 export const MyPosts: React.FC<MyPostsPropsType> = memo((props) => {
   const { addPost, profilePage, deletePost, setLikePost } = props
 
-  const postDataMap = profilePage.posts.map((p) => <Post post={p} deletePost={deletePost} setLikePost={setLikePost} />)
+  const postDataMap = profilePage.posts.map((p) => (
+    <Post key={p.id} post={p} deletePost={deletePost} setLikePost={setLikePost} />
+  ))
 
   const onAddPost = (data: FormAddPostDataType) => {
     addPost(data.postText)

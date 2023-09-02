@@ -34,7 +34,7 @@ export const Post: React.FC<PropsType> = (props) => {
   }
 
   return (
-    <div key={id} className={s.postBox}>
+    <div className={s.postBox}>
       <div className={s.postHeader}>
         <div className={s.postInfo}>
           <AvatarDemo name={fullName} src={userPhoto} />
