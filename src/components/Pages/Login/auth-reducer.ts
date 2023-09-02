@@ -4,6 +4,8 @@ import { stopSubmit } from 'redux-form'
 import { authAPI } from '../../../api/auth-api'
 import { securityAPI } from '../../../api/security-api'
 import { ResultCodeForCapctha, ResultCodesEnum } from '../../../api/api'
+import NProgress from 'nprogress'
+import { handleServerAppError, handleServerNetworkError } from '../../../utils/error-utils'
 
 const initialState: InitialUsersReducerStateType = {
   userId: null,
@@ -12,7 +14,6 @@ const initialState: InitialUsersReducerStateType = {
   isAuth: false,
   captchaUrl: null,
 }
-
 export const authReducer = (
   state: InitialUsersReducerStateType = initialState,
   action: AuthReducerType,
@@ -43,50 +44,63 @@ export const authActions = {
 //Thunks
 export const getAuthUserData = (): AppThunk => async (dispatch) => {
   try {
+    NProgress.start()
     const data = await authAPI.getAuthMe()
     if (data.resultCode === ResultCodesEnum.Success) {
       const { id, email, login } = data.data
       dispatch(authActions.setAuthUserData(String(id), email, login, true))
+      NProgress.done()
+    } else {
+      handleServerAppError(data)
     }
   } catch (e) {
-    console.log(e)
+    handleServerNetworkError(e)
   }
 }
 export const login =
   (email: string, password: string, rememberMe: boolean, captcha: string): AppThunk =>
   async (dispatch) => {
     try {
+      NProgress.start()
       const data = await authAPI.logIn(email, password, rememberMe, captcha)
       if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(getAuthUserData())
+        NProgress.done()
       } else {
         if (data.resultCode === ResultCodeForCapctha.CaptchaIsRequired) {
           dispatch(getCaptcha())
         }
         const errorMessage = data.messages.length > 0 ? data.messages[0] : 'Some error'
         dispatch(stopSubmit('login', { _error: errorMessage }))
+        handleServerAppError(data)
       }
     } catch (e) {
-      console.log(e)
+      handleServerNetworkError(e)
     }
   }
 export const logout = (): AppThunk => async (dispatch) => {
   try {
+    NProgress.start()
     const data = await authAPI.logOut()
     if (data.resultCode === ResultCodesEnum.Success) {
       dispatch(authActions.setAuthUserData(null, null, null, false))
+      NProgress.done()
+    } else {
+      handleServerAppError(data)
     }
   } catch (e) {
-    console.log(e)
+    handleServerNetworkError(e)
   }
 }
 export const getCaptcha = (): AppThunk => async (dispatch) => {
   try {
+    NProgress.start()
     const data = await securityAPI.getCaptchaUrl()
     const captchaUrl = data.url
     dispatch(authActions.getCaptchaUrlSuccess(captchaUrl))
+    NProgress.done()
   } catch (e) {
-    console.log(e)
+    handleServerNetworkError(e)
   }
 }
 
@@ -98,7 +112,4 @@ export type InitialUsersReducerStateType = {
   isAuth: boolean
   captchaUrl: string | null
 }
-// export type AuthReducerType =
-//     | ReturnType<typeof setAuthUserData>
-//     | ReturnType<typeof getCaptchaUrlSuccess>
 export type AuthReducerType = InferActionsTypes<typeof authActions>
