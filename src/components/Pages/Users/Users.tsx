@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
 import { UsersAPIComponentType } from './UsersContainer'
 import { User } from './User/User'
 import { Pagination } from '../../ui/pagination'
 import { Typography } from '../../ui/typography'
 import { SuperSelect } from '../../ui/select'
 import s from './Users.module.scss'
+import { UserSearchForm } from './UserSearchForm/UserSearchForm'
+import { useAppDispatch } from '../../../app/store'
+import { requestUsers, SearchFilterType } from './user-reducer/users-reducer'
+import { Button } from '../../ui/button'
 
 export const Users: React.FC<UsersPropsType> = (props) => {
   const {
@@ -20,7 +24,18 @@ export const Users: React.FC<UsersPropsType> = (props) => {
     onSetPerPage,
   } = props
 
+  const dispatch = useAppDispatch()
+
   const pagesCount = Math.ceil(totalUsersCount / pageSize)
+
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const data = Object.fromEntries(new FormData(event.currentTarget)) as SearchFilterType
+    dispatch(requestUsers(1, pageSize, data))
+    event.preventDefault()
+  }
+  const reset = () => {
+    dispatch(requestUsers(1, pageSize, { term: '' }))
+  }
 
   const mappedUsers = users.map((u) => (
     <User
@@ -34,6 +49,8 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
   return (
     <div className={s.usersPageBlock}>
+      <UserSearchForm submit={onSubmit} />
+      <Button onClick={reset}> Reset filter</Button>
       <div className={s.pagination}>
         <Pagination count={pagesCount} page={currentPage} onChange={onPageChanged} />
         <Typography variant={'body2'}>Показать</Typography>

@@ -7,3 +7,4 @@ export const getCurrentPage = (state: RootReducerType) => state.usersReducer.cur
 export const getIsFetching = (state: RootReducerType) => state.usersReducer.isFetching
 export const getFollowingInProgress = (state: RootReducerType) => state.usersReducer.followingInProgress
 export const getOptions = (state: RootReducerType) => state.usersReducer.paginationOptions
+export const getUsersFilter = (state: RootReducerType) => state.usersReducer.filter

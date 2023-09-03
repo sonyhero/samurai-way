@@ -2,12 +2,12 @@ import { UserType } from '../components/Pages/Users/user-reducer/users-reducer'
 import { instance, ResponseAppType } from './api'
 
 export const usersAPI = {
-  getUsers(currentPage: number, pageSize: number) {
+  getUsers(currentPage: number, pageSize: number, term: string) {
     return instance
       .get<UsersResponseDataType>(
         `users?page=
         ${currentPage}&count=
-        ${pageSize}`,
+        ${pageSize}&term=${term}`,
       )
       .then((res) => res.data)
   },

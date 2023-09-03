@@ -1,9 +1,15 @@
 import React, { ComponentType } from 'react'
 import { RootReducerType } from '../../../app/store'
 import { connect } from 'react-redux'
-import { followUsers, requestUsers, unFollowUsers, userActions, UserType } from './user-reducer/users-reducer'
+import {
+  followUsers,
+  requestUsers,
+  SearchFilterType,
+  unFollowUsers,
+  userActions,
+  UserType,
+} from './user-reducer/users-reducer'
 import { Users } from './Users'
-import { Preloader } from '../../common/Preloader/Preloader'
 import { compose } from 'redux'
 import {
   getCurrentPage,
@@ -13,6 +19,7 @@ import {
   getPageSize,
   getTotalUsersCount,
   getUsers,
+  getUsersFilter,
 } from '../../../app/selectors/users-selector'
 import { getIsAuth } from '../../../app/selectors/auth-selector'
 import { Redirect } from 'react-router-dom'
@@ -30,19 +37,19 @@ const {
 
 export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
   componentDidMount() {
-    const { currentPage, pageSize } = this.props
-    this.props.requestUsers(currentPage, pageSize)
+    const { currentPage, pageSize, filter } = this.props
+    this.props.requestUsers(currentPage, pageSize, filter)
   }
 
   onPageChanged = (pageNumber: number) => {
-    const { pageSize } = this.props
-    this.props.requestUsers(pageNumber, pageSize)
+    const { pageSize, filter } = this.props
+    this.props.requestUsers(pageNumber, pageSize, filter)
   }
 
   onSetPerPage = (value: number) => {
-    const { currentPage } = this.props
+    const { currentPage, filter } = this.props
     this.props.setPerPage(value)
-    this.props.requestUsers(currentPage, value)
+    this.props.requestUsers(currentPage, value, filter)
   }
 
   render() {
@@ -65,6 +72,7 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     isFetching: getIsFetching(state),
     followingInProgress: getFollowingInProgress(state),
     options: getOptions(state),
+    filter: getUsersFilter(state),
   }
 }
 
@@ -92,7 +100,7 @@ type MapDispatchToPropsType = {
   setUsersTotalCount: (totalUsersCount: number) => void
   toggleIsFetching: (isFetching: boolean) => void
   toggleFollowingProgress: (isFetching: boolean, userId: number) => void
-  requestUsers: (currentPage: number, pageSize: number) => void
+  requestUsers: (currentPage: number, pageSize: number, filter: SearchFilterType) => void
   followUsers: (userId: number) => void
   unFollowUsers: (userId: number) => void
   setPerPage: (value: number) => void
@@ -106,5 +114,6 @@ type MapStateToPropsType = {
   isFetching: boolean
   followingInProgress: number[]
   options: { value: number }[]
+  filter: SearchFilterType
 }
 export type UsersAPIComponentType = MapStateToPropsType & MapDispatchToPropsType

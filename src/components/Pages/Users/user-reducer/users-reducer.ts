@@ -13,6 +13,9 @@ const initialState: InitialUsersReducerStateType = {
   paginationOptions: [{ value: 5 }, { value: 10 }, { value: 20 }, { value: 50 }, { value: 100 }],
   pageSize: 5,
   currentPage: 1,
+  filter: {
+    term: '',
+  },
 }
 
 export const usersReducer = (
@@ -62,6 +65,11 @@ export const usersReducer = (
         ...state,
         pageSize: action.value,
       }
+    case 'SET_SEARCH_FILTER':
+      return {
+        ...state,
+        filter: action.filter,
+      }
     default:
       return state
   }
@@ -81,24 +89,26 @@ export const userActions = {
       userId,
     }) as const,
   setPerPage: (value: number) => ({ type: 'SET_PER_PAGE', value }) as const,
+  setTerm: (filter: SearchFilterType) => ({ type: 'SET_SEARCH_FILTER', filter }) as const,
 }
 
 //Thunks
-export const requestUsers = (page: number, pageSize: number) => (dispatch: Dispatch) => {
-  try {
-    NProgress.start()
-    dispatch(userActions.toggleIsFetching(true))
-    dispatch(userActions.setCurrentPage(page))
-    usersAPI.getUsers(page, pageSize).then((data) => {
+export const requestUsers =
+  (page: number, pageSize: number, filter: SearchFilterType) => async (dispatch: Dispatch) => {
+    try {
+      NProgress.start()
+      dispatch(userActions.toggleIsFetching(true))
+      dispatch(userActions.setCurrentPage(page))
+      dispatch(userActions.setTerm(filter))
+      const data = await usersAPI.getUsers(page, pageSize, filter.term)
       dispatch(userActions.toggleIsFetching(false))
       dispatch(userActions.setUsers(data.items))
       dispatch(userActions.setUsersTotalCount(data.totalCount))
       NProgress.done()
-    })
-  } catch (e) {
-    handleServerNetworkError(e)
+    } catch (e) {
+      handleServerNetworkError(e)
+    }
   }
-}
 
 //Рефакторинг выпуск 90
 const followUnfollowUsers = async (
@@ -151,6 +161,10 @@ type PhotosType = {
   small: any
   large: any
 }
+export type SearchFilterType = {
+  term: string
+  // friend: boolean | null
+}
 export type InitialUsersReducerStateType = {
   users: UserType[]
   totalUsersCount: number
@@ -159,5 +173,6 @@ export type InitialUsersReducerStateType = {
   paginationOptions: { value: number }[]
   pageSize: number
   currentPage: number
+  filter: SearchFilterType
 }
 export type UsersReducerType = InferActionsTypes<typeof userActions>
