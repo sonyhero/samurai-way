@@ -7,7 +7,7 @@ import { authReducer, AuthReducerType } from '../components/Pages/Login/auth-red
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { FormAction, reducer as formReducer } from 'redux-form'
 import { appReducer, AppReducerType } from './app-reducer'
-import { TypedUseSelectorHook, useSelector } from 'react-redux'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 let rootReducer = combineReducers({
   dialogsReducer,
@@ -38,3 +38,4 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootStateType,
 export type ActionsTypes = UsersReducerType | DialogsReducerType | AuthReducerType | FormAction | AppReducerType
 
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector
+export const useAppDispatch: () => AppDispatch = useDispatch
