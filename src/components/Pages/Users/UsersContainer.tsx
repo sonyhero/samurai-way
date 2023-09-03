@@ -47,11 +47,11 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentType> {
 
   render() {
     if (!this.props.isAuth) return <Redirect to={'/login'} />
-    return this.props.isFetching ? (
-      <Preloader />
-    ) : (
-      <Users {...this.props} onPageChanged={this.onPageChanged} onSetPerPage={this.onSetPerPage} />
-    )
+    // return this.props.isFetching ? (
+    //   <Preloader />
+    // ) : (
+    return <Users {...this.props} onPageChanged={this.onPageChanged} onSetPerPage={this.onSetPerPage} />
+    // )
   }
 }
 
