@@ -1,30 +1,38 @@
-import React, { FormEvent, useCallback } from 'react'
-import { UsersAPIComponentType } from './UsersContainer'
+import React, { FormEvent, useCallback, useEffect } from 'react'
 import { User } from './User/User'
 import { Pagination } from '../../ui/pagination'
 import { Typography } from '../../ui/typography'
 import { SuperSelect } from '../../ui/select'
 import s from './Users.module.scss'
 import { UserSearchForm } from './UserSearchForm/UserSearchForm'
-import { useAppDispatch } from '../../../app/store'
-import { requestUsers, SearchFilterType } from './user-reducer/users-reducer'
+import { useAppDispatch, useAppSelector } from '../../../app/store'
+import { followUsers, requestUsers, SearchFilterType, unFollowUsers, userActions } from './user-reducer/users-reducer'
 import { Button } from '../../ui/button'
+import {
+  getCurrentPage,
+  getOptions,
+  getPageSize,
+  getTotalUsersCount,
+  getUsers,
+  getUsersFilter,
+} from '../../../app/selectors/users-selector'
 
-export const Users: React.FC<UsersPropsType> = (props) => {
-  const {
-    totalUsersCount,
-    pageSize,
-    currentPage,
-    users,
-    followingInProgress,
-    onPageChanged,
-    followUsers,
-    unFollowUsers,
-    options,
-    onSetPerPage,
-  } = props
-
+export const Users = () => {
+  const totalUsersCount = useAppSelector(getTotalUsersCount)
+  const pageSize = useAppSelector(getPageSize)
+  const currentPage = useAppSelector(getCurrentPage)
+  const options = useAppSelector(getOptions)
+  const users = useAppSelector(getUsers)
+  const filter = useAppSelector(getUsersFilter)
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(requestUsers(currentPage, pageSize, filter))
+  }, [])
+
+  const follow = (userId: number) => dispatch(followUsers(userId))
+
+  const unFollow = (userId: number) => dispatch(unFollowUsers(userId))
 
   const pagesCount = Math.ceil(totalUsersCount / pageSize)
 
@@ -36,19 +44,18 @@ export const Users: React.FC<UsersPropsType> = (props) => {
     },
     [pageSize],
   )
+  const onPageChanged = (pageNumber: number) => {
+    dispatch(requestUsers(pageNumber, pageSize, filter))
+  }
+  const onSetPerPage = (value: number) => {
+    dispatch(userActions.setPerPage(value))
+    dispatch(requestUsers(currentPage, value, filter))
+  }
   const reset = () => {
     dispatch(requestUsers(1, pageSize, { term: '' }))
   }
 
-  const mappedUsers = users.map((u) => (
-    <User
-      key={u.id}
-      user={u}
-      followUsers={followUsers}
-      unFollowUsers={unFollowUsers}
-      followingInProgress={followingInProgress}
-    />
-  ))
+  const mappedUsers = users.map((u) => <User key={u.id} user={u} followUsers={follow} unFollowUsers={unFollow} />)
 
   return (
     <div className={s.usersPageBlock}>
@@ -70,10 +77,3 @@ export const Users: React.FC<UsersPropsType> = (props) => {
     </div>
   )
 }
-
-//Types
-type UsersProps = {
-  onPageChanged: (pageNumber: number) => void
-  onSetPerPage: (value: number) => void
-}
-type UsersPropsType = UsersProps & UsersAPIComponentType

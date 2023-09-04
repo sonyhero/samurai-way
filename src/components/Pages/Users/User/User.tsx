@@ -4,12 +4,16 @@ import userPhoto from '../../../../assets/img/user.png'
 import { NavLink } from 'react-router-dom'
 import { UserType } from '../user-reducer/users-reducer'
 import { Button } from '../../../ui/button'
+import { useAppSelector } from '../../../../app/store'
+import { getFollowingInProgress } from '../../../../app/selectors/users-selector'
 
 export const User: React.FC<UserPropsType> = (props) => {
-  const { user, followingInProgress, followUsers, unFollowUsers } = props
+  const { user, followUsers, unFollowUsers } = props
 
-  const changeFollow = (userId: number) => followUsers(userId)
-  const changeUnFollow = (userId: number) => unFollowUsers(userId)
+  const followingInProgress = useAppSelector(getFollowingInProgress)
+
+  const changeFollow = () => followUsers(user.id)
+  const changeUnFollow = () => unFollowUsers(user.id)
 
   return (
     <div className={s.userBlock}>
@@ -27,12 +31,12 @@ export const User: React.FC<UserPropsType> = (props) => {
         <Button
           variant={'secondary'}
           disabled={followingInProgress.some((id) => id === user.id)}
-          onClick={() => changeUnFollow(user.id)}
+          onClick={changeUnFollow}
         >
           Unfollow
         </Button>
       ) : (
-        <Button disabled={followingInProgress.some((id) => id === user.id)} onClick={() => changeFollow(user.id)}>
+        <Button disabled={followingInProgress.some((id) => id === user.id)} onClick={changeFollow}>
           Follow
         </Button>
       )}
@@ -50,7 +54,6 @@ export const User: React.FC<UserPropsType> = (props) => {
 //Types
 type UserPropsType = {
   user: UserType
-  followingInProgress: number[]
   followUsers: (userId: number) => void
   unFollowUsers: (userId: number) => void
 }
