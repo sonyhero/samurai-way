@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react'
+import React, { FormEvent, useCallback } from 'react'
 import { UsersAPIComponentType } from './UsersContainer'
 import { User } from './User/User'
 import { Pagination } from '../../ui/pagination'
@@ -28,11 +28,14 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
   const pagesCount = Math.ceil(totalUsersCount / pageSize)
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    const data = Object.fromEntries(new FormData(event.currentTarget)) as SearchFilterType
-    dispatch(requestUsers(1, pageSize, data))
-    event.preventDefault()
-  }
+  const onFilterChange = useCallback(
+    (event: FormEvent<HTMLFormElement>) => {
+      const data = Object.fromEntries(new FormData(event.currentTarget)) as SearchFilterType
+      dispatch(requestUsers(1, pageSize, data))
+      event.preventDefault()
+    },
+    [pageSize],
+  )
   const reset = () => {
     dispatch(requestUsers(1, pageSize, { term: '' }))
   }
@@ -49,7 +52,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
   return (
     <div className={s.usersPageBlock}>
-      <UserSearchForm submit={onSubmit} />
+      <UserSearchForm onFilterChange={onFilterChange} />
       <Button onClick={reset}> Reset filter</Button>
       <div className={s.pagination}>
         <Pagination count={pagesCount} page={currentPage} onChange={onPageChanged} />

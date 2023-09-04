@@ -2,15 +2,15 @@ import * as Form from '@radix-ui/react-form'
 import { TextField } from '../../../ui/textfield'
 import { Button } from '../../../ui/button'
 import s from './UserSearchForm.module.scss'
-import { FC, FormEvent } from 'react'
+import { FC, FormEvent, memo } from 'react'
 
 type PropsType = {
-  submit: (event: FormEvent<HTMLFormElement>) => void
+  onFilterChange: (event: FormEvent<HTMLFormElement>) => void
 }
 
-export const UserSearchForm: FC<PropsType> = ({ submit }) => {
+export const UserSearchForm: FC<PropsType> = memo(({ onFilterChange }) => {
   return (
-    <Form.Root onSubmit={submit}>
+    <Form.Root onSubmit={onFilterChange}>
       <div className={s.userField}>
         <Form.Field name={'term'}>
           <Form.Label>User</Form.Label>
@@ -24,4 +24,4 @@ export const UserSearchForm: FC<PropsType> = ({ submit }) => {
       </div>
     </Form.Root>
   )
-}
+})
