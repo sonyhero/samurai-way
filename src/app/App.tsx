@@ -12,6 +12,9 @@ import { Routing } from './Routing'
 import 'nprogress/nprogress.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { Toast } from '../components/Toast/Toast'
+import { QueryParamProvider } from 'use-query-params'
+import { ReactRouter5Adapter } from 'use-query-params/adapters/react-router-5'
+import queryString from 'query-string'
 
 class App extends React.Component<AppPropsType> {
   componentDidMount() {
@@ -47,9 +50,17 @@ const AppContainer = compose<ComponentType>(withRouter, connect(mapStateToProps,
 
 export const AppMain = () => (
   <HashRouter>
-    <Provider store={store}>
-      <AppContainer />
-    </Provider>
+    <QueryParamProvider
+      adapter={ReactRouter5Adapter}
+      options={{
+        searchStringToObject: queryString.parse,
+        objectToSearchString: queryString.stringify,
+      }}
+    >
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </QueryParamProvider>
   </HashRouter>
 )
 
