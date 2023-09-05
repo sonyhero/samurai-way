@@ -15,6 +15,8 @@ import {
   getUsers,
   getUsersFilter,
 } from '../../../app/selectors/users-selector'
+import { searchStringToObject, StringParam, useQueryParams } from 'use-query-params'
+import { useHistory } from 'react-router-dom'
 
 export const Users = () => {
   const totalUsersCount = useAppSelector(getTotalUsersCount)
@@ -25,9 +27,48 @@ export const Users = () => {
   const filter = useAppSelector(getUsersFilter)
   const dispatch = useAppDispatch()
 
+  const history = useHistory()
+
+  const [_, setQuery] = useQueryParams({
+    page: StringParam,
+    term: StringParam,
+    friend: StringParam,
+  })
+
   useEffect(() => {
-    dispatch(requestUsers(currentPage, pageSize, filter))
+    const parsed = searchStringToObject(history.location.search)
+
+    let actualPage = currentPage
+    let actualFilter = filter
+
+    if (!!parsed.page) actualPage = Number(parsed.page)
+    if (!!parsed.term) actualFilter = { ...actualFilter, term: parsed.term as string }
+
+    switch (parsed.friend) {
+      case 'null':
+        actualFilter = { ...actualFilter, friend: null }
+        break
+      case 'true':
+        actualFilter = { ...actualFilter, friend: true }
+        break
+      case 'false':
+        actualFilter = { ...actualFilter, friend: false }
+        break
+    }
+    dispatch(requestUsers(actualPage, pageSize, actualFilter))
   }, [])
+
+  useEffect(() => {
+    if (!!filter.term) {
+      setQuery({ term: filter.term })
+    }
+    if (!filter.friend) {
+      setQuery({ friend: String(filter.friend) })
+    }
+    if (currentPage) {
+      setQuery({ page: String(currentPage) })
+    }
+  }, [filter, currentPage])
 
   const follow = (userId: number) => dispatch(followUsers(userId))
 

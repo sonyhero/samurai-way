@@ -55,7 +55,9 @@ export const UserSearchForm: FC<PropsType> = memo(({ onFilterChange }) => {
               </option>
             ))}
           </Field>
-          <Button disabled={isSubmitting}>search</Button>
+          <Button type={'submit'} disabled={isSubmitting}>
+            search
+          </Button>
         </form>
       )}
     </Formik>
