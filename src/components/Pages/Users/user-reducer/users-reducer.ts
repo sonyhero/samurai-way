@@ -15,6 +15,7 @@ const initialState: InitialUsersReducerStateType = {
   currentPage: 1,
   filter: {
     term: '',
+    friend: null as null | boolean,
   },
 }
 
@@ -100,7 +101,7 @@ export const requestUsers =
       dispatch(userActions.toggleIsFetching(true))
       dispatch(userActions.setCurrentPage(page))
       dispatch(userActions.setTerm(filter))
-      const data = await usersAPI.getUsers(page, pageSize, filter.term)
+      const data = await usersAPI.getUsers(page, pageSize, filter.term, filter.friend)
       dispatch(userActions.toggleIsFetching(false))
       dispatch(userActions.setUsers(data.items))
       dispatch(userActions.setUsersTotalCount(data.totalCount))
@@ -163,7 +164,7 @@ type PhotosType = {
 }
 export type SearchFilterType = {
   term: string
-  // friend: boolean | null
+  friend: boolean | null
 }
 export type InitialUsersReducerStateType = {
   users: UserType[]

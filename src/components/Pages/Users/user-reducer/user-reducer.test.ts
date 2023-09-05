@@ -48,6 +48,7 @@ beforeEach(() => {
     currentPage: 1,
     filter: {
       term: '',
+      friend: null as null | boolean,
     },
   }
 })

@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { User } from './User/User'
 import { Pagination } from '../../ui/pagination'
 import { Typography } from '../../ui/typography'
@@ -7,7 +7,6 @@ import s from './Users.module.scss'
 import { UserSearchForm } from './UserSearchForm/UserSearchForm'
 import { useAppDispatch, useAppSelector } from '../../../app/store'
 import { followUsers, requestUsers, SearchFilterType, unFollowUsers, userActions } from './user-reducer/users-reducer'
-import { Button } from '../../ui/button'
 import {
   getCurrentPage,
   getOptions,
@@ -37,10 +36,8 @@ export const Users = () => {
   const pagesCount = Math.ceil(totalUsersCount / pageSize)
 
   const onFilterChange = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      const data = Object.fromEntries(new FormData(event.currentTarget)) as SearchFilterType
-      dispatch(requestUsers(1, pageSize, data))
-      event.preventDefault()
+    (filter: SearchFilterType) => {
+      dispatch(requestUsers(1, pageSize, filter))
     },
     [pageSize],
   )
@@ -51,16 +48,12 @@ export const Users = () => {
     dispatch(userActions.setPerPage(value))
     dispatch(requestUsers(currentPage, value, filter))
   }
-  const reset = () => {
-    dispatch(requestUsers(1, pageSize, { term: '' }))
-  }
 
   const mappedUsers = users.map((u) => <User key={u.id} user={u} followUsers={follow} unFollowUsers={unFollow} />)
 
   return (
     <div className={s.usersPageBlock}>
       <UserSearchForm onFilterChange={onFilterChange} />
-      <Button onClick={reset}> Reset filter</Button>
       <div className={s.pagination}>
         <Pagination count={pagesCount} page={currentPage} onChange={onPageChanged} />
         <Typography variant={'body2'}>Показать</Typography>
