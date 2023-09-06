@@ -6,14 +6,14 @@ import { Settings } from '../components/Pages/Settings/Settings'
 import React from 'react'
 import { UsersPage } from '../components/Pages/Users/UsersPage'
 import { LoginPage } from '../components/Pages/Login/LoginPage'
+import { DialogsPage } from '../components/Pages/Dialogs/DialogsPage'
 
-const DialogsContainer = React.lazy(() => import('../components/Pages/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('../components/Pages/Profile/ProfileContainer'))
 
 export const Routing = () => {
   return (
     <Switch>
-      <Route path="/dialogs" render={withSuspense(DialogsContainer)} />
+      <Route path="/dialogs" render={() => <DialogsPage />} />
       <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)} />
       <Route path="/users" render={() => <UsersPage />} />
       <Route exact path="/" render={() => <Redirect to={'/profile'} />} />

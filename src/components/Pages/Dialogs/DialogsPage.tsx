@@ -2,23 +2,23 @@ import React from 'react'
 import s from './Dialogs.module.scss'
 import { DialogItem } from './DialogItem/DialogsItem'
 import { Message } from './Message/Message'
-import { MapDispatchToPropsType, MapStateToPropsType } from './DialogsContainer'
 import { AddMessageReduxForm } from './AddMessageForm'
-import { useAppSelector } from '../../../app/store'
+import { useAppDispatch, useAppSelector } from '../../../app/store'
 import { getIsAuth } from '../../../app/selectors/auth-selector'
 import { Redirect } from 'react-router-dom'
+import { addMessage } from './dialogs-reducer'
 
-export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+export const DialogsPage = () => {
+  const dispatch = useAppDispatch()
   const isAuth = useAppSelector(getIsAuth)
-
-  const { addMessage, dialogsPage } = props
+  const dialogsPage = useAppSelector((state) => state.dialogsReducer)
 
   const dialogsDataMap = dialogsPage.dialogs.map((d) => <DialogItem key={d.id} name={d.name} id={d.id} />)
 
   const messagesDataMap = dialogsPage.messages.map((m) => <Message key={m.id} messageText={m.messageText} id={m.id} />)
 
   const onAddMessage = (data: { messageText: string }) => {
-    addMessage(data.messageText)
+    dispatch(addMessage(data.messageText))
   }
 
   return !isAuth ? (
@@ -36,6 +36,3 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     </div>
   )
 }
-
-//Types
-type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
