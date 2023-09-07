@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './Navbar.module.scss'
 import { NavLink } from 'react-router-dom'
-import { MessagesNav, MusicNav, NewsNav, ProfileNav, SettingsNav } from '../../assets/iconsNavbar'
+import { ChatNav, MessagesNav, MusicNav, NewsNav, ProfileNav, SettingsNav } from '../../assets/iconsNavbar'
 import { UsersNav } from '../../assets/iconsNavbar'
 
 export const Navbar = () => {
@@ -31,7 +31,12 @@ export const Navbar = () => {
           Users
         </NavLink>
       </div>
-
+      <div className={s.item}>
+        <ChatNav />
+        <NavLink to="/chat" activeClassName={s.activeLink}>
+          Chat
+        </NavLink>
+      </div>
       <div className={s.item}>
         <MusicNav />
         <NavLink to="/music" activeClassName={s.activeLink}>

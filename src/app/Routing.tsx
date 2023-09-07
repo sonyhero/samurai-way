@@ -9,6 +9,7 @@ import { LoginPage } from '../components/Pages/Login/LoginPage'
 import { DialogsPage } from '../components/Pages/Dialogs/DialogsPage'
 
 const ProfileContainer = React.lazy(() => import('../components/Pages/Profile/ProfileContainer'))
+const ChatPage = React.lazy(() => import('../components/Pages/Chat/ChatPage'))
 
 export const Routing = () => {
   return (
@@ -23,6 +24,7 @@ export const Routing = () => {
       <Route path="/news" render={() => <News />} />
       <Route path="/music" render={() => <Music />} />
       <Route path="/settings" render={() => <Settings />} />
+      <Route path="/chat" render={withSuspense(ChatPage)} />
 
       <Route path="*" render={() => <h1>404: PAGE NOT FOUND</h1>} />
     </Switch>
