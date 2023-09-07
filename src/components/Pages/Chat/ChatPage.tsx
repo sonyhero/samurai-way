@@ -1,6 +1,8 @@
 import { Button } from '../../ui/button'
 import { TextField } from '../../ui/textfield'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
+
+const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
 
 const ChatPage = () => {
   return (
@@ -19,41 +21,39 @@ const Chat = () => {
     </div>
   )
 }
+type ChatMessageType = {
+  message: string
+  photo: string
+  userId: number
+  userName: string
+}
 
 const ChatMessages = () => {
-  const messages: MessagesType[] = [
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-    { id: new Date(), text: 'hello' },
-  ]
-  const mappedMessages = messages.map((m) => <ChatMessage key={+m.id} text={m.text} />)
+  const [messages, setMessages] = useState<ChatMessageType[]>([])
+
+  useEffect(() => {
+    ws.addEventListener('message', (e) => {
+      console.log(JSON.parse(e.data))
+      setMessages((prevMessages) => [...prevMessages, ...JSON.parse(e.data)])
+    })
+  }, [])
+
+  // const messages = null as null | ChatMessageType[]
+  const mappedMessages = messages?.map((m, index) => <ChatMessage key={index} message={m} />)
   return <div style={{ height: '300px', overflowY: 'auto' }}>{mappedMessages}</div>
 }
-type MessagesType = {
-  id: Date
-  text: string
-}
 
-const ChatMessage: FC<ChatMessagePropsType> = () => {
-  return <div>message</div>
+const ChatMessage: FC<ChatMessagePropsType> = ({ message }) => {
+  return (
+    <div>
+      <img src={message.photo} alt={'photo'} />
+      <div>{message.userName}</div>
+      <div>{message.message}</div>
+    </div>
+  )
 }
 type ChatMessagePropsType = {
-  text: any
+  message: ChatMessageType
 }
 
 const AddChatMessageForm = () => {
