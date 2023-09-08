@@ -4,13 +4,11 @@ import { DialogItem } from './DialogItem/DialogsItem'
 import { Message } from './Message/Message'
 import { AddMessageReduxForm } from './AddMessageForm'
 import { useAppDispatch, useAppSelector } from '../../../app/store'
-import { getIsAuth } from '../../../app/selectors/auth-selector'
-import { Redirect } from 'react-router-dom'
 import { addMessage } from './dialogs-reducer'
+import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
 
-export const DialogsPage = () => {
+const DialogsPage = () => {
   const dispatch = useAppDispatch()
-  const isAuth = useAppSelector(getIsAuth)
   const dialogsPage = useAppSelector((state) => state.dialogsReducer)
 
   const dialogsDataMap = dialogsPage.dialogs.map((d) => <DialogItem key={d.id} name={d.name} id={d.id} />)
@@ -21,9 +19,7 @@ export const DialogsPage = () => {
     dispatch(addMessage(data.messageText))
   }
 
-  return !isAuth ? (
-    <Redirect to={'/login'} />
-  ) : (
+  return (
     <div className={s.dialogsBox}>
       Dialogs
       <div className={s.dialogs}>
@@ -36,3 +32,5 @@ export const DialogsPage = () => {
     </div>
   )
 }
+
+export default withAuthRedirect(DialogsPage)

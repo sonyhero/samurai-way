@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppSelector } from '../../../app/store'
-import { Users } from './Users'
+import Users from './Users'
 import { getIsAuth } from '../../../app/selectors/auth-selector'
 import { Redirect } from 'react-router-dom'
 

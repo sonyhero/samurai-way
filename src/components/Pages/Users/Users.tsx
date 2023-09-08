@@ -17,8 +17,9 @@ import {
 } from '../../../app/selectors/users-selector'
 import { searchStringToObject, StringParam, useQueryParams } from 'use-query-params'
 import { useHistory } from 'react-router-dom'
+import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
 
-export const Users = () => {
+const Users = () => {
   const totalUsersCount = useAppSelector(getTotalUsersCount)
   const pageSize = useAppSelector(getPageSize)
   const currentPage = useAppSelector(getCurrentPage)
@@ -111,3 +112,5 @@ export const Users = () => {
     </div>
   )
 }
+
+export default withAuthRedirect(Users)
