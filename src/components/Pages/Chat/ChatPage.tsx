@@ -2,8 +2,6 @@ import { Button } from '../../ui/button'
 import { TextField } from '../../ui/textfield'
 import { FC, useEffect, useState } from 'react'
 
-const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-
 const ChatPage = () => {
   return (
     <div>
@@ -13,11 +11,30 @@ const ChatPage = () => {
 }
 
 const Chat = () => {
+  const [ws, setWs] = useState<WebSocket | null>(null)
+
+  useEffect(() => {
+    let webSocket: WebSocket
+    const closeHandler = () => setTimeout(createChannel, 3000)
+    function createChannel() {
+      ws?.removeEventListener('close', closeHandler)
+      ws?.close()
+      webSocket = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+      ws?.addEventListener('close', closeHandler)
+      setWs(webSocket)
+    }
+    createChannel()
+    return () => {
+      ws?.removeEventListener('close', closeHandler)
+      ws?.close()
+    }
+  }, [])
+
   return (
     <div style={{ width: '500px', border: '1px solid red' }}>
       Chat
-      <ChatMessages />
-      <AddChatMessageForm />
+      <ChatMessages ws={ws} />
+      <AddChatMessageForm ws={ws} />
     </div>
   )
 }
@@ -28,17 +45,17 @@ type ChatMessageType = {
   userName: string
 }
 
-const ChatMessages = () => {
+const ChatMessages: FC<{ ws: WebSocket | null }> = ({ ws }) => {
   const [messages, setMessages] = useState<ChatMessageType[]>([])
 
   useEffect(() => {
-    ws.addEventListener('message', (e) => {
-      console.log(JSON.parse(e.data))
-      setMessages((prevMessages) => [...prevMessages, ...JSON.parse(e.data)])
-    })
-  }, [])
+    const messageHandler = (e: MessageEvent) => setMessages((prevMessages) => [...prevMessages, ...JSON.parse(e.data)])
+    ws?.addEventListener('message', messageHandler)
+    return () => {
+      ws?.removeEventListener('message', messageHandler)
+    }
+  }, [ws])
 
-  // const messages = null as null | ChatMessageType[]
   const mappedMessages = messages?.map((m, index) => <ChatMessage key={index} message={m} />)
   return <div style={{ height: '300px', overflowY: 'auto' }}>{mappedMessages}</div>
 }
@@ -56,8 +73,17 @@ type ChatMessagePropsType = {
   message: ChatMessageType
 }
 
-const AddChatMessageForm = () => {
-  const [message, setMessage] = useState('')
+const AddChatMessageForm: FC<{ ws: WebSocket | null }> = ({ ws }) => {
+  const [message, setMessage] = useState<string>('')
+  const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>('pending')
+
+  useEffect(() => {
+    const openHandler = () => setReadyStatus('ready')
+    ws?.addEventListener('open', openHandler)
+    return () => {
+      ws?.removeEventListener('open', openHandler)
+    }
+  }, [ws])
 
   const sendMessage = () => {
     debugger
@@ -73,7 +99,9 @@ const AddChatMessageForm = () => {
   return (
     <div>
       <TextField onChangeText={onChangeHandler} value={message} placeholder={'type message...'} />
-      <Button onClick={sendMessage}>Send</Button>
+      <Button disabled={ws === null || readyStatus !== 'ready'} onClick={sendMessage}>
+        Send
+      </Button>
     </div>
   )
 }
