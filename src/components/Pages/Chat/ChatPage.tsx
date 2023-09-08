@@ -57,10 +57,23 @@ type ChatMessagePropsType = {
 }
 
 const AddChatMessageForm = () => {
+  const [message, setMessage] = useState('')
+
+  const sendMessage = () => {
+    debugger
+    if (!message) return
+    ws?.send(message)
+    setMessage('')
+  }
+
+  const onChangeHandler = (text: string) => {
+    setMessage(text)
+  }
+
   return (
     <div>
-      <TextField placeholder={'type message...'} />
-      <Button>Send</Button>
+      <TextField onChangeText={onChangeHandler} value={message} placeholder={'type message...'} />
+      <Button onClick={sendMessage}>Send</Button>
     </div>
   )
 }
