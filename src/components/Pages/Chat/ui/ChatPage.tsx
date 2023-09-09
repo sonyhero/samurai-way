@@ -45,7 +45,7 @@ const ChatMessages = () => {
 
   useEffect(() => {
     if (isAutoScrollIsActive) {
-      messagesAnchorRef.current?.scrollIntoView({ behavior: 'smooth' })
+      messagesAnchorRef.current?.scrollIntoView({ block: 'end', behavior: 'smooth' })
     }
   }, [messages])
 
