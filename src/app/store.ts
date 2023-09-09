@@ -8,6 +8,7 @@ import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { FormAction, reducer as formReducer } from 'redux-form'
 import { appReducer, AppReducerType } from './app-reducer'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { chatReducer } from '../components/Pages/Chat/model/chat-reducer'
 
 let rootReducer = combineReducers({
   dialogsReducer,
@@ -17,6 +18,7 @@ let rootReducer = combineReducers({
   authReducer,
   form: formReducer,
   appReducer,
+  chatReducer,
 })
 //Redux dev tools
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

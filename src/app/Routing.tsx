@@ -8,7 +8,7 @@ import { LoginPage } from '../components/Pages/Login/LoginPage'
 import ProfileContainer from '../components/Pages/Profile/ProfileContainer'
 
 // const ProfileContainer = React.lazy(() => import('../components/Pages/Profile/ProfileContainer'))
-const ChatPage = React.lazy(() => import('../components/Pages/Chat/ChatPage'))
+const ChatPage = React.lazy(() => import('../components/Pages/Chat/ui/ChatPage'))
 const UsersPage = React.lazy(() => import('../components/Pages/Users/Users'))
 const DialogsPage = React.lazy(() => import('../components/Pages/Dialogs/DialogsPage'))
 
