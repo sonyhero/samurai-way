@@ -2,10 +2,10 @@ import React from 'react'
 import s from './Dialogs.module.scss'
 import { DialogItem } from './DialogItem/DialogsItem'
 import { Message } from './Message/Message'
-import { AddMessageReduxForm } from './AddMessageForm'
-import { useAppDispatch, useAppSelector } from '../../../app/store'
-import { addMessage } from './dialogs-reducer'
-import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
+import { AddMessageReduxForm } from './AddDialogsMessageForm/AddDialogsMessageForm'
+import { useAppDispatch, useAppSelector } from '../../../../app/store'
+import { addMessage } from '../model/dialogs-reducer'
+import { withAuthRedirect } from '../../../../hoc/withAuthRedirect'
 
 const DialogsPage = () => {
   const dispatch = useAppDispatch()
