@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { ProfileType } from '../../profile-reducer/profile-reducer'
+import { ProfileType } from '../../../model/profile-reducer'
 import { Contacts } from './Contacts'
-import { Button } from '../../../../ui/button'
-import { Typography } from '../../../../ui/typography'
+import { Button } from '../../../../../ui/button'
+import { Typography } from '../../../../../ui/typography'
 import s from './ProfileDescription.module.scss'
-import { Modal } from '../../../../ui/modal'
+import { Modal } from '../../../../../ui/modal'
 
 export const ProfileDescription: React.FC<ProfileDescriptionType> = ({ profile, isOwner, setEditMode }) => {
   const [modalMode, setModalMode] = useState<boolean>(false)

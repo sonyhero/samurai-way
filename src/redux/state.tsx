@@ -1,8 +1,4 @@
 export {}
-// import {profileReducer} from './profile-reducer';
-// import {dialogsReducer} from './dialogs-reducer';
-// import {sidebarReducer} from './sidebar-reducer';
-// import {ActionsTypes} from './redux-store';
 //
 //  type StateType = {
 //     profilePage: ProfilePageType

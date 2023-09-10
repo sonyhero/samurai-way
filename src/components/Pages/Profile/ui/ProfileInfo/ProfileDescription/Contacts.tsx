@@ -1,6 +1,6 @@
-import { getContacts } from '../../../../../app/selectors/profile-selector'
+import { getContacts } from '../../../../../../app/selectors/profile-selector'
 import React from 'react'
-import { useAppSelector } from '../../../../../app/store'
+import { useAppSelector } from '../../../../../../app/store'
 
 export const Contacts = () => {
   const contacts = useAppSelector(getContacts)

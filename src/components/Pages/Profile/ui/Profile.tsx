@@ -1,7 +1,7 @@
 import React from 'react'
 import { ProfileInfo } from './ProfileInfo/ProfileInfo'
 import { MyPostsContainer } from './MyPosts/MyPostsContainer'
-import { ProfileType } from './profile-reducer/profile-reducer'
+import { ProfileType } from '../model/profile-reducer'
 import { ProfileFormType } from './ProfileInfo/ProfileForm/ProfileForm'
 import s from './Profile.module.scss'
 

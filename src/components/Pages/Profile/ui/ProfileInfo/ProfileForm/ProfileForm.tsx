@@ -1,9 +1,9 @@
 import React from 'react'
-import { fieldCreator, Input, TextArea } from '../../../../common/FormsControls/FormsControl'
+import { fieldCreator, Input, TextArea } from '../../../../../common/FormsControls/FormsControl'
 import { InjectedFormProps, reduxForm } from 'redux-form'
 import { ContactsForm } from './ContactsForm'
 import s from './ProfieForm.module.scss'
-import { Button } from '../../../../ui/button'
+import { Button } from '../../../../../ui/button'
 
 export const ProfileForm: React.FC<InjectedFormProps<ProfileFormType>> = (props) => {
   return (

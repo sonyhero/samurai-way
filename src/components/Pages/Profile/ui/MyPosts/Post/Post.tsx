@@ -1,11 +1,11 @@
 import React from 'react'
 import s from './Post.module.scss'
-import { Button } from '../../../../ui/button'
-import { Like, Trash } from '../../../../../assets'
-import { Typography } from '../../../../ui/typography'
-import { AvatarDemo } from '../../../../ui/avatar'
-import { useAppSelector } from '../../../../../app/store'
-import { PostsType } from '../../profile-reducer/profile-reducer'
+import { Button } from '../../../../../ui/button'
+import { Like, Trash } from '../../../../../../assets'
+import { Typography } from '../../../../../ui/typography'
+import { AvatarDemo } from '../../../../../ui/avatar'
+import { useAppSelector } from '../../../../../../app/store'
+import { PostsType } from '../../../model/profile-reducer'
 
 export const Post: React.FC<PropsType> = (props) => {
   const { post, deletePost, setLikePost } = props

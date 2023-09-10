@@ -3,7 +3,7 @@ import s from './MyPosts.module.scss'
 import { Post } from './Post/Post'
 import { MapDispatchToPropsType, MapStateToPropsType } from './MyPostsContainer'
 import { AddPostReduxForm, FormAddPostDataType } from './AddPostForm/AddPostForm'
-import { Typography } from '../../../ui/typography'
+import { Typography } from '../../../../ui/typography'
 
 export const MyPosts: React.FC<MyPostsPropsType> = memo((props) => {
   const { addPost, profilePage, deletePost, setLikePost } = props

@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useState } from 'react'
 import s from './ProfileInfo.module.scss'
-import { ProfileType } from '../profile-reducer/profile-reducer'
+import { ProfileType } from '../../model/profile-reducer'
 import { ProfileStatusUseState } from './ProfileStatus/ProfileStatusUseState'
 import { ProfileDescription } from './ProfileDescription/ProfileDescription'
 import ProfileForm, { ProfileFormType } from './ProfileForm/ProfileForm'
-import { Typography } from '../../../ui/typography'
-import { AvatarDemo } from '../../../ui/avatar'
-import { Edit } from '../../../../assets'
+import { Typography } from '../../../../ui/typography'
+import { AvatarDemo } from '../../../../ui/avatar'
+import { Edit } from '../../../../../assets'
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
   const { profile, profileStatus, updateProfileStatus, isOwner, savePhoto, saveProfile } = props

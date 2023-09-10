@@ -1,6 +1,6 @@
-import { PhotosType, ProfileType } from '../components/Pages/Profile/profile-reducer/profile-reducer'
-import { ProfileFormType } from '../components/Pages/Profile/ProfileInfo/ProfileForm/ProfileForm'
-import { instance, ResponseAppType } from './api'
+import { PhotosType, ProfileType } from '../model/profile-reducer'
+import { ProfileFormType } from '../ui/ProfileInfo/ProfileForm/ProfileForm'
+import { instance, ResponseAppType } from '../../../../api/api'
 
 export const profileAPI = {
   getProfile(userId: string) {

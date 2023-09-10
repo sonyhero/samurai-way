@@ -1,6 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
-import { TextField } from '../../../../ui/textfield'
-import { Typography } from '../../../../ui/typography'
+import { TextField } from '../../../../../ui/textfield'
+import { Typography } from '../../../../../ui/typography'
 
 type ProfileStatusType = {
   status: string

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
-import { TextArea } from '../../../../common/FormsControls/FormsControl'
-import { Button } from '../../../../ui/button'
-import { maxLength, minLength, required } from '../../../../../utils/validators'
+import { TextArea } from '../../../../../common/FormsControls/FormsControl'
+import { Button } from '../../../../../ui/button'
+import { maxLength, minLength, required } from '../../../../../../utils/validators'
 import s from './AddPostForm.module.scss'
 
 const maxLength100 = maxLength(100)
