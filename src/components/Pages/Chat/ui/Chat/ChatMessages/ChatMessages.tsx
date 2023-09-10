@@ -1,6 +1,6 @@
 import { UIEvent, useEffect, useRef, useState } from 'react'
 import { useAppSelector } from '../../../../../../app/store'
-import { getMessages } from '../../../../../../app/selectors/chat-selector'
+import { getMessages } from '../../../../../../app/model/selectors/chat-selector'
 import { ChatMessage } from './ChatMessage/ChatMessage'
 
 export const ChatMessages = () => {

@@ -14,8 +14,8 @@ import { RootReducerType } from '../../../../app/store'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { withAuthRedirect } from '../../../../hoc/withAuthRedirect'
 import { compose } from 'redux'
-import { getProfile, getStatus } from '../../../../app/selectors/profile-selector'
-import { getIsAuth, getUserId } from '../../../../app/selectors/auth-selector'
+import { getProfile, getStatus } from '../../../../app/model/selectors/profile-selector'
+import { getIsAuth, getUserId } from '../../../../app/model/selectors/auth-selector'
 import { ProfileFormType } from './ProfileInfo/ProfileForm/ProfileForm'
 
 const { setUserProfile } = profileActions

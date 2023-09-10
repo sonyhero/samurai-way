@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../../../../../app/store'
-import { getStatus } from '../../../../../../app/selectors/chat-selector'
+import { getStatus } from '../../../../../../app/model/selectors/chat-selector'
 import { useState } from 'react'
 import { sendMessage } from '../../../model/chat-reducer'
 import { TextField } from '../../../../../ui/textfield'

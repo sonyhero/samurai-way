@@ -1,4 +1,4 @@
-import { getContacts } from '../../../../../../app/selectors/profile-selector'
+import { getContacts } from '../../../../../../app/model/selectors/profile-selector'
 import React from 'react'
 import { useAppSelector } from '../../../../../../app/store'
 

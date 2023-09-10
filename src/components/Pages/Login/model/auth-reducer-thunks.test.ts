@@ -1,5 +1,5 @@
 import { authAPI } from '../api/auth-api'
-import { ResponseAppType, ResultCodesEnum } from '../../../../api/api'
+import { ResponseAppType, ResultCodesEnum } from '../../../../app/api/api'
 import { login } from './auth-reducer'
 
 jest.mock('../../../api/auth-api')

@@ -2,7 +2,7 @@ import { AppThunk, InferActionsTypes } from '../../../../app/store'
 import { ProfileFormType } from '../ui/ProfileInfo/ProfileForm/ProfileForm'
 import { stopSubmit } from 'redux-form'
 import { profileAPI } from '../api/profile-api'
-import { ResultCodesEnum } from '../../../../api/api'
+import { ResultCodesEnum } from '../../../../app/api/api'
 import NProgress from 'nprogress'
 import { handleServerAppError, handleServerNetworkError } from '../../../../utils/error-utils'
 

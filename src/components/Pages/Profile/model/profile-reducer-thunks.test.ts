@@ -1,4 +1,4 @@
-import { ResponseAppType, ResultCodesEnum } from '../../../../api/api'
+import { ResponseAppType, ResultCodesEnum } from '../../../../app/api/api'
 import { profileAPI } from '../api/profile-api'
 import { getProfileData, getProfileStatus, PhotosType } from './profile-reducer'
 

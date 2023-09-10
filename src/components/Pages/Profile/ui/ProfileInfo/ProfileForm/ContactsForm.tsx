@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
-import { getContacts } from '../../../../../../app/selectors/profile-selector'
-import { fieldCreator, Input } from '../../../../../common/FormsControls/FormsControl'
+import { getContacts } from '../../../../../../app/model/selectors/profile-selector'
+import { fieldCreator, Input } from '../../../../../forms-controls/FormsControl'
 import React from 'react'
 
 export const ContactsForm = () => {

@@ -1,4 +1,4 @@
-import { ResponseAppType } from '../api/api'
+import { ResponseAppType } from '../app/api/api'
 import { toast } from 'react-toastify'
 import NProgress from 'nprogress'
 import axios, { AxiosError } from 'axios'

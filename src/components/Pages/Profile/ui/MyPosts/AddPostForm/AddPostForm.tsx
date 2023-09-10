@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
-import { TextArea } from '../../../../../common/FormsControls/FormsControl'
+import { TextArea } from '../../../../../forms-controls/FormsControl'
 import { Button } from '../../../../../ui/button'
 import { maxLength, minLength, required } from '../../../../../../utils/validators'
 import s from './AddPostForm.module.scss'

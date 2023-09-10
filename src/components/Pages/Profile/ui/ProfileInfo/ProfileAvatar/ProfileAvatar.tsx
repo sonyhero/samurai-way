@@ -1,6 +1,6 @@
 import { PhotosType } from '../../../model/profile-reducer'
 import React from 'react'
-import { Preloader } from '../../../../../common/Preloader/Preloader'
+import { Preloader } from '../../../../../ui/preloader/Preloader'
 import user from '../../../../../../assets/img/user.png'
 
 export const ProfileAvatar: React.FC<ProfileAvatarType> = ({ isAvatar, photos }) => {

@@ -1,0 +1,6 @@
+@import 'mixins';
+
+.appBox {
+  display: flex;
+  @include container();
+}

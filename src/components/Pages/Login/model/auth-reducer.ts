@@ -2,8 +2,8 @@ import { AppThunk, InferActionsTypes } from '../../../../app/store'
 
 import { stopSubmit } from 'redux-form'
 import { authAPI } from '../api/auth-api'
-import { securityAPI } from '../../../../api/security-api'
-import { ResultCodeForCapctha, ResultCodesEnum } from '../../../../api/api'
+import { securityAPI } from '../../../../app/api/security-api'
+import { ResultCodeForCapctha, ResultCodesEnum } from '../../../../app/api/api'
 import NProgress from 'nprogress'
 import { handleServerAppError, handleServerNetworkError } from '../../../../utils/error-utils'
 

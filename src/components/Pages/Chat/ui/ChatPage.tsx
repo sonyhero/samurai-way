@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { withAuthRedirect } from '../../../../hoc/withAuthRedirect'
 import { useAppDispatch, useAppSelector } from '../../../../app/store'
 import { startMessagesListening, stopMessagesListening } from '../model/chat-reducer'
-import { getStatus } from '../../../../app/selectors/chat-selector'
+import { getStatus } from '../../../../app/model/selectors/chat-selector'
 import { ChatMessages } from './Chat/ChatMessages/ChatMessages'
 import { AddChatMessageForm } from './Chat/AddChatMessageForm/AddChatMEssageForm'
 
