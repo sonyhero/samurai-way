@@ -1,40 +1,33 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { User } from './User/User'
 import { Pagination } from '../../../ui/pagination'
 import { Typography } from '../../../ui/typography'
 import { SuperSelect } from '../../../ui/select'
 import s from './Users.module.scss'
 import { UserSearchForm } from './UserSearchForm/UserSearchForm'
-import { useAppDispatch, useAppSelector } from '../../../../app/store'
-import { followUsers, requestUsers, SearchFilterType, unFollowUsers, userActions } from '../model/users-reducer'
-import {
-  getCurrentPage,
-  getOptions,
-  getPageSize,
-  getTotalUsersCount,
-  getUsers,
-  getUsersFilter,
-} from '../../../../app/model/selectors/users-selector'
-import { searchStringToObject, StringParam, useQueryParams } from 'use-query-params'
-import { useHistory } from 'react-router-dom'
+import { useAppDispatch } from '../../../../app/store'
+import { requestUsers } from '../model/users-reducer'
+import { searchStringToObject } from 'use-query-params'
 import { withAuthRedirect } from '../../../../hoc/withAuthRedirect'
+import { useUsers } from './hooks/useUsers'
 
 const Users = () => {
-  const totalUsersCount = useAppSelector(getTotalUsersCount)
-  const pageSize = useAppSelector(getPageSize)
-  const currentPage = useAppSelector(getCurrentPage)
-  const options = useAppSelector(getOptions)
-  const users = useAppSelector(getUsers)
-  const filter = useAppSelector(getUsersFilter)
   const dispatch = useAppDispatch()
-
-  const history = useHistory()
-
-  const [_, setQuery] = useQueryParams({
-    page: StringParam,
-    term: StringParam,
-    friend: StringParam,
-  })
+  const {
+    users,
+    follow,
+    unFollow,
+    pagesCount,
+    onFilterChange,
+    onPageChanged,
+    onSetPerPage,
+    options,
+    history,
+    setQuery,
+    currentPage,
+    filter,
+    pageSize,
+  } = useUsers()
 
   useEffect(() => {
     const parsed = searchStringToObject(history.location.search)
@@ -71,26 +64,6 @@ const Users = () => {
     }
   }, [filter, currentPage])
 
-  const follow = (userId: number) => dispatch(followUsers(userId))
-
-  const unFollow = (userId: number) => dispatch(unFollowUsers(userId))
-
-  const pagesCount = Math.ceil(totalUsersCount / pageSize)
-
-  const onFilterChange = useCallback(
-    (filter: SearchFilterType) => {
-      dispatch(requestUsers(1, pageSize, filter))
-    },
-    [pageSize],
-  )
-  const onPageChanged = (pageNumber: number) => {
-    dispatch(requestUsers(pageNumber, pageSize, filter))
-  }
-  const onSetPerPage = (value: number) => {
-    dispatch(userActions.setPerPage(value))
-    dispatch(requestUsers(currentPage, value, filter))
-  }
-
   const mappedUsers = users.map((u) => <User key={u.id} user={u} followUsers={follow} unFollowUsers={unFollow} />)
 
   return (
@@ -99,13 +72,7 @@ const Users = () => {
       <div className={s.pagination}>
         <Pagination count={pagesCount} page={currentPage} onChange={onPageChanged} />
         <Typography variant={'body2'}>Показать</Typography>
-        <SuperSelect
-          options={options}
-          // value={`${pageSize}`}
-          defaultValue={pageSize}
-          onValueChange={onSetPerPage}
-          classname={s.selectPagination}
-        />
+        <SuperSelect options={options} onValueChange={onSetPerPage} classname={s.selectPagination} />
         <Typography variant={'body2'}>На странице</Typography>
       </div>
       <div className={s.usersBlock}>{mappedUsers}</div>
