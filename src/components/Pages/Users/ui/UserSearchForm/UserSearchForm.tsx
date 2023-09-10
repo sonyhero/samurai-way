@@ -7,15 +7,11 @@ import { Field, Formik } from 'formik'
 import { TextField } from '../../../../ui/textfield'
 import { Button } from '../../../../ui/button'
 
-type FriendFormType = 'true' | 'false' | 'null'
-type FormType = {
-  term: string
-  friend: FriendFormType
-}
-
-type PropsType = {
-  onFilterChange: (filter: SearchFilterType) => void
-}
+const options = [
+  { value: 'null', item: 'all' },
+  { value: 'true', item: 'only followed' },
+  { value: 'false', item: 'only unfollowed' },
+]
 
 export const UserSearchForm: FC<PropsType> = memo(({ onFilterChange }) => {
   const filter = useSelector(getUsersFilter)
@@ -27,11 +23,6 @@ export const UserSearchForm: FC<PropsType> = memo(({ onFilterChange }) => {
     onFilterChange(filter)
     setSubmitting(false)
   }
-  const options = [
-    { value: 'null', item: 'all' },
-    { value: 'true', item: 'only followed' },
-    { value: 'false', item: 'only unfollowed' },
-  ]
 
   return (
     <Formik
@@ -63,3 +54,13 @@ export const UserSearchForm: FC<PropsType> = memo(({ onFilterChange }) => {
     </Formik>
   )
 })
+
+//Types
+type FriendFormType = 'true' | 'false' | 'null'
+type FormType = {
+  term: string
+  friend: FriendFormType
+}
+type PropsType = {
+  onFilterChange: (filter: SearchFilterType) => void
+}
