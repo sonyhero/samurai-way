@@ -4,7 +4,7 @@ import { News } from '../components/Pages/News/News'
 import { Music } from '../components/Pages/Music/Music'
 import { Settings } from '../components/Pages/Settings/Settings'
 import React from 'react'
-import { LoginPage } from '../components/Pages/Login/LoginPage'
+import { LoginPage } from '../components/Pages/Login/ui/LoginPage'
 import ProfileContainer from '../components/Pages/Profile/ProfileContainer'
 
 // const ProfileContainer = React.lazy(() => import('../components/Pages/Profile/ProfileContainer'))

@@ -2,7 +2,7 @@ import React from 'react'
 import { Header } from './Header'
 import { connect } from 'react-redux'
 import { RootReducerType } from '../../app/store'
-import { logout } from '../Pages/Login/auth-reducer'
+import { logout } from '../Pages/Login/model/auth-reducer'
 
 export class HeaderAPIComponent extends React.Component<HeaderAPIComponentType> {
   render() {

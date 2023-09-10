@@ -1,13 +1,13 @@
 import React from 'react'
 import { InjectedFormProps, reduxForm } from 'redux-form'
-import { CheckBox, fieldCreator, Input } from '../../../common/FormsControls/FormsControl'
-import { required } from '../../../../utils/validators'
+import { CheckBox, fieldCreator, Input } from '../../../../common/FormsControls/FormsControl'
+import { required } from '../../../../../utils/validators'
 import s from './Login-form.module.scss'
-import { useAppSelector } from '../../../../app/store'
-import { Typography } from '../../../ui/typography'
-import { Button } from '../../../ui/button'
-import { Card } from '../../../ui/card'
-import { getCaptchaUrl } from '../../../../app/selectors/auth-selector'
+import { useAppSelector } from '../../../../../app/store'
+import { Typography } from '../../../../ui/typography'
+import { Button } from '../../../../ui/button'
+import { Card } from '../../../../ui/card'
+import { getCaptchaUrl } from '../../../../../app/selectors/auth-selector'
 
 const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
   const captcha = useAppSelector(getCaptchaUrl)

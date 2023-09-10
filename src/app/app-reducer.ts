@@ -1,5 +1,5 @@
 import { AppThunk } from './store'
-import { getAuthUserData } from '../components/Pages/Login/auth-reducer'
+import { getAuthUserData } from '../components/Pages/Login/model/auth-reducer'
 import NProgress from 'nprogress'
 
 const initialState: InitialUsersReducerStateType = {

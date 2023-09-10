@@ -1,11 +1,11 @@
-import { AppThunk, InferActionsTypes } from '../../../app/store'
+import { AppThunk, InferActionsTypes } from '../../../../app/store'
 
 import { stopSubmit } from 'redux-form'
-import { authAPI } from '../../../api/auth-api'
-import { securityAPI } from '../../../api/security-api'
-import { ResultCodeForCapctha, ResultCodesEnum } from '../../../api/api'
+import { authAPI } from '../api/auth-api'
+import { securityAPI } from '../../../../api/security-api'
+import { ResultCodeForCapctha, ResultCodesEnum } from '../../../../api/api'
 import NProgress from 'nprogress'
-import { handleServerAppError, handleServerNetworkError } from '../../../utils/error-utils'
+import { handleServerAppError, handleServerNetworkError } from '../../../../utils/error-utils'
 
 const initialState: InitialUsersReducerStateType = {
   userId: null,

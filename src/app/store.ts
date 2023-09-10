@@ -3,7 +3,7 @@ import { dialogsReducer, DialogsReducerType } from '../components/Pages/Dialogs/
 import { profileReducer } from '../components/Pages/Profile/profile-reducer/profile-reducer'
 import { sidebarReducer } from '../components/Navbar/sidebar-reducer'
 import { usersReducer, UsersReducerType } from '../components/Pages/Users/user-reducer/users-reducer'
-import { authReducer, AuthReducerType } from '../components/Pages/Login/auth-reducer'
+import { authReducer, AuthReducerType } from '../components/Pages/Login/model/auth-reducer'
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { FormAction, reducer as formReducer } from 'redux-form'
 import { appReducer, AppReducerType } from './app-reducer'

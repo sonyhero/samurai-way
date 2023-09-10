@@ -1,4 +1,4 @@
-import { instance, ResponseAppType } from './api'
+import { instance, ResponseAppType } from '../../../../api/api'
 
 export const authAPI = {
   getAuthMe() {
