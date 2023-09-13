@@ -2,6 +2,7 @@ import { Dispatch } from 'redux'
 import { v1 } from 'uuid'
 import { AppThunk, InferActionsTypes } from '../../../../app/store'
 import { chatAPI, ChatMessageAPIType, StatusType } from '../api/chat-api'
+import { toast } from 'react-toastify'
 
 type ChatMessageType = ChatMessageAPIType & { id: string }
 
@@ -53,6 +54,7 @@ const statusChangedHandlerCreator = (dispatch: Dispatch) => {
   if (_statusChangedHandler === null) {
     _statusChangedHandler = (status) => {
       dispatch(chatActions.statusChangedAC(status))
+      status === 'error' && toast.error('Some error occurred. Please refresh the page')
     }
   }
   return _statusChangedHandler
