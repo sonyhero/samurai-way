@@ -2,6 +2,7 @@ import { UIEvent, useEffect, useRef, useState } from 'react'
 import { useAppSelector } from '../../../../../../app/store'
 import { getMessages } from '../../../../../../app/model/selectors/chat-selector'
 import { ChatMessage } from './ChatMessage/ChatMessage'
+import s from './ChatMessages.module.scss'
 
 export const ChatMessages = () => {
   const messagesAnchorRef = useRef<HTMLDivElement>(null)
@@ -26,7 +27,7 @@ export const ChatMessages = () => {
   const mappedMessages = messages?.map((m, index) => <ChatMessage key={index} messageBody={m} />)
 
   return (
-    <div onScroll={onScrollHandler} style={{ height: '300px', overflowY: 'auto' }}>
+    <div className={s.container} onScroll={onScrollHandler}>
       {mappedMessages}
       <div ref={messagesAnchorRef}></div>
     </div>
