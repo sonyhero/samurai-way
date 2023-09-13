@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { sendMessage } from '../../../model/chat-reducer'
 import { TextField } from '../../../../../ui/textfield'
 import { Button } from '../../../../../ui/button'
+import s from '../../../../Profile/ui/MyPosts/AddPostForm/AddPostForm.module.scss'
 
 export const AddChatMessageForm = () => {
   const status = useAppSelector(getStatus)
@@ -26,14 +27,15 @@ export const AddChatMessageForm = () => {
   }
 
   return (
-    <div>
+    <div className={s.formBox}>
       <TextField
+        className={s.field}
         onEnter={onKeyPressHandler}
         onChangeText={onChangeHandler}
         value={value}
         placeholder={'type message...'}
       />
-      <Button disabled={status !== 'ready'} onClick={addNewMessage}>
+      <Button className={s.formButton} disabled={status !== 'ready'} onClick={addNewMessage}>
         Send
       </Button>
     </div>
