@@ -1,13 +1,12 @@
 import { useEffect } from 'react'
 import { withAuthRedirect } from '../../../../hoc/withAuthRedirect'
-import { useAppDispatch, useAppSelector } from '../../../../app/store'
+import { useAppDispatch } from '../../../../app/store'
 import { startMessagesListening, stopMessagesListening } from '../model/chat-reducer'
-import { getStatus } from '../../../../app/model/selectors/chat-selector'
 import { ChatMessages } from './Chat/ChatMessages/ChatMessages'
-import { AddChatMessageForm } from './Chat/AddChatMessageForm/AddChatMEssageForm'
+import { AddChatMessageForm } from './Chat/AddChatMessageForm/AddChatMessageForm'
+import s from './ChatPage.module.scss'
 
 const ChatPage = () => {
-  const status = useAppSelector(getStatus)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -18,13 +17,9 @@ const ChatPage = () => {
   }, [])
 
   return (
-    <div>
-      {status === 'error' && <div>Some error occurred. Please refresh the page</div>}
-      <div style={{ width: '500px', border: '1px solid red' }}>
-        Chat
-        <ChatMessages />
-        <AddChatMessageForm />
-      </div>
+    <div className={s.container}>
+      <ChatMessages />
+      <AddChatMessageForm />
     </div>
   )
 }
