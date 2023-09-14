@@ -2,7 +2,6 @@ import React, { ComponentType } from 'react'
 import s from './App.module.scss'
 import { Navbar } from '../../components/ui/navbar/Navbar'
 import { HashRouter, withRouter } from 'react-router-dom'
-import { HeaderContainer } from '../../components/ui/header/HeaderContainer'
 import { connect, Provider } from 'react-redux'
 import { compose } from 'redux'
 import { initializeApp } from '../model/app-reducer'
@@ -15,6 +14,7 @@ import { Toast } from '../../components/ui/toast-notification/Toast'
 import { QueryParamProvider } from 'use-query-params'
 import { ReactRouter5Adapter } from 'use-query-params/adapters/react-router-5'
 import queryString from 'query-string'
+import { Header } from '../../components/ui/header/Header'
 
 class App extends React.Component<AppPropsType> {
   componentDidMount() {
@@ -25,7 +25,7 @@ class App extends React.Component<AppPropsType> {
     return (
       <>
         <Toast />
-        <HeaderContainer />
+        <Header />
         {!this.props.initialized ? (
           <Preloader />
         ) : (
