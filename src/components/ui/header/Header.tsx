@@ -2,22 +2,30 @@ import React from 'react'
 import s from './Header.module.scss'
 import { Typography } from '../typography'
 import { Button } from '../button'
-import { HeaderAPIComponentType } from './HeaderContainer'
 import { Logout } from '../../../assets'
 import { AvatarDemo } from '../avatar'
-import { useAppSelector } from '../../../app/store'
+import { useAppDispatch, useAppSelector } from '../../../app/store'
 import { DropDownMenuDemo } from '../dropDownMenu'
+import { getProfilePhotoSmall } from '../../../app/model/selectors/profile-selector'
+import { getIsAuth, getLogin } from '../../../app/model/selectors/auth-selector'
+import { logout } from '../../Pages/Login/model/auth-reducer'
 
-export const Header: React.FC<HeaderPropsType> = (props) => {
-  const { isAuth, login, logout } = props
+export const Header = () => {
+  const userPhoto = useAppSelector(getProfilePhotoSmall)
+  const isAuth = useAppSelector(getIsAuth)
+  const login = useAppSelector(getLogin)
+  const dispatch = useAppDispatch()
 
-  const userPhoto = useAppSelector((state) => state.profileReducer.profile.photos.small)
+  const logoutHandler = () => {
+    dispatch(logout)
+  }
+
   const dropDownItems = [
     { id: 1, component: <Typography className={s.userName}>{login}</Typography> },
     {
       id: 2,
       component: (
-        <Button className={s.logoutBtn} variant={'secondary'} onClick={logout}>
+        <Button className={s.logoutBtn} variant={'secondary'} onClick={logoutHandler}>
           <Logout />
           Log out
         </Button>
@@ -39,10 +47,6 @@ export const Header: React.FC<HeaderPropsType> = (props) => {
                 items={dropDownItems}
                 trigger={<AvatarDemo className={s.avatar} name={login ? login : ''} src={userPhoto} />}
               />
-              {/*<Button className={s.logoutBtn} variant={'secondary'} onClick={logout}>*/}
-              {/*  <Logout />*/}
-              {/*  Log out*/}
-              {/*</Button>*/}
             </>
           )}
         </div>
@@ -50,6 +54,3 @@ export const Header: React.FC<HeaderPropsType> = (props) => {
     </header>
   )
 }
-
-//Types
-type HeaderPropsType = HeaderAPIComponentType
