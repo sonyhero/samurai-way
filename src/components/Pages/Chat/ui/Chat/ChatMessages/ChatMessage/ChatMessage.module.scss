@@ -1,0 +1,12 @@
+.container {
+display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  .avatarContainer{
+    display: flex;
+  }
+  .fullName {
+    margin-left: 10px;
+    color: var(--color-accent-900);
+  }
+}
