@@ -17,7 +17,7 @@ export const Header = () => {
   const dispatch = useAppDispatch()
 
   const logoutHandler = () => {
-    dispatch(logout)
+    dispatch(logout())
   }
 
   const dropDownItems = [
