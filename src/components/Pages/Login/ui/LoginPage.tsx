@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import { getIsAuth } from '../../../../app/model/selectors/auth-selector'
 import { LoginFormDataType, LoginReduxForm } from './LoginForm/LoginForm'
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const isAuth = useAppSelector(getIsAuth)
   const dispatch = useAppDispatch()
 
@@ -16,3 +16,5 @@ export const LoginPage = () => {
 
   return isAuth ? <Redirect to={'/profile'} /> : <LoginReduxForm onSubmit={onSubmit} />
 }
+
+export default LoginPage
