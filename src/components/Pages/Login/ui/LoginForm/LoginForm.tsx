@@ -14,23 +14,24 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
 
   return (
     <Card className={s.container}>
-      <Typography>
-        To log in get registered on{' '}
-        <Typography as={'a'} href={'https://social-network.samuraijs.com/'} target={'_blank'} rel="noreferrer">
-          this site
+      <div>
+        <Typography>
+          To log in get registered on{' '}
+          <Typography as={'a'} href={'https://social-network.samuraijs.com/'} target={'_blank'} rel="noreferrer">
+            this site
+          </Typography>
         </Typography>
-      </Typography>
-      <Typography>or use common test account credentials:</Typography>
-      <Typography>Email: free@samuraijs.com</Typography>
-      <Typography>Password: free</Typography>
-      <Typography className={s.title} variant={'large'}>
-        Login
-      </Typography>
+        <Typography>or use common test account credentials:</Typography>
+        <Typography>Email: free@samuraijs.com</Typography>
+        <Typography>Password: free</Typography>
+      </div>
+
       <form onSubmit={props.handleSubmit} className={s.formContainer}>
-        <div className={s.inputBox}>{fieldCreator('email', 'Email', [required], Input)}</div>
-        <div className={s.inputBox}>
-          {fieldCreator('password', 'Password', [required], Input, { type: 'password' })}
-        </div>
+        <Typography className={s.title} variant={'large'}>
+          Login
+        </Typography>
+        <div>{fieldCreator('email', 'Email', [required], Input)}</div>
+        <div>{fieldCreator('password', 'Password', [required], Input, { type: 'password' })}</div>
         {props.error && <div className={s.error}>{props.error}</div>}
         <div className={s.checkBox}>
           {fieldCreator('rememberMe', '', [], CheckBox, { type: 'checkbox' }, 'Remember Me')}
@@ -38,7 +39,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
         {/*//--------------------------------------------------------*/}
 
         {captcha && <img src={`${captcha}`} alt={'anti-bot captcha'} />}
-        {captcha && <div className={s.inputBox}>{fieldCreator('captcha', 'Captcha', [required], Input)}</div>}
+        {captcha && <div>{fieldCreator('captcha', 'Captcha', [required], Input)}</div>}
 
         <Button fullWidth={true} className={s.submit} type={'submit'}>
           Login
