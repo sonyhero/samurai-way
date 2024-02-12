@@ -35,7 +35,7 @@ export const Header = () => {
 
   return (
     <header className={s.header}>
-      <div className={s.contentBox}>
+      <div className={s.contentBlock}>
         <Typography className={s.networkName} variant={'large'}>
           Social Network
         </Typography>
