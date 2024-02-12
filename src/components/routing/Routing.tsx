@@ -6,7 +6,6 @@ import { Settings } from '../Pages/Settings/Settings'
 import React from 'react'
 import ProfileContainer from '../Pages/Profile/ui/ProfilePage'
 
-// const ProfileContainer = React.lazy(() => import('../components/Pages/Profile/ProfileContainer'))
 const ChatPage = React.lazy(() => import('../Pages/Chat/ui/ChatPage'))
 const UsersPage = React.lazy(() => import('../Pages/Users/ui/Users'))
 const DialogsPage = React.lazy(() => import('../Pages/Dialogs/ui/DialogsPage'))
