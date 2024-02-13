@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, KeyboardEvent, useState } from 'react'
 
 import { LabelDemo } from '../label'
 import { Typography } from '../typography'
@@ -64,57 +64,51 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     }
 
     return (
-      <div className={className}>
-        <LabelDemo label={label} variant={'secondary'}>
-          <div className={`${s.fieldContainer}`}>
-            {type === 'searchType' && (
-              <span className={s.search}>
-                <Search fill={disableValue ? '#4c4c4c' : '#808080'} />
-              </span>
-            )}
-            <input
-              className={`${s.field} ${errorMessage ? s.error : ''}`}
-              ref={ref}
-              placeholder={placeholder}
-              type={finalType}
+      <div className={`${s.fieldContainer} ${className}`}>
+        <LabelDemo className={s.label} label={label} variant={'secondary'}>
+          {type === 'searchType' && <Search className={s.search} fill={disableValue ? '#4c4c4c' : '#808080'} />}
+          <input
+            className={`${s.field} ${errorMessage ? s.error : ''}`}
+            ref={ref}
+            placeholder={placeholder}
+            type={finalType}
+            disabled={disableValue}
+            onChange={onChangeHandler}
+            onKeyDown={onKeyPressCallback}
+            style={inputStyle(type)}
+            value={value}
+            {...restProps}
+          />
+          {type === 'password' && (
+            <button
+              className={s.buttonAction}
+              type={'button'}
+              aria-label={'show password'}
               disabled={disableValue}
-              onChange={onChangeHandler}
-              onKeyDown={onKeyPressCallback}
-              style={inputStyle(type)}
-              value={value}
-              {...restProps}
-            />
-            {type === 'password' && (
-              <button
-                className={s.buttonAction}
-                type={'button'}
-                aria-label={'show password'}
-                disabled={disableValue}
-                onClick={() => setShowPassword((prev) => !prev)}
-              >
-                {showPassword ? (
-                  <Eye fill={disableValue ? '#fff' : '#4c4c4c'} />
-                ) : (
-                  <NotEye fill={disableValue ? '#fff' : '#4c4c4c'} />
-                )}
-              </button>
-            )}
-            {type === 'searchType' && !!value && (
-              <button
-                className={s.buttonAction}
-                type={'button'}
-                aria-label={'delete'}
-                disabled={disableValue}
-                onClick={onSearchClearHandler}
-              >
-                <DeleteIcon fill={disableValue ? '#4c4c4c' : '#808080'} />
-              </button>
-            )}
-          </div>
-          <Typography variant="body1" className={s.errorMessage}>
-            {errorMessage}
-          </Typography>
+              onClick={() => setShowPassword((prev) => !prev)}
+            >
+              {showPassword ? (
+                <Eye className={s.eyeIcon} fill={disableValue ? '#fff' : '#4c4c4c'} />
+              ) : (
+                <NotEye className={s.eyeIcon} fill={disableValue ? '#fff' : '#4c4c4c'} />
+              )}
+            </button>
+          )}
+          {type === 'searchType' && !!value && (
+            <button
+              className={s.buttonAction}
+              type={'button'}
+              aria-label={'delete'}
+              disabled={disableValue}
+              onClick={onSearchClearHandler}
+            >
+              <DeleteIcon fill={disableValue ? '#4c4c4c' : '#808080'} />
+            </button>
+          )}
         </LabelDemo>
+        <Typography variant="body1" className={s.errorMessage}>
+          {errorMessage}
+        </Typography>
       </div>
     )
   },
