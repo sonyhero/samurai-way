@@ -3,9 +3,18 @@ import s from './Navbar.module.scss'
 import { NavLink, useLocation } from 'react-router-dom'
 import { ChatNav, MessagesNav, MusicNav, NewsNav, ProfileNav, SettingsNav, UsersNav } from '../../../assets/iconsNavbar'
 import { PATH } from '../../../config/routes'
+import { useAppDispatch } from '../../../app/store'
+import { logout } from '../../Pages/Login/model/auth-reducer'
+import { Logout } from '../../../assets'
 
 export const Navbar = () => {
   const { pathname } = useLocation()
+
+  const dispatch = useAppDispatch()
+
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
 
   const defaultColor = '#000'
   const activeColor = '#407c87'
@@ -14,57 +23,58 @@ export const Navbar = () => {
     {
       path: PATH.PROFILE,
       value: (
-        <span>
-          <ProfileNav fill={pathname === PATH.PROFILE ? activeColor : defaultColor} /> Profile
-        </span>
+        <>
+          <ProfileNav fill={pathname === PATH.PROFILE ? activeColor : defaultColor} />
+          <span>Profile</span>
+        </>
       ),
     },
     {
       path: PATH.NEWS,
       value: (
-        <span>
-          <NewsNav fill={pathname === PATH.NEWS ? activeColor : defaultColor} /> News
-        </span>
+        <>
+          <NewsNav fill={pathname === PATH.NEWS ? activeColor : defaultColor} /> <span>News</span>
+        </>
       ),
     },
     {
       path: PATH.DIALOGS,
       value: (
-        <span>
-          <MessagesNav fill={pathname === PATH.DIALOGS ? activeColor : defaultColor} /> Messages
-        </span>
+        <>
+          <MessagesNav fill={pathname === PATH.DIALOGS ? activeColor : defaultColor} /> <span>Messages</span>
+        </>
       ),
     },
     {
       path: PATH.USERS,
       value: (
-        <span>
-          <UsersNav fill={pathname === PATH.USERS ? activeColor : defaultColor} /> Users
-        </span>
+        <>
+          <UsersNav fill={pathname === PATH.USERS ? activeColor : defaultColor} /> <span>Users</span>
+        </>
       ),
     },
     {
       path: PATH.CHAT,
       value: (
-        <span>
-          <ChatNav fill={pathname === PATH.CHAT ? activeColor : defaultColor} /> Chat
-        </span>
+        <>
+          <ChatNav fill={pathname === PATH.CHAT ? activeColor : defaultColor} /> <span>Chat</span>
+        </>
       ),
     },
     {
       path: PATH.MUSIC,
       value: (
-        <span>
-          <MusicNav fill={pathname === PATH.MUSIC ? activeColor : defaultColor} /> Music
-        </span>
+        <>
+          <MusicNav fill={pathname === PATH.MUSIC ? activeColor : defaultColor} /> <span>Music</span>
+        </>
       ),
     },
     {
       path: PATH.SETTINGS,
       value: (
-        <span>
-          <SettingsNav fill={pathname === PATH.SETTINGS ? activeColor : defaultColor} /> Settings
-        </span>
+        <>
+          <SettingsNav fill={pathname === PATH.SETTINGS ? activeColor : defaultColor} /> <span>Settings</span>
+        </>
       ),
     },
   ]
@@ -72,12 +82,22 @@ export const Navbar = () => {
   const mappedLinks = navLinks.map((navLink, index) => {
     return (
       <div key={index} className={s.item}>
-        <NavLink to={navLink.path} activeClassName={s.activeLink}>
+        <NavLink to={navLink.path} className={s.link} activeClassName={s.activeLink}>
           {navLink.value}
         </NavLink>
       </div>
     )
   })
 
-  return <nav className={s.nav}>{mappedLinks}</nav>
+  return (
+    <nav className={s.nav}>
+      {mappedLinks}
+      <div onClick={logoutHandler} className={s.item}>
+        <div className={s.link}>
+          <Logout fill={defaultColor} />
+          <span>Log Out</span>
+        </div>
+      </div>
+    </nav>
+  )
 }

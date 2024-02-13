@@ -5,33 +5,14 @@
     display: flex;
     height: 80px;
     margin: 0 auto;
+    padding: 0 10px;
     justify-content: space-between;
     align-items: center;
 
-    .networkName {
-      margin-left: 20px;
-    }
-
-    .loginBlock {
+    .userName {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-
-      .avatar,
-      .userName,
-      .logoutBtn {
-        margin: 0 10px 0 0;
-      }
-      .avatar {
-        min-height: 36px;
-        min-width: 36px;
-        &:hover {
-          outline: 2px solid var(--color-palette-300);
-        }
-        &:active {
-          outline: 2px solid var(--color-palette-100);
-        }
-      }
+      gap: 10px;
     }
 
     @media screen and (min-width: 767px) {

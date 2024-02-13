@@ -5,7 +5,6 @@ import { Button } from '../button'
 import { Logout } from '../../../assets'
 import { AvatarDemo } from '../avatar'
 import { useAppDispatch, useAppSelector } from '../../../app/store'
-import { DropDownMenuDemo } from '../dropDownMenu'
 import { getProfilePhotoSmall } from '../../../app/model/selectors/profile-selector'
 import { getIsAuth, getLogin } from '../../../app/model/selectors/auth-selector'
 import { logout } from '../../Pages/Login/model/auth-reducer'
@@ -36,20 +35,13 @@ export const Header = () => {
   return (
     <header className={s.header}>
       <div className={s.contentBlock}>
-        <Typography className={s.networkName} variant={'large'}>
-          Social Network
-        </Typography>
-        <div className={s.loginBlock}>
-          {isAuth && (
-            <>
-              <Typography className={s.userName}>{login}</Typography>
-              <DropDownMenuDemo
-                items={dropDownItems}
-                trigger={<AvatarDemo className={s.avatar} name={login ? login : ''} src={userPhoto} />}
-              />
-            </>
-          )}
-        </div>
+        <Typography variant={'large'}>Social Network</Typography>
+        {isAuth && (
+          <Typography className={s.userName}>
+            {login}
+            <AvatarDemo name={login ? login : ''} src={userPhoto} />
+          </Typography>
+        )}
       </div>
     </header>
   )

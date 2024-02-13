@@ -1,14 +1,19 @@
 .nav {
-  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--color-palette-300);
   padding: 10px;
-  min-height: 100vh;
 
   .item {
-    margin-bottom: 10px;
     padding: 5px;
     border-radius: 4px;
+    cursor: pointer;
 
-    a {
+    .link {
+      display: flex;
+      gap: 10px;
+
       width: 100%;
       text-decoration: none;
       span {
@@ -17,6 +22,10 @@
         gap: 10px;
         color: var(--color-dark-900);
         text-decoration: none;
+
+        @media screen and (max-width: 767px) {
+          display: none;
+        }
       }
     }
 
@@ -29,5 +38,20 @@
     &:hover {
       background-color: var(--color-palette-400);
     }
+  }
+
+  @media screen and (min-width: 767px) {
+    min-width: 250px;
+    min-height: 80vh;
+  }
+
+  @media screen and (max-width: 767px) {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    bottom: 0;
+    left: 0;
+    width: 100%;
   }
 }
