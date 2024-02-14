@@ -32,17 +32,19 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
     <div className={s.profileInfoBox}>
       <div className={s.profileBox}>
         {/*<ProfileAvatar isAvatar={!profile} photos={profile.photos} />*/}
+
         <div className={s.avatarBox}>
           <AvatarDemo className={s.avatar} src={profile.photos.large || profile.photos.small} />
           {isOwner && editMode && (
             <label htmlFor={'mainPhotoInput'}>
               <div className={s.avatarEdit}>
-                <Edit />
+                <Edit className={s.avatarEdit} />
               </div>
               <input type={'file'} id={'mainPhotoInput'} onChange={onMainPhotoSelected} className={s.mainPhotoInput} />
             </label>
           )}
         </div>
+
         {editMode ? (
           <ProfileForm initialValues={profile} onSubmit={onSubmit} />
         ) : (
