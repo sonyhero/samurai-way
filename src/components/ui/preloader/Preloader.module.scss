@@ -1,9 +1,18 @@
 .preloaderContainer {
   height: 90vh;
-  /* height: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin: 0 auto;
+
+  .image {
+    width: 600px;
+    height: 600px;
+
+    @media screen and (max-width: 1000px) {
+      width: 100px;
+      height: 100px;
+    }
+  }
 }
