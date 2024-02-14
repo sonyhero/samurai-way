@@ -8,6 +8,7 @@
     padding: 0 10px;
     justify-content: space-between;
     align-items: center;
+    width: 70%;
 
     .userName {
       display: flex;
@@ -15,8 +16,9 @@
       gap: 10px;
     }
 
-    @media screen and (min-width: 767px) {
-      width: 60%;
+    @media screen and (max-width: 1042px) {
+      width: 100%;
+      padding: 0 10px;
     }
   }
 }
