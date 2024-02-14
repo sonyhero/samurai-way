@@ -39,16 +39,18 @@ export const UserSearchForm: FC<PropsType> = memo(({ onFilterChange }) => {
             value={values.term}
             placeholder={'type to search...'}
           />
-          <Field as="select" name="friend" className={s.select}>
-            {options.map((el) => (
-              <option key={el.value} value={el.value} className={s.content}>
-                {el.item}
-              </option>
-            ))}
-          </Field>
-          <Button type={'submit'} disabled={isSubmitting}>
-            search
-          </Button>
+          <div className={s.selectAndSearch}>
+            <Field as="select" name="friend" className={s.select}>
+              {options.map((el) => (
+                <option key={el.value} value={el.value} className={s.content}>
+                  {el.item}
+                </option>
+              ))}
+            </Field>
+            <Button type={'submit'} disabled={isSubmitting}>
+              search
+            </Button>
+          </div>
         </form>
       )}
     </Formik>

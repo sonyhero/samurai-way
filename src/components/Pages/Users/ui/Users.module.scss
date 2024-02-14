@@ -1,14 +1,26 @@
 .usersPageBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   width: 100%;
 
   .pagination {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     align-items: center;
-    margin-top: 1rem;
 
-    .selectPagination {
-      width: 70px;
+    .showOnPage {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      .selectPagination {
+        width: 70px;
+      }
+    }
+
+    @media screen and (max-width: 608px) {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 
@@ -16,6 +28,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 10px;
+    overflow: auto;
+    max-height: 80vh;
   }
 }

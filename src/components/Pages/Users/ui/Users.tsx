@@ -71,9 +71,11 @@ const Users = () => {
       <UserSearchForm onFilterChange={onFilterChange} />
       <div className={s.pagination}>
         <Pagination count={pagesCount} page={currentPage} onChange={onPageChanged} />
-        <Typography variant={'body2'}>Показать</Typography>
-        <SuperSelect options={options} onValueChange={onSetPerPage} classname={s.selectPagination} />
-        <Typography variant={'body2'}>На странице</Typography>
+        <div className={s.showOnPage}>
+          <Typography variant={'body2'}>Показать</Typography>
+          <SuperSelect defaultValue={5} options={options} onValueChange={onSetPerPage} classname={s.selectPagination} />
+          <Typography variant={'body2'}>На странице</Typography>
+        </div>
       </div>
       <div className={s.usersBlock}>{mappedUsers}</div>
     </div>
