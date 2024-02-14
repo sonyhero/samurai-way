@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/samurai-way/static/css/main.adf7fda2.css",
-    "main.js": "/samurai-way/static/js/main.ca3c8407.js",
-    "static/css/702.ff5ad112.chunk.css": "/samurai-way/static/css/702.ff5ad112.chunk.css",
+    "main.css": "/samurai-way/static/css/main.ded84782.css",
+    "main.js": "/samurai-way/static/js/main.225ee859.js",
+    "static/css/702.f4d3b651.chunk.css": "/samurai-way/static/css/702.f4d3b651.chunk.css",
     "static/js/702.6471834a.chunk.js": "/samurai-way/static/js/702.6471834a.chunk.js",
-    "static/css/176.de3a45c4.chunk.css": "/samurai-way/static/css/176.de3a45c4.chunk.css",
-    "static/js/176.1da4fd5d.chunk.js": "/samurai-way/static/js/176.1da4fd5d.chunk.js",
+    "static/css/176.6124fb16.chunk.css": "/samurai-way/static/css/176.6124fb16.chunk.css",
+    "static/js/176.6edb0be3.chunk.js": "/samurai-way/static/js/176.6edb0be3.chunk.js",
     "static/css/654.60dbb136.chunk.css": "/samurai-way/static/css/654.60dbb136.chunk.css",
     "static/js/654.2f643593.chunk.js": "/samurai-way/static/js/654.2f643593.chunk.js",
-    "static/css/672.aa067f9e.chunk.css": "/samurai-way/static/css/672.aa067f9e.chunk.css",
-    "static/js/672.4be7fd88.chunk.js": "/samurai-way/static/js/672.4be7fd88.chunk.js",
-    "static/js/108.22c29de2.chunk.js": "/samurai-way/static/js/108.22c29de2.chunk.js",
+    "static/css/672.cd822c58.chunk.css": "/samurai-way/static/css/672.cd822c58.chunk.css",
+    "static/js/672.d745c238.chunk.js": "/samurai-way/static/js/672.d745c238.chunk.js",
+    "static/js/334.391ed76c.chunk.js": "/samurai-way/static/js/334.391ed76c.chunk.js",
     "static/media/avatar-default.svg": "/samurai-way/static/media/avatar-default.40cf6bc82dbfad62be58bb4a4a7d9608.svg",
     "static/media/montserrat-latin-400-normal.woff": "/samurai-way/static/media/montserrat-latin-400-normal.0f1794a79a689a577c2a.woff",
     "static/media/montserrat-latin-700-normal.woff": "/samurai-way/static/media/montserrat-latin-700-normal.e8155b435ce17d7f08f9.woff",
@@ -34,20 +34,20 @@
     "static/media/montserrat-vietnamese-400-normal.woff2": "/samurai-way/static/media/montserrat-vietnamese-400-normal.8f3f4c99eb0eeb5990f1.woff2",
     "index.html": "/samurai-way/index.html",
     "static/media/preloader.svg": "/samurai-way/static/media/preloader.48f42d3fb05f840aae64f998ca7db2e9.svg",
-    "main.adf7fda2.css.map": "/samurai-way/static/css/main.adf7fda2.css.map",
-    "main.ca3c8407.js.map": "/samurai-way/static/js/main.ca3c8407.js.map",
-    "702.ff5ad112.chunk.css.map": "/samurai-way/static/css/702.ff5ad112.chunk.css.map",
+    "main.ded84782.css.map": "/samurai-way/static/css/main.ded84782.css.map",
+    "main.225ee859.js.map": "/samurai-way/static/js/main.225ee859.js.map",
+    "702.f4d3b651.chunk.css.map": "/samurai-way/static/css/702.f4d3b651.chunk.css.map",
     "702.6471834a.chunk.js.map": "/samurai-way/static/js/702.6471834a.chunk.js.map",
-    "176.de3a45c4.chunk.css.map": "/samurai-way/static/css/176.de3a45c4.chunk.css.map",
-    "176.1da4fd5d.chunk.js.map": "/samurai-way/static/js/176.1da4fd5d.chunk.js.map",
+    "176.6124fb16.chunk.css.map": "/samurai-way/static/css/176.6124fb16.chunk.css.map",
+    "176.6edb0be3.chunk.js.map": "/samurai-way/static/js/176.6edb0be3.chunk.js.map",
     "654.60dbb136.chunk.css.map": "/samurai-way/static/css/654.60dbb136.chunk.css.map",
     "654.2f643593.chunk.js.map": "/samurai-way/static/js/654.2f643593.chunk.js.map",
-    "672.aa067f9e.chunk.css.map": "/samurai-way/static/css/672.aa067f9e.chunk.css.map",
-    "672.4be7fd88.chunk.js.map": "/samurai-way/static/js/672.4be7fd88.chunk.js.map",
-    "108.22c29de2.chunk.js.map": "/samurai-way/static/js/108.22c29de2.chunk.js.map"
+    "672.cd822c58.chunk.css.map": "/samurai-way/static/css/672.cd822c58.chunk.css.map",
+    "672.d745c238.chunk.js.map": "/samurai-way/static/js/672.d745c238.chunk.js.map",
+    "334.391ed76c.chunk.js.map": "/samurai-way/static/js/334.391ed76c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.adf7fda2.css",
-    "static/js/main.ca3c8407.js"
+    "static/css/main.ded84782.css",
+    "static/js/main.225ee859.js"
   ]
 }
