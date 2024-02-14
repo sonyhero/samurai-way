@@ -4,6 +4,8 @@
   gap: 10px;
   background-color: var(--color-palette-300);
   padding: 10px;
+  min-width: 250px;
+  z-index: 9999;
 
   .item {
     padding: 5px;
@@ -40,12 +42,11 @@
     }
   }
 
-  @media screen and (min-width: 767px) {
-    min-width: 250px;
-    min-height: 80vh;
+  @media screen and (max-width: 832px) {
+    min-width: 200px;
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 768px) {
     position: fixed;
     display: flex;
     flex-direction: row;
