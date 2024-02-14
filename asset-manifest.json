@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/samurai-way/static/css/main.ded84782.css",
-    "main.js": "/samurai-way/static/js/main.225ee859.js",
-    "static/css/702.f4d3b651.chunk.css": "/samurai-way/static/css/702.f4d3b651.chunk.css",
+    "main.css": "/samurai-way/static/css/main.b752f4c3.css",
+    "main.js": "/samurai-way/static/js/main.8b1e4252.js",
+    "static/css/702.8a7f9409.chunk.css": "/samurai-way/static/css/702.8a7f9409.chunk.css",
     "static/js/702.6471834a.chunk.js": "/samurai-way/static/js/702.6471834a.chunk.js",
     "static/css/176.6124fb16.chunk.css": "/samurai-way/static/css/176.6124fb16.chunk.css",
     "static/js/176.6edb0be3.chunk.js": "/samurai-way/static/js/176.6edb0be3.chunk.js",
@@ -34,9 +34,9 @@
     "static/media/montserrat-vietnamese-400-normal.woff2": "/samurai-way/static/media/montserrat-vietnamese-400-normal.8f3f4c99eb0eeb5990f1.woff2",
     "index.html": "/samurai-way/index.html",
     "static/media/preloader.svg": "/samurai-way/static/media/preloader.48f42d3fb05f840aae64f998ca7db2e9.svg",
-    "main.ded84782.css.map": "/samurai-way/static/css/main.ded84782.css.map",
-    "main.225ee859.js.map": "/samurai-way/static/js/main.225ee859.js.map",
-    "702.f4d3b651.chunk.css.map": "/samurai-way/static/css/702.f4d3b651.chunk.css.map",
+    "main.b752f4c3.css.map": "/samurai-way/static/css/main.b752f4c3.css.map",
+    "main.8b1e4252.js.map": "/samurai-way/static/js/main.8b1e4252.js.map",
+    "702.8a7f9409.chunk.css.map": "/samurai-way/static/css/702.8a7f9409.chunk.css.map",
     "702.6471834a.chunk.js.map": "/samurai-way/static/js/702.6471834a.chunk.js.map",
     "176.6124fb16.chunk.css.map": "/samurai-way/static/css/176.6124fb16.chunk.css.map",
     "176.6edb0be3.chunk.js.map": "/samurai-way/static/js/176.6edb0be3.chunk.js.map",
@@ -47,7 +47,7 @@
     "334.391ed76c.chunk.js.map": "/samurai-way/static/js/334.391ed76c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ded84782.css",
-    "static/js/main.225ee859.js"
+    "static/css/main.b752f4c3.css",
+    "static/js/main.8b1e4252.js"
   ]
 }
