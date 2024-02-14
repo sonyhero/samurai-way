@@ -6,6 +6,7 @@ import { securityAPI } from '../../../../app/api/security-api'
 import { ResultCodeForCapctha, ResultCodesEnum } from '../../../../app/api/api'
 import NProgress from 'nprogress'
 import { handleServerAppError, handleServerNetworkError } from '../../../../utils/error-utils'
+import { getAuthorizedProfileData } from '../../Profile/model/profile-reducer'
 
 const initialState: InitialUsersReducerStateType = {
   userId: null,
@@ -49,6 +50,7 @@ export const getAuthUserData = (): AppThunk => async (dispatch) => {
     if (data.resultCode === ResultCodesEnum.Success) {
       const { id, email, login } = data.data
       dispatch(authActions.setAuthUserData(String(id), email, login, true))
+      await dispatch(getAuthorizedProfileData(String(id)))
       NProgress.done()
     } else {
       handleServerAppError(data)

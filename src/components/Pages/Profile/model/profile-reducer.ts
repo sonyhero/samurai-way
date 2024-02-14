@@ -45,6 +45,10 @@ const initialState = {
     },
   },
   profileStatus: '',
+  authorizedProfilePhoto: {
+    small: '',
+    large: '',
+  },
 }
 
 export const profileReducer = (
@@ -84,6 +88,9 @@ export const profileReducer = (
         ),
       }
     }
+    case 'PROFILE/SET_AUTHORIZED_PROFILE_PHOTO': {
+      return { ...state, authorizedProfilePhoto: action.photos }
+    }
     default:
       return state
   }
@@ -96,6 +103,8 @@ export const profileActions = {
   deletePost: (id: number) => ({ type: 'PROFILE/DELETE_POST', id }) as const,
   savePhotoSuccess: (photos: PhotosType) => ({ type: 'PROFILE/SAVE_PHOTO', photos }) as const,
   setLikePost: (id: number, isLike: boolean) => ({ type: 'PROFILE/LIKE_POST', id, isLike }) as const,
+  setAuthorizedProfilePhoto: (photos: PhotosType) =>
+    ({ type: 'PROFILE/SET_AUTHORIZED_PROFILE_PHOTO', photos }) as const,
 }
 //Thunks
 export const getProfileData =
@@ -174,11 +183,25 @@ export const saveProfile =
       handleServerNetworkError(e)
     }
   }
+export const getAuthorizedProfileData =
+  (userId: string): AppThunk =>
+  async (dispatch) => {
+    try {
+      NProgress.start()
+      const data = await profileAPI.getProfile(userId)
+      const { photos } = data
+      dispatch(profileActions.setAuthorizedProfilePhoto(photos))
+      NProgress.done()
+    } catch (e) {
+      handleServerNetworkError(e)
+    }
+  }
 //Types
 export type InitialProfileReducerStateType = {
   posts: PostsType[]
   profile: ProfileType
   profileStatus: string
+  authorizedProfilePhoto: PhotosType | null
 }
 export type PostsType = {
   id: number

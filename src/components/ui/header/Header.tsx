@@ -5,12 +5,12 @@ import { Button } from '../button'
 import { Logout } from '../../../assets'
 import { AvatarDemo } from '../avatar'
 import { useAppDispatch, useAppSelector } from '../../../app/store'
-import { getProfilePhotoSmall } from '../../../app/model/selectors/profile-selector'
+import { getAuthorizedProfilePhotoSmall } from '../../../app/model/selectors/profile-selector'
 import { getIsAuth, getLogin } from '../../../app/model/selectors/auth-selector'
 import { logout } from '../../Pages/Login/model/auth-reducer'
 
 export const Header = () => {
-  const userPhoto = useAppSelector(getProfilePhotoSmall)
+  const userPhoto = useAppSelector(getAuthorizedProfilePhotoSmall)
   const isAuth = useAppSelector(getIsAuth)
   const login = useAppSelector(getLogin)
   const dispatch = useAppDispatch()

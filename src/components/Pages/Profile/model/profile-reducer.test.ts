@@ -33,6 +33,10 @@ describe('profileReducer', () => {
         },
       },
       profileStatus: '',
+      authorizedProfilePhoto: {
+        small: '',
+        large: '',
+      },
     }
   })
 
