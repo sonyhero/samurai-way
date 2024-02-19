@@ -50,9 +50,11 @@ export const Modal: FC<PropsType> = ({
               <Button onClick={() => onClose?.()} variant={'secondary'}>
                 Cancel
               </Button>
-              {/*<Button variant={'primary'} onClick={callBack}>*/}
-              {/*  {titleButton}*/}
-              {/*</Button>*/}
+              {callBack && (
+                <Button variant={'primary'} onClick={callBack}>
+                  {titleButton}
+                </Button>
+              )}
             </div>
           </DialogContent>
         </DialogPortal>
