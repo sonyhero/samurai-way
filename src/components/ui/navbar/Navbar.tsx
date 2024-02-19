@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import s from './Navbar.module.scss'
 import { NavLink, useLocation } from 'react-router-dom'
 import { ChatNav, MessagesNav, MusicNav, NewsNav, ProfileNav, SettingsNav, UsersNav } from '../../../assets/iconsNavbar'
@@ -6,11 +6,19 @@ import { PATH } from '../../../config/routes'
 import { useAppDispatch } from '../../../app/store'
 import { logout } from '../../Pages/Login/model/auth-reducer'
 import { Logout } from '../../../assets'
+import { Modal } from '../modal'
 
 export const Navbar = () => {
   const { pathname } = useLocation()
-
   const dispatch = useAppDispatch()
+  const [modalMode, setModalMode] = useState<boolean>(false)
+
+  const modalOpenHandler = () => {
+    setModalMode(true)
+  }
+  const modalCloseHandler = () => {
+    setModalMode(false)
+  }
 
   const logoutHandler = () => {
     dispatch(logout())
@@ -92,12 +100,22 @@ export const Navbar = () => {
   return (
     <nav className={s.nav}>
       {mappedLinks}
-      <div onClick={logoutHandler} className={s.item}>
+      <div onClick={modalOpenHandler} className={s.item}>
         <div className={s.link}>
           <Logout fill={defaultColor} />
           <span>Log Out</span>
         </div>
       </div>
+      <Modal
+        showCloseButton={true}
+        callBack={logoutHandler}
+        title={'Log Out'}
+        open={modalMode}
+        onClose={modalCloseHandler}
+        titleButton={'Yes'}
+      >
+        Do you really want to log out?
+      </Modal>
     </nav>
   )
 }

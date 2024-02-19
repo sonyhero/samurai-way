@@ -19,7 +19,12 @@ export const ProfileDescription: React.FC<ProfileDescriptionType> = ({ profile, 
   return (
     <div className={s.wrap}>
       <div className={s.buttonBox}>
-        <Modal title={'More information about user'} open={modalMode} onClose={modalCloseHandler}>
+        <Modal
+          showCloseButton={true}
+          title={'More information about user'}
+          open={modalMode}
+          onClose={modalCloseHandler}
+        >
           <div>Looking for a job: {profile.lookingForAJob ? 'yes' : ' no'}</div>
           {profile.lookingForAJob && <div>My professional skills: {profile.lookingForAJobDescription}</div>}
           <div>
